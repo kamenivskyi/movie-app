@@ -10,7 +10,6 @@ const GenresView = ({ genres }) => {
             <input
               className='form-check-input'
               type='checkbox'
-              value=''
               id={`check${id}`}
             />
             <label className='form-check-label' htmlFor={`check${id}`}>

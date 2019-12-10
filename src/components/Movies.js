@@ -4,9 +4,11 @@ import MovieItem from './MovieItem';
 
 class Movies extends Component {
   service = new MovieService();
+
   state = {
     results: []
   };
+
   componentDidMount() {
     this.service
       .getTrendingMovies()

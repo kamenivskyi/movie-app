@@ -1,14 +1,21 @@
+import axios from 'axios';
+
 class MovieService {
   _apiKey = 'f58b7aed07949c396b8a76edb193b481';
+  _cors = 'https://cors-anywhere.herokuapp.com/';
   _apiBase = 'https://api.themoviedb.org/3';
   _apiImageBase = 'https://image.tmdb.org/t/p/w500';
 
   getResource = async url => {
-    const res = await fetch(`${this._apiBase}${url}`);
-    if (!res.ok) {
-      throw new Error(`Could not fetch ${url}, received: ${res.status}`);
-    }
-    return await res.json();
+    const res = await axios.get(`${this._apiBase}${url}`);
+    console.log(res.data);
+    return res.data;
+  };
+  getMovie = async id => {
+    const res = await axios.get(
+      `https://api.themoviedb.org/3/movie/${id}?api_key=f58b7aed07949c396b8a76edb193b481&language=en-US`
+    );
+    return res.data;
   };
   getDiscoverMovies = () => {
     return this.getResource(
