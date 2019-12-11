@@ -8,14 +8,18 @@ class MovieService {
 
   getResource = async url => {
     const res = await axios.get(`${this._apiBase}${url}`);
-    console.log(res.data);
     return res.data;
   };
-  getMovie = async id => {
-    const res = await axios.get(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=f58b7aed07949c396b8a76edb193b481&language=en-US`
+  getFilm = id => {
+    return this.getResource(
+      `/movie/${id}?api_key=${this._apiKey}&language=en-US`
     );
-    return res.data;
+  };
+  getGenreMoviesById = async id => {
+    const res = await this.getResource(
+      `/discover/movie?api_key=${this._apiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${id}`
+    );
+    return res.results;
   };
   getDiscoverMovies = () => {
     return this.getResource(

@@ -2,39 +2,42 @@ import React, { useReducer } from 'react';
 import MovieContext from './movieContext';
 import MovieReducer from './movieReducer';
 import MovieService from '../../services/movie-service';
-import { GET_MOVIE, SET_LOADING } from '../types';
+import { GET_MOVIE, SET_LOADING, GET_GENRE_MOVIES } from '../types';
 
 const MovieState = props => {
   const service = new MovieService();
+  const { getFilm, getGenreMoviesById } = service;
 
   const initialState = {
     movies: [],
     movie: {},
+    genreMovies: [],
     loading: false,
     alert: null
   };
 
   const [state, dispatch] = useReducer(MovieReducer, initialState);
 
-  // get movie
-
   const getMovie = async id => {
-    // setLoading();
-    const res = service.getMovie(id);
-    console.log(res);
-    dispatch({ type: GET_MOVIE, payload: res });
+    setLoading();
+    dispatch({ type: GET_MOVIE, payload: await getFilm(id) });
+  };
+  const getGenreMovies = async id => {
+    setLoading();
+    dispatch({ type: GET_GENRE_MOVIES, payload: await getGenreMoviesById(id) });
   };
 
-  // set loading
-  // const setLoading = () => dispatch({ type: SET_LOADING });
+  const setLoading = () => dispatch({ type: SET_LOADING });
 
   return (
     <MovieContext.Provider
       value={{
         movies: state.movies,
         movie: state.movie,
+        genreMovies: state.genreMovies,
         loading: state.loading,
-        getMovie
+        getMovie,
+        getGenreMovies
       }}
     >
       {props.children}
