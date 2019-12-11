@@ -14,7 +14,6 @@ const Movie = ({ match }) => {
 
 const MovieView = ({ data }) => {
   const { title, id, poster_path, backdrop_path, overview, genres } = data;
-  console.log(data);
   const bgImage = `https://image.tmdb.org/t/p/w1280${backdrop_path}`;
   const image = `https://image.tmdb.org/t/p/w500${poster_path}`;
   // console.log(genreArray);

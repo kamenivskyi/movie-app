@@ -6,7 +6,7 @@ import { GET_MOVIE, SET_LOADING, GET_GENRE_MOVIES } from '../types';
 
 const MovieState = props => {
   const service = new MovieService();
-  const { getFilm, getGenreMoviesById } = service;
+  const { getMovieById, getGenreMoviesById } = service;
 
   const initialState = {
     movies: [],
@@ -20,7 +20,7 @@ const MovieState = props => {
 
   const getMovie = async id => {
     setLoading();
-    dispatch({ type: GET_MOVIE, payload: await getFilm(id) });
+    dispatch({ type: GET_MOVIE, payload: await getMovieById(id) });
   };
   const getGenreMovies = async id => {
     setLoading();

@@ -10,7 +10,7 @@ class MovieService {
     const res = await axios.get(`${this._apiBase}${url}`);
     return res.data;
   };
-  getFilm = id => {
+  getMovieById = id => {
     return this.getResource(
       `/movie/${id}?api_key=${this._apiKey}&language=en-US`
     );

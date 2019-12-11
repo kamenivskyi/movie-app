@@ -1,15 +1,19 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import MovieContext from '../../context/movie/movieContext';
 import MovieItem from '../MovieItem';
 
-const GenreMovies = ({ match }) => {
-  const [movies, setMovies] = useState([]);
+const GenreMovies = props => {
   const movieContext = useContext(MovieContext);
+  const { genreMovies, getGenreMovies } = movieContext;
 
   useEffect(() => {
-    movieContext.getGenreMovies(match.params.id).then(res => console.log(res));
+    getGenreMovies(props.match.params.id);
   }, []);
 
-  return <div>Genre movies</div>;
+  return (
+    <div className='row'>
+      <MovieItem movies={genreMovies} />
+    </div>
+  );
 };
 export default GenreMovies;
