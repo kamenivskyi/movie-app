@@ -2,4 +2,82 @@
   background-size: cover;
   background-repeat: no-repeat;
   color: #fff;
+  position: relative;
+  z-index: 1;
+}
+.movie::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: -1;
+}
+
+.finances {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.budget,
+.revenue {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 0;
+}
+.budget {
+  background-color: tomato;
+}
+.budget i,
+.revenue i {
+  font-size: 45px;
+  margin-right: 20px;
+}
+.budget i {
+  color: #222222;
+}
+.revenue {
+  background-color: #222222;
+}
+.revenue i {
+  color: tomato;
+}
+.companies {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.companies li {
+  width: 30%;
+}
+.cast {
+  display: flex;
+  overflow: auto;
+}
+.cast li {
+  width: 200px;
+}
+
+.cast li img {
+  width: 100%;
+  height: auto;
+}
+.slick-next:before,
+.slick-prev:before {
+  color: red;
+}
+.slick-prev,
+.slick-next {
+  z-index: 2;
+}
+.slick-prev {
+  left: 0px;
+}
+.slick-next {
+  right: 0px;
 }

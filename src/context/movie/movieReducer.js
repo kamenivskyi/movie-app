@@ -1,4 +1,10 @@
-import { GET_MOVIE, SET_LOADING, GET_GENRE_MOVIES } from '../types';
+import {
+  GET_MOVIE,
+  SET_LOADING,
+  GET_GENRE_MOVIES,
+  GET_CAST,
+  GET_PERSON
+} from '../types';
 
 export default (state, action) => {
   switch (action.type) {
@@ -12,6 +18,18 @@ export default (state, action) => {
       return {
         ...state,
         genreMovies: action.payload,
+        loading: false
+      };
+    case GET_CAST:
+      return {
+        ...state,
+        cast: action.payload,
+        loading: false
+      };
+    case GET_PERSON:
+      return {
+        ...state,
+        person: action.payload,
         loading: false
       };
     case SET_LOADING:

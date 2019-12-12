@@ -1,5 +1,6 @@
 import React from 'react';
 import MovieItemView from './MovieItemView';
+
 const MovieItem = ({ movies }) => {
   return (
     <>

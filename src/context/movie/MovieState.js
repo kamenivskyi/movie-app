@@ -2,16 +2,29 @@ import React, { useReducer } from 'react';
 import MovieContext from './movieContext';
 import MovieReducer from './movieReducer';
 import MovieService from '../../services/movie-service';
-import { GET_MOVIE, SET_LOADING, GET_GENRE_MOVIES } from '../types';
+import {
+  GET_MOVIE,
+  GET_PERSON,
+  SET_LOADING,
+  GET_GENRE_MOVIES,
+  GET_CAST
+} from '../types';
 
 const MovieState = props => {
   const service = new MovieService();
-  const { getMovieById, getGenreMoviesById } = service;
+  const {
+    getMovieById,
+    getGenreMoviesById,
+    getCastById,
+    getPersonById
+  } = service;
 
   const initialState = {
     movies: [],
     movie: {},
     genreMovies: [],
+    credits: [],
+    person: {},
     loading: false,
     alert: null
   };
@@ -26,6 +39,14 @@ const MovieState = props => {
     setLoading();
     dispatch({ type: GET_GENRE_MOVIES, payload: await getGenreMoviesById(id) });
   };
+  const getCast = async id => {
+    setLoading();
+    dispatch({ type: GET_CAST, payload: await getCastById(id) });
+  };
+  const getPerson = async id => {
+    setLoading();
+    dispatch({ type: GET_PERSON, payload: await getPersonById(id) });
+  };
 
   const setLoading = () => dispatch({ type: SET_LOADING });
 
@@ -35,9 +56,13 @@ const MovieState = props => {
         movies: state.movies,
         movie: state.movie,
         genreMovies: state.genreMovies,
+        cast: state.cast,
+        person: state.person,
         loading: state.loading,
         getMovie,
-        getGenreMovies
+        getGenreMovies,
+        getCast,
+        getPerson
       }}
     >
       {props.children}

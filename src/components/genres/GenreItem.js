@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const GenreItem = ({ genre: { name, id } }) => {
   return (
     <li>
-      <Link to={`/genre/${id}`} type='button' className='btn btn-danger'>
+      <Link to={`/genre/${id}`} type='button' className='btn btn-primary'>
         {name}
       </Link>
     </li>
