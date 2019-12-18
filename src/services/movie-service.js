@@ -10,16 +10,6 @@ class MovieService {
     return res.data;
   };
 
-  // getMovieData = async id => {
-  //   const data = {};
-  //   const baseData = await this._getMovieBase(id);
-  //   const actorsData = await this._getCreditsById(id);
-
-  //   data.base = baseData;
-  //   data.cast = actorsData;
-  //   return data;
-  // };
-
   getMovieById = async id => {
     const res = await this.getResource(
       `/movie/${id}?api_key=${this._apiKey}&language=en-US`
@@ -40,6 +30,12 @@ class MovieService {
     );
     return res;
   };
+  getPersonPhotoById = async id => {
+    const res = await this.getResource(
+      `/person/${id}/images?api_key=${this._apiKey}`
+    );
+    return res.profiles;
+  };
 
   getGenreMoviesById = async id => {
     const res = await this.getResource(
@@ -54,8 +50,11 @@ class MovieService {
     );
   };
 
-  getTrendingMovies = () => {
-    return this.getResource(`/trending/all/week?api_key=${this._apiKey}`);
+  getTrendingMovies = async () => {
+    const res = await this.getResource(
+      `/trending/movies/week?api_key=${this._apiKey}`
+    );
+    return res.results;
   };
 
   getGenres = async () => {
@@ -65,10 +64,11 @@ class MovieService {
     return res.genres;
   };
 
-  searchMovies = value => {
-    return this.getResource(
-      `/search/movie?api_key=${this._apiKey}&language=en-US&query=${value}&page=1&include_adult=true`
+  searchMoviesByName = async name => {
+    const res = await this.getResource(
+      `/search/movie?api_key=${this._apiKey}&language=en-US&query=${name}&page=1&include_adult=true`
     );
+    return res.results;
   };
 
   _transformMovieBase = obj => {

@@ -4,13 +4,15 @@ import PersonView from './PersonView';
 
 const PersonInfo = ({ match }) => {
   const movieContext = useContext(MovieContext);
-  const { getPerson, person } = movieContext;
+  const { getPerson, person, getPhoto, photos } = movieContext;
 
   useEffect(() => {
-    getPerson(match.params.id);
+    const { id } = match.params;
+    getPerson(id);
+    getPhoto(id);
   }, []);
 
   console.log(person);
-  return <PersonView data={person} />;
+  return <PersonView general={person} photos={photos} />;
 };
 export default PersonInfo;

@@ -1,0 +1,17 @@
+.main-header {
+  padding: 20px 0;
+  background-color: tomato;
+  margin-bottom: 15px;
+}
+.main-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main-navigation {
+  display: flex;
+  align-items: center;
+}
+.main-navigation li {
+  margin-left: 20px;
+}

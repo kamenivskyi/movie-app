@@ -2,15 +2,12 @@ import React from 'react';
 import Genres from '../../genres/Genres';
 import Finances from './Finances';
 import Cast from './Cast';
-import Row from './../../Row';
+import withSpinner from '../../hoc-helpers/withSpinner';
+import config from '../../../config';
+
 // import Companies from './Companies';
 
 const MovieView = ({ movie, cast }) => {
-  console.log(movie);
-  console.log(cast);
-  // const { base, cast } = data;
-  // console.log(base);
-
   const {
     title,
     id,
@@ -22,20 +19,20 @@ const MovieView = ({ movie, cast }) => {
     revenue
   } = movie;
 
-  const bgImage = `https://image.tmdb.org/t/p/w1280/${poster_path}`;
-  const image = `https://image.tmdb.org/t/p/w500${backdrop_path}`;
+  const {
+    API_IMAGE: { original }
+  } = config;
+
+  const image = `${original}${backdrop_path}`;
 
   return (
     <React.Fragment>
-      <div
-        className='card movie mb-3'
-        style={{
-          backgroundImage: `url(${bgImage})`
-        }}
-      >
+      <div className='card movie mb-3'>
         <div className='row no-gutters'>
           <div className='col-md-4'>
-            <img src={image} className='card-img' alt={title} />
+            {poster_path && (
+              <img src={image} className='card-img' alt={title} />
+            )}
           </div>
           <div className='col-md-8'>
             <div className='card-body'>
@@ -57,5 +54,4 @@ const MovieView = ({ movie, cast }) => {
   );
 };
 
-const MovieBase = () => {};
-export default MovieView;
+export default withSpinner(MovieView);

@@ -1,10 +1,11 @@
 .movie {
+  position: relative;
   background-size: cover;
   background-repeat: no-repeat;
   color: #fff;
-  position: relative;
   z-index: 1;
 }
+
 .movie::before {
   content: '';
   position: absolute;
@@ -58,6 +59,18 @@
 .cast {
   display: flex;
   overflow: auto;
+}
+.cast-item .slick-slide img {
+  padding: 0 !important;
+}
+.cast-item {
+  text-decoration: none !important;
+}
+.character {
+  font-size: 18px;
+}
+.name {
+  font-size: 16px;
 }
 .cast li {
   width: 200px;

@@ -1,16 +1,11 @@
-import React, { useEffect } from 'react';
-import Filters from '../filters/filters';
+import React from 'react';
 import Movies from '../Movies';
-import Row from '../Row';
 
 const Home = () => {
-  // useEffect(() => {
-
-  // })
   return (
-    <div>
-      <Row left={<Filters />} right={<Movies />} />
-    </div>
+    <>
+      <Movies />
+    </>
   );
 };
 export default Home;

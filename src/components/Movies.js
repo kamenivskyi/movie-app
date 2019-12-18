@@ -1,27 +1,27 @@
-import React, { Component } from 'react';
-import MovieService from '../services/movie-service';
+import React, { useEffect, useContext } from 'react';
 import MovieItem from './MovieItem';
+import MovieTabs from './layout/MovieTabs';
+import MovieContext from '../context/movie/movieContext';
+import Banner from './pages/Banner';
 
-class Movies extends Component {
-  service = new MovieService();
+const Movies = () => {
+  const movieContext = useContext(MovieContext);
+  const { movies, getTrending } = movieContext;
 
-  state = {
-    results: []
-  };
+  useEffect(() => {
+    getTrending();
+  }, []);
 
-  componentDidMount() {
-    this.service
-      .getTrendingMovies()
-      .then(({ results }) => this.setState({ results }));
-  }
-
-  render() {
-    const { results } = this.state;
-    return (
-      <div className='row'>
-        <MovieItem movies={results} />
+  return (
+    <React.Fragment>
+      <Banner data={movies} />
+      <div className='container-fluid mt-3'>
+        <div className='row'>
+          <MovieTabs />
+          <MovieItem movies={movies} />
+        </div>
       </div>
-    );
-  }
-}
+    </React.Fragment>
+  );
+};
 export default Movies;

@@ -5,9 +5,12 @@ import MovieService from '../../services/movie-service';
 import {
   GET_MOVIE,
   GET_PERSON,
+  GET_PHOTO,
   SET_LOADING,
   GET_GENRE_MOVIES,
-  GET_CAST
+  GET_CAST,
+  GET_TRENDING,
+  SEARCH_MOVIES
 } from '../types';
 
 const MovieState = props => {
@@ -16,7 +19,10 @@ const MovieState = props => {
     getMovieById,
     getGenreMoviesById,
     getCastById,
-    getPersonById
+    getPersonById,
+    getPersonPhotoById,
+    searchMoviesByName,
+    getTrendingMovies
   } = service;
 
   const initialState = {
@@ -25,6 +31,7 @@ const MovieState = props => {
     genreMovies: [],
     credits: [],
     person: {},
+    photos: [],
     loading: false,
     alert: null
   };
@@ -47,6 +54,18 @@ const MovieState = props => {
     setLoading();
     dispatch({ type: GET_PERSON, payload: await getPersonById(id) });
   };
+  const getPhoto = async id => {
+    setLoading();
+    dispatch({ type: GET_PHOTO, payload: await getPersonPhotoById(id) });
+  };
+  const searchMovies = async name => {
+    setLoading();
+    dispatch({ type: SEARCH_MOVIES, payload: await searchMoviesByName(name) });
+  };
+  const getTrending = async () => {
+    setLoading();
+    dispatch({ type: GET_TRENDING, payload: await getTrendingMovies() });
+  };
 
   const setLoading = () => dispatch({ type: SET_LOADING });
 
@@ -59,7 +78,11 @@ const MovieState = props => {
         cast: state.cast,
         person: state.person,
         loading: state.loading,
+        photos: state.photos,
+        searchMovies,
+        getTrending,
         getMovie,
+        getPhoto,
         getGenreMovies,
         getCast,
         getPerson

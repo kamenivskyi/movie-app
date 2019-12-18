@@ -3,7 +3,10 @@ import {
   SET_LOADING,
   GET_GENRE_MOVIES,
   GET_CAST,
-  GET_PERSON
+  GET_PERSON,
+  GET_PHOTO,
+  GET_TRENDING,
+  SEARCH_MOVIES
 } from '../types';
 
 export default (state, action) => {
@@ -30,6 +33,24 @@ export default (state, action) => {
       return {
         ...state,
         person: action.payload,
+        loading: false
+      };
+    case GET_PHOTO:
+      return {
+        ...state,
+        photos: action.payload,
+        loading: false
+      };
+    case GET_TRENDING:
+      return {
+        ...state,
+        movies: action.payload,
+        loading: false
+      };
+    case SEARCH_MOVIES:
+      return {
+        ...state,
+        movies: action.payload,
         loading: false
       };
     case SET_LOADING:
