@@ -1,0 +1,9 @@
+.filters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+}
+.year {
+  margin: 0 20px;
+}

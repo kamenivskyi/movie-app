@@ -44,7 +44,7 @@ export default (state, action) => {
     case GET_TRENDING:
       return {
         ...state,
-        movies: action.payload,
+        bannerMovies: action.payload,
         loading: false
       };
     case SEARCH_MOVIES:

@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import withSpinner from '../hoc-helpers/withSpinner';
 import GenreItem from './GenreItem';
 import './Genres.css';
 
@@ -18,4 +19,4 @@ const Genres = ({ genres }) => {
     </div>
   );
 };
-export default Genres;
+export default withSpinner(Genres);

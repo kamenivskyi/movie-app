@@ -4,6 +4,7 @@ class MovieService {
   _apiKey = 'f58b7aed07949c396b8a76edb193b481';
   _apiBase = 'https://api.themoviedb.org/3';
   _apiImageBase = 'https://image.tmdb.org/t/p/w500';
+  _year = `&primary_release_year=`;
 
   getResource = async url => {
     const res = await axios.get(`${this._apiBase}${url}`);
@@ -44,27 +45,33 @@ class MovieService {
     return res.results;
   };
 
-  getDiscoverMovies = () => {
-    return this.getResource(
-      `/discover/movie?api_key=${this._apiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`
+  getDiscoverMovies = async (sortBy, isAdult, year) => {
+    const res = await this.getResource(
+      `/discover/movie?api_key=${
+        this._apiKey
+      }&language=en-US&sort_by=${sortBy}&include_adult=${isAdult}&vote_count.gte=1000&include_video=true&page=1${
+        year ? this._year + year : ''
+      }`
     );
+
+    return res.results;
   };
 
   getTrendingMovies = async () => {
     const res = await this.getResource(
-      `/trending/movies/week?api_key=${this._apiKey}`
+      `/trending/movie/week?api_key=${this._apiKey}`
     );
     return res.results;
   };
 
-  getGenres = async () => {
+  getGenreList = async () => {
     const res = await this.getResource(
       `/genre/movie/list?api_key=${this._apiKey}&language=en-US`
     );
     return res.genres;
   };
 
-  searchMoviesByName = async name => {
+  searchMovies = async name => {
     const res = await this.getResource(
       `/search/movie?api_key=${this._apiKey}&language=en-US&query=${name}&page=1&include_adult=true`
     );

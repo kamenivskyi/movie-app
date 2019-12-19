@@ -22,10 +22,12 @@ const MovieState = props => {
     getPersonById,
     getPersonPhotoById,
     searchMoviesByName,
-    getTrendingMovies
+    getTrendingMovies,
+    getDiscoverMovies
   } = service;
 
   const initialState = {
+    bannerMovies: [],
     movies: [],
     movie: {},
     genreMovies: [],
@@ -58,9 +60,13 @@ const MovieState = props => {
     setLoading();
     dispatch({ type: GET_PHOTO, payload: await getPersonPhotoById(id) });
   };
-  const searchMovies = async name => {
+
+  const searchMovies = async (sortBy, isAdult, year) => {
     setLoading();
-    dispatch({ type: SEARCH_MOVIES, payload: await searchMoviesByName(name) });
+    dispatch({
+      type: SEARCH_MOVIES,
+      payload: await getDiscoverMovies(sortBy, isAdult, year)
+    });
   };
   const getTrending = async () => {
     setLoading();
@@ -73,6 +79,7 @@ const MovieState = props => {
     <MovieContext.Provider
       value={{
         movies: state.movies,
+        bannerMovies: state.bannerMovies,
         movie: state.movie,
         genreMovies: state.genreMovies,
         cast: state.cast,

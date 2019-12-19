@@ -16,7 +16,8 @@ const MovieView = ({ movie, cast }) => {
     overview,
     genres,
     budget,
-    revenue
+    revenue,
+    release_date
   } = movie;
 
   const {
@@ -42,6 +43,9 @@ const MovieView = ({ movie, cast }) => {
                   <h4>Description: </h4>
                   <p className='card-text'>{overview}</p>
                 </>
+              )}
+              {release_date && (
+                <div className='card-text'>Release: {release_date}</div>
               )}
               <Genres genres={genres} />
             </div>

@@ -2,7 +2,7 @@ import React from 'react';
 
 const MovieTabs = () => {
   return (
-    <div className='col-12'>
+    <div className='col-12 mb-3'>
       <ul className='nav nav-pills'>
         <li className='nav-item'>
           <a className='nav-link active' href='#'>
