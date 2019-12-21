@@ -10,7 +10,8 @@ import {
   GET_GENRE_MOVIES,
   GET_CAST,
   GET_TRENDING,
-  SEARCH_MOVIES
+  SEARCH_MOVIES,
+  FILTER_MOVIES
 } from '../types';
 
 const MovieState = props => {
@@ -29,6 +30,7 @@ const MovieState = props => {
   const initialState = {
     bannerMovies: [],
     movies: [],
+    activePage: 1,
     movie: {},
     genreMovies: [],
     credits: [],
@@ -61,11 +63,18 @@ const MovieState = props => {
     dispatch({ type: GET_PHOTO, payload: await getPersonPhotoById(id) });
   };
 
-  const searchMovies = async (sortBy, isAdult, year) => {
+  const filterMovies = async (activePage, sortBy, isAdult, year) => {
+    setLoading();
+    dispatch({
+      type: FILTER_MOVIES,
+      payload: await getDiscoverMovies(activePage, sortBy, isAdult, year)
+    });
+  };
+  const searchMovies = async (name, activePage) => {
     setLoading();
     dispatch({
       type: SEARCH_MOVIES,
-      payload: await getDiscoverMovies(sortBy, isAdult, year)
+      payload: await searchMoviesByName(name, activePage)
     });
   };
   const getTrending = async () => {
@@ -86,6 +95,7 @@ const MovieState = props => {
         person: state.person,
         loading: state.loading,
         photos: state.photos,
+        filterMovies,
         searchMovies,
         getTrending,
         getMovie,

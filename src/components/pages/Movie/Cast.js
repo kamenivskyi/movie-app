@@ -16,9 +16,7 @@ const Cast = ({ data }) => {
             <Link to={`/person/${id}`} key={id} className='cast-item'>
               <img
                 src={`${
-                  profile_path
-                    ? config.API_IMAGE.little + profile_path
-                    : reserve
+                  profile_path ? config.API_IMAGE.small + profile_path : reserve
                 }`}
                 alt={name}
               />

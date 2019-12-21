@@ -1,5 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import Search from '../Search';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -16,7 +18,7 @@ const Navbar = () => {
           <NavLink className='nav-item nav-link' to='/'>
             Home
           </NavLink>
-          <NavLink className='nav-item nav-link' to='/'>
+          <NavLink className='nav-item nav-link' to='/people'>
             People
           </NavLink>
           <NavLink className='nav-item nav-link' to='/'>
@@ -27,6 +29,7 @@ const Navbar = () => {
           </NavLink>
         </div>
       </div>
+      <Route render={props => <Search {...props} />} />
     </nav>
   );
 };

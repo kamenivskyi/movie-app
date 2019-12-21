@@ -7,3 +7,7 @@
 .year {
   margin: 0 20px;
 }
+.filter-title {
+  font-family: 'Comic sans MS', cursive, Arial, Helvetica, sans-serif;
+  text-align: center;
+}

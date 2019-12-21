@@ -7,3 +7,4 @@ export const GET_PHOTO = 'GET_PHOTO';
 export const GET_TRENDING = 'GET_TRENDING';
 export const SET_LOADING = 'SET_LOADING';
 export const SEARCH_MOVIES = 'SEARCH_MOVIES';
+export const FILTER_MOVIES = 'FILTER_MOVIES';

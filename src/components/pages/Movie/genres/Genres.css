@@ -9,3 +9,8 @@
 .genres li {
   margin-left: 10px;
 }
+.genres-title {
+  font-family: 'Comic sans MS';
+  font-size: 24px;
+  margin-top: 10px;
+}

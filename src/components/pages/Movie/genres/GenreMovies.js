@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react';
-import MovieContext from '../../context/movie/movieContext';
-import MovieItem from '../MovieItem';
+import MovieContext from '../../../../context/movie/movieContext';
+import MovieItem from '../../../MovieItem';
 
 const GenreMovies = ({ match }) => {
   const movieContext = useContext(MovieContext);

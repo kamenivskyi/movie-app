@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import config from '../../../config';
 import MovieContext from '../../../context/movie/movieContext';
 import Slider from 'react-slick';
+import withSpinner from '../../hoc-helpers/withSpinner';
 import './Banner.css';
 
 const Banner = () => {

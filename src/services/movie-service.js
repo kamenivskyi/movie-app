@@ -5,6 +5,7 @@ class MovieService {
   _apiBase = 'https://api.themoviedb.org/3';
   _apiImageBase = 'https://image.tmdb.org/t/p/w500';
   _year = `&primary_release_year=`;
+  _sort = '&sort_by=';
 
   getResource = async url => {
     const res = await axios.get(`${this._apiBase}${url}`);
@@ -45,16 +46,15 @@ class MovieService {
     return res.results;
   };
 
-  getDiscoverMovies = async (sortBy, isAdult, year) => {
+  getDiscoverMovies = async (activePage, sortBy, isAdult, year) => {
+    const hasSort = sortBy ? this._sort + sortBy : '';
+    const hasYear = year ? this._year + year : '';
+
     const res = await this.getResource(
-      `/discover/movie?api_key=${
-        this._apiKey
-      }&language=en-US&sort_by=${sortBy}&include_adult=${isAdult}&vote_count.gte=1000&include_video=true&page=1${
-        year ? this._year + year : ''
-      }`
+      `/discover/movie?api_key=${this._apiKey}&language=en-US${hasSort}&include_adult=${isAdult}&vote_count.gte=1000&include_video=true&page=${activePage}${hasYear}`
     );
 
-    return res.results;
+    return res;
   };
 
   getTrendingMovies = async () => {
@@ -71,9 +71,15 @@ class MovieService {
     return res.genres;
   };
 
-  searchMovies = async name => {
+  searchMoviesByName = async (name, activePage = 1) => {
     const res = await this.getResource(
-      `/search/movie?api_key=${this._apiKey}&language=en-US&query=${name}&page=1&include_adult=true`
+      `/search/movie?api_key=${this._apiKey}&language=en-US&query=${name}&page=1&include_adult=true&page=${activePage}`
+    );
+    return res;
+  };
+  getPopularPeople = async () => {
+    const res = await this.getResource(
+      `/person/popular?api_key=${this._apiKey}&language=en-US&page=1`
     );
     return res.results;
   };

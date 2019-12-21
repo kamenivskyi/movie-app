@@ -15,6 +15,31 @@ ul {
 a {
   text-decoration: none;
 }
+p {
+  font-family: Helvetica, Arial, sans-serif;
+}
+.page-item.active .page-link {
+  color: #fff;
+  background-color: #222222;
+  border-color: #222222;
+}
+.page-link {
+  color: #222222;
+}
+.page-link:hover {
+  color: #000000;
+}
+.page-link:focus {
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(34, 34, 34, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(34, 34, 34, 0.25);
+}
+.pagination-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
 .card {
   border: none;
   min-height: 420px;

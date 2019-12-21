@@ -1,9 +1,9 @@
 import React from 'react';
-import Genres from '../../genres/Genres';
 import Finances from './Finances';
 import Cast from './Cast';
 import withSpinner from '../../hoc-helpers/withSpinner';
 import config from '../../../config';
+import MovieDescription from './MovieDescription';
 
 // import Companies from './Companies';
 
@@ -11,7 +11,6 @@ const MovieView = ({ movie, cast }) => {
   const {
     title,
     id,
-    poster_path,
     backdrop_path,
     overview,
     genres,
@@ -24,36 +23,22 @@ const MovieView = ({ movie, cast }) => {
     API_IMAGE: { original }
   } = config;
 
-  const image = `${original}${backdrop_path}`;
+  const image = backdrop_path
+    ? `${original}${backdrop_path}`
+    : 'http://www.ahmproduction.com/wp-content/uploads/2016/05/film-background-1334067869u9d.jpg';
 
   return (
     <React.Fragment>
-      <div className='card movie mb-3'>
-        <div className='row no-gutters'>
-          <div className='col-md-4'>
-            {poster_path && (
-              <img src={image} className='card-img' alt={title} />
-            )}
-          </div>
-          <div className='col-md-8'>
-            <div className='card-body'>
-              {title && <h3 className='card-title'>{title}</h3>}
-              {overview && (
-                <>
-                  <h4>Description: </h4>
-                  <p className='card-text'>{overview}</p>
-                </>
-              )}
-              {release_date && (
-                <div className='card-text'>Release: {release_date}</div>
-              )}
-              <Genres genres={genres} />
-            </div>
-          </div>
-        </div>
-        <Cast data={cast} />
-        <Finances budget={budget} revenue={revenue} />
+      <div className='movie' style={{ backgroundImage: `url(${image})` }}>
+        {title && <h3 className='movie-title'>{title}</h3>}
+        <MovieDescription
+          overview={overview}
+          releaseDate={release_date}
+          genres={genres}
+        />
       </div>
+      <Finances budget={budget} revenue={revenue} />
+      <Cast data={cast} />
     </React.Fragment>
   );
 };

@@ -3,6 +3,7 @@ import {
   SET_LOADING,
   GET_GENRE_MOVIES,
   GET_CAST,
+  FILTER_MOVIES,
   GET_PERSON,
   GET_PHOTO,
   GET_TRENDING,
@@ -45,6 +46,12 @@ export default (state, action) => {
       return {
         ...state,
         bannerMovies: action.payload,
+        loading: false
+      };
+    case FILTER_MOVIES:
+      return {
+        ...state,
+        movies: action.payload,
         loading: false
       };
     case SEARCH_MOVIES:
