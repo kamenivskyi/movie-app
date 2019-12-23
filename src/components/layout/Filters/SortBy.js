@@ -2,8 +2,8 @@ import React from 'react';
 
 const SortBy = ({ onChange, value, options }) => {
   return (
-    <select className='form-control mx-2' value={value} onChange={onChange}>
-      <option value=''>Select sort</option>
+    <select className='form-control sort' value={value} onChange={onChange}>
+      <option value=''>--Select sort--</option>
       {options.map(({ value, label }) => (
         <option key={value} value={value}>
           {label}

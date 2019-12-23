@@ -1,18 +1,19 @@
 import React, { useContext, useState } from 'react';
-import MovieContext from '../../../context/movie/movieContext';
+import ResultsContext from '../../../context/results/resultsContext';
 
 const Search = props => {
-  const movieContext = useContext(MovieContext);
+  const resultsContext = useContext(ResultsContext);
   const [value, setValue] = useState('');
 
   const onSubmit = e => {
     e.preventDefault();
-    movieContext.searchMovies(1, value);
-    props.history.push('/');
+    if (value.trim()) {
+      resultsContext.searchMovies(value, 1);
+      props.history.push(`/results/${value}`);
+    }
   };
-  const onChange = ({ target }) => {
-    setValue(target.value);
-  };
+
+  const onChange = ({ target }) => setValue(target.value);
 
   return (
     <form className='form-inline' onSubmit={onSubmit}>

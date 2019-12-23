@@ -18,6 +18,11 @@ a {
 p {
   font-family: Helvetica, Arial, sans-serif;
 }
+.section-title {
+  font-family: 'Comic sans MS', cursive, Arial, Helvetica, sans-serif;
+  text-align: center;
+  margin-bottom: 20px;
+}
 .page-item.active .page-link {
   color: #fff;
   background-color: #222222;
@@ -44,6 +49,13 @@ p {
   border: none;
   min-height: 420px;
 }
+.item-row {
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-around;
+}
 
 .myRow {
   display: flex;
@@ -69,4 +81,13 @@ p {
 .column img {
   width: 100%;
   border-radius: 10px;
+}
+
+@media (max-width: 750px) {
+  .item-row {
+    flex-direction: column;
+  }
+  .item-row img {
+    border-top-left-radius: 0;
+  }
 }

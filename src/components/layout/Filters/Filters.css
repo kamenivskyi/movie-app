@@ -4,10 +4,25 @@
   align-items: center;
   padding: 20px 0;
 }
+
 .year {
   margin: 0 20px;
 }
-.filter-title {
-  font-family: 'Comic sans MS', cursive, Arial, Helvetica, sans-serif;
-  text-align: center;
+.sort {
+  margin-right: 20px;
+}
+@media (max-width: 850px) {
+  .submit-btn {
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+@media (max-width: 850px) {
+  .form-control.sort {
+    width: 100%;
+    margin-right: 0;
+  }
+  .form-group.year {
+    width: 100%;
+  }
 }

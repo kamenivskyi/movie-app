@@ -7,6 +7,7 @@ const IncludeAdult = ({ value, onChange }) => {
         <input
           className='form-check-input'
           type='checkbox'
+          value={value}
           checked={value}
           onChange={onChange}
         />{' '}

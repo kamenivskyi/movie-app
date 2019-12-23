@@ -4,6 +4,7 @@ import MovieContext from '../context/movie/movieContext';
 
 const Movies = () => {
   const movieContext = useContext(MovieContext);
+
   return (
     <>
       <MovieItem movies={movieContext.movies.results} />

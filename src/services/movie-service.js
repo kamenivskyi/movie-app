@@ -70,10 +70,16 @@ class MovieService {
     );
     return res.genres;
   };
-
-  searchMoviesByName = async (name, activePage = 1) => {
+  getVideo = async id => {
     const res = await this.getResource(
-      `/search/movie?api_key=${this._apiKey}&language=en-US&query=${name}&page=1&include_adult=true&page=${activePage}`
+      `/movie/${id}/videos?api_key=${this._apiKey}&language=en-US`
+    );
+    return res.results[0];
+  };
+
+  search = async (name, activePage = 1) => {
+    const res = await this.getResource(
+      `/search/movie?api_key=${this._apiKey}&language=en-US&query=${name}&include_adult=true&page=${activePage}`
     );
     return res;
   };

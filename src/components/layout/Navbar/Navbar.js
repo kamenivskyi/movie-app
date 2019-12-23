@@ -10,26 +10,26 @@ const Navbar = () => {
       <NavLink className='navbar-brand' to='/'>
         Movie Finder
       </NavLink>
-      <button className='navbar-toggler' type='button'>
-        <span className='navbar-toggler-icon'></span>
-      </button>
       <div className='collapse navbar-collapse' id='navbarNavAltMarkup'>
         <div className='navbar-nav'>
-          <NavLink className='nav-item nav-link' to='/'>
+          <NavLink className='nav-item nav-link' exact to='/'>
             Home
           </NavLink>
           <NavLink className='nav-item nav-link' to='/people'>
             People
           </NavLink>
-          <NavLink className='nav-item nav-link' to='/'>
-            Companies
+          <NavLink className='nav-item nav-link' to='/popular'>
+            Popular
           </NavLink>
-          <NavLink className='nav-item nav-link' to='/'>
+          <NavLink className='nav-item nav-link' to='/about'>
             About
           </NavLink>
         </div>
       </div>
       <Route render={props => <Search {...props} />} />
+      <button className='navbar-toggler' type='button'>
+        <span className='navbar-toggler-icon'></span>
+      </button>
     </nav>
   );
 };

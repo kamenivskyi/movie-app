@@ -36,8 +36,7 @@ const MovieState = props => {
     credits: [],
     person: {},
     photos: [],
-    loading: false,
-    alert: null
+    loading: false
   };
 
   const [state, dispatch] = useReducer(MovieReducer, initialState);

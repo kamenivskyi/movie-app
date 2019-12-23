@@ -15,8 +15,10 @@ const GenreMovies = ({ match }) => {
   }, [match.params.id]);
 
   return (
-    <div className='row'>
-      <MovieItem movies={genreMovies} />
+    <div className='container-fluid'>
+      <div className='row'>
+        <MovieItem movies={genreMovies} />
+      </div>
     </div>
   );
 };

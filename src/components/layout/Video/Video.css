@@ -1,0 +1,29 @@
+.video-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 5;
+  /* cursor: pointer; */
+}
+.video {
+  width: 90%;
+  height: 90%;
+  z-index: 6;
+}
+.close-video {
+  position: absolute;
+  right: 1%;
+  top: 6%;
+  background-color: transparent;
+  border: none;
+  font-size: 23px;
+  cursor: pointer;
+  z-index: 7;
+  color: #ffffff;
+}

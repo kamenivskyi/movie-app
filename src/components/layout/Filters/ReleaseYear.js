@@ -15,7 +15,7 @@ const ReleaseYear = ({ onChange, year }) => {
       <label>
         Release year: &nbsp;
         <select className='form-control' value={year} onChange={onChange}>
-          <option value=''>Choose a year</option>
+          <option value=''>--Choose a year--</option>
           {years.map(item => (
             <option value={item} key={item}>
               {item}
