@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import MovieItem from './MovieItem';
+import MediaItem from './MediaItem';
 import MovieContext from '../context/movie/movieContext';
 
 const Movies = () => {
@@ -7,7 +7,7 @@ const Movies = () => {
 
   return (
     <>
-      <MovieItem movies={movieContext.movies.results} />
+      <MediaItem items={movieContext.movies.results} type='movie' />
     </>
   );
 };

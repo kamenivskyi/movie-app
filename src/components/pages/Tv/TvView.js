@@ -1,26 +1,24 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import Finances from './Finances';
-import Cast from './Cast';
+import Cast from '../Movie/Cast';
 import withSpinner from '../../hoc-helpers/withSpinner';
-import MovieDescription from './MovieDescription';
+import MovieDescription from '../Movie/MovieDescription';
 import ItemRow from '../../common/ItemRow';
 import BtnShowVideo from '../../layout/Video/BtnShowVideo';
 import config from '../../../config';
-import reserveBg from './reserve-bg.jpg';
+import reserveBg from '../Movie/reserve-bg.jpg';
 
-const MovieView = ({ movie, cast, video }) => {
+const TvView = ({ tv, cast, video }) => {
   const {
-    title,
+    name,
     poster_path,
     backdrop_path,
     overview,
     genres,
-    budget,
-    revenue,
-    release_date,
+    first_air_date,
     runtime
-  } = movie;
+  } = tv;
+  console.log(tv);
 
   const {
     API_IMAGE: { original, medium }
@@ -31,10 +29,10 @@ const MovieView = ({ movie, cast, video }) => {
   return (
     <Fragment>
       <div className='movie' style={{ backgroundImage: `url(${image})` }}>
-        {title && <h3 className='movie-title'>{title}</h3>}
+        {name && <h3 className='movie-title'>{name}</h3>}
         <ItemRow>
           <div className='movie-img-wrapp'>
-            <img className='movie-img' src={medium + poster_path} alt={title} />
+            <img className='movie-img' src={medium + poster_path} alt={name} />
             {video && <BtnShowVideo url={video.key} />}
             <button className='btn btn-primary mt-3'>
               <i className='fas fa-bookmark'></i> &nbsp; To bookmarks
@@ -42,21 +40,20 @@ const MovieView = ({ movie, cast, video }) => {
           </div>
           <MovieDescription
             overview={overview}
-            releaseDate={release_date}
+            releaseDate={first_air_date}
             genres={genres}
             runtime={runtime}
           />
         </ItemRow>
+        <Cast data={cast} />
       </div>
-      <Finances budget={budget} revenue={revenue} />
-      <Cast data={cast} />
     </Fragment>
   );
 };
 
-MovieView.propTypes = {
+TvView.propTypes = {
   movie: PropTypes.object,
   cast: PropTypes.array
 };
 
-export default withSpinner(MovieView);
+export default withSpinner(TvView);

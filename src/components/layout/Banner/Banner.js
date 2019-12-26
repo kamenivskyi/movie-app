@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import config from '../../../config';
 import MovieContext from '../../../context/movie/movieContext';
 import Slider from 'react-slick';
-import withSpinner from '../../hoc-helpers/withSpinner';
 import './Banner.css';
 
 const Banner = () => {
@@ -11,7 +10,7 @@ const Banner = () => {
   const { bannerMovies, getTrending } = movieContext;
 
   useEffect(() => {
-    getTrending();
+    getTrending('movie');
   }, []);
 
   const settings = {
@@ -32,7 +31,7 @@ const Banner = () => {
         bannerMovies.map(item => {
           const { title, backdrop_path, overview, id } = item;
           return (
-            <div className='banner-item' key={id}>
+            <div className='banner-item' key={Math.random()}>
               <div className='container-fluid'>
                 <img src={`${original}${backdrop_path}`} alt={title} />
                 <Link to={`movie/${id}`} className='banner-link'>

@@ -6,17 +6,14 @@ import './Navbar.css';
 
 const Navbar = () => {
   return (
-    <nav className='navbar navbar-expand-lg navbar-light'>
+    <header className='navbar navbar-expand-lg navbar-light'>
       <NavLink className='navbar-brand' to='/'>
         Movie Finder
       </NavLink>
-      <div className='collapse navbar-collapse' id='navbarNavAltMarkup'>
-        <div className='navbar-nav'>
+      <div className='collapse navbar-collapse navbar-item'>
+        <nav className='navbar-nav'>
           <NavLink className='nav-item nav-link' exact to='/'>
             Home
-          </NavLink>
-          <NavLink className='nav-item nav-link' to='/people'>
-            People
           </NavLink>
           <NavLink className='nav-item nav-link' to='/popular'>
             Popular
@@ -24,13 +21,25 @@ const Navbar = () => {
           <NavLink className='nav-item nav-link' to='/about'>
             About
           </NavLink>
-        </div>
+        </nav>
       </div>
       <Route render={props => <Search {...props} />} />
+      <ul className='navbar-nav authentication navbar-item'>
+        <li>
+          <NavLink to='/signup' className='nav-item nav-link'>
+            Signup
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to='/login' className='nav-item nav-link'>
+            Login
+          </NavLink>
+        </li>
+      </ul>
       <button className='navbar-toggler' type='button'>
         <span className='navbar-toggler-icon'></span>
       </button>
-    </nav>
+    </header>
   );
 };
 export default Navbar;

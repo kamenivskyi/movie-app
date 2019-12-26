@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import MovieItem from '../../MovieItem';
+import MediaItem from '../../MediaItem';
 import ResultsContext from '../../../context/results/resultsContext';
 import PaginationWrapper from '../../layout/PaginationWrapper';
 
@@ -18,12 +18,13 @@ const Results = props => {
     setPage(activePage);
     resultsContext.searchMovies(query, activePage);
   };
+  console.log(results);
 
   return (
     <div className='container-fluid'>
       {results && <h2 className='section-title'>Results: </h2>}
       <div className='row'>
-        <MovieItem movies={results} />
+        <MediaItem items={results} type='movie' />
         <div className='pagination-container'>
           <PaginationWrapper
             currentPage={page}

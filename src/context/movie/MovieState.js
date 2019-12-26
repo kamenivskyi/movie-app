@@ -17,7 +17,7 @@ import {
 const MovieState = props => {
   const service = new MovieService();
   const {
-    getMovieById,
+    getMediaById,
     getGenreMoviesById,
     getCastById,
     getPersonById,
@@ -43,7 +43,7 @@ const MovieState = props => {
 
   const getMovie = async id => {
     setLoading();
-    dispatch({ type: GET_MOVIE, payload: await getMovieById(id) });
+    dispatch({ type: GET_MOVIE, payload: await getMediaById(id, 'movie') });
   };
   const getGenreMovies = async id => {
     setLoading();

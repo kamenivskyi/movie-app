@@ -5,6 +5,7 @@ export const GET_CAST = 'GET_CAST';
 export const GET_PERSON = 'GET_PERSON';
 export const GET_PHOTO = 'GET_PHOTO';
 export const GET_TRENDING = 'GET_TRENDING';
+export const TRENDING_GET_DATA = 'TRENDING_GET_DATA';
 export const SET_LOADING = 'SET_LOADING';
 export const SEARCH_MOVIES = 'SEARCH_MOVIES';
 export const FILTER_MOVIES = 'FILTER_MOVIES';

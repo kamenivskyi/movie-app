@@ -12,7 +12,7 @@ const Movie = ({ match }) => {
 
   useEffect(() => {
     const { id } = match.params;
-    service.getVideo(id).then(res => setVideo(res));
+    service.getVideo(id, 'movie').then(res => setVideo(res));
     getMovie(id);
     getCast(id);
   }, []);

@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import MovieContext from '../../../../context/movie/movieContext';
-import MovieItem from '../../../MovieItem';
+import MediaItem from '../../../MediaItem';
 
 const GenreMovies = ({ match }) => {
   const movieContext = useContext(MovieContext);
@@ -13,11 +13,12 @@ const GenreMovies = ({ match }) => {
     }
     return () => (cancelled = true);
   }, [match.params.id]);
+  console.log(genreMovies);
 
   return (
     <div className='container-fluid'>
       <div className='row'>
-        <MovieItem movies={genreMovies} />
+        <MediaItem items={genreMovies} />
       </div>
     </div>
   );

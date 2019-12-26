@@ -1,30 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import config from '../../../config';
+import avatar from './avatar.jpg';
 import SliderWrapper from '../../common/SliderWrapper';
 
 const Cast = ({ data }) => {
   return (
-    <div className='cast'>
+    <ul className='cast'>
       {data &&
         data.map(actor => {
           const { character, name, profile_path, id } = actor;
+
           return (
-            <Link to={`/person/${id}`} key={id} className='cast-item'>
+            <li className='cast-item' key={id}>
               <img
                 src={`${
-                  profile_path
-                    ? config.API_IMAGE.small + profile_path
-                    : config.mediumReserve
+                  profile_path ? config.API_IMAGE.medium + profile_path : avatar
                 }`}
                 alt={name}
               />
-              <h4 className='character'>{character}</h4>
+              <Link to={`/person/${id}`} className='character'>
+                {character}
+              </Link>
               <h5 className='name'>{name}</h5>
-            </Link>
+            </li>
           );
         })}
-    </div>
+    </ul>
   );
 };
 export default Cast;

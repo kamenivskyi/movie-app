@@ -1,12 +1,16 @@
-.main-header {
-  padding: 20px 0;
-  background-color: tomato;
-  margin-bottom: 15px;
-}
 .main-navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.navbar-item {
+  width: 30%;
+}
+.navbar-collapse {
+  flex-grow: 0;
+}
+.authentication {
+  justify-content: flex-end;
 }
 .main-navigation {
   display: flex;

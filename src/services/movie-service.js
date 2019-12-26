@@ -12,9 +12,9 @@ class MovieService {
     return res.data;
   };
 
-  getMovieById = async id => {
+  getMediaById = async (id, type) => {
     const res = await this.getResource(
-      `/movie/${id}?api_key=${this._apiKey}&language=en-US`
+      `/${type}/${id}?api_key=${this._apiKey}&language=en-US`
     );
     return res;
   };
@@ -57,9 +57,9 @@ class MovieService {
     return res;
   };
 
-  getTrendingMovies = async () => {
+  getTrendingMovies = async (type = 'movie', page = 1) => {
     const res = await this.getResource(
-      `/trending/movie/week?api_key=${this._apiKey}`
+      `/trending/${type}/week?api_key=${this._apiKey}&page=${page}`
     );
     return res.results;
   };
@@ -70,9 +70,9 @@ class MovieService {
     );
     return res.genres;
   };
-  getVideo = async id => {
+  getVideo = async (id, type) => {
     const res = await this.getResource(
-      `/movie/${id}/videos?api_key=${this._apiKey}&language=en-US`
+      `/${type}/${id}/videos?api_key=${this._apiKey}&language=en-US`
     );
     return res.results[0];
   };

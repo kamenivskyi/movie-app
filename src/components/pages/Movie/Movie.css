@@ -110,28 +110,31 @@
   display: flex;
   overflow: auto;
   flex-flow: row nowrap;
+  margin-top: 20px;
 }
 .cast-item .slick-slide img {
 }
 .cast-item {
   display: block;
   width: 300px;
+  height: 100%;
   text-decoration: none !important;
   padding: 0 10px;
 }
 .cast-item img {
   padding: 0 !important;
-  width: 300px;
+  min-width: 300px;
+  width: 100%;
   height: 100%;
+}
+.cast-item img:last-child {
+  margin-right: 0;
 }
 .character {
   font-size: 18px;
 }
 .name {
   font-size: 16px;
-}
-.cast li {
-  width: 200px;
 }
 
 .cast li img {
