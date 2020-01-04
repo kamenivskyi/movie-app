@@ -1,5 +1,6 @@
 import React from 'react';
 import Genres from './genres/Genres';
+import { calcTime } from '../../../helpers';
 
 const MovieDescription = ({ overview, releaseDate, genres, runtime }) => {
   return (
@@ -15,7 +16,13 @@ const MovieDescription = ({ overview, releaseDate, genres, runtime }) => {
           Release: <span className='release-value'>{releaseDate}</span>
         </div>
       )}
-      {runtime && <div className='description-title'>Runtime: {runtime}m</div>}
+      {runtime && (
+        <div className='description-title'>
+          <i className='far fa-clock'></i>{' '}
+          <span className='font-weight-bold'>Runtime: </span>{' '}
+          {calcTime(runtime)}
+        </div>
+      )}
       <Genres genres={genres} />
     </div>
   );

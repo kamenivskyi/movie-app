@@ -10,15 +10,13 @@ const Cast = ({ data }) => {
       {data &&
         data.map(actor => {
           const { character, name, profile_path, id } = actor;
+          const imageUrl = profile_path
+            ? config.API_IMAGE.medium + profile_path
+            : avatar;
 
           return (
-            <li className='cast-item' key={id}>
-              <img
-                src={`${
-                  profile_path ? config.API_IMAGE.medium + profile_path : avatar
-                }`}
-                alt={name}
-              />
+            <li className='cast-item' key={Math.random()}>
+              <img src={imageUrl} alt={name} />
               <Link to={`/person/${id}`} className='character'>
                 {character}
               </Link>

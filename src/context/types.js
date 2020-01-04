@@ -9,3 +9,7 @@ export const TRENDING_GET_DATA = 'TRENDING_GET_DATA';
 export const SET_LOADING = 'SET_LOADING';
 export const SEARCH_MOVIES = 'SEARCH_MOVIES';
 export const FILTER_MOVIES = 'FILTER_MOVIES';
+// firebase
+export const SET_USER = 'SET_USER';
+export const SET_USER_DATA = 'SET_USER_DATA';
+export const LOG_OUT = 'LOG_OUT';

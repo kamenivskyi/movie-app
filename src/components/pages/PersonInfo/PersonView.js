@@ -1,6 +1,7 @@
 import React from 'react';
 import PersonPhotos from './PersonPhotos';
 import withSpinner from '../../hoc-helpers/withSpinner';
+import config from '../../../config'
 
 const PersonView = ({ general, photos }) => {
   const { name, biography, profile_path, birthday, place_of_birth } = general;
@@ -12,7 +13,7 @@ const PersonView = ({ general, photos }) => {
         <div className='row no-gutters'>
           <div className='col-md-4'>
             <img
-              src={`https://image.tmdb.org/t/p/w300${profile_path}`}
+              src={`${config.API_IMAGE.medium}${profile_path}`}
               className='card-img'
               alt={name}
             />

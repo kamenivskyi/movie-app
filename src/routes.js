@@ -9,6 +9,7 @@ import Results from './components/pages/Results';
 import Popular from './components/pages/Popular';
 import Tv from './components/pages/Tv';
 import About from './components/pages/About';
+import Profile from './components/pages/Profile';
 import Login from './components/pages/Auth/Login';
 import Signup from './components/pages/Auth/Signup';
 
@@ -24,6 +25,7 @@ const Routes = () => {
       <Route exact path='/popular' component={Popular} />
       <Route exact path='/about' component={About} />
       <Route exact path='/results/:query' component={Results} />
+      <Route exact path='/profile' component={Profile} />
       <Route exact path='/login' component={Login} />
       <Route exact path='/signup' component={Signup} />
     </Switch>

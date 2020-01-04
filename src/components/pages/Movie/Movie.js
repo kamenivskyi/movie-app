@@ -9,15 +9,16 @@ const Movie = ({ match }) => {
   const service = new MovieService();
   const movieContext = useContext(MovieContext);
   const { getMovie, movie, getCast, cast } = movieContext;
+  const { id } = match.params;
 
   useEffect(() => {
-    const { id } = match.params;
+    console.log('Use effect');
     service.getVideo(id, 'movie').then(res => setVideo(res));
     getMovie(id);
     getCast(id);
   }, []);
 
-  return <MovieView movie={movie} cast={cast} video={video} />;
+  return <MovieView movie={movie} cast={cast} video={video} id={id} />;
 };
 
 export default Movie;
