@@ -1,0 +1,18 @@
+.not-found-wrapper {
+  text-align: center;
+  padding: 40px;
+}
+.not-found-message {
+  padding: 30px;
+}
+.not-found-message i {
+  color: #fd7301;
+}
+.error-code {
+  font-size: 70px;
+  color: #fd7301;
+  font-weight: bold;
+}
+.error-code i {
+  font-size: 55px;
+}

@@ -16,12 +16,9 @@ const FirebaseState = props => {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         dispatch({ type: SET_USER, payload: user });
-        console.log(user);
-        console.log(user.providerData);
       } else {
         return;
         // User is signed out.
-        console.log('user is signed out');
       }
     });
   }, []);
@@ -52,14 +49,21 @@ const FirebaseState = props => {
       .catch(handleError);
   };
 
+  // var user = firebase.auth().currentUser;
+  // user.updateProfile({
+  //   displayName: "Jane Q. User",
+  //   photoURL: "https://example.com/jane-q-user/profile.jpg"
+  // }).then(function() {
+  //   // Update successful.
+  // }).catch(function(error) {
+  //   // An error happened.
+  // });
+
   const logoutUser = async () => {
     await firebase
       .auth()
       .signOut()
-      .then(() => {
-        dispatch({ type: LOG_OUT });
-        // console.log(res);
-      })
+      .then(() => dispatch({ type: LOG_OUT }))
       .catch(error => {
         // An error happened
         console.log(error);

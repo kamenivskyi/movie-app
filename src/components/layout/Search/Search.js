@@ -1,16 +1,17 @@
 import React, { useContext, useState } from 'react';
+import { withRouter } from 'react-router-dom';
 import ResultsContext from '../../../context/results/resultsContext';
 import './Search.css';
 
-const Search = props => {
-  const resultsContext = useContext(ResultsContext);
+const Search = ({ history }) => {
+  const { searchMovies } = useContext(ResultsContext);
   const [value, setValue] = useState('');
 
   const onSubmit = e => {
     e.preventDefault();
     if (value.trim()) {
-      resultsContext.searchMovies(value, 1);
-      props.history.push(`/results/${value}`);
+      searchMovies(value, 1);
+      history.push(`/results/${value}`);
     }
   };
 
@@ -21,7 +22,7 @@ const Search = props => {
       <input
         className='form-control search'
         type='search'
-        placeholder='typing something'
+        placeholder='Enter something'
         aria-label='Search'
         value={value}
         onChange={onChange}
@@ -29,4 +30,4 @@ const Search = props => {
     </form>
   );
 };
-export default Search;
+export default withRouter(Search);

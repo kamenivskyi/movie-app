@@ -12,6 +12,7 @@ import About from './components/pages/About';
 import Profile from './components/pages/Profile';
 import Login from './components/pages/Auth/Login';
 import Signup from './components/pages/Auth/Signup';
+import NotFound from './components/pages/NotFound';
 
 const Routes = () => {
   return (
@@ -28,6 +29,7 @@ const Routes = () => {
       <Route exact path='/profile' component={Profile} />
       <Route exact path='/login' component={Login} />
       <Route exact path='/signup' component={Signup} />
+      <Route component={NotFound} />
     </Switch>
   );
 };

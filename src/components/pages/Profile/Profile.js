@@ -20,7 +20,10 @@ const Profile = () => {
     return (
       <div className='jumbotron'>
         <h1 className='display-4'>{currentUser.email}</h1>
-        <p className='lead'>Bookmarks: </p>
+        <p className='lead'>Bookmarks: </p>{' '}
+        <button className='btn btn-success'>
+          <i className='fas fa-edit'></i>
+        </button>
         <hr className='my-4' />
         <p>
           It uses utility classes for typography and spacing to space content
