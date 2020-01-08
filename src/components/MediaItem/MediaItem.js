@@ -3,6 +3,7 @@ import MovieItemView from './MovieItemView';
 import TvItemView from './TvItemView';
 
 const MediaItem = ({ items, type }) => {
+  // console.log(items);
   if (items) {
     switch (type) {
       case 'movie':

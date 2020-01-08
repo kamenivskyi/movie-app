@@ -2,25 +2,30 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Routes from './routes';
+import FirebaseState from './context/firebase/FirebaseState';
+import AlertState from './context/alert/AlertState';
 import MovieState from './context/movie/MovieState';
 import ResultsState from './context/results/ResultsState';
 import PopularState from './context/popular/PopularState';
-import FirebaseState from './context/firebase/FirebaseState';
+import Alert from './components/layout/Alert';
 import './App.css';
 
 const App = () => {
   return (
     <FirebaseState>
-      <MovieState>
-        <ResultsState>
-          <PopularState>
-            <BrowserRouter>
-              <Navbar />
-              <Routes />
-            </BrowserRouter>
-          </PopularState>
-        </ResultsState>
-      </MovieState>
+      <AlertState>
+        <MovieState>
+          <ResultsState>
+            <PopularState>
+              <BrowserRouter>
+                <Navbar />
+                <Routes />
+                <Alert />
+              </BrowserRouter>
+            </PopularState>
+          </ResultsState>
+        </MovieState>
+      </AlertState>
     </FirebaseState>
   );
 };

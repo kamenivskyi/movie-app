@@ -1,15 +1,17 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
+import FirebaseContext from '../../../context/firebase/firebaseContext';
+import withSpinner from '../../hoc-helpers/withSpinner';
 import Finances from './Finances';
 import Cast from './Cast';
-import withSpinner from '../../hoc-helpers/withSpinner';
 import MovieDescription from './MovieDescription';
 import ItemRow from '../../common/ItemRow';
 import BtnShowVideo from '../../layout/Video/BtnShowVideo';
 import config from '../../../config';
 import reserveBg from './reserve-bg.jpg';
 
-const MovieView = ({ movie, cast, video, id }) => {
+const MovieView = ({ movie, cast, video, id, type }) => {
+  const { isLoggedIn, addToBookmarks } = useContext(FirebaseContext);
   const {
     title,
     poster_path,
@@ -19,71 +21,34 @@ const MovieView = ({ movie, cast, video, id }) => {
     budget,
     revenue,
     release_date,
-    runtime
+    runtime,
+    vote_average
   } = movie;
 
   useEffect(() => {
-    console.log('Movie view use effect');
+    console.log('Movie view use effect', movie);
   });
 
-  console.log(id);
+  const { original, medium } = config.API_IMAGE;
 
-  const {
-    API_IMAGE: { original, medium }
-  } = config;
-
-  const getBookmarks = () => {
-    let bookmarks;
-    if (localStorage.getItem('bookmarks') === null) {
-      bookmarks = [];
-    } else {
-      bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
-    }
-
-    return bookmarks;
-  };
-
-  // const addToBookmarks = () => {
-  //   // localStorage.setItem('')
-  //   let bookmarks;
-  //   if (localStorage.getItem('bookmarks') === null) {
-  //     bookmarks = [];
-  //   } else {
-  //     bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
-  //     console.log(bookmarks);
-  //   }
-
-  //   return bookmarks;
-  // };
   const handleClick = e => {
     const id = e.target.getAttribute('data-id');
-    console.log(id);
-    localStorage.setItem('id', JSON.stringify(id));
+    const type = e.target.getAttribute('data-type');
 
-    // return id => {
-    //   let bookmarks;
-    //   if (localStorage.getItem('bookmarks') === null) {
-    //     bookmarks = [];
-    //   } else {
-    //     bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
-    //   }
+    const obj = _createObj(id, type);
 
-    //   bookmarks.push(id);
-
-    //   localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
-
-    // const bookmarks = getBookmarks();
-    // bookmarks.push(id);
-    // localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
-    // };
+    addToBookmarks(obj);
   };
-  // const addToBookmarks = bookmark => {
-  //   const bookmarks = getBookmarks();
 
-  //   bookmarks.push(bookmark);
-
-  //   localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
-  // };
+  const _createObj = (id, type) => {
+    return {
+      id,
+      title,
+      type,
+      poster_path,
+      vote_average
+    };
+  };
 
   const image = backdrop_path ? original + backdrop_path : reserveBg;
 
@@ -95,14 +60,16 @@ const MovieView = ({ movie, cast, video, id }) => {
           <div className='movie-img-wrapp'>
             <img className='movie-img' src={medium + poster_path} alt={title} />
             {video && <BtnShowVideo url={video.key} />}
-
-            <button
-              className='btn btn-primary mt-3'
-              onClick={handleClick}
-              data-id={id}
-            >
-              <i className='fas fa-bookmark'></i> &nbsp; To bookmarks
-            </button>
+            {isLoggedIn && (
+              <button
+                className='btn btn-primary mt-3'
+                onClick={handleClick}
+                data-id={id}
+                data-type={type}
+              >
+                <i className='fas fa-bookmark'></i> &nbsp; To bookmarks
+              </button>
+            )}
           </div>
           <MovieDescription
             overview={overview}

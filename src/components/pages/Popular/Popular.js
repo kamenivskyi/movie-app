@@ -6,12 +6,11 @@ import MediaTabs from '../../layout/MediaTabs';
 const Popular = () => {
   const [currentType, setCurrentType] = useState('movie');
 
-  const popularContext = useContext(PopularContext);
-  const { getPopularItems, items } = popularContext;
+  const { getPopularItems, items } = useContext(PopularContext);
 
   useEffect(() => {
     getPopularItems(currentType);
-  }, []);
+  }, [currentType]);
 
   const updateType = async e => {
     e.preventDefault();

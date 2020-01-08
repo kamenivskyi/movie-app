@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import Movies from '../../Movies';
+import Movies from '../../layout/Movies';
 import Banner from '../../layout/Banner';
 import Filters from '../../layout/Filters';
 import ReleaseYear from '../../layout/Filters/ReleaseYear';
@@ -7,11 +7,11 @@ import SortBy from '../../layout/Filters/SortBy';
 import IncludeAdult from '../../layout/Filters/IncludeAdult';
 import MovieContext from '../../../context/movie/movieContext';
 import PaginationWrapper from '../../layout/PaginationWrapper';
+import Alert from '../../layout/Alert';
 
 const Home = () => {
-  const movieContext = useContext(MovieContext);
-  const { filterMovies } = movieContext;
-  const { total_results, total_pages } = movieContext.movies;
+  const { filterMovies, movies } = useContext(MovieContext);
+  const { total_results, total_pages } = movies;
 
   const [sortBy, setSortBy] = useState('');
   const [year, setYear] = useState(null);
@@ -44,6 +44,7 @@ const Home = () => {
             <SortBy onChange={handleSortBy} value={sortBy} />
           </Filters>
           <Movies />
+          <Alert />
           <PaginationWrapper
             currentPage={activePage}
             totalItems={total_results}

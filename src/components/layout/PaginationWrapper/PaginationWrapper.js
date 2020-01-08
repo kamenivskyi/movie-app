@@ -5,23 +5,25 @@ import PropTypes from 'prop-types';
 const PaginationWrapper = props => {
   const { currentPage, totalItems, totalPages, onChange } = props;
   return (
-    <div className='pagination-container'>
+    <>
       {totalPages > 1 ? (
-        <Pagination
-          activePage={currentPage}
-          itemsCountPerPage={20}
-          totalItemsCount={totalItems}
-          pageRangeDisplayed={5}
-          onChange={onChange}
-          itemClass={'page-item'}
-          linkClass={'page-link'}
-          prevPageText={`Prev`}
-          nextPageText={`Next`}
-          firstPageText={`First`}
-          lastPageText={`Last`}
-        />
+        <div className='pagination-container'>
+          <Pagination
+            activePage={currentPage}
+            itemsCountPerPage={20}
+            totalItemsCount={totalItems}
+            pageRangeDisplayed={5}
+            onChange={onChange}
+            itemClass={'page-item'}
+            linkClass={'page-link'}
+            prevPageText={`Prev`}
+            nextPageText={`Next`}
+            firstPageText={`First`}
+            lastPageText={`Last`}
+          />
+        </div>
       ) : null}
-    </div>
+    </>
   );
 };
 

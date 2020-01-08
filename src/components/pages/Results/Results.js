@@ -2,30 +2,34 @@ import React, { useContext, useState, useEffect } from 'react';
 import MediaItem from '../../MediaItem';
 import ResultsContext from '../../../context/results/resultsContext';
 import PaginationWrapper from '../../layout/PaginationWrapper';
+import AlertContext from '../../../context/alert/alertContext';
 
-const Results = props => {
+const Results = ({ match }) => {
   const [page, setPage] = useState(1);
-  const resultsContext = useContext(ResultsContext);
-  const { query } = props.match.params;
-  const { results, total_results, total_pages } = resultsContext.results;
+  const { items, searchMovies } = useContext(ResultsContext);
+  const { setAlert } = useContext(AlertContext);
+  const { query } = match.params;
+  const { results, total_results, total_pages } = items;
 
   useEffect(() => {
     setPage(1);
-    resultsContext.searchMovies(query, page);
+    searchMovies(query, page);
+    if (!total_results) {
+      setAlert('Media not found', 'danger');
+    }
   }, [query]);
 
   const handlePageChange = activePage => {
     setPage(activePage);
-    resultsContext.searchMovies(query, activePage);
+    searchMovies(query, activePage);
   };
-  console.log(results);
 
-  return (
-    <div className='container-fluid'>
-      {results && <h2 className='section-title'>Results: </h2>}
-      <div className='row'>
-        <MediaItem items={results} type='movie' />
-        <div className='pagination-container'>
+  if (total_results > 0) {
+    return (
+      <div className='container-fluid'>
+        <h2 className='section-title'>Results:</h2>
+        <div className='row'>
+          <MediaItem items={results} type='movie' />
           <PaginationWrapper
             currentPage={page}
             totalItems={total_results}
@@ -34,7 +38,7 @@ const Results = props => {
           />
         </div>
       </div>
-    </div>
-  );
+    );
+  } else return null;
 };
 export default Results;

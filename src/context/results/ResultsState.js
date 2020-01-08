@@ -10,10 +10,10 @@ const ResultsState = props => {
   const { search } = service;
 
   const initialState = {
-    results: []
+    items: []
   };
 
-  const [state, dispatch] = useReducer(ResultsReducer, initialState);
+  const [{ items }, dispatch] = useReducer(ResultsReducer, initialState);
 
   const searchMovies = async (name, activePage) => {
     dispatch({
@@ -25,7 +25,7 @@ const ResultsState = props => {
   return (
     <ResultsContext.Provider
       value={{
-        results: state.results,
+        items,
         searchMovies
       }}
     >

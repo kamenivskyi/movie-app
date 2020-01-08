@@ -18,8 +18,8 @@ const MovieDescription = ({ overview, releaseDate, genres, runtime }) => {
       )}
       {runtime && (
         <div className='description-title'>
-          <i className='far fa-clock'></i>{' '}
-          <span className='font-weight-bold'>Runtime: </span>{' '}
+          <i className='far fa-clock'></i> &nbsp;
+          <span className='font-weight-bold'>Runtime: </span>
           {calcTime(runtime)}
         </div>
       )}

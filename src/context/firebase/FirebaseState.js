@@ -2,13 +2,14 @@ import React, { useReducer, useEffect } from 'react';
 import 'firebase/firestore';
 import FirebaseContext from './firebaseContext';
 import FirebaseReducer from './firebaseReducer';
-import { SET_LOADING, SET_USER, LOG_OUT, SET_USER_DATA } from '../types';
-import firebase from '../../firebase';
+import { SET_LOADING, SET_USER, LOG_OUT, SET_BOOKMARKS } from '../types';
+import firebase, { db } from '../../firebase';
 
 const FirebaseState = props => {
   const initialState = {
     isLoggedIn: false,
     currentUser: {},
+    bookmarks: [],
     loading: false
   };
 
@@ -17,7 +18,7 @@ const FirebaseState = props => {
       if (user) {
         dispatch({ type: SET_USER, payload: user });
       } else {
-        return;
+        console.log('User is signed out');
         // User is signed out.
       }
     });
@@ -42,11 +43,32 @@ const FirebaseState = props => {
       .catch(handleError);
   };
 
+  const addToBookmarks = obj => {
+    db.collection('bookmarks').add(obj);
+  };
+
   const createUser = async (email, password) => {
     await firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .catch(handleError);
+  };
+
+  const getBookmarks = () => {
+    setLoading();
+    db.collection('bookmarks')
+      .get()
+      .then(({ docs }) => {
+        setupBookmarks(docs);
+        console.log(docs);
+      });
+  };
+  const setupBookmarks = data => {
+    const bookmarks = data.map(doc => {
+      const bookmark = doc.data();
+      return bookmark;
+    });
+    dispatch({ type: SET_BOOKMARKS, payload: bookmarks });
   };
 
   // var user = firebase.auth().currentUser;
@@ -87,6 +109,9 @@ const FirebaseState = props => {
         isLoggedIn: state.isLoggedIn,
         loading: state.loading,
         currentUser: state.currentUser,
+        bookmarks: state.bookmarks,
+        addToBookmarks,
+        getBookmarks,
         createUser,
         signinUser,
         logoutUser

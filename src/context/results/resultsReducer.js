@@ -5,7 +5,7 @@ export default (state, action) => {
     case SEARCH_MOVIES:
       return {
         ...state,
-        results: action.payload
+        items: action.payload
       };
   }
 };

@@ -15,7 +15,6 @@ import {
 } from '../types';
 
 const MovieState = props => {
-  const service = new MovieService();
   const {
     getMediaById,
     getGenreMoviesById,
@@ -25,7 +24,7 @@ const MovieState = props => {
     searchMoviesByName,
     getTrendingMovies,
     getDiscoverMovies
-  } = service;
+  } = new MovieService();
 
   const initialState = {
     bannerMovies: [],

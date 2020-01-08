@@ -4,9 +4,8 @@ import PopularReducer from './popularReducer';
 import MovieService from '../../services/movie-service';
 import { GET_TRENDING, TRENDING_GET_DATA } from '../types';
 
-const PopularState = props => {
-  const service = new MovieService();
-  const { getTrendingMovies, getMediaById } = service;
+const PopularState = ({ children }) => {
+  const { getTrendingMovies, getMediaById } = new MovieService();
 
   const initialState = {
     items: [],
@@ -37,7 +36,7 @@ const PopularState = props => {
         getMedia
       }}
     >
-      {props.children}
+      {children}
     </PopularContext.Provider>
   );
 };
