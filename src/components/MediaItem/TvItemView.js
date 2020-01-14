@@ -1,4 +1,5 @@
 import React from 'react';
+import Flip from 'react-reveal/Flip';
 import { Link } from 'react-router-dom';
 import config from '../../config';
 import NotFound from './not-found.jpg';
@@ -9,7 +10,7 @@ const TvItemView = props => {
   // console.log(props.type);
 
   return (
-    <>
+    <Flip left cascade>
       {props.array.map(item => {
         console.log(item);
         const { name, poster_path, vote_average, id } = item;
@@ -22,14 +23,14 @@ const TvItemView = props => {
               <span className='badge badge-success position-absolute my-1'>
                 Rating: {vote_average}
               </span>
-              <Link to={`/${props.type || 'movie'}/${id}`} className='py-2'>
+              <Link to={`/${props.type || 'tv'}/${id}`} className='py-2'>
                 {name}
               </Link>
             </div>
           </div>
         );
       })}
-    </>
+    </Flip>
   );
 };
 export default TvItemView;

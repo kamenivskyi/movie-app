@@ -47,7 +47,7 @@ const Trending = () => {
         period={currentPeriod}
       />
       <div className='row'>
-        <MediaItem items={results} type={currentType} />;
+        <MediaItem items={results} type={currentType} />
         <PaginationWrapper
           currentPage={currentPage}
           totalItems={total_results}

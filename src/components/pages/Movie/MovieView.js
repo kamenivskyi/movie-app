@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import FirebaseContext from '../../../context/firebase/firebaseContext';
-import withSpinner from '../../hoc-helpers/withSpinner';
+// import withSpinner from '../../hoc-helpers/withSpinner';
 import Finances from './Finances';
 import Cast from './Cast';
 import MovieDescription from './MovieDescription';

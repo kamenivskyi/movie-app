@@ -8,6 +8,7 @@ import MovieState from './context/movie/MovieState';
 import ResultsState from './context/results/ResultsState';
 import TrendingState from './context/trending/TrendingState';
 import Alert from './components/layout/Alert';
+import ButtonToTop from './components/layout/ButtonToTop';
 import './App.css';
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
                 <Navbar />
                 <Routes />
                 <Alert />
+                <ButtonToTop />
               </BrowserRouter>
             </TrendingState>
           </ResultsState>

@@ -1,4 +1,5 @@
 import React, { useEffect, useContext } from 'react';
+import Zoom from 'react-reveal/Zoom';
 import { Redirect } from 'react-router-dom';
 import FirebaseContext from '../../../context/firebase/firebaseContext';
 import MediaItem from '../../MediaItem';
@@ -23,7 +24,11 @@ const Profile = () => {
   if (isLoggedIn) {
     return (
       <div className='jumbotron'>
-        <h1 className='display-4'>Email: {currentUser.email}</h1>
+        <h1 className='display-4'>
+          <Zoom left cascade>
+            Email: {currentUser.email}
+          </Zoom>
+        </h1>
         <p>Username: {userData.nickname}</p>
         <p className='lead'>Bookmarks: </p>
         <button className='btn btn-success'>

@@ -1,4 +1,5 @@
 import React, { useEffect, useContext } from 'react';
+import Flip from 'react-reveal/Flip';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import MovieContext from '../../../context/movie/movieContext';
@@ -25,23 +26,25 @@ const Banner = () => {
   const { original } = config.API_IMAGE;
 
   return (
-    <Slider {...settings}>
-      {bannerMovies.results &&
-        bannerMovies.results.map(item => {
-          const { title, backdrop_path, overview, id } = item;
-          return (
-            <div className='banner-item' key={Math.random()}>
-              <div className='container-fluid'>
-                <img src={`${original}${backdrop_path}`} alt={title} />
-                <Link to={`movie/${id}`} className='banner-link'>
-                  {title}
-                </Link>
+    <Flip left>
+      <Slider {...settings}>
+        {bannerMovies.results &&
+          bannerMovies.results.map(item => {
+            const { title, backdrop_path, overview, id } = item;
+            return (
+              <div className='banner-item' key={Math.random()}>
+                <div className='container-fluid'>
+                  <img src={`${original}${backdrop_path}`} alt={title} />
+                  <Link to={`movie/${id}`} className='banner-link'>
+                    {title}
+                  </Link>
+                </div>
+                <div className='banner-description'>{overview}</div>
               </div>
-              <div className='banner-description'>{overview}</div>
-            </div>
-          );
-        })}
-    </Slider>
+            );
+          })}
+      </Slider>
+    </Flip>
   );
 };
 export default Banner;

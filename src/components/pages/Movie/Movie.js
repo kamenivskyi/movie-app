@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import MovieContext from '../../../context/movie/movieContext';
-import MovieView from './MovieView';
 import MovieService from '../../../services/movie-service';
+import MovieView from './MovieView';
 import './Movie.css';
 import Spinner from '../../common/Spinner';
 

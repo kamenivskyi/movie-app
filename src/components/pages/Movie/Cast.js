@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import config from '../../../config';
 import avatar from './avatar.jpg';
-import SliderWrapper from '../../common/SliderWrapper';
 
 const Cast = ({ data }) => {
   return (
