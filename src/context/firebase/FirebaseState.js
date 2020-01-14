@@ -26,7 +26,6 @@ const FirebaseState = props => {
     console.log(user);
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        setUid(user.uid);
         db.collection('users')
           .doc(user.uid)
           .get()
@@ -44,7 +43,6 @@ const FirebaseState = props => {
 
   const setLoading = () => dispatch({ type: SET_LOADING });
 
-  const setUid = value => localStorage.setItem('uid', value);
   const uniqueId = localStorage.getItem('uid');
   // const geUid = () => localStorage.getItem('uid');
 
@@ -90,8 +88,6 @@ const FirebaseState = props => {
   // .catch(onValidationError);
 
   const addToBookmarks = data => {
-    // const user = firebase.auth().currentUser; //берем текущего юзера
-    console.log(user);
     if (user) {
       let uid = user.uid;
       const doc = db.collection('userBookmarks').doc(uid);
@@ -101,20 +97,30 @@ const FirebaseState = props => {
       });
     }
   };
+
   const deleteBookmark = (id, type) => {
     console.log('id: ', id);
     console.log('type: ', type);
+
+    // Atomically remove a region from the "regions" array field.
+    db.collection('userBookmarks')
+      .doc(user.uid)
+      .update({
+        regions: firebase.firestore.FieldValue.arrayRemove('Joker')
+      });
   };
 
   const getBookmarks = () => {
-    setLoading();
-    db.collection('userBookmarks')
-      .doc(uniqueId)
-      .get()
-      .then(doc => {
-        console.log(doc.data());
-        dispatch({ type: GET_BOOKMARKS, payload: doc.data().regions });
-      });
+    if (user) {
+      setLoading();
+      db.collection('userBookmarks')
+        .doc(user.uid)
+        .get()
+        .then(doc => {
+          console.log(doc.data());
+          dispatch({ type: GET_BOOKMARKS, payload: doc.data().regions });
+        });
+    }
   };
 
   const setupBookmarks = data => {
@@ -130,7 +136,6 @@ const FirebaseState = props => {
       .signOut()
       .then(() => {
         dispatch({ type: LOG_OUT });
-        setUid('');
       })
       .catch(error => {
         console.log(error);

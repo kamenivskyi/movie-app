@@ -43,8 +43,8 @@ const TvView = ({ tv, cast, video }) => {
             runtime={runtime}
           />
         </ItemRow>
-        <Cast data={cast} />
       </div>
+      <Cast data={cast} />
     </Fragment>
   );
 };

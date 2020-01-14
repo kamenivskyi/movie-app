@@ -18,7 +18,7 @@ const MovieState = ({ children }) => {
   const {
     getMediaById,
     getGenreMoviesById,
-    getCastById,
+    getCastByType,
     getPersonById,
     getPersonPhotoById,
     searchMoviesByName,
@@ -48,9 +48,9 @@ const MovieState = ({ children }) => {
     setLoading();
     dispatch({ type: GET_GENRE_MOVIES, payload: await getGenreMoviesById(id) });
   };
-  const getCast = async id => {
+  const getCast = async (id, type) => {
     setLoading();
-    dispatch({ type: GET_CAST, payload: await getCastById(id) });
+    dispatch({ type: GET_CAST, payload: await getCastByType(id, type) });
   };
   const getPerson = async id => {
     setLoading();

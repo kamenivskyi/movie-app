@@ -19,9 +19,9 @@ class MovieService {
     return res;
   };
 
-  getCastById = async id => {
+  getCastByType = async (id, type) => {
     const res = await this.getResource(
-      `/movie/${id}/credits?api_key=${this._apiKey}`
+      `/${type}/${id}/credits?api_key=${this._apiKey}`
     );
     return res.cast;
   };

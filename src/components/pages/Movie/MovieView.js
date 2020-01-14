@@ -82,4 +82,4 @@ MovieView.propTypes = {
   cast: PropTypes.array
 };
 
-export default withSpinner(MovieView);
+export default MovieView;

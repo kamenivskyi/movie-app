@@ -8,10 +8,10 @@ import './MediaItem.css';
 const MovieItemView = ({ array, type, history }) => {
   const { large } = config.API_IMAGE;
   const { deleteBookmark } = useContext(FirebaseContext);
-  console.log(history);
+  const isProfilePage = history.location.pathname === '/profile';
   return (
     <>
-      {array.map(item => {
+      {array.map((item, idx) => {
         const { title, poster_path, vote_average, id } = item;
         const image = poster_path ? large + poster_path : NotFoundImage;
 
@@ -22,10 +22,10 @@ const MovieItemView = ({ array, type, history }) => {
               <span className='badge badge-success position-absolute my-1'>
                 Rating: {vote_average}
               </span>
-              {history.location.pathname === '/profile' && (
+              {isProfilePage && (
                 <button
                   className='btn btn-warning delete-bookmark'
-                  onClick={deleteBookmark}
+                  onClick={() => deleteBookmark(idx, 'movie')}
                   title='delete bookmark'
                 >
                   <i className='fas fa-trash-alt'></i>

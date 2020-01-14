@@ -14,7 +14,7 @@ const Tv = ({ match }) => {
     const { id } = match.params;
     getVideo(id, 'tv').then(res => setVideo(res));
     getMedia(id, 'tv');
-    getCast(id);
+    getCast(id, 'tv');
   }, []);
 
   return <TvView tv={itemData} video={video} cast={cast} />;
