@@ -6,7 +6,7 @@ import PersonInfo from './components/pages/PersonInfo';
 import GenreMovies from './components/pages/Movie/genres/GenreMovies';
 import People from './components/pages/People';
 import Results from './components/pages/Results';
-import Popular from './components/pages/Popular';
+import Trending from './components/pages/Trending';
 import Tv from './components/pages/Tv';
 import About from './components/pages/About';
 import Profile from './components/pages/Profile';
@@ -23,7 +23,7 @@ const Routes = () => {
       <Route exact path='/genre/:id' component={GenreMovies} />
       <Route exact path='/person/:id' component={PersonInfo} />
       <Route exact path='/people' component={People} />
-      <Route exact path='/popular' component={Popular} />
+      <Route exact path='/trending' component={Trending} />
       <Route exact path='/about' component={About} />
       <Route exact path='/results/:query' component={Results} />
       <Route exact path='/profile' component={Profile} />

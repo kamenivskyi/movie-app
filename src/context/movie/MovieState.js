@@ -14,7 +14,7 @@ import {
   FILTER_MOVIES
 } from '../types';
 
-const MovieState = props => {
+const MovieState = ({ children }) => {
   const {
     getMediaById,
     getGenreMoviesById,
@@ -22,7 +22,7 @@ const MovieState = props => {
     getPersonById,
     getPersonPhotoById,
     searchMoviesByName,
-    getTrendingMovies,
+    getTrendingMedia,
     getDiscoverMovies
   } = new MovieService();
 
@@ -77,7 +77,10 @@ const MovieState = props => {
   };
   const getTrending = async () => {
     setLoading();
-    dispatch({ type: GET_TRENDING, payload: await getTrendingMovies() });
+    dispatch({
+      type: GET_TRENDING,
+      payload: await getTrendingMedia('movie', 'week')
+    });
   };
 
   const setLoading = () => dispatch({ type: SET_LOADING });
@@ -103,7 +106,7 @@ const MovieState = props => {
         getPerson
       }}
     >
-      {props.children}
+      {children}
     </MovieContext.Provider>
   );
 };

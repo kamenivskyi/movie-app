@@ -20,9 +20,7 @@ const TvView = ({ tv, cast, video }) => {
   } = tv;
   console.log(tv);
 
-  const {
-    API_IMAGE: { original, medium }
-  } = config;
+  const { original, medium } = config.API_IMAGE;
 
   const image = backdrop_path ? original + backdrop_path : reserveBg;
 

@@ -1,4 +1,11 @@
-import { SET_LOADING, SET_USER, LOG_OUT, SET_BOOKMARKS } from '../types';
+import {
+  SET_LOADING,
+  SET_USER,
+  LOG_OUT,
+  SET_BOOKMARKS,
+  SET_USER_DATA,
+  GET_BOOKMARKS
+} from '../types';
 
 export default (state, action) => {
   switch (action.type) {
@@ -9,7 +16,14 @@ export default (state, action) => {
         isLoggedIn: true,
         loading: false
       };
-    case SET_BOOKMARKS:
+    case SET_USER_DATA:
+      return {
+        ...state,
+        userData: action.payload,
+        isLoggedIn: true,
+        loading: false
+      };
+    case GET_BOOKMARKS:
       return {
         ...state,
         bookmarks: action.payload,

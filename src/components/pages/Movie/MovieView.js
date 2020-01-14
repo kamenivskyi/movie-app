@@ -34,20 +34,12 @@ const MovieView = ({ movie, cast, video, id, type }) => {
   const handleClick = e => {
     const id = e.target.getAttribute('data-id');
     const type = e.target.getAttribute('data-type');
-
     const obj = _createObj(id, type);
-
     addToBookmarks(obj);
   };
 
   const _createObj = (id, type) => {
-    return {
-      id,
-      title,
-      type,
-      poster_path,
-      vote_average
-    };
+    return { id, title, type, poster_path, vote_average };
   };
 
   const image = backdrop_path ? original + backdrop_path : reserveBg;

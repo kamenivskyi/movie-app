@@ -3,23 +3,31 @@ import { Redirect } from 'react-router-dom';
 import FirebaseContext from '../../../../context/firebase/firebaseContext';
 
 const Signup = () => {
+  const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { createUser, isLoggedIn } = useContext(FirebaseContext);
 
   const onSubmit = e => {
     e.preventDefault();
-    createUser(email, password);
+    createUser(nickname, email, password);
     console.log(email);
     console.log(password);
   };
-  const onChange = e => {
-    if (e.target.type === 'email') {
-      setEmail(e.target.value);
-    } else {
-      setPassword(e.target.value);
+  const onChange = ({ target: { value, type } }) => {
+    switch (type) {
+      case 'email':
+        setEmail(value);
+        break;
+      case 'password':
+        setPassword(value);
+        break;
+      default:
+        setNickname(value);
+        break;
     }
   };
+
   if (isLoggedIn) {
     return <Redirect to='/' />;
   }
@@ -27,6 +35,17 @@ const Signup = () => {
     <div className='container'>
       <h2 className='section-title'>Signup</h2>
       <form onSubmit={onSubmit}>
+        <div className='form-group'>
+          <label htmlFor='signupNickname'>Nickname</label>
+          <input
+            type='text'
+            className='form-control'
+            id='signupNickname'
+            value={nickname}
+            onChange={onChange}
+            required
+          />
+        </div>
         <div className='form-group'>
           <label htmlFor='signupEmail'>Email address</label>
           <input

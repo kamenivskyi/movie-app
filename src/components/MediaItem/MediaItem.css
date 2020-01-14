@@ -3,3 +3,8 @@
 }
 .movie-card:hover {
 }
+.delete-bookmark {
+  position: absolute;
+  right: 0;
+  top: 0;
+}

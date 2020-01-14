@@ -11,8 +11,8 @@ const NavbarNav = () => (
         <NavLink className='nav-item nav-link' exact to='/'>
           Home
         </NavLink>
-        <NavLink className='nav-item nav-link' to='/popular'>
-          Popular
+        <NavLink className='nav-item nav-link' to='/trending'>
+          Trending
         </NavLink>
         <NavLink className='nav-item nav-link' to='/about'>
           About

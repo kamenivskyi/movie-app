@@ -14,7 +14,8 @@ export const FILTER_MOVIES = 'FILTER_MOVIES';
 export const SET_USER = 'SET_USER';
 export const SET_USER_DATA = 'SET_USER_DATA';
 export const LOG_OUT = 'LOG_OUT';
-export const SET_BOOKMARKS = 'SET_BOOKMARKS';
+export const GET_BOOKMARKS = 'GET_BOOKMARKS';
+export const DELETE_BOOKMARK = 'DELETE_BOOKMARK';
 //alert
 export const SET_ALERT = 'SET_ALERT';
 export const REMOVE_ALERT = 'REMOVE_ALERT';

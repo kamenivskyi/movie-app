@@ -57,11 +57,11 @@ class MovieService {
     return res;
   };
 
-  getTrendingMovies = async (type = 'movie', page = 1) => {
+  getTrendingMedia = async (type = 'movie', period = 'week', page = 1) => {
     const res = await this.getResource(
-      `/trending/${type}/week?api_key=${this._apiKey}&page=${page}`
+      `/trending/${type}/${period}?api_key=${this._apiKey}&page=${page}`
     );
-    return res.results;
+    return res;
   };
 
   getGenreList = async () => {

@@ -1,10 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import FirebaseContext from '../../context/firebase/firebaseContext';
 import config from '../../config';
 import NotFoundImage from './not-found.jpg';
+import './MediaItem.css';
 
-const MovieItemView = ({ array, type }) => {
+const MovieItemView = ({ array, type, history }) => {
   const { large } = config.API_IMAGE;
+  const { deleteBookmark } = useContext(FirebaseContext);
+  console.log(history);
   return (
     <>
       {array.map(item => {
@@ -18,6 +22,15 @@ const MovieItemView = ({ array, type }) => {
               <span className='badge badge-success position-absolute my-1'>
                 Rating: {vote_average}
               </span>
+              {history.location.pathname === '/profile' && (
+                <button
+                  className='btn btn-warning delete-bookmark'
+                  onClick={deleteBookmark}
+                  title='delete bookmark'
+                >
+                  <i className='fas fa-trash-alt'></i>
+                </button>
+              )}
               <Link to={`/${type || 'movie'}/${id}`} className='py-2'>
                 {title}
               </Link>
@@ -28,4 +41,4 @@ const MovieItemView = ({ array, type }) => {
     </>
   );
 };
-export default MovieItemView;
+export default withRouter(MovieItemView);

@@ -2,21 +2,39 @@ import React, { useReducer, useEffect } from 'react';
 import 'firebase/firestore';
 import FirebaseContext from './firebaseContext';
 import FirebaseReducer from './firebaseReducer';
-import { SET_LOADING, SET_USER, LOG_OUT, SET_BOOKMARKS } from '../types';
 import firebase, { db } from '../../firebase';
+import {
+  SET_LOADING,
+  SET_USER,
+  LOG_OUT,
+  GET_BOOKMARKS,
+  SET_USER_DATA
+} from '../types';
 
 const FirebaseState = props => {
   const initialState = {
     isLoggedIn: false,
     currentUser: {},
+    userData: {},
     bookmarks: [],
     loading: false
   };
+  const [state, dispatch] = useReducer(FirebaseReducer, initialState);
+  const user = firebase.auth().currentUser;
 
   useEffect(() => {
+    console.log(user);
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        dispatch({ type: SET_USER, payload: user });
+        setUid(user.uid);
+        db.collection('users')
+          .doc(user.uid)
+          .get()
+          .then(doc => {
+            console.log(doc.data());
+            dispatch({ type: SET_USER_DATA, payload: doc.data() });
+            dispatch({ type: SET_USER, payload: user });
+          });
       } else {
         console.log('User is signed out');
         // User is signed out.
@@ -24,9 +42,11 @@ const FirebaseState = props => {
     });
   }, []);
 
-  const [state, dispatch] = useReducer(FirebaseReducer, initialState);
-
   const setLoading = () => dispatch({ type: SET_LOADING });
+
+  const setUid = value => localStorage.setItem('uid', value);
+  const uniqueId = localStorage.getItem('uid');
+  // const geUid = () => localStorage.getItem('uid');
 
   const signinUser = (email, password) => {
     firebase
@@ -40,59 +60,84 @@ const FirebaseState = props => {
           console.log(res);
         }
       })
-      .catch(handleError);
+      .catch(onValidationError);
   };
 
-  const addToBookmarks = obj => {
-    db.collection('bookmarks').add(obj);
-  };
-
-  const createUser = async (email, password) => {
+  const createUser = async (nickname, email, password) => {
     await firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
-      .catch(handleError);
+      .then(({ user }) => {
+        console.log(user);
+        db.collection('userBookmarks')
+          .doc(user.uid)
+          .set({ regions: [] });
+
+        db.collection('users')
+          .doc(user.uid)
+          .set({ nickname });
+      })
+      .catch(onValidationError);
+  };
+  // db.collection(`userBookmarks/${uid}`).set({ bookmarks: []})
+  //   return db
+  //     .collection('users')
+  //     .doc(user.uid)
+  //     .add({ nickname, bookmarks: [] })
+  //     .collection('bookmarks')
+  //     .set({ nickname, bookmarks: [] });
+  // })
+  // .catch(onValidationError);
+
+  const addToBookmarks = data => {
+    // const user = firebase.auth().currentUser; //берем текущего юзера
+    console.log(user);
+    if (user) {
+      let uid = user.uid;
+      const doc = db.collection('userBookmarks').doc(uid);
+
+      doc.update({
+        regions: firebase.firestore.FieldValue.arrayUnion(data)
+      });
+    }
+  };
+  const deleteBookmark = (id, type) => {
+    console.log('id: ', id);
+    console.log('type: ', type);
   };
 
   const getBookmarks = () => {
     setLoading();
-    db.collection('bookmarks')
+    db.collection('userBookmarks')
+      .doc(uniqueId)
       .get()
-      .then(({ docs }) => {
-        setupBookmarks(docs);
-        console.log(docs);
+      .then(doc => {
+        console.log(doc.data());
+        dispatch({ type: GET_BOOKMARKS, payload: doc.data().regions });
       });
   };
-  const setupBookmarks = data => {
-    const bookmarks = data.map(doc => {
-      const bookmark = doc.data();
-      return bookmark;
-    });
-    dispatch({ type: SET_BOOKMARKS, payload: bookmarks });
-  };
 
-  // var user = firebase.auth().currentUser;
-  // user.updateProfile({
-  //   displayName: "Jane Q. User",
-  //   photoURL: "https://example.com/jane-q-user/profile.jpg"
-  // }).then(function() {
-  //   // Update successful.
-  // }).catch(function(error) {
-  //   // An error happened.
-  // });
+  const setupBookmarks = data => {
+    console.log(data);
+    const bookmarks = data.map(doc => doc.data());
+    // dispatch({ type: SET_BOOKMARKS, payload: bookmarks });
+    console.log(bookmarks);
+  };
 
   const logoutUser = async () => {
     await firebase
       .auth()
       .signOut()
-      .then(() => dispatch({ type: LOG_OUT }))
+      .then(() => {
+        dispatch({ type: LOG_OUT });
+        setUid('');
+      })
       .catch(error => {
-        // An error happened
         console.log(error);
       });
   };
 
-  const handleError = ({ code, message }) => {
+  const onValidationError = ({ code, message }) => {
     switch (code) {
       case 'auth/wrong-password':
         return alert('The password is wrong, please try again.');
@@ -109,8 +154,10 @@ const FirebaseState = props => {
         isLoggedIn: state.isLoggedIn,
         loading: state.loading,
         currentUser: state.currentUser,
+        userData: state.userData,
         bookmarks: state.bookmarks,
         addToBookmarks,
+        deleteBookmark,
         getBookmarks,
         createUser,
         signinUser,

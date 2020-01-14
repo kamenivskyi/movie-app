@@ -12,7 +12,7 @@ const TvItemView = props => {
     <>
       {props.array.map(item => {
         console.log(item);
-        const { title, name, poster_path, vote_average, id } = item;
+        const { name, poster_path, vote_average, id } = item;
         const image = poster_path ? large + poster_path : NotFound;
 
         return (

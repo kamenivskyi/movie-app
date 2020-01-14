@@ -2,12 +2,10 @@ import React, { useReducer } from 'react';
 import ResultsContext from './resultsContext';
 import ResultsReducer from './resultsReducer';
 import MovieService from '../../services/movie-service';
-
 import { SEARCH_MOVIES } from '../types';
 
-const ResultsState = props => {
-  const service = new MovieService();
-  const { search } = service;
+const ResultsState = ({ children }) => {
+  const { search } = new MovieService();
 
   const initialState = {
     items: []
@@ -29,7 +27,7 @@ const ResultsState = props => {
         searchMovies
       }}
     >
-      {props.children}
+      {children}
     </ResultsContext.Provider>
   );
 };

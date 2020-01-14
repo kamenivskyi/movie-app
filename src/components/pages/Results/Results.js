@@ -33,8 +33,8 @@ const Results = ({ match }) => {
           <PaginationWrapper
             currentPage={page}
             totalItems={total_results}
-            onChange={handlePageChange}
             totalPages={total_pages}
+            onChange={handlePageChange}
           />
         </div>
       </div>

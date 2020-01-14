@@ -6,7 +6,7 @@ import FirebaseState from './context/firebase/FirebaseState';
 import AlertState from './context/alert/AlertState';
 import MovieState from './context/movie/MovieState';
 import ResultsState from './context/results/ResultsState';
-import PopularState from './context/popular/PopularState';
+import TrendingState from './context/trending/TrendingState';
 import Alert from './components/layout/Alert';
 import './App.css';
 
@@ -16,13 +16,13 @@ const App = () => {
       <AlertState>
         <MovieState>
           <ResultsState>
-            <PopularState>
+            <TrendingState>
               <BrowserRouter>
                 <Navbar />
                 <Routes />
                 <Alert />
               </BrowserRouter>
-            </PopularState>
+            </TrendingState>
           </ResultsState>
         </MovieState>
       </AlertState>

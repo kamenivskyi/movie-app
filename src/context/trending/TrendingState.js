@@ -1,23 +1,26 @@
 import React, { useReducer } from 'react';
-import PopularContext from './popularContext';
-import PopularReducer from './popularReducer';
+import TrendingContext from './trendingContext';
+import TrendingReducer from './trendingReducer';
 import MovieService from '../../services/movie-service';
 import { GET_TRENDING, TRENDING_GET_DATA } from '../types';
 
 const PopularState = ({ children }) => {
-  const { getTrendingMovies, getMediaById } = new MovieService();
+  const { getTrendingMedia, getMediaById } = new MovieService();
 
   const initialState = {
     items: [],
     itemData: {}
   };
 
-  const [state, dispatch] = useReducer(PopularReducer, initialState);
+  const [{ items, itemData }, dispatch] = useReducer(
+    TrendingReducer,
+    initialState
+  );
 
-  const getPopularItems = async (type, activePage) => {
+  const getTrendingItems = async (type, period, activePage) => {
     dispatch({
       type: GET_TRENDING,
-      payload: await getTrendingMovies(type, activePage)
+      payload: await getTrendingMedia(type, period, activePage)
     });
   };
   const getMedia = async (id, type) => {
@@ -28,16 +31,16 @@ const PopularState = ({ children }) => {
   };
 
   return (
-    <PopularContext.Provider
+    <TrendingContext.Provider
       value={{
-        items: state.items,
-        itemData: state.itemData,
-        getPopularItems,
+        items,
+        itemData,
+        getTrendingItems,
         getMedia
       }}
     >
       {children}
-    </PopularContext.Provider>
+    </TrendingContext.Provider>
   );
 };
 

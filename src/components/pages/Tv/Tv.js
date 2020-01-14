@@ -1,24 +1,23 @@
 import React, { useContext, useEffect, useState } from 'react';
-import PopularContext from '../../../context/popular/popularContext';
+import TrendingContext from '../../../context/trending/trendingContext';
 import MovieContext from '../../../context/movie/movieContext';
 import TvView from './TvView';
 import MovieService from '../../../services/movie-service';
 
 const Tv = ({ match }) => {
   const [video, setVideo] = useState('');
-  const service = new MovieService();
-  const popularContext = useContext(PopularContext);
-  const movieContext = useContext(MovieContext);
-  const { getMedia, itemData } = popularContext;
+  const { getVideo } = new MovieService();
+  const { getMedia, itemData } = useContext(TrendingContext);
+  const { getCast, cast } = useContext(MovieContext);
 
   useEffect(() => {
     const { id } = match.params;
-    service.getVideo(id, 'tv').then(res => setVideo(res));
+    getVideo(id, 'tv').then(res => setVideo(res));
     getMedia(id, 'tv');
-    movieContext.getCast(id);
+    getCast(id);
   }, []);
 
-  return <TvView tv={itemData} video={video} cast={movieContext.cast} />;
+  return <TvView tv={itemData} video={video} cast={cast} />;
 };
 
 export default Tv;
