@@ -18,7 +18,6 @@ const Profile = () => {
   useEffect(() => {
     getBookmarks();
     console.log(bookmarks);
-    console.log(loading);
   }, []);
 
   if (isLoggedIn) {
@@ -37,6 +36,7 @@ const Profile = () => {
         <hr className='my-4' />
         <div className='row'>
           {loading ? <Spinner /> : <MediaItem items={bookmarks} type='movie' />}
+          {!bookmarks && !loading ? 'bookmarks not found' : ''}
         </div>
       </div>
     );

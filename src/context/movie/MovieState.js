@@ -9,7 +9,6 @@ import {
   SET_LOADING,
   GET_GENRE_MOVIES,
   GET_CAST,
-  GET_TRENDING,
   SEARCH_MOVIES,
   FILTER_MOVIES
 } from '../types';
@@ -22,12 +21,10 @@ const MovieState = ({ children }) => {
     getPersonById,
     getPersonPhotoById,
     searchMoviesByName,
-    getTrendingMedia,
     getDiscoverMovies
   } = new MovieService();
 
   const initialState = {
-    bannerMovies: [],
     movies: [],
     activePage: 1,
     movie: {},
@@ -75,13 +72,6 @@ const MovieState = ({ children }) => {
       payload: await searchMoviesByName(name, activePage)
     });
   };
-  const getTrending = async () => {
-    setLoading();
-    dispatch({
-      type: GET_TRENDING,
-      payload: await getTrendingMedia('movie', 'week')
-    });
-  };
 
   const setLoading = () => dispatch({ type: SET_LOADING });
 
@@ -89,7 +79,6 @@ const MovieState = ({ children }) => {
     <MovieContext.Provider
       value={{
         movies: state.movies,
-        bannerMovies: state.bannerMovies,
         movie: state.movie,
         genreMovies: state.genreMovies,
         cast: state.cast,
@@ -98,7 +87,6 @@ const MovieState = ({ children }) => {
         photos: state.photos,
         filterMovies,
         searchMovies,
-        getTrending,
         getMovie,
         getPhoto,
         getGenreMovies,

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, Fragment } from 'react';
 import Movies from '../../layout/Movies';
 import Banner from '../../layout/Banner';
 import Filters from '../../layout/Filters';
@@ -7,7 +7,6 @@ import SortBy from '../../layout/Filters/SortBy';
 import IncludeAdult from '../../layout/Filters/IncludeAdult';
 import MovieContext from '../../../context/movie/movieContext';
 import PaginationWrapper from '../../layout/PaginationWrapper';
-import Alert from '../../layout/Alert';
 
 const Home = () => {
   const { filterMovies, movies } = useContext(MovieContext);
@@ -28,13 +27,13 @@ const Home = () => {
   const handleSortBy = e => setSortBy(e.target.value);
   const handleChangeYear = e => setYear(e.target.value);
 
-  const handlePageChange = pageNumber => {
+  const handlePageChange = async pageNumber => {
     setActivePage(pageNumber);
-    filterMovies(pageNumber, sortBy, includeAdult, year);
+    filterMovies(activePage, sortBy, includeAdult, year);
   };
 
   return (
-    <React.Fragment>
+    <Fragment>
       <Banner />
       <div className='container-fluid mt-3'>
         <div className='row'>
@@ -44,7 +43,6 @@ const Home = () => {
             <SortBy onChange={handleSortBy} value={sortBy} />
           </Filters>
           <Movies />
-          <Alert />
           <PaginationWrapper
             currentPage={activePage}
             totalItems={total_results}
@@ -53,7 +51,7 @@ const Home = () => {
           />
         </div>
       </div>
-    </React.Fragment>
+    </Fragment>
   );
 };
 export default Home;

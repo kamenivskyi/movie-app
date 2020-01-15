@@ -15,30 +15,12 @@ const SortBy = ({ onChange, value, options }) => {
 
 SortBy.defaultProps = {
   options: [
-    {
-      label: 'Popular descending',
-      value: 'popularity.desc'
-    },
-    {
-      label: 'Popular ascending',
-      value: 'popularity.asc'
-    },
-    {
-      label: 'Rating descending',
-      value: 'vote_average.desc'
-    },
-    {
-      label: 'Rating ascending',
-      value: 'vote_average.asc'
-    },
-    {
-      label: 'Revenue descending',
-      value: 'revenue.desc'
-    },
-    {
-      label: 'Revenue ascending',
-      value: 'revenue.asc'
-    }
+    { label: 'Popular descending', value: 'popularity.desc' },
+    { label: 'Popular ascending', value: 'popularity.asc' },
+    { label: 'Rating descending', value: 'vote_average.desc' },
+    { label: 'Rating ascending', value: 'vote_average.asc' },
+    { label: 'Revenue descending', value: 'revenue.desc' },
+    { label: 'Revenue ascending', value: 'revenue.asc' }
   ]
 };
 

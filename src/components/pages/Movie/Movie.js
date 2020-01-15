@@ -19,7 +19,9 @@ const Movie = ({ match }) => {
   if (loading) {
     return <Spinner />;
   } else {
-    return <MovieView movie={movie} cast={cast} video={video} id={id} />;
+    return (
+      <MovieView movie={movie} type='movie' cast={cast} video={video} id={id} />
+    );
   }
 };
 

@@ -2,12 +2,12 @@ import React, { useEffect, useContext } from 'react';
 import Flip from 'react-reveal/Flip';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
-import MovieContext from '../../../context/movie/movieContext';
+import BannerContext from '../../../context/banner/bannerContext';
 import config from '../../../config';
 import './Banner.css';
 
 const Banner = () => {
-  const { bannerMovies, getTrending } = useContext(MovieContext);
+  const { items, getTrending } = useContext(BannerContext);
 
   useEffect(() => {
     getTrending('movie', 'week');
@@ -28,8 +28,8 @@ const Banner = () => {
   return (
     <Flip left>
       <Slider {...settings}>
-        {bannerMovies.results &&
-          bannerMovies.results.map(item => {
+        {items.results &&
+          items.results.map(item => {
             const { title, backdrop_path, overview, id } = item;
             return (
               <div className='banner-item' key={Math.random()}>

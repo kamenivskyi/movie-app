@@ -6,7 +6,6 @@ import {
   FILTER_MOVIES,
   GET_PERSON,
   GET_PHOTO,
-  GET_TRENDING,
   SEARCH_MOVIES
 } from '../types';
 
@@ -40,12 +39,6 @@ export default (state, action) => {
       return {
         ...state,
         photos: action.payload,
-        loading: false
-      };
-    case GET_TRENDING:
-      return {
-        ...state,
-        bannerMovies: action.payload,
         loading: false
       };
     case FILTER_MOVIES:

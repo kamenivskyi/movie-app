@@ -69,7 +69,7 @@ const FirebaseState = props => {
         console.log(user);
         db.collection('userBookmarks')
           .doc(user.uid)
-          .set({ regions: [] });
+          .set({ bookmarks: [] });
 
         db.collection('users')
           .doc(user.uid)
@@ -93,20 +93,16 @@ const FirebaseState = props => {
       const doc = db.collection('userBookmarks').doc(uid);
 
       doc.update({
-        regions: firebase.firestore.FieldValue.arrayUnion(data)
+        bookmarks: firebase.firestore.FieldValue.arrayUnion(data)
       });
     }
   };
 
-  const deleteBookmark = (id, type) => {
-    console.log('id: ', id);
-    console.log('type: ', type);
-
-    // Atomically remove a region from the "regions" array field.
+  const deleteBookmark = data => {
     db.collection('userBookmarks')
       .doc(user.uid)
       .update({
-        regions: firebase.firestore.FieldValue.arrayRemove('Joker')
+        bookmarks: firebase.firestore.FieldValue.arrayRemove(data)
       });
   };
 
@@ -115,10 +111,9 @@ const FirebaseState = props => {
       setLoading();
       db.collection('userBookmarks')
         .doc(user.uid)
-        .get()
-        .then(doc => {
+        .onSnapshot(doc => {
           console.log(doc.data());
-          dispatch({ type: GET_BOOKMARKS, payload: doc.data().regions });
+          dispatch({ type: GET_BOOKMARKS, payload: doc.data().bookmarks });
         });
     }
   };

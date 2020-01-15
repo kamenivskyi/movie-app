@@ -14,7 +14,7 @@ const NavbarUserService = () => {
             </NavLink>
           </li>
           <li className='d-flex align-items-center'>
-            <button className='btn btn-danger btn-sm' onClick={logoutUser}>
+            <button className='btn btn-danger' onClick={logoutUser}>
               Logout
             </button>
           </li>
