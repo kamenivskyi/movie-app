@@ -26,7 +26,6 @@ const MovieState = ({ children }) => {
 
   const initialState = {
     movies: [],
-    activePage: 1,
     movie: {},
     genreMovies: [],
     credits: [],

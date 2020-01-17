@@ -3,10 +3,11 @@ import { NavLink } from 'react-router-dom';
 import FirebaseContext from '../../../context/firebase/firebaseContext';
 
 const NavbarUserService = () => {
-  const { isLoggedIn, logoutUser } = useContext(FirebaseContext);
+  const { isLoggedIn, logoutUser, currentUser } = useContext(FirebaseContext);
+  console.log(currentUser.uid);
   return (
     <ul className='navbar-nav authentication navbar-item'>
-      {isLoggedIn ? (
+      {currentUser.uid && isLoggedIn ? (
         <>
           <li>
             <NavLink to='/profile' className='nav-link nav-item mr-2'>
@@ -15,7 +16,7 @@ const NavbarUserService = () => {
           </li>
           <li className='d-flex align-items-center'>
             <button className='btn btn-danger' onClick={logoutUser}>
-              Logout
+              <i className='fas fa-sign-out-alt mr-1'></i>Logout
             </button>
           </li>
         </>
@@ -23,12 +24,12 @@ const NavbarUserService = () => {
         <>
           <li>
             <NavLink to='/signup' className='nav-item nav-link'>
-              Signup
+              <i className='fas fa-user-plus mr-1'></i>Signup
             </NavLink>
           </li>
           <li>
             <NavLink to='/login' className='nav-item nav-link'>
-              Login
+              <i className='fas fa-sign-in-alt mr-1'></i>Login
             </NavLink>
           </li>
         </>

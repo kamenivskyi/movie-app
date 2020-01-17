@@ -35,7 +35,7 @@ const MovieView = ({ movie, cast, video, id, type }) => {
     const id = e.target.getAttribute('data-id');
     const type = e.target.getAttribute('data-type');
     const obj = _createObj(id, type);
-    addToBookmarks(obj);
+    addToBookmarks(obj, 'movies');
   };
 
   const _createObj = (id, type) => {

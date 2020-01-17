@@ -3,7 +3,7 @@ import spinner from './spinner.svg';
 
 const Spinner = () => {
   return (
-    <div className='text-center'>
+    <div style={{ margin: '30px auto', textAlign: 'center' }}>
       <img src={spinner} className='text-center' alt='Spinner' />
     </div>
   );

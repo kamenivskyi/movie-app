@@ -11,7 +11,7 @@ const Video = ({ url, onClick }) => {
         src={config.video + url}
         frameBorder='0'
         allowFullScreen='1'
-      ></iframe>
+      />
       <button
         className='close-video'
         type='button'

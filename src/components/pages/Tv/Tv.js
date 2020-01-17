@@ -17,7 +17,7 @@ const Tv = ({ match }) => {
     getCast(id, 'tv');
   }, []);
 
-  return <TvView tv={itemData} video={video} cast={cast} />;
+  return <TvView tv={itemData} video={video} cast={cast} type='tv' />;
 };
 
 export default Tv;

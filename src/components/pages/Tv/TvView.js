@@ -1,5 +1,6 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import PropTypes from 'prop-types';
+import FirebaseContext from '../../../context/firebase/firebaseContext';
 import Cast from '../Movie/Cast';
 import withSpinner from '../../hoc-helpers/withSpinner';
 import MovieDescription from '../Movie/MovieDescription';
@@ -8,7 +9,8 @@ import BtnShowVideo from '../../layout/Video/BtnShowVideo';
 import config from '../../../config';
 import reserveBg from '../Movie/reserve-bg.jpg';
 
-const TvView = ({ tv, cast, video }) => {
+const TvView = ({ tv, cast, video, type }) => {
+  const { isLoggedIn, addToBookmarks } = useContext(FirebaseContext);
   const {
     name,
     poster_path,
@@ -16,13 +18,25 @@ const TvView = ({ tv, cast, video }) => {
     overview,
     genres,
     first_air_date,
-    runtime
+    runtime,
+    vote_average,
+    id
   } = tv;
-  console.log(tv);
 
   const { original, medium } = config.API_IMAGE;
 
   const image = backdrop_path ? original + backdrop_path : reserveBg;
+
+  const handleClick = e => {
+    const id = e.target.getAttribute('data-id');
+    const type = e.target.getAttribute('data-type');
+    const obj = _createObj(id, type);
+    addToBookmarks(obj, 'tvs');
+  };
+
+  const _createObj = (id, type) => {
+    return { id, name, type, poster_path, vote_average };
+  };
 
   return (
     <Fragment>
@@ -32,9 +46,16 @@ const TvView = ({ tv, cast, video }) => {
           <div className='movie-img-wrapp'>
             <img className='movie-img' src={medium + poster_path} alt={name} />
             {video && <BtnShowVideo url={video.key} />}
-            <button className='btn btn-primary mt-3'>
-              <i className='fas fa-bookmark'></i> &nbsp; To bookmarks
-            </button>
+            {isLoggedIn && (
+              <button
+                className='btn btn-primary mt-3'
+                onClick={handleClick}
+                data-id={id}
+                data-type={type}
+              >
+                <i className='fas fa-bookmark'></i> &nbsp; To bookmarks
+              </button>
+            )}
           </div>
           <MovieDescription
             overview={overview}

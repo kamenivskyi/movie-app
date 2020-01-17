@@ -26,15 +26,17 @@ const MovieItemView = ({ array, type, history }) => {
                 <span className='badge badge-success position-absolute my-1'>
                   Rating: {vote_average}
                 </span>
+
                 {isProfilePage && (
                   <button
                     className='btn btn-warning delete-bookmark'
-                    onClick={() => deleteBookmark(obj)}
+                    onClick={() => deleteBookmark(obj, 'movies')}
                     title='delete bookmark'
                   >
                     <i className='fas fa-trash-alt'></i>
                   </button>
                 )}
+
                 <Link to={`/${type || 'movie'}/${id}`} className='py-2'>
                   {title}
                 </Link>

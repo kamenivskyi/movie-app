@@ -43,9 +43,6 @@ const FirebaseState = props => {
 
   const setLoading = () => dispatch({ type: SET_LOADING });
 
-  const uniqueId = localStorage.getItem('uid');
-  // const geUid = () => localStorage.getItem('uid');
-
   const signinUser = (email, password) => {
     firebase
       .auth()
@@ -69,7 +66,7 @@ const FirebaseState = props => {
         console.log(user);
         db.collection('userBookmarks')
           .doc(user.uid)
-          .set({ bookmarks: [] });
+          .set({ tvs: [], movies: [] });
 
         db.collection('users')
           .doc(user.uid)
@@ -87,22 +84,21 @@ const FirebaseState = props => {
   // })
   // .catch(onValidationError);
 
-  const addToBookmarks = data => {
+  const addToBookmarks = (data, type) => {
     if (user) {
       let uid = user.uid;
       const doc = db.collection('userBookmarks').doc(uid);
-
       doc.update({
-        bookmarks: firebase.firestore.FieldValue.arrayUnion(data)
+        [type]: firebase.firestore.FieldValue.arrayUnion(data)
       });
     }
   };
 
-  const deleteBookmark = data => {
+  const deleteBookmark = (data, type) => {
     db.collection('userBookmarks')
       .doc(user.uid)
       .update({
-        bookmarks: firebase.firestore.FieldValue.arrayRemove(data)
+        [type]: firebase.firestore.FieldValue.arrayRemove(data)
       });
   };
 
@@ -113,7 +109,7 @@ const FirebaseState = props => {
         .doc(user.uid)
         .onSnapshot(doc => {
           console.log(doc.data());
-          dispatch({ type: GET_BOOKMARKS, payload: doc.data().bookmarks });
+          dispatch({ type: GET_BOOKMARKS, payload: doc.data() });
         });
     }
   };

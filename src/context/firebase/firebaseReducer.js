@@ -2,7 +2,6 @@ import {
   SET_LOADING,
   SET_USER,
   LOG_OUT,
-  SET_BOOKMARKS,
   SET_USER_DATA,
   GET_BOOKMARKS
 } from '../types';

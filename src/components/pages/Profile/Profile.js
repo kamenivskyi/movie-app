@@ -14,6 +14,7 @@ const Profile = () => {
     bookmarks,
     loading
   } = useContext(FirebaseContext);
+  const { tvs, movies } = bookmarks;
 
   useEffect(() => {
     getBookmarks();
@@ -35,8 +36,14 @@ const Profile = () => {
         </button>
         <hr className='my-4' />
         <div className='row'>
-          {loading ? <Spinner /> : <MediaItem items={bookmarks} type='movie' />}
-          {!bookmarks && !loading ? 'bookmarks not found' : ''}
+          {loading ? (
+            <Spinner />
+          ) : (
+            <>
+              <MediaItem items={movies} type='movie' />
+              {/* <MediaItem items={tvs} type='tv' /> */}
+            </>
+          )}
         </div>
       </div>
     );

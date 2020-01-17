@@ -1,11 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
 import trendingContext from '../../../context/trending/trendingContext';
-import MediaItem from '../../MediaItem';
 import MediaTabs from '../../layout/MediaTabs';
 import PaginationWrapper from '../../layout/PaginationWrapper';
-import Spinner from '../../common/Spinner';
 
-const Trending = () => {
+const Trending = ({ children }) => {
   const [currentType, setCurrentType] = useState('movie');
   const [currentPeriod, setCurrentPeriod] = useState('week');
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,9 +25,11 @@ const Trending = () => {
     if (type) {
       setCurrentType(type);
       getTrendingItems(currentType, currentPeriod, currentPage);
+      console.log(currentPage);
     } else {
       setCurrentPeriod(period);
       getTrendingItems(currentType, currentPeriod, currentPage);
+      console.log(currentPage);
     }
   };
 
@@ -39,28 +39,22 @@ const Trending = () => {
   };
 
   return (
-    <div className='container-fluid'>
-      {loading ? (
-        <Spinner />
-      ) : (
-        <>
-          <MediaTabs
-            onClick={updateMedia}
-            type={currentType}
-            period={currentPeriod}
-          />
-          <div className='row'>
-            <MediaItem items={results} type={currentType} />
-            <PaginationWrapper
-              currentPage={currentPage}
-              totalItems={total_results}
-              totalPages={total_pages}
-              onChange={handlePageChange}
-            />
-          </div>
-        </>
-      )}
-    </div>
+    <>
+      <MediaTabs
+        onClick={updateMedia}
+        type={currentType}
+        period={currentPeriod}
+      />
+      <div className='row'>
+        {children}
+        <PaginationWrapper
+          currentPage={currentPage}
+          totalItems={total_results}
+          totalPages={total_pages}
+          onChange={handlePageChange}
+        />
+      </div>
+    </>
   );
 };
 export default Trending;
