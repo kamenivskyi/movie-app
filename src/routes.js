@@ -24,6 +24,10 @@ const Routes = () => {
       <Route exact path='/person/:id' component={PersonInfo} />
       <Route exact path='/people' component={People} />
       <Route exact path='/trending' component={Trending} />
+
+      {/* <Route exact path='/trending/movie' component={Trending} />
+      <Route exact path='/trending/tv' component={Trending} /> */}
+
       <Route exact path='/about' component={About} />
       <Route exact path='/results/:query' component={Results} />
       <Route exact path='/profile' component={Profile} />

@@ -13,6 +13,7 @@
   background-color: #383838;
   border: none;
   border-radius: 5px;
+  z-index: 10;
 }
 .btn-to-top:hover {
   box-shadow: 0px 0px 10px #ffffff;

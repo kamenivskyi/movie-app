@@ -1,24 +1,23 @@
 import React, { useEffect, useContext } from 'react';
 import MovieContext from '../../../../context/movie/movieContext';
-import MediaItem from '../../../MediaItem';
+import MediaItems from '../../../MediaItems';
 
 const GenreMovies = ({ match }) => {
-  const movieContext = useContext(MovieContext);
-  const { genreMovies, getGenreMovies } = movieContext;
+  const { genreMovies, getGenreMovies } = useContext(MovieContext);
 
   useEffect(() => {
-    let cancelled = false;
-    if (!cancelled) {
+    let isCurrent = true;
+    if (isCurrent) {
       getGenreMovies(match.params.id);
     }
-    return () => (cancelled = true);
+    return () => (isCurrent = false);
   }, [match.params.id]);
   console.log(genreMovies);
 
   return (
     <div className='container-fluid'>
       <div className='row'>
-        <MediaItem items={genreMovies} />
+        <MediaItems items={genreMovies} />
       </div>
     </div>
   );

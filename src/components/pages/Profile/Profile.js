@@ -1,8 +1,8 @@
 import React, { useEffect, useContext } from 'react';
-import Zoom from 'react-reveal/Zoom';
 import { Redirect } from 'react-router-dom';
+import Zoom from 'react-reveal/Zoom';
 import FirebaseContext from '../../../context/firebase/firebaseContext';
-import MediaItem from '../../MediaItem';
+import MediaItems from '../../MediaItems';
 import Spinner from '../../common/Spinner';
 
 const Profile = () => {
@@ -19,6 +19,7 @@ const Profile = () => {
   useEffect(() => {
     getBookmarks();
     console.log(bookmarks);
+    console.log(tvs);
   }, []);
 
   if (isLoggedIn) {
@@ -36,14 +37,9 @@ const Profile = () => {
         </button>
         <hr className='my-4' />
         <div className='row'>
-          {loading ? (
-            <Spinner />
-          ) : (
-            <>
-              <MediaItem items={movies} type='movie' />
-              {/* <MediaItem items={tvs} type='tv' /> */}
-            </>
-          )}
+          {loading && <Spinner />}
+          {movies && <MediaItems items={movies} type='movie' />}
+          {tvs && <MediaItems items={tvs} type='tv' />}
         </div>
       </div>
     );

@@ -1,11 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
 import trendingContext from '../../../context/trending/trendingContext';
-import MediaItem from '../../MediaItem';
+import MediaItems from '../../MediaItems';
 import MediaTabs from '../../layout/MediaTabs';
 import PaginationWrapper from '../../layout/PaginationWrapper';
 import Spinner from '../../common/Spinner';
 
-const Trending = () => {
+const Trending = ({ history }) => {
   const [currentType, setCurrentType] = useState('movie');
   const [currentPeriod, setCurrentPeriod] = useState('week');
   const [currentPage, setCurrentPage] = useState(1);
@@ -50,7 +51,7 @@ const Trending = () => {
             period={currentPeriod}
           />
           <div className='row'>
-            <MediaItem items={results} type={currentType} />
+            <MediaItems items={results} type={currentType} />
             <PaginationWrapper
               currentPage={currentPage}
               totalItems={total_results}
@@ -63,4 +64,4 @@ const Trending = () => {
     </div>
   );
 };
-export default Trending;
+export default withRouter(Trending);

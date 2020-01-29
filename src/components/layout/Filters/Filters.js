@@ -43,9 +43,7 @@ const Filters = ({ children }) => {
           </button>
         </form>
       </div>
-
       {children}
-
       <PaginationWrapper
         currentPage={activePage}
         totalItems={total_results}

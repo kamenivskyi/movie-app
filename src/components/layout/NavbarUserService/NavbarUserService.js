@@ -7,6 +7,7 @@ const NavbarUserService = () => {
   console.log(currentUser.uid);
   return (
     <ul className='navbar-nav authentication navbar-item'>
+      {!isLoggedIn && <span>loading...</span>}
       {currentUser.uid && isLoggedIn ? (
         <>
           <li>
@@ -15,9 +16,9 @@ const NavbarUserService = () => {
             </NavLink>
           </li>
           <li className='d-flex align-items-center'>
-            <button className='btn btn-danger' onClick={logoutUser}>
+            <a href='' className='nav-link nav-item' onClick={logoutUser}>
               <i className='fas fa-sign-out-alt mr-1'></i>Logout
-            </button>
+            </a>
           </li>
         </>
       ) : (

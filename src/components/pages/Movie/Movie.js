@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import MovieContext from '../../../context/movie/movieContext';
 import MovieService from '../../../services/movie-service';
 import MovieView from './MovieView';
-import './Movie.css';
 import Spinner from '../../common/Spinner';
+import './Movie.css';
 
 const Movie = ({ match }) => {
   const [video, setVideo] = useState('');
@@ -16,6 +16,7 @@ const Movie = ({ match }) => {
     getMovie(id, 'movie');
     getCast(id, 'movie');
   }, []);
+
   if (loading) {
     return <Spinner />;
   } else {

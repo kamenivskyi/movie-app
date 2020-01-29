@@ -10,14 +10,6 @@ const Navbar = () => {
       <NavbarNav />
       <Search />
       <NavbarUserService />
-      {/* <div className='custom-control custom-switch'>
-        <input
-          type='checkbox'
-          className='custom-control-input'
-          id='customSwitch1'
-        />
-        <label className='custom-control-label' htmlFor='customSwitch1'></label>
-      </div> */}
       <button className='navbar-toggler' type='button'>
         <span className='navbar-toggler-icon'></span>
       </button>
