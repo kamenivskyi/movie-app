@@ -6,7 +6,7 @@ import FirebaseContext from '../../../context/firebase/firebaseContext';
 const DeleteBookmarkButton = ({ item, type, history }) => {
   const { deleteBookmark } = useContext(FirebaseContext);
 
-  const isProfilePage = history.location.pathname === '/profile';
+  const isProfilePage = history.location.pathname === '/profile/bookmarks';
   const onDelete = () => deleteBookmark(item, type);
 
   return (

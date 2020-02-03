@@ -39,7 +39,9 @@ const Banner = () => {
                     {title}
                   </Link>
                 </div>
-                <div className='banner-description'>{overview}</div>
+                <div className='banner-description'>
+                  {overview.substr(0, 150)} {overview.length >= 150 && '...'}
+                </div>
               </div>
             );
           })}

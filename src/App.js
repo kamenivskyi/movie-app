@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import Navbar from './components/layout/Navbar';
 import Routes from './routes';
+import Navbar from './components/layout/Navbar';
 import FirebaseState from './context/firebase/FirebaseState';
 import AlertState from './context/alert/AlertState';
 import MovieState from './context/movie/MovieState';
@@ -14,11 +14,11 @@ import './App.css';
 
 const App = () => {
   return (
-    <FirebaseState>
-      <AlertState>
-        <MovieState>
-          <ResultsState>
-            <TrendingState>
+    <AlertState>
+      <MovieState>
+        <ResultsState>
+          <TrendingState>
+            <FirebaseState>
               <BannerState>
                 <BrowserRouter>
                   <Navbar />
@@ -27,11 +27,11 @@ const App = () => {
                   <ButtonToTop />
                 </BrowserRouter>
               </BannerState>
-            </TrendingState>
-          </ResultsState>
-        </MovieState>
-      </AlertState>
-    </FirebaseState>
+            </FirebaseState>
+          </TrendingState>
+        </ResultsState>
+      </MovieState>
+    </AlertState>
   );
 };
 

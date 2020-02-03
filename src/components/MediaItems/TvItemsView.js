@@ -18,13 +18,15 @@ const TvItemsView = ({ array, type }) => {
 
       return (
         <Card key={`tv${id}`}>
-          <img className='img-fluid' src={image} alt={name} />
-          <span className='badge badge-success position-absolute my-1'>
-            Rating: {vote_average}
-          </span>
-          <DeleteBookmarkButton item={obj} type='tvs' />
           <Link to={`/${type || 'tv'}/${id}`} className='py-2'>
-            {name}
+            <img className='img-fluid' src={image} alt={name} />
+            <span className='badge badge-success card-item-badge'>
+              Rating: {vote_average}
+            </span>
+            <div className='card-item-content'>
+              <DeleteBookmarkButton item={obj} type='tvs' />
+              <h5 className='card-item-link'>{name}</h5>
+            </div>
           </Link>
         </Card>
       );

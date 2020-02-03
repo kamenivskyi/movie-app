@@ -50,6 +50,7 @@ const Trending = ({ history }) => {
             type={currentType}
             period={currentPeriod}
           />
+
           <div className='row'>
             <MediaItems items={results} type={currentType} />
             <PaginationWrapper

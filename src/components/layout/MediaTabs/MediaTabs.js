@@ -10,9 +10,24 @@ const MediaTabs = ({ onClick, type, period, items, periodItems }) => {
     return `nav-link ${period === value ? 'active' : ''}`;
   };
 
+  // const Tab = () => {
+  //   return (
+  //     <li className='nav-item' key={type}>
+  //       <a
+  //         className={getClassByType(type)}
+  //         href='#'
+  //         data-type={type}
+  //         onClick={onClick}
+  //       >
+  //         {label}
+  //       </a>
+  //     </li>
+  //   );
+  // };
+
   return (
-    <div className='row mb-3'>
-      <ul className='col-md-6 nav nav-pills'>
+    <div className='row my-3' style={{ margin: '0' }}>
+      <ul className='col-6 nav nav-pills'>
         {items.map(({ label, type }) => {
           return (
             <li className='nav-item' key={type}>
@@ -28,7 +43,7 @@ const MediaTabs = ({ onClick, type, period, items, periodItems }) => {
           );
         })}
       </ul>
-      <ul className='col-md-6 nav nav-pills'>
+      <ul className='col-6 nav nav-pills'>
         {periodItems.map(({ label, period }) => {
           return (
             <li className='nav-item' key={period}>

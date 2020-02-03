@@ -13,6 +13,7 @@ import Profile from './components/pages/Profile';
 import Login from './components/pages/Auth/Login';
 import Signup from './components/pages/Auth/Signup';
 import NotFound from './components/pages/NotFound';
+import UserBookmarks from './components/pages/UserBookmarks/UserBookmarks';
 
 const Routes = () => {
   return (
@@ -31,6 +32,7 @@ const Routes = () => {
       <Route exact path='/about' component={About} />
       <Route exact path='/results/:query' component={Results} />
       <Route exact path='/profile' component={Profile} />
+      <Route exact path='/profile/bookmarks' component={UserBookmarks} />
       <Route exact path='/login' component={Login} />
       <Route exact path='/signup' component={Signup} />
       <Route component={NotFound} />

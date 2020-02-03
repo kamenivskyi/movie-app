@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { withRouter } from 'react-router-dom';
+
 import ResultsContext from '../../../context/results/resultsContext';
+
 import './Search.css';
 
 const Search = ({ history }) => {
@@ -18,7 +20,10 @@ const Search = ({ history }) => {
   const onChange = ({ target }) => setValue(target.value);
 
   return (
-    <form className='form-inline navbar-item' onSubmit={onSubmit}>
+    <form
+      className='form-inline navbar-item my-sm-2 my-lg-0'
+      onSubmit={onSubmit}
+    >
       <input
         className='form-control search'
         type='search'

@@ -1,9 +1,12 @@
 import React, { useContext, useState } from 'react';
+
+import MovieContext from '../../../context/movie/movieContext';
+import PaginationWrapper from '../../layout/PaginationWrapper';
 import ReleaseYear from './ReleaseYear';
 import SortBy from './SortBy';
 import IncludeAdult from './IncludeAdult';
-import MovieContext from '../../../context/movie/movieContext';
-import PaginationWrapper from '../../layout/PaginationWrapper';
+import { Button } from '../../proxy/Button';
+
 import './Filters.css';
 
 const Filters = ({ children }) => {
@@ -38,9 +41,9 @@ const Filters = ({ children }) => {
           <IncludeAdult onChange={handleAdultCheck} value={includeAdult} />
           <ReleaseYear onChange={handleChangeYear} value={year} />
           <SortBy onChange={handleSortBy} value={sortBy} />
-          <button className='btn btn-outline-dark submit-btn' type='submit'>
+          <Button className='btn btn-outline-dark submit-btn' type='submit'>
             Search
-          </button>
+          </Button>
         </form>
       </div>
       {children}

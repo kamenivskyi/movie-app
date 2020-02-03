@@ -86,11 +86,28 @@ const FirebaseState = props => {
 
   const addToBookmarks = (data, type) => {
     if (user) {
-      let uid = user.uid;
-      const doc = db.collection('userBookmarks').doc(uid);
+      const doc = db.collection('userBookmarks').doc(user.uid);
       doc.update({
         [type]: firebase.firestore.FieldValue.arrayUnion(data)
       });
+    }
+  };
+
+  const updateUserProfile = nickname => {
+    if (user) {
+      return db
+        .collection('users')
+        .doc(user.uid)
+        .update({
+          nickname
+        })
+        .then(function() {
+          console.log('Document successfully updated!');
+        })
+        .catch(function(error) {
+          // The document probably doesn't exist.
+          console.error('Error updating document: ', error);
+        });
     }
   };
 
@@ -157,7 +174,8 @@ const FirebaseState = props => {
         getBookmarks,
         createUser,
         signinUser,
-        logoutUser
+        logoutUser,
+        updateUserProfile
       }}
     >
       {props.children}

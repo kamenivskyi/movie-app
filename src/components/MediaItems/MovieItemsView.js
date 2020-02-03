@@ -19,12 +19,12 @@ const MovieItemView = ({ array, type }) => {
         <Card key={`movie${id}`}>
           <Link to={`/${type || 'movie'}/${id}`}>
             <img src={image} alt={title} />
-            <span className='badge badge-success card-badge'>
+            <span className='badge badge-success card-item-badge'>
               Rating: {vote_average}
             </span>
-            <div className='card-content'>
+            <div className='card-item-content'>
               <DeleteBookmarkButton item={obj} type='movies' />
-              <h5 className='card-link'>{title}</h5>
+              <h5 className='card-item-link'>{title}</h5>
             </div>
           </Link>
         </Card>
