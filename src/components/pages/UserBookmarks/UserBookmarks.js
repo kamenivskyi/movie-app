@@ -12,7 +12,7 @@ const UserBookmarks = () => {
 
   const [term, setTerm] = useState('');
 
-  const { tvs, movies } = bookmarks;
+  const { tv, movie } = bookmarks;
 
   useEffect(() => {
     getBookmarks();
@@ -24,8 +24,8 @@ const UserBookmarks = () => {
     );
   };
 
-  const visibleMovies = movies && search(movies, term, 'title');
-  const visibleTvs = tvs && search(tvs, term, 'name');
+  const visibleMovies = movie && search(movie, term, 'title');
+  const visibleTvs = tv && search(tv, term, 'name');
 
   const handleChange = ({ target: { value } }) => {
     setTerm(value);
@@ -39,7 +39,11 @@ const UserBookmarks = () => {
         <hr className='my-4' />
         <div className='row'>
           {loading && <Spinner />}
-          {tvs && tvs.length === 0 ? 'Your bookmarks list is empty' : ''}
+
+          {tv && tv.length === 0 && movie && movie.length === 0
+            ? 'Your bookmarks list is empty'
+            : ''}
+
           {visibleMovies && <MediaItems items={visibleMovies} type='movie' />}
           {visibleTvs && <MediaItems items={visibleTvs} type='tv' />}
         </div>

@@ -66,7 +66,7 @@ const FirebaseState = props => {
         console.log(user);
         db.collection('userBookmarks')
           .doc(user.uid)
-          .set({ tvs: [], movies: [] });
+          .set({ tv: [], movie: [] });
 
         db.collection('users')
           .doc(user.uid)
@@ -94,20 +94,13 @@ const FirebaseState = props => {
   };
 
   const updateUserProfile = nickname => {
+    const doc = db.collection('users').doc(user.uid);
     if (user) {
-      return db
-        .collection('users')
-        .doc(user.uid)
-        .update({
-          nickname
-        })
-        .then(function() {
-          console.log('Document successfully updated!');
-        })
-        .catch(function(error) {
-          // The document probably doesn't exist.
-          console.error('Error updating document: ', error);
-        });
+      return doc.update({ nickname }).catch(error => {
+        alert('Error updating document, maybe the document does not exist!');
+        // The document probably doesn't exist.
+        console.error('Error updating document: ', error);
+      });
     }
   };
 

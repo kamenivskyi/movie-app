@@ -1,3 +1,3 @@
-import { UpdateProfileModal } from './UpdateProfileModal';
+import UpdateProfileModal from './UpdateProfileModal';
 
 export default UpdateProfileModal;

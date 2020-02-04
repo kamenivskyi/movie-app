@@ -1,18 +1,19 @@
 import React from 'react';
-import MovieItemsView from './MovieItemsView';
-import TvItemsView from './TvItemsView';
+import MediaItem from '../layout/MediaItem/MediaItem';
 
 const MediaItems = ({ items, type }) => {
-  // console.log(items);
+  console.log(items);
   if (items) {
-    switch (type) {
-      case 'movie':
-        return <MovieItemsView array={items} key={Math.random()} type={type} />;
-      case 'tv':
-        return <TvItemsView array={items} key={Math.random()} type={type} />;
-      default:
-        return <MovieItemsView array={items} key={Math.random()} type={type} />;
-    }
+    return (
+      <>
+        {items &&
+          items.map(data => {
+            return (
+              <MediaItem data={data} key={`${type}${data.id}`} type={type} />
+            );
+          })}
+      </>
+    );
   }
   return <>{null}</>;
 };

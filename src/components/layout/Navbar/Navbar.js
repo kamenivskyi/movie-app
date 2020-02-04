@@ -22,7 +22,7 @@ const NavbarToggleButton = () => (
 );
 
 const Navbar = () => (
-  <header className='navbar navbar-expand-lg navbar-light bg-light fixed-top'>
+  <header className='navbar navbar-expand-lg navbar-light bg-light sticky-top'>
     <NavLink className='navbar-brand' to='/'>
       <i className='fas fa-film'></i> Movie Finder
     </NavLink>

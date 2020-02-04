@@ -1,12 +1,15 @@
 import React, { useContext, useState, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
+
 import FirebaseContext from '../../../../context/firebase/firebaseContext';
 import { Button } from '../../../proxy/Button';
 
-export const UpdateProfileModal = () => {
+const UpdateProfileModal = ({ history }) => {
   const { userData, updateUserProfile } = useContext(FirebaseContext);
 
   const [nickname, setNickname] = useState('');
-  console.log(nickname);
+
+  console.log(history);
 
   useEffect(() => {
     if (userData.nickname) {
@@ -16,8 +19,14 @@ export const UpdateProfileModal = () => {
 
   const onUpdateProfile = e => {
     e.preventDefault();
-    updateUserProfile(nickname);
+
+    updateUserProfile(nickname).then(() => {
+      alert('Document successfully updated!');
+      // window.location.reload();
+      history.go(0);
+    });
   };
+
   return (
     <div
       className='modal fade'
@@ -45,8 +54,6 @@ export const UpdateProfileModal = () => {
               value={nickname}
               onChange={e => setNickname(e.target.value)}
             />
-            {/* <input type='text' className='form-control' />
-            <input type='text' className='form-control' /> */}
           </div>
           <div className='modal-footer'>
             <Button className='btn btn-secondary' data-dismiss='modal'>
@@ -61,3 +68,4 @@ export const UpdateProfileModal = () => {
     </div>
   );
 };
+export default withRouter(UpdateProfileModal);

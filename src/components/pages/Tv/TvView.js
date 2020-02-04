@@ -31,7 +31,7 @@ const TvView = ({ tv, cast, video, type }) => {
     const id = e.target.getAttribute('data-id');
     const type = e.target.getAttribute('data-type');
     const obj = _createObj(id, type);
-    addToBookmarks(obj, 'tvs');
+    addToBookmarks(obj, type);
   };
 
   const _createObj = (id, type) => {
