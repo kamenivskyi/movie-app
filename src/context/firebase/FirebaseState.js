@@ -20,23 +20,23 @@ const FirebaseState = props => {
     loading: false
   };
   const [state, dispatch] = useReducer(FirebaseReducer, initialState);
+
+  // firebase variables
   const user = firebase.auth().currentUser;
+  const docBookmarks = user && db.collection('userBookmarks').doc(user.uid);
+  const docUsers = user && db.collection('users').doc(user.uid);
 
   useEffect(() => {
-    console.log(user);
     firebase.auth().onAuthStateChanged(user => {
+      const doc = db.collection('users').doc(user.uid);
+
       if (user) {
-        db.collection('users')
-          .doc(user.uid)
-          .get()
-          .then(doc => {
-            console.log(doc.data());
-            dispatch({ type: SET_USER_DATA, payload: doc.data() });
-            dispatch({ type: SET_USER, payload: user });
-          });
+        doc.get().then(doc => {
+          dispatch({ type: SET_USER_DATA, payload: doc.data() });
+          dispatch({ type: SET_USER, payload: user });
+        });
       } else {
         console.log('User is signed out');
-        // User is signed out.
       }
     });
   }, []);
@@ -48,8 +48,6 @@ const FirebaseState = props => {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(res => {
-        console.log(res);
-        // dispatch({ type: SET_USER, payload: res });
         if (res) {
           console.log('its ok!');
           console.log(res);
@@ -74,61 +72,40 @@ const FirebaseState = props => {
       })
       .catch(onValidationError);
   };
-  // db.collection(`userBookmarks/${uid}`).set({ bookmarks: []})
-  //   return db
-  //     .collection('users')
-  //     .doc(user.uid)
-  //     .add({ nickname, bookmarks: [] })
-  //     .collection('bookmarks')
-  //     .set({ nickname, bookmarks: [] });
-  // })
-  // .catch(onValidationError);
 
   const addToBookmarks = (data, type) => {
     if (user) {
-      const doc = db.collection('userBookmarks').doc(user.uid);
-      doc.update({
+      docBookmarks.update({
         [type]: firebase.firestore.FieldValue.arrayUnion(data)
       });
     }
   };
 
   const updateUserProfile = nickname => {
-    const doc = db.collection('users').doc(user.uid);
     if (user) {
-      return doc.update({ nickname }).catch(error => {
+      return docUsers.update({ nickname }).catch(error => {
         alert('Error updating document, maybe the document does not exist!');
-        // The document probably doesn't exist.
         console.error('Error updating document: ', error);
       });
     }
   };
 
   const deleteBookmark = (data, type) => {
-    db.collection('userBookmarks')
-      .doc(user.uid)
-      .update({
+    if (user) {
+      docBookmarks.update({
         [type]: firebase.firestore.FieldValue.arrayRemove(data)
       });
+    }
   };
 
   const getBookmarks = () => {
     if (user) {
       setLoading();
-      db.collection('userBookmarks')
-        .doc(user.uid)
-        .onSnapshot(doc => {
-          console.log(doc.data());
-          dispatch({ type: GET_BOOKMARKS, payload: doc.data() });
-        });
-    }
-  };
 
-  const setupBookmarks = data => {
-    console.log(data);
-    const bookmarks = data.map(doc => doc.data());
-    // dispatch({ type: SET_BOOKMARKS, payload: bookmarks });
-    console.log(bookmarks);
+      docBookmarks.onSnapshot(doc => {
+        dispatch({ type: GET_BOOKMARKS, payload: doc.data() });
+      });
+    }
   };
 
   const logoutUser = async () => {

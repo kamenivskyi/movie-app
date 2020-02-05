@@ -1,5 +1,5 @@
 import React from 'react';
-import Genres from './genres/Genres';
+import Genres from '../../layout/genres/Genres';
 import { calcTime } from '../../../helpers';
 
 const MovieDescription = ({ overview, releaseDate, genres, runtime }) => {

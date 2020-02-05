@@ -1,8 +1,7 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import Zoom from 'react-reveal/Zoom';
 import FirebaseContext from '../../../context/firebase/firebaseContext';
-import MediaItems from '../../MediaItems';
+import MediaItems from '../../layout/MediaItems';
 import Spinner from '../../common/Spinner';
 
 const UserBookmarks = () => {

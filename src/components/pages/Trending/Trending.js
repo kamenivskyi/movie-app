@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import trendingContext from '../../../context/trending/trendingContext';
-import MediaItems from '../../MediaItems';
+import MediaItems from '../../layout/MediaItems';
 import MediaTabs from '../../layout/MediaTabs';
 import PaginationWrapper from '../../layout/PaginationWrapper';
 import Spinner from '../../common/Spinner';

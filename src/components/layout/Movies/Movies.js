@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import MediaItems from '../../MediaItems';
+import MediaItems from '../MediaItems';
 import MovieContext from '../../../context/movie/movieContext';
 import Spinner from '../../common/Spinner';
 

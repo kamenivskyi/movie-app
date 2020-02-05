@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import Home from './components/pages/Home';
 import Movie from './components/pages/Movie';
 import PersonInfo from './components/pages/PersonInfo';
-import GenreMovies from './components/pages/Movie/genres/GenreMovies';
+import GenreMovies from './components/pages/GenreMovies';
 import People from './components/pages/People';
 import Results from './components/pages/Results';
 import Trending from './components/pages/Trending';

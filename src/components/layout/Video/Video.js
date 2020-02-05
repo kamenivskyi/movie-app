@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import config from '../../../config';
+import { Button } from '../../proxy/Button';
+
 import './Video.css';
 
 const Video = ({ url, onClick }) => {
@@ -12,14 +15,9 @@ const Video = ({ url, onClick }) => {
         frameBorder='0'
         allowFullScreen='1'
       />
-      <button
-        className='close-video'
-        type='button'
-        title='close video'
-        onClick={onClick}
-      >
+      <Button className='close-video' title='close video' onClick={onClick}>
         <i className='fas fa-times'></i>
-      </button>
+      </Button>
     </div>
   );
 };

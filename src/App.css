@@ -84,7 +84,16 @@ p {
   position: absolute;
   left: 5px;
   top: 5px;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 3;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  box-shadow: 0 0 3px 1px #000000;
+  font-weight: bold;
 }
 .card-item img {
   position: absolute;

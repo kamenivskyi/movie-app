@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+
 import Video from './Video';
+import { Button } from '../../proxy/Button';
 
 const BtnShowVideo = ({ url }) => {
   const [show, setShow] = useState(false);
@@ -13,11 +15,13 @@ const BtnShowVideo = ({ url }) => {
       setShow(false);
     }
   };
+
   const button = (
-    <button className='btn btn-danger mt-3' onClick={handleClick}>
+    <Button className='btn btn-danger mt-3' onClick={handleClick}>
       <i className='fas fa-play'></i> &nbsp; Trailer
-    </button>
+    </Button>
   );
+
   if (show) {
     return (
       <>
@@ -25,8 +29,9 @@ const BtnShowVideo = ({ url }) => {
         {button}
       </>
     );
+  } else {
+    return <>{button}</>;
   }
-  return <>{button}</>;
 };
 
 BtnShowVideo.propTypes = {

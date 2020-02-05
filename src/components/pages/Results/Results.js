@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import MediaItems from '../../MediaItems';
+import MediaItems from '../../layout/MediaItems';
 import ResultsContext from '../../../context/results/resultsContext';
 import PaginationWrapper from '../../layout/PaginationWrapper';
 
