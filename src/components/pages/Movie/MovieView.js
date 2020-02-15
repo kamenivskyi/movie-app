@@ -1,17 +1,26 @@
 import React, { Fragment, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
+
+import withSpinner from '../../hoc-helpers/withSpinner';
+
 import FirebaseContext from '../../../context/firebase/firebaseContext';
-// import withSpinner from '../../hoc-helpers/withSpinner';
 import Finances from './Finances';
-import Cast from './Cast';
-import MovieDescription from './MovieDescription';
+import Cast from '../../layout/Cast';
+import MediaDescription from '../../layout/MediaDescription';
 import ItemRow from '../../common/ItemRow';
 import BtnShowVideo from '../../layout/Video/BtnShowVideo';
+
 import config from '../../../config';
-import reserveBg from './reserve-bg.jpg';
+
+import { Button } from '../../proxy/Button';
+
+import { onGetTypeAndId } from '../../../helpers';
+
+import reserveBg from '../../../assets/images/reserve-bg.jpg';
 
 const MovieView = ({ movie, cast, video, id, type }) => {
   const { isLoggedIn, addToBookmarks } = useContext(FirebaseContext);
+
   const {
     title,
     poster_path,
@@ -31,16 +40,11 @@ const MovieView = ({ movie, cast, video, id, type }) => {
 
   const { original, medium } = config.API_IMAGE;
 
-  const handleClick = e => {
-    const id = e.target.getAttribute('data-id');
-    const type = e.target.getAttribute('data-type');
-    const obj = _createObj(id, type);
-    addToBookmarks(obj, type);
-  };
-
   const _createObj = (id, type) => {
     return { id, title, type, poster_path, vote_average };
   };
+
+  const handleGetTypeAndId = onGetTypeAndId(_createObj, addToBookmarks);
 
   const image = backdrop_path ? original + backdrop_path : reserveBg;
 
@@ -53,17 +57,17 @@ const MovieView = ({ movie, cast, video, id, type }) => {
             <img className='movie-img' src={medium + poster_path} alt={title} />
             {video && <BtnShowVideo url={video.key} />}
             {isLoggedIn && (
-              <button
+              <Button
                 className='btn btn-primary mt-3'
-                onClick={handleClick}
+                onClick={handleGetTypeAndId}
                 data-id={id}
                 data-type={type}
               >
                 <i className='fas fa-bookmark'></i> &nbsp; To bookmarks
-              </button>
+              </Button>
             )}
           </div>
-          <MovieDescription
+          <MediaDescription
             overview={overview}
             releaseDate={release_date}
             genres={genres}
@@ -82,4 +86,4 @@ MovieView.propTypes = {
   cast: PropTypes.array
 };
 
-export default MovieView;
+export default withSpinner(MovieView);

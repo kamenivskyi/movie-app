@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import Zoom from 'react-reveal/Zoom';
+
 import FirebaseContext from '../../../context/firebase/firebaseContext';
-import Spinner from '../../common/Spinner';
 import UpdateProfileModal from '../../layout/Modals/UpdateProfileModal';
+
 import { Button } from '../../proxy/Button';
 
 const Profile = () => {

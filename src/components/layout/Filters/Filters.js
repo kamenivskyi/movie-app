@@ -24,10 +24,6 @@ const Filters = ({ children }) => {
     filterMovies(1, sortBy, includeAdult, year);
   };
 
-  const handleAdultCheck = e => setIncludeAdult(e.target.checked);
-  const handleSortBy = e => setSortBy(e.target.value);
-  const handleChangeYear = e => setYear(e.target.value);
-
   const handlePageChange = pageNumber => {
     setActivePage(pageNumber);
     filterMovies(pageNumber, sortBy, includeAdult, year);
@@ -38,15 +34,26 @@ const Filters = ({ children }) => {
       <div className='col-12'>
         <h2 className='section-title'>Filters</h2>
         <form className='form-inline filters' onSubmit={handleSubmit}>
-          <IncludeAdult onChange={handleAdultCheck} value={includeAdult} />
-          <ReleaseYear onChange={handleChangeYear} value={year} />
-          <SortBy onChange={handleSortBy} value={sortBy} />
+          <IncludeAdult
+            onChange={({ target }) => setIncludeAdult(target.checked)}
+            value={includeAdult}
+          />
+          <ReleaseYear
+            onChange={({ target }) => setYear(target.value)}
+            value={year}
+          />
+          <SortBy
+            onChange={({ target }) => setSortBy(target.value)}
+            value={sortBy}
+          />
           <Button className='btn btn-outline-dark submit-btn' type='submit'>
             Search
           </Button>
         </form>
       </div>
+
       {children}
+
       <PaginationWrapper
         currentPage={activePage}
         totalItems={total_results}

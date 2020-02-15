@@ -39,7 +39,7 @@ const FirebaseState = props => {
         console.log('User is signed out');
       }
     });
-  }, []);
+  }, [user]);
 
   const setLoading = () => dispatch({ type: SET_LOADING });
 
@@ -90,10 +90,10 @@ const FirebaseState = props => {
     }
   };
 
-  const deleteBookmark = (data, type) => {
+  const deleteBookmark = (bookmark, type) => {
     if (user) {
       docBookmarks.update({
-        [type]: firebase.firestore.FieldValue.arrayRemove(data)
+        [type]: firebase.firestore.FieldValue.arrayRemove(bookmark)
       });
     }
   };

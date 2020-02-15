@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import config from '../../../config';
 import { Button } from '../../proxy/Button';
+import config from '../../../config';
 
 import './Video.css';
 

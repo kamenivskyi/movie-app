@@ -17,7 +17,7 @@ const BtnShowVideo = ({ url }) => {
   };
 
   const button = (
-    <Button className='btn btn-danger mt-3' onClick={handleClick}>
+    <Button className='btn btn-info mt-3' onClick={handleClick}>
       <i className='fas fa-play'></i> &nbsp; Trailer
     </Button>
   );

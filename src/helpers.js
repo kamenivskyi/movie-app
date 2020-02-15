@@ -14,3 +14,11 @@ export const convertMoney = money => {
   });
   return formatter.format(money);
 };
+
+// get type and id then add to bookmarks
+export const onGetTypeAndId = (createObj, addToBookmarks) => async e => {
+  const id = e.target.getAttribute('data-id');
+  const type = e.target.getAttribute('data-type');
+  const obj = createObj(id, type);
+  await addToBookmarks(obj, type);
+};

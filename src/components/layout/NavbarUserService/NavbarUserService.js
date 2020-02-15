@@ -8,26 +8,30 @@ const NavbarUserService = () => {
   );
 
   if (currentUser.uid && isLoggedIn) {
-    console.log(currentUser);
     return (
-      <li className='nav-item dropdown'>
-        <a
-          className='nav-link dropdown-toggle'
+      <div className='dropdown'>
+        <button
+          className='btn btn-light dropdown-toggle'
+          type='button'
+          id='dropdownMenu2'
           data-toggle='dropdown'
-          href='#'
-          role='button'
           aria-haspopup='true'
           aria-expanded='false'
         >
-          <i className='fas fa-user'></i> &nbsp;{userData.nickname || 'Profile'}
-        </a>
-        <div className='dropdown-menu'>
-          <NavLink to='/profile' className='dropdown-item' href='#' exact>
-            <i className='far fa-user'></i> &nbsp; Cabinet
-          </NavLink>
-          <NavLink to='/profile/bookmarks' className='dropdown-item'>
-            <i className='far fa-bookmark'></i> &nbsp; Bookmarks
-          </NavLink>
+          <i className='fas fa-user'></i> &nbsp;{' '}
+          {userData.nickname || 'Profile'}
+        </button>
+        <ul className='dropdown-menu' aria-labelledby='dropdownMenu2'>
+          <li>
+            <NavLink className='dropdown-item' to='/profile' exact>
+              <i className='far fa-user'></i> &nbsp; Cabinet
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to='/profile/bookmarks' className='dropdown-item'>
+              <i className='far fa-bookmark'></i> &nbsp; Bookmarks
+            </NavLink>
+          </li>
           <div className='dropdown-divider'></div>
           <div className='d-flex align-items-center'>
             <a
@@ -39,8 +43,8 @@ const NavbarUserService = () => {
               <i className='fas fa-sign-out-alt mr-1'></i>Logout
             </a>
           </div>
-        </div>
-      </li>
+        </ul>
+      </div>
     );
   } else {
     return (

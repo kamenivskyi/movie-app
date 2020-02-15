@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import classNames from 'classnames';
 
 import Search from '../Search';
 import NavbarNav from '../NavbarNav/NavbarNav';
@@ -21,20 +22,22 @@ const NavbarToggleButton = () => (
   </Button>
 );
 
-const Navbar = () => (
-  <header className='navbar navbar-expand-lg navbar-light bg-light sticky-top'>
-    <NavLink className='navbar-brand' to='/'>
-      <i className='fas fa-film'></i> Movie Finder
-    </NavLink>
-    <NavbarToggleButton />
-    <div className='collapse navbar-collapse' id='navbarCollapse'>
-      <NavbarNav />
-      <Search />
-      <ul className='navbar-nav authentication navbar-item'>
-        <NavbarUserService />
-      </ul>
-    </div>
-  </header>
-);
+const Navbar = () => {
+  return (
+    <header className='main-navbar navbar navbar-expand-lg navbar-dark bg-dark'>
+      <NavLink className='navbar-brand' to='/'>
+        <i className='fas fa-film'></i> Movie Finder
+      </NavLink>
+      <NavbarToggleButton />
+      <div className='collapse navbar-collapse' id='navbarCollapse'>
+        <NavbarNav />
+        <Search />
+        <ul className='navbar-nav authentication navbar-item'>
+          <NavbarUserService />
+        </ul>
+      </div>
+    </header>
+  );
+};
 
 export default Navbar;

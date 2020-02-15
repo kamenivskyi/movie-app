@@ -1,8 +1,8 @@
 import React from 'react';
-import Genres from '../../layout/genres/Genres';
+import Genres from '../genres/Genres';
 import { calcTime } from '../../../helpers';
 
-const MovieDescription = ({ overview, releaseDate, genres, runtime }) => {
+const MediaDescription = ({ overview, releaseDate, genres, runtime }) => {
   return (
     <div className='description'>
       {overview && (
@@ -27,4 +27,4 @@ const MovieDescription = ({ overview, releaseDate, genres, runtime }) => {
     </div>
   );
 };
-export default MovieDescription;
+export default MediaDescription;

@@ -5,12 +5,18 @@ import classNames from 'classnames';
 import CardWrapper from '../CardWrapper';
 import DeleteBookmarkButton from '../DeleteBookmarkButton';
 import config from '../../../config';
+
 import NotFoundImage from '../../../assets/images/not-found.jpg';
+
+import './MediaItem.css';
 
 const MediaItem = ({ data, type }) => {
   const { title, name, poster_path, vote_average, id } = data;
+
   const image = getItemImage(poster_path);
+
   const uniqueData = getUniqueData(data, type);
+
   const link = `/${type}/${id}`;
 
   const badgeIconClass = classNames('card-item-badge', {
@@ -39,6 +45,7 @@ const getItemImage = path => {
 
 const getUniqueData = (data, type) => {
   const { id, poster_path, title, name, vote_average } = data;
+
   const standartObj = { id, poster_path, vote_average, type };
 
   if (type === 'tv') {

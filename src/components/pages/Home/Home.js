@@ -7,7 +7,7 @@ import Filters from '../../layout/Filters';
 const Home = () => (
   <>
     <Banner />
-    <div className='container-fluid mt-3'>
+    <div className='wrapper' style={{ marginTop: '20px' }}>
       <Filters>
         <Movies />
       </Filters>

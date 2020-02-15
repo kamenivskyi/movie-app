@@ -1,16 +1,24 @@
 import React, { Fragment, useContext } from 'react';
 import PropTypes from 'prop-types';
-import FirebaseContext from '../../../context/firebase/firebaseContext';
-import Cast from '../Movie/Cast';
+
 import withSpinner from '../../hoc-helpers/withSpinner';
-import MovieDescription from '../Movie/MovieDescription';
+
+import FirebaseContext from '../../../context/firebase/firebaseContext';
+import Cast from '../../layout/Cast';
+import MediaDescription from '../../layout/MediaDescription';
 import ItemRow from '../../common/ItemRow';
 import BtnShowVideo from '../../layout/Video/BtnShowVideo';
 import config from '../../../config';
-import reserveBg from '../Movie/reserve-bg.jpg';
+
+import { Button } from '../../proxy/Button';
+
+import { onGetTypeAndId } from '../../../helpers';
+
+import reserveBg from '../../../assets/images/reserve-bg.jpg';
 
 const TvView = ({ tv, cast, video, type }) => {
   const { isLoggedIn, addToBookmarks } = useContext(FirebaseContext);
+
   const {
     name,
     poster_path,
@@ -27,16 +35,11 @@ const TvView = ({ tv, cast, video, type }) => {
 
   const image = backdrop_path ? original + backdrop_path : reserveBg;
 
-  const handleClick = e => {
-    const id = e.target.getAttribute('data-id');
-    const type = e.target.getAttribute('data-type');
-    const obj = _createObj(id, type);
-    addToBookmarks(obj, type);
-  };
-
   const _createObj = (id, type) => {
     return { id, name, type, poster_path, vote_average };
   };
+
+  const handleGetTypeAndId = onGetTypeAndId(_createObj, addToBookmarks);
 
   return (
     <Fragment>
@@ -47,17 +50,17 @@ const TvView = ({ tv, cast, video, type }) => {
             <img className='movie-img' src={medium + poster_path} alt={name} />
             {video && <BtnShowVideo url={video.key} />}
             {isLoggedIn && (
-              <button
+              <Button
                 className='btn btn-primary mt-3'
-                onClick={handleClick}
+                onClick={handleGetTypeAndId}
                 data-id={id}
                 data-type={type}
               >
                 <i className='fas fa-bookmark'></i> &nbsp; To bookmarks
-              </button>
+              </Button>
             )}
           </div>
-          <MovieDescription
+          <MediaDescription
             overview={overview}
             releaseDate={first_air_date}
             genres={genres}

@@ -34,9 +34,9 @@
   border-top-right-radius: 20px;
 }
 .description-title {
+  color: #000;
   font-size: 24px;
   margin-bottom: 20px;
-  font-family: 'Comic sans MS', cursive, Arial, Helvetica, sans-serif;
 }
 .release {
   font-weight: 600;

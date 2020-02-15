@@ -1,9 +1,12 @@
 import React, { useEffect, useContext } from 'react';
-import Flip from 'react-reveal/Flip';
 import { Link } from 'react-router-dom';
-import Slider from 'react-slick';
+import Flip from 'react-reveal/Flip';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+
 import BannerContext from '../../../context/banner/bannerContext';
 import config from '../../../config';
+
 import './Banner.css';
 
 const Banner = () => {
@@ -13,39 +16,32 @@ const Banner = () => {
     getTrending('movie', 'week');
   }, []);
 
-  const settings = {
-    dots: false,
-    autoplay: true,
-    autoplaySpeed: 7000,
-    infinite: true,
-    arrows: false,
-    slidesToShow: 1,
-    slidesToScroll: 1
-  };
-
   const { original } = config.API_IMAGE;
+
+  if (!items.results) return null;
 
   return (
     <Flip left>
-      <Slider {...settings}>
-        {items.results &&
-          items.results.map(item => {
-            const { title, backdrop_path, overview, id } = item;
-            return (
-              <div className='banner-item' key={Math.random()}>
-                <div className='container-fluid'>
-                  <img src={`${original}${backdrop_path}`} alt={title} />
-                  <Link to={`movie/${id}`} className='banner-link'>
-                    {title}
-                  </Link>
-                </div>
+      <Carousel autoPlay>
+        {items.results.map(item => {
+          const { title, backdrop_path, overview, id } = item;
+
+          return (
+            <div className='banner-item' key={`banner${Math.random()}`}>
+              <img src={`${original}${backdrop_path}`} alt={title} />
+              <div className='banner-content'>
+                <Link to={`movie/${id}`} className='banner-link'>
+                  {title.substr(0, 30)} {title.length >= 30 && '..'}
+                </Link>
+
                 <div className='banner-description'>
                   {overview.substr(0, 150)} {overview.length >= 150 && '...'}
                 </div>
               </div>
-            );
-          })}
-      </Slider>
+            </div>
+          );
+        })}
+      </Carousel>
     </Flip>
   );
 };
