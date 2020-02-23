@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Flip from 'react-reveal/Flip';
 import { Carousel } from 'react-responsive-carousel';
+
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 import BannerContext from '../../../context/banner/bannerContext';
@@ -22,7 +23,7 @@ const Banner = () => {
 
   return (
     <Flip left>
-      <Carousel autoPlay>
+      <Carousel autoPlay showStatus={false} showIndicators={false}>
         {items.results.map(item => {
           const { title, backdrop_path, overview, id } = item;
 

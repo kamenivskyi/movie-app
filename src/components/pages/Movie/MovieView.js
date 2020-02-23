@@ -10,10 +10,9 @@ import MediaDescription from '../../layout/MediaDescription';
 import ItemRow from '../../common/ItemRow';
 import BtnShowVideo from '../../layout/Video/BtnShowVideo';
 
-import config from '../../../config';
-
 import { Button } from '../../proxy/Button';
 
+import config from '../../../config';
 import { onGetTypeAndId } from '../../../helpers';
 
 import reserveBg from '../../../assets/images/reserve-bg.jpg';
@@ -67,6 +66,7 @@ const MovieView = ({ movie, cast, video, id, type }) => {
               </Button>
             )}
           </div>
+
           <MediaDescription
             overview={overview}
             releaseDate={release_date}

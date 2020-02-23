@@ -1,4 +1,7 @@
 import React from 'react';
+// import Pagination from 'react-pagination-js';
+import 'react-pagination-js/dist/styles.css';
+// import Pagination from 'rc-pagination';
 import Pagination from 'react-js-pagination';
 import PropTypes from 'prop-types';
 
@@ -8,6 +11,23 @@ const PaginationWrapper = props => {
     <>
       {totalPages > 1 ? (
         <div className='pagination-container'>
+          {/* <Pagination
+            currentPage={currentPage}
+            totalSize={totalItems}
+            sizePerPage={20}
+            changeCurrentPage={onChange}
+            theme='circle'
+          /> */}
+
+          {/* <Pagination
+            current={currentPage}
+            pageSize={20}
+            total={totalItems}
+            onChange={onChange}
+            nextIcon='next'
+            prevIcon='prev'
+            className='pagination'
+          /> */}
           <Pagination
             activePage={currentPage}
             itemsCountPerPage={20}

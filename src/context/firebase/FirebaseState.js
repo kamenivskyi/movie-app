@@ -2,7 +2,7 @@ import React, { useReducer, useEffect } from 'react';
 import 'firebase/firestore';
 import FirebaseContext from './firebaseContext';
 import FirebaseReducer from './firebaseReducer';
-import firebase, { db } from '../../firebase';
+import firebase, { db, auth } from '../../firebase';
 import {
   SET_LOADING,
   SET_USER,
@@ -22,12 +22,12 @@ const FirebaseState = props => {
   const [state, dispatch] = useReducer(FirebaseReducer, initialState);
 
   // firebase variables
-  const user = firebase.auth().currentUser;
+  const user = auth.currentUser;
   const docBookmarks = user && db.collection('userBookmarks').doc(user.uid);
   const docUsers = user && db.collection('users').doc(user.uid);
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged(user => {
+    auth.onAuthStateChanged(user => {
       const doc = db.collection('users').doc(user.uid);
 
       if (user) {
@@ -44,8 +44,7 @@ const FirebaseState = props => {
   const setLoading = () => dispatch({ type: SET_LOADING });
 
   const signinUser = (email, password) => {
-    firebase
-      .auth()
+    auth
       .signInWithEmailAndPassword(email, password)
       .then(res => {
         if (res) {
@@ -57,8 +56,7 @@ const FirebaseState = props => {
   };
 
   const createUser = async (nickname, email, password) => {
-    await firebase
-      .auth()
+    await auth
       .createUserWithEmailAndPassword(email, password)
       .then(({ user }) => {
         console.log(user);
@@ -109,8 +107,7 @@ const FirebaseState = props => {
   };
 
   const logoutUser = async () => {
-    await firebase
-      .auth()
+    await auth
       .signOut()
       .then(() => {
         dispatch({ type: LOG_OUT });

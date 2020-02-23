@@ -25,6 +25,7 @@ const PopularState = ({ children }) => {
       payload: await getTrendingMedia(type, period, activePage)
     });
   };
+
   const getMedia = async (id, type) => {
     setLoading();
     dispatch({
@@ -32,6 +33,7 @@ const PopularState = ({ children }) => {
       payload: await getMediaById(id, type)
     });
   };
+
   const setLoading = () => dispatch({ type: SET_LOADING });
 
   return (

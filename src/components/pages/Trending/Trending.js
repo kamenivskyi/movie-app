@@ -6,14 +6,40 @@ import MediaTabs from '../../layout/MediaTabs';
 import PaginationWrapper from '../../layout/PaginationWrapper';
 import Spinner from '../../common/Spinner';
 
+// const usePagination = item => {
+//   const { results, total_results, total_pages } = item;
+
+//   const [currentType, setCurrentType] = useState('movie');
+//   const [currentPeriod, setCurrentPeriod] = useState('week');
+//   const [currentPage, setCurrentPage] = useState(1);
+
+//   useEffect(() => {
+//     getTrendingItems(currentType, currentPeriod);
+//   }, [currentType, currentPeriod]);
+
+//   return {
+//     currentType,
+//     currentPeriod,
+//     currentPage,
+//     setCurrentType,
+//     setCurrentPeriod,
+//     setCurrentPage,
+//     results,
+//     total_results,
+//     total_pages
+//   };
+// };
+
 const Trending = ({ history }) => {
   const [currentType, setCurrentType] = useState('movie');
   const [currentPeriod, setCurrentPeriod] = useState('week');
   const [currentPage, setCurrentPage] = useState(1);
 
   const { getTrendingItems, items, loading } = useContext(trendingContext);
+
   const { results, total_results, total_pages } = items;
   console.log(items);
+  console.log(history);
 
   useEffect(() => {
     getTrendingItems(currentType, currentPeriod);
@@ -35,6 +61,7 @@ const Trending = ({ history }) => {
   };
 
   const handlePageChange = activePage => {
+    console.log(activePage);
     setCurrentPage(activePage);
     getTrendingItems(currentType, currentPeriod, activePage);
   };

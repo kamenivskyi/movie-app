@@ -9,17 +9,15 @@ body {
   background-color: #222222;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #bdbab8;
+  background-color: #2a9fd6;
   border: 3px solid #222222;
   border-radius: 9px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #928e8b;
+  background-color: #0c7baf;
 }
-::-webkit-scrollbar-thumb:focus {
-  background-color: #4e4c4a;
-}
+
 *::-moz-scrollbar {
   width: 15px;
 }
