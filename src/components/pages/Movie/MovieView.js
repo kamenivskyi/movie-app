@@ -12,8 +12,8 @@ import BtnShowVideo from '../../layout/Video/BtnShowVideo';
 
 import { Button } from '../../proxy/Button';
 
-import config from '../../../config';
-import { onGetTypeAndId } from '../../../helpers';
+import config from '../../../utils/config';
+import { onGetTypeAndId } from '../../../utils/helpers';
 
 import reserveBg from '../../../assets/images/reserve-bg.jpg';
 

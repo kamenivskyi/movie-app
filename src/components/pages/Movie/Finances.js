@@ -1,5 +1,5 @@
 import React from 'react';
-import { convertMoney } from '../../../helpers';
+import { convertMoney } from '../../../utils/helpers';
 
 const Finances = ({ revenue, budget }) => {
   return (

@@ -1,12 +1,14 @@
 import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Flip from 'react-reveal/Flip';
-import { Carousel } from 'react-responsive-carousel';
-
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import Slider from 'react-slick';
 
 import BannerContext from '../../../context/banner/bannerContext';
-import config from '../../../config';
+
+import config from '../../../utils/config';
+import { singleItem } from '../../../utils/sliderSettings';
+
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 import './Banner.css';
 
@@ -23,7 +25,7 @@ const Banner = () => {
 
   return (
     <Flip left>
-      <Carousel autoPlay showStatus={false} showIndicators={false}>
+      <Slider {...singleItem}>
         {items.results.map(item => {
           const { title, backdrop_path, overview, id } = item;
 
@@ -42,7 +44,7 @@ const Banner = () => {
             </div>
           );
         })}
-      </Carousel>
+      </Slider>
     </Flip>
   );
 };

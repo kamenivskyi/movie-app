@@ -8,11 +8,11 @@ import Cast from '../../layout/Cast';
 import MediaDescription from '../../layout/MediaDescription';
 import ItemRow from '../../common/ItemRow';
 import BtnShowVideo from '../../layout/Video/BtnShowVideo';
-import config from '../../../config';
 
 import { Button } from '../../proxy/Button';
 
-import { onGetTypeAndId } from '../../../helpers';
+import { onGetTypeAndId } from '../../../utils/helpers';
+import config from '../../../utils/config';
 
 import reserveBg from '../../../assets/images/reserve-bg.jpg';
 

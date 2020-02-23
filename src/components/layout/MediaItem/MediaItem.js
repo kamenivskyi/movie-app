@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import CardWrapper from '../CardWrapper';
 import DeleteBookmarkButton from '../DeleteBookmarkButton';
-import config from '../../../config';
+import config from '../../../utils/config';
 
 import NotFoundImage from '../../../assets/images/not-found.jpg';
 

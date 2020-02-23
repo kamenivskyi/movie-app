@@ -1,7 +1,8 @@
 import React from 'react';
 import PersonPhotos from './PersonPhotos';
 import withSpinner from '../../hoc-helpers/withSpinner';
-import config from '../../../config';
+
+import config from '../../../utils/config';
 
 const PersonView = ({ general, photos }) => {
   const { name, biography, profile_path, birthday, place_of_birth } = general;

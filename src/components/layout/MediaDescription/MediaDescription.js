@@ -1,6 +1,6 @@
 import React from 'react';
 import Genres from '../genres/Genres';
-import { calcTime } from '../../../helpers';
+import { calcTime } from '../../../utils/helpers';
 
 const MediaDescription = ({ overview, releaseDate, genres, runtime }) => {
   return (
