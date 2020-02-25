@@ -4,8 +4,10 @@ import PropTypes from 'prop-types';
 import withSpinner from '../../hoc-helpers/withSpinner';
 
 import FirebaseContext from '../../../context/firebase/firebaseContext';
+
 import Cast from '../../layout/Cast';
 import MediaDescription from '../../layout/MediaDescription';
+import Companies from '../../layout/Companies';
 import MediaContainer from '../../common/MediaContainer';
 import BtnShowVideo from '../../layout/Video/BtnShowVideo';
 
@@ -15,6 +17,7 @@ import { onGetTypeAndId } from '../../../utils/helpers';
 import config from '../../../utils/config';
 
 import reserveBg from '../../../assets/images/reserve-bg.jpg';
+import Networks from '../../layout/Networks/Networks';
 
 const TvView = ({ tv, cast, video, type }) => {
   const { isLoggedIn, addToBookmarks } = useContext(FirebaseContext);
@@ -28,21 +31,29 @@ const TvView = ({ tv, cast, video, type }) => {
     first_air_date,
     runtime,
     vote_average,
-    id
+    id,
+    production_companies,
+    networks
   } = tv;
+
+  console.log(tv);
 
   const { original, medium } = config.API_IMAGE;
 
   const image = backdrop_path ? original + backdrop_path : reserveBg;
 
-  const _createObj = (id, type) => {
-    return { id, name, type, poster_path, vote_average };
-  };
+  const _createObj = (id, type) => ({
+    id,
+    name,
+    type,
+    poster_path,
+    vote_average
+  });
 
   const handleGetTypeAndId = onGetTypeAndId(_createObj, addToBookmarks);
 
   return (
-    <Fragment>
+    <section>
       <div className='movie' style={{ backgroundImage: `url(${image})` }}>
         {name && <h3 className='movie-title'>{name}</h3>}
         <MediaContainer>
@@ -68,8 +79,10 @@ const TvView = ({ tv, cast, video, type }) => {
           />
         </MediaContainer>
       </div>
+      <Companies data={production_companies} />
+      <Networks data={networks} />
       <Cast data={cast} />
-    </Fragment>
+    </section>
   );
 };
 

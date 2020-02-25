@@ -2,7 +2,6 @@ import React from 'react';
 import MediaItem from '../MediaItem';
 
 const MediaItems = ({ items, type }) => {
-  console.log(items);
   if (items && type) {
     return (
       <>
@@ -14,7 +13,7 @@ const MediaItems = ({ items, type }) => {
       </>
     );
   }
-  return <>{null}</>;
+  return null;
 };
 
 export default MediaItems;

@@ -7,6 +7,8 @@ import FirebaseContext from '../../../context/firebase/firebaseContext';
 import Finances from './Finances';
 import Cast from '../../layout/Cast';
 import MediaDescription from '../../layout/MediaDescription';
+import Companies from '../../layout/Companies/Companies';
+import Networks from '../../layout/Networks/Networks';
 import MediaContainer from '../../common/MediaContainer';
 import BtnShowVideo from '../../layout/Video/BtnShowVideo';
 
@@ -30,7 +32,9 @@ const MovieView = ({ movie, cast, video, id, type }) => {
     revenue,
     release_date,
     runtime,
-    vote_average
+    vote_average,
+    production_companies,
+    networks
   } = movie;
 
   useEffect(() => {
@@ -75,6 +79,8 @@ const MovieView = ({ movie, cast, video, id, type }) => {
           />
         </MediaContainer>
       </div>
+      <Networks data={networks} />
+      <Companies data={production_companies} />
       <Finances budget={budget} revenue={revenue} />
       <Cast data={cast} />
     </section>

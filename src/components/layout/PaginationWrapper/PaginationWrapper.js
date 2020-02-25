@@ -12,7 +12,7 @@ const PaginationWrapper = ({ currentPage, totalItems, totalPages, onChange }) =>
         totalSize={totalItems}
         sizePerPage={20}
         changeCurrentPage={onChange}
-        theme='bootstrap'
+        theme='border-bottom'
       />
     </div>
   ) : null;

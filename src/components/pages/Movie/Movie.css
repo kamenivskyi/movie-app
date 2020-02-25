@@ -97,15 +97,6 @@
 /* .revenue i {
   color: tomato;
 } */
-.companies {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-}
-.companies li {
-  width: 30%;
-}
 
 .slick-next:before,
 .slick-prev:before {

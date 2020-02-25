@@ -18,7 +18,7 @@ export const multipleItems = {
       }
     },
     {
-      breakpoint: 600,
+      breakpoint: 830,
       settings: {
         slidesToShow: 2,
         slidesToScroll: 2,
@@ -26,7 +26,7 @@ export const multipleItems = {
       }
     },
     {
-      breakpoint: 480,
+      breakpoint: 550,
       settings: {
         slidesToShow: 1,
         slidesToScroll: 1

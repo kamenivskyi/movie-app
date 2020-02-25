@@ -4,8 +4,8 @@ import MovieContext from '../../context/movie/movieContext';
 
 const withSpinner = View => {
   return props => {
-    const movieContext = useContext(MovieContext);
-    if (movieContext.loading) {
+    const { loading } = useContext(MovieContext);
+    if (loading) {
       return <Spinner />;
     }
     return <View {...props} />;

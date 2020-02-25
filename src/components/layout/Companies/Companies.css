@@ -1,0 +1,27 @@
+.companies-wrapper {
+  background-color: #ccc;
+  border-bottom: 2px solid black;
+  padding: 20px 0;
+}
+.companies {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0;
+  overflow-x: auto;
+}
+
+.companies li {
+  padding: 0 20px;
+  min-width: 150px;
+  margin-right: 35px;
+}
+.company-img-wrapper img {
+  width: 100%;
+  min-width: 140px;
+  max-height: 140px;
+}
+.company-name {
+  font-size: 28px;
+  color: #222222;
+}
