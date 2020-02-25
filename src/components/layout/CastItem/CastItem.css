@@ -1,0 +1,17 @@
+.cast-item .card img {
+  padding: 0 10px;
+  min-height: 300px;
+  max-height: 300px;
+}
+
+.cast-item .card-header {
+  margin: 0 auto;
+}
+
+.cast-item .card {
+  height: 420px;
+}
+
+.card-header {
+  padding: 0 !important;
+}

@@ -6,9 +6,8 @@ import Slider from 'react-slick';
 import BannerContext from '../../../context/banner/bannerContext';
 
 import config from '../../../utils/config';
+import { cutString } from '../../../utils/helpers';
 import { singleItem } from '../../../utils/sliderSettings';
-
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 import './Banner.css';
 
@@ -34,11 +33,11 @@ const Banner = () => {
               <img src={`${original}${backdrop_path}`} alt={title} />
               <div className='banner-content'>
                 <Link to={`movie/${id}`} className='banner-link'>
-                  {title.substr(0, 30)} {title.length >= 30 && '..'}
+                  {cutString(title, 30)}
                 </Link>
 
                 <div className='banner-description'>
-                  {overview.substr(0, 150)} {overview.length >= 150 && '...'}
+                  {cutString(overview, 150)}
                 </div>
               </div>
             </div>

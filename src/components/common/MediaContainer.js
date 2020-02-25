@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ItemRow = ({ children }) => {
+const MediaContainer = ({ children }) => {
   return <div className='item-row'>{children}</div>;
 };
-export default ItemRow;
+export default MediaContainer;

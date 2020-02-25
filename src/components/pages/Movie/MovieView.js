@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import withSpinner from '../../hoc-helpers/withSpinner';
@@ -7,13 +7,13 @@ import FirebaseContext from '../../../context/firebase/firebaseContext';
 import Finances from './Finances';
 import Cast from '../../layout/Cast';
 import MediaDescription from '../../layout/MediaDescription';
-import ItemRow from '../../common/ItemRow';
+import MediaContainer from '../../common/MediaContainer';
 import BtnShowVideo from '../../layout/Video/BtnShowVideo';
 
 import { Button } from '../../proxy/Button';
 
-import config from '../../../utils/config';
 import { onGetTypeAndId } from '../../../utils/helpers';
+import config from '../../../utils/config';
 
 import reserveBg from '../../../assets/images/reserve-bg.jpg';
 
@@ -48,10 +48,10 @@ const MovieView = ({ movie, cast, video, id, type }) => {
   const image = backdrop_path ? original + backdrop_path : reserveBg;
 
   return (
-    <Fragment>
+    <section className='movie-section'>
       <div className='movie' style={{ backgroundImage: `url(${image})` }}>
         {title && <h3 className='movie-title'>{title}</h3>}
-        <ItemRow>
+        <MediaContainer>
           <div className='movie-img-wrapp'>
             <img className='movie-img' src={medium + poster_path} alt={title} />
             {video && <BtnShowVideo url={video.key} />}
@@ -73,11 +73,11 @@ const MovieView = ({ movie, cast, video, id, type }) => {
             genres={genres}
             runtime={runtime}
           />
-        </ItemRow>
+        </MediaContainer>
       </div>
       <Finances budget={budget} revenue={revenue} />
       <Cast data={cast} />
-    </Fragment>
+    </section>
   );
 };
 

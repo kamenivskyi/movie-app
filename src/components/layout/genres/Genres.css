@@ -3,11 +3,12 @@
   justify-content: flex-start;
   align-items: center;
   list-style-type: none;
+  flex-wrap: wrap;
   padding: 0;
-  margin: 20px 0;
+  margin: 10px 0;
 }
 .genres li {
-  margin-left: 10px;
+  margin: 10px 10px 0 0;
 }
 .genres-title {
   font-family: 'Comic sans MS';

@@ -11,3 +11,9 @@
     margin: 15px 0;
   }
 }
+
+@media (min-width: 576px) {
+  .form-inline .form-control.search {
+    width: 100%;
+  }
+}

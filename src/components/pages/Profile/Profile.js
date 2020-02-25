@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import Zoom from 'react-reveal/Zoom';
 
 import FirebaseContext from '../../../context/firebase/firebaseContext';
+
 import UpdateProfileModal from '../../layout/Modals/UpdateProfileModal';
 
 import { Button } from '../../proxy/Button';
@@ -10,7 +11,7 @@ import { Button } from '../../proxy/Button';
 const Profile = () => {
   const { isLoggedIn, currentUser, userData } = useContext(FirebaseContext);
 
-  if (isLoggedIn) {
+  if (!isLoggedIn) {
     return (
       <div className='jumbotron'>
         <h1 className='display-4'>

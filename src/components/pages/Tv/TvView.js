@@ -6,7 +6,7 @@ import withSpinner from '../../hoc-helpers/withSpinner';
 import FirebaseContext from '../../../context/firebase/firebaseContext';
 import Cast from '../../layout/Cast';
 import MediaDescription from '../../layout/MediaDescription';
-import ItemRow from '../../common/ItemRow';
+import MediaContainer from '../../common/MediaContainer';
 import BtnShowVideo from '../../layout/Video/BtnShowVideo';
 
 import { Button } from '../../proxy/Button';
@@ -45,7 +45,7 @@ const TvView = ({ tv, cast, video, type }) => {
     <Fragment>
       <div className='movie' style={{ backgroundImage: `url(${image})` }}>
         {name && <h3 className='movie-title'>{name}</h3>}
-        <ItemRow>
+        <MediaContainer>
           <div className='movie-img-wrapp'>
             <img className='movie-img' src={medium + poster_path} alt={name} />
             {video && <BtnShowVideo url={video.key} />}
@@ -66,7 +66,7 @@ const TvView = ({ tv, cast, video, type }) => {
             genres={genres}
             runtime={runtime}
           />
-        </ItemRow>
+        </MediaContainer>
       </div>
       <Cast data={cast} />
     </Fragment>

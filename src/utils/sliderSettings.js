@@ -1,18 +1,20 @@
 export const multipleItems = {
-  dots: true,
+  dots: false,
+  arrows: false,
   infinite: false,
   speed: 500,
   slidesToShow: 5,
   slidesToScroll: 5,
   initialSlide: 0,
+  lazyLoad: true,
   responsive: [
     {
       breakpoint: 1024,
       settings: {
+        dots: false,
         slidesToShow: 3,
         slidesToScroll: 3,
-        infinite: true,
-        dots: true
+        infinite: true
       }
     },
     {
@@ -34,9 +36,12 @@ export const multipleItems = {
 };
 
 export const singleItem = {
-  dots: true,
+  autoplay: true,
+  dots: false,
   infinite: true,
-  speed: 500,
+  speed: 700,
+  lazyLoad: false,
+  arrows: false,
   slidesToShow: 1,
   slidesToScroll: 1
 };

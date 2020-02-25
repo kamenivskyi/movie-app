@@ -15,6 +15,10 @@ export const convertMoney = money => {
   return formatter.format(money);
 };
 
+export const cutString = (string, cutTo) => {
+  return string.length > cutTo ? string.substr(0, cutTo) + '..' : string;
+};
+
 // get type and id then add to bookmarks
 export const onGetTypeAndId = (createObj, addToBookmarks) => async e => {
   const id = e.target.getAttribute('data-id');
