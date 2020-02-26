@@ -1,36 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import config from '../../../utils/config';
-
-import './Companies.css';
+import StudioItem from '../StudioItem';
 
 const Companies = ({ data }) => {
   if (!data) return null;
 
-  const renderCompanies = data.map(({ name, id, logo_path }) => (
-    <li key={`network${id}`}>
-      {logo_path ? (
-        <div className='company-img-wrapper'>
-          <img
-            src={config.API_IMAGE.little + logo_path}
-            alt={name}
-            title={name}
-          />
-        </div>
-      ) : (
-        <span className='company-name'>{name}</span>
-      )}
-    </li>
+  const renderCompanies = data.map(item => (
+    <StudioItem item={item} key={`company${item.id}`} />
   ));
 
   return (
-    data.length > 0 && (
-      <div className='companies-wrapper'>
-        <div className='container-fluid'>
-          <ul className='companies'>{renderCompanies}</ul>
-        </div>
-      </div>
+    data && (
+      <>
+        <h4 className='creative-title'>Companies</h4>
+        <ul className='companies'>{renderCompanies}</ul>
+      </>
     )
   );
 };

@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClock } from '@fortawesome/free-solid-svg-icons';
 
 import Genres from '../genres/Genres';
 
@@ -20,7 +22,7 @@ const MediaDescription = ({ overview, releaseDate, genres, runtime }) => {
       )}
       {runtime && (
         <div className='description-title'>
-          <i className='far fa-clock'></i> &nbsp;
+          <FontAwesomeIcon icon={faClock} /> &nbsp;
           <span className='font-weight-bold'>Runtime: </span>
           {calcTime(runtime)}
         </div>

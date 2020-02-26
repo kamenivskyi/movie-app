@@ -4,14 +4,15 @@ import PropTypes from 'prop-types';
 import withSpinner from '../../hoc-helpers/withSpinner';
 
 import FirebaseContext from '../../../context/firebase/firebaseContext';
-import Finances from './Finances';
-import Cast from '../../layout/Cast';
+
 import MediaDescription from '../../layout/MediaDescription';
-import Companies from '../../layout/Companies/Companies';
+import Finances from '../../layout/Finances';
+import Cast from '../../layout/Cast';
+import Studios from '../../layout/Studios';
+import Companies from '../../layout/Companies';
 import Networks from '../../layout/Networks/Networks';
 import MediaContainer from '../../common/MediaContainer';
 import BtnShowVideo from '../../layout/Video/BtnShowVideo';
-
 import { Button } from '../../proxy/Button';
 
 import { onGetTypeAndId } from '../../../utils/helpers';
@@ -43,9 +44,13 @@ const MovieView = ({ movie, cast, video, id, type }) => {
 
   const { original, medium } = config.API_IMAGE;
 
-  const _createObj = (id, type) => {
-    return { id, title, type, poster_path, vote_average };
-  };
+  const _createObj = (id, type) => ({
+    id,
+    title,
+    type,
+    poster_path,
+    vote_average
+  });
 
   const handleGetTypeAndId = onGetTypeAndId(_createObj, addToBookmarks);
 
@@ -79,8 +84,10 @@ const MovieView = ({ movie, cast, video, id, type }) => {
           />
         </MediaContainer>
       </div>
-      <Networks data={networks} />
-      <Companies data={production_companies} />
+      <Studios
+        postitionTop={<Companies data={production_companies} />}
+        positionBottom={<Networks data={networks} />}
+      />
       <Finances budget={budget} revenue={revenue} />
       <Cast data={cast} />
     </section>
@@ -88,8 +95,23 @@ const MovieView = ({ movie, cast, video, id, type }) => {
 };
 
 MovieView.propTypes = {
-  movie: PropTypes.object,
-  cast: PropTypes.array
+  movie: PropTypes.shape({
+    title: PropTypes.string,
+    poster_path: PropTypes.string,
+    backdrop_path: PropTypes.string,
+    overview: PropTypes.string,
+    genres: PropTypes.array,
+    budget: PropTypes.number,
+    revenue: PropTypes.number,
+    release_date: PropTypes.string,
+    runtime: PropTypes.number,
+    vote_average: PropTypes.number,
+    production_companies: PropTypes.arrayOf(PropTypes.object),
+    networks: PropTypes.arrayOf(PropTypes.object)
+  }),
+  cast: PropTypes.arrayOf(PropTypes.object),
+  id: PropTypes.string,
+  type: PropTypes.string
 };
 
 export default withSpinner(MovieView);

@@ -1,7 +1,8 @@
 import React from 'react';
-import SliderWrapper from '../../common/SliderWrapper';
-import { multipleItems } from '../../../utils/sliderSettings';
 import Slider from 'react-slick';
+
+import { multipleItems } from '../../../utils/sliderSettings';
+import config from '../../../utils/config';
 
 const PersonPhotos = ({ data }) => {
   console.log(data);
@@ -10,7 +11,7 @@ const PersonPhotos = ({ data }) => {
     <Slider {...multipleItems}>
       {data.map(item => (
         <img
-          src={`https://image.tmdb.org/t/p/w300${item.file_path}`}
+          src={`${config.API_IMAGE.medium}${item.file_path}`}
           alt='photo'
           key={item.file_path}
         />

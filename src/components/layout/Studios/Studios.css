@@ -9,18 +9,15 @@
   justify-content: space-between;
   margin-bottom: 0;
   overflow-x: auto;
+  padding: 15px 0;
 }
 
-.companies li {
-  padding: 0 20px;
-  min-width: 150px;
-  margin-right: 35px;
-}
 .company-img-wrapper img {
   width: 100%;
   min-width: 140px;
   max-height: 140px;
 }
+
 .company-name {
   font-size: 28px;
   color: #222222;

@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import withSpinner from '../../hoc-helpers/withSpinner';
@@ -6,9 +6,11 @@ import withSpinner from '../../hoc-helpers/withSpinner';
 import FirebaseContext from '../../../context/firebase/firebaseContext';
 
 import Cast from '../../layout/Cast';
-import MediaDescription from '../../layout/MediaDescription';
-import Companies from '../../layout/Companies';
 import MediaContainer from '../../common/MediaContainer';
+import MediaDescription from '../../layout/MediaDescription';
+import Studios from '../../layout/Studios';
+import Companies from '../../layout/Companies';
+import Networks from '../../layout/Networks/Networks';
 import BtnShowVideo from '../../layout/Video/BtnShowVideo';
 
 import { Button } from '../../proxy/Button';
@@ -17,7 +19,6 @@ import { onGetTypeAndId } from '../../../utils/helpers';
 import config from '../../../utils/config';
 
 import reserveBg from '../../../assets/images/reserve-bg.jpg';
-import Networks from '../../layout/Networks/Networks';
 
 const TvView = ({ tv, cast, video, type }) => {
   const { isLoggedIn, addToBookmarks } = useContext(FirebaseContext);
@@ -79,16 +80,33 @@ const TvView = ({ tv, cast, video, type }) => {
           />
         </MediaContainer>
       </div>
-      <Companies data={production_companies} />
-      <Networks data={networks} />
+      <Studios
+        postitionTop={<Companies data={production_companies} />}
+        positionBottom={<Networks data={networks} />}
+      />
       <Cast data={cast} />
     </section>
   );
 };
 
 TvView.propTypes = {
-  movie: PropTypes.object,
-  cast: PropTypes.array
+  tv: PropTypes.shape({
+    name: PropTypes.string,
+    poster_path: PropTypes.string,
+    backdrop_path: PropTypes.string,
+    overview: PropTypes.string,
+    genres: PropTypes.array,
+    budget: PropTypes.number,
+    revenue: PropTypes.number,
+    first_air_date: PropTypes.string,
+    runtime: PropTypes.number,
+    vote_average: PropTypes.number,
+    production_companies: PropTypes.arrayOf(PropTypes.object),
+    networks: PropTypes.arrayOf(PropTypes.object)
+  }),
+  cast: PropTypes.arrayOf(PropTypes.object),
+  id: PropTypes.string,
+  type: PropTypes.string
 };
 
 export default withSpinner(TvView);

@@ -1,6 +1,17 @@
 import React, { useContext } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faUser,
+  faBookmark,
+  faSignOutAlt,
+  faSignInAlt,
+  faUserPlus
+} from '@fortawesome/free-solid-svg-icons';
+
 import FirebaseContext from '../../../context/firebase/firebaseContext';
+
+import { Button } from '../../proxy/Button';
 
 const NavbarUserService = () => {
   const { isLoggedIn, logoutUser, currentUser, userData } = useContext(
@@ -10,26 +21,25 @@ const NavbarUserService = () => {
   if (currentUser.uid && isLoggedIn) {
     return (
       <div className='dropdown'>
-        <button
+        <Button
           className='btn btn-light dropdown-toggle'
-          type='button'
           id='dropdownMenu2'
           data-toggle='dropdown'
           aria-haspopup='true'
           aria-expanded='false'
         >
-          <i className='fas fa-user'></i> &nbsp;{' '}
+          <FontAwesomeIcon icon={faUser} /> &nbsp;{' '}
           {userData.nickname || 'Profile'}
-        </button>
+        </Button>
         <ul className='dropdown-menu' aria-labelledby='dropdownMenu2'>
           <li>
             <NavLink className='dropdown-item' to='/profile' exact>
-              <i className='far fa-user'></i> &nbsp; Cabinet
+              <FontAwesomeIcon icon={faUser} /> &nbsp; Cabinet
             </NavLink>
           </li>
           <li>
             <NavLink to='/profile/bookmarks' className='dropdown-item'>
-              <i className='far fa-bookmark'></i> &nbsp; Bookmarks
+              <FontAwesomeIcon icon={faBookmark} /> &nbsp; Bookmarks
             </NavLink>
           </li>
           <div className='dropdown-divider'></div>
@@ -40,7 +50,7 @@ const NavbarUserService = () => {
               onClick={logoutUser}
               title='Sign out'
             >
-              <i className='fas fa-sign-out-alt mr-1'></i>Logout
+              <FontAwesomeIcon icon={faSignOutAlt} /> Logout
             </a>
           </div>
         </ul>
@@ -51,12 +61,12 @@ const NavbarUserService = () => {
       <>
         <li>
           <NavLink to='/signup' className='nav-item nav-link'>
-            <i className='fas fa-user-plus mr-1'></i>Signup
+            <FontAwesomeIcon icon={faUserPlus} /> Signup
           </NavLink>
         </li>
         <li>
           <NavLink to='/login' className='nav-item nav-link'>
-            <i className='fas fa-sign-in-alt mr-1'></i>Login
+            <FontAwesomeIcon icon={faSignInAlt} /> Login
           </NavLink>
         </li>
       </>

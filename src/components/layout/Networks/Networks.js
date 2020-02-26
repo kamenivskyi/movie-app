@@ -1,33 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import config from '../../../utils/config';
-
-import './Networks.css';
+import StudioItem from '../StudioItem';
 
 const Networks = ({ data }) => {
   if (!data) return null;
 
-  const renderNetworks = data.map(({ id, name, logo_path }) => (
-    <li key={`network${id}`}>
-      {logo_path ? (
-        <img
-          src={config.API_IMAGE.little + logo_path}
-          alt={name}
-          title={name}
-        />
-      ) : (
-        { name }
-      )}
-    </li>
+  const renderNetworks = data.map(item => (
+    <StudioItem item={item} key={`network${item.id}`} />
   ));
 
   return (
-    <div className='network-wrapper'>
-      <div className='container'>
-        <ul className='networks'>{renderNetworks}</ul>
-      </div>
-    </div>
+    <>
+      <h4 className='creative-title'>Networks</h4>
+      <ul className='companies'>{renderNetworks}</ul>
+    </>
   );
 };
 
@@ -39,4 +26,5 @@ Networks.propTypes = {
     })
   )
 };
+
 export default Networks;

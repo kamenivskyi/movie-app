@@ -101,6 +101,13 @@ input {
   width: 100%;
   border-radius: 10px;
 }
+.creative-title {
+  font-size: 34px;
+  text-align: center;
+  font-family: 'Trade Winds';
+  margin-bottom: 20px;
+  color: #222222;
+}
 
 @media (max-width: 750px) {
   .item-row {
