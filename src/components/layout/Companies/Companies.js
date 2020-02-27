@@ -14,7 +14,7 @@ const Companies = ({ data }) => {
     data && (
       <>
         <h4 className='creative-title'>Companies</h4>
-        <ul className='companies'>{renderCompanies}</ul>
+        <ul className='studios'>{renderCompanies}</ul>
       </>
     )
   );

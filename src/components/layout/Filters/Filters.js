@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 
 import MovieContext from '../../../context/movie/movieContext';
+
 import PaginationWrapper from '../../layout/PaginationWrapper';
 import ReleaseYear from './ReleaseYear';
 import SortBy from './SortBy';

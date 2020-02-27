@@ -1,7 +1,11 @@
 import React, { useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+
 import FirebaseContext from '../../../context/firebase/firebaseContext';
+
 import { Button } from '../../proxy/Button';
 
 const DeleteBookmarkButton = ({ item, type, history }) => {
@@ -22,7 +26,7 @@ const DeleteBookmarkButton = ({ item, type, history }) => {
           right: '0'
         }}
       >
-        <i className='fas fa-trash-alt'></i>
+        <FontAwesomeIcon icon={faTrash} />
       </Button>
     )
   );

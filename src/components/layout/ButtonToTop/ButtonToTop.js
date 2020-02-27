@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretUp } from '@fortawesome/free-solid-svg-icons';
+
 import './ButtonToTop.css';
 
 const ButtonToTop = () => {
-  const btnRef = React.createRef();
+  const btnRef = useRef();
 
   const goToTop = () => {
     const top = document.querySelector('#root');
@@ -14,6 +17,7 @@ const ButtonToTop = () => {
 
   function toggleButton() {
     const button = btnRef.current.classList;
+
     if (this.scrollY > 800) {
       button.add('show');
     } else {
@@ -30,7 +34,7 @@ const ButtonToTop = () => {
       ref={btnRef}
       title='To the top'
     >
-      <i className='fas fa-caret-up'></i>
+      <FontAwesomeIcon icon={faCaretUp} />
     </button>
   );
 };

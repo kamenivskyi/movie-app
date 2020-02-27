@@ -8,7 +8,7 @@ import './StudioItem.css';
 const StudioItem = ({ item: { logo_path, name } }) => (
   <li className='studio-item'>
     {logo_path ? (
-      <div className='company-img-wrapper'>
+      <div className='studio-img-wrapper'>
         <img
           src={config.API_IMAGE.little + logo_path}
           alt={name}
@@ -16,7 +16,7 @@ const StudioItem = ({ item: { logo_path, name } }) => (
         />
       </div>
     ) : (
-      <span className='company-name'>{name}</span>
+      <span className='studio-name'>{name}</span>
     )}
   </li>
 );

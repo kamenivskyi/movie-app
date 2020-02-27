@@ -1,5 +1,6 @@
 import React from 'react';
 import Slider from 'react-slick';
+import PropTypes from 'prop-types';
 
 import CastItem from '../CastItem/CastItem';
 
@@ -21,4 +22,9 @@ const Cast = ({ data }) => {
     </section>
   );
 };
-export default Cast;
+
+Cast.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object)
+};
+
+export default React.memo(Cast);
