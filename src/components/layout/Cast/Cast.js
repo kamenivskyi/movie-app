@@ -9,6 +9,7 @@ import { multipleItems } from '../../../utils/sliderSettings';
 import './Cast.css';
 
 const Cast = ({ data }) => {
+  console.log(data);
   if (!data) return null;
 
   return (

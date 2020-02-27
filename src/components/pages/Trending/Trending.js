@@ -69,4 +69,4 @@ const Trending = ({ history }) => {
     </div>
   );
 };
-export default withRouter(Trending);
+export default withRouter(React.memo(Trending));
