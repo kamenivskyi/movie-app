@@ -37,7 +37,7 @@ const Banner = () => {
                 </Link>
 
                 <div className='banner-description'>
-                  {cutString(overview, 0, 150)}
+                  {cutString(overview, 0, 140)}
                 </div>
               </div>
             </div>

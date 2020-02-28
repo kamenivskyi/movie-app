@@ -2,7 +2,11 @@ import React, { useReducer, useEffect } from 'react';
 import 'firebase/firestore';
 import FirebaseContext from './firebaseContext';
 import FirebaseReducer from './firebaseReducer';
-import firebase, { db, auth } from '../../firebase/firebase';
+import firebase, {
+  db,
+  auth,
+  createUserProfileDocument
+} from '../../firebase/firebase';
 import {
   SET_LOADING,
   SET_USER,
@@ -13,9 +17,9 @@ import {
 
 const FirebaseState = props => {
   const initialState = {
-    isLoggedIn: false,
-    currentUser: {},
-    userData: {},
+    // isLoggedIn: false,
+    currentUser: null,
+    // userData: {},
     bookmarks: [],
     loading: false
   };
@@ -25,22 +29,45 @@ const FirebaseState = props => {
   const user = auth.currentUser;
 
   const docBookmarks = user && db.collection('userBookmarks').doc(user.uid);
-  const docUsers = user && db.collection('users').doc(user.uid);
+  // const docUsers = user && db.collection('users').doc(user.uid);
+
+  // useEffect(() => {
+  //   auth.onAuthStateChanged(userAuth => {
+  //     if (userAuth) {
+  //       const doc = db.collection('users').doc(userAuth.uid);
+
+  //       doc.get().then(doc => {
+  //         dispatch({ type: SET_USER_DATA, payload: doc.data() });
+  //         dispatch({ type: SET_USER, payload: userAuth });
+  //       });
+  //     } else {
+  //       console.log('User is signed out');
+  //     }
+  //   });
+  // }, []);
 
   useEffect(() => {
-    auth.onAuthStateChanged(userAuth => {
+    auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
-        const doc = db.collection('users').doc(userAuth.uid);
+        const userRef = await createUserProfileDocument(userAuth);
 
-        doc.get().then(doc => {
-          dispatch({ type: SET_USER_DATA, payload: doc.data() });
-          dispatch({ type: SET_USER, payload: userAuth });
+        // console.log(user.displayName);
+
+        userRef.onSnapshot(snapshot => {
+          dispatch({
+            type: SET_USER,
+            payload: {
+              id: snapshot.id,
+              displayName: userAuth.displayName,
+              ...snapshot.data()
+            }
+          });
         });
-      } else {
-        console.log('User is signed out');
       }
+      // setCurrentUser(userAuth);
+      dispatch({ type: SET_USER, payload: userAuth });
     });
-  }, []);
+  }, [user]);
 
   const setLoading = () => dispatch({ type: SET_LOADING });
 
@@ -56,21 +83,21 @@ const FirebaseState = props => {
       .catch(onValidationError);
   };
 
-  const createUser = async (nickname, email, password) => {
-    await auth
-      .createUserWithEmailAndPassword(email, password)
-      .then(({ user }) => {
-        console.log(user);
-        db.collection('userBookmarks')
-          .doc(user.uid)
-          .set({ tv: [], movie: [] });
+  // const createUser = async (nickname, email, password) => {
+  //   await auth
+  //     .createUserWithEmailAndPassword(emasil, password)
+  //     .then(({ user }) => {
+  //       console.log(user);
+  //       db.collection('userBookmarks')
+  //         .doc(user.uid)
+  //         .set({ tv: [], movie: [] });
 
-        db.collection('users')
-          .doc(user.uid)
-          .set({ nickname });
-      })
-      .catch(onValidationError);
-  };
+  //       db.collection('users')
+  //         .doc(user.uid)
+  //         .set({ nickname });
+  //     })
+  //     .catch(onValidationError);
+  // };
 
   const addToBookmarks = (data, type) => {
     if (user) {
@@ -80,9 +107,9 @@ const FirebaseState = props => {
     }
   };
 
-  const updateUserProfile = nickname => {
+  const updateUserProfile = displayName => {
     if (user) {
-      return docUsers.update({ nickname }).catch(error => {
+      return user.updateProfile({ displayName }).catch(error => {
         alert('Error updating document, maybe the document does not exist!');
         console.error('Error updating document: ', error);
       });
@@ -107,16 +134,16 @@ const FirebaseState = props => {
     }
   };
 
-  const logoutUser = async () => {
-    await auth
-      .signOut()
-      .then(() => {
-        dispatch({ type: LOG_OUT });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
+  // const logoutUser = async () => {
+  //   await auth
+  //     .signOut()
+  //     .then(() => {
+  //       dispatch({ type: LOG_OUT });
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //     });
+  // };
 
   const onValidationError = ({ code, message }) => {
     switch (code) {
@@ -132,18 +159,18 @@ const FirebaseState = props => {
   return (
     <FirebaseContext.Provider
       value={{
-        isLoggedIn: state.isLoggedIn,
+        // isLoggedIn: state.isLoggedIn,
         loading: state.loading,
         currentUser: state.currentUser,
-        userData: state.userData,
+        // userData: state.userData,
         bookmarks: state.bookmarks,
         addToBookmarks,
         deleteBookmark,
         getBookmarks,
-        createUser,
         signinUser,
-        logoutUser,
         updateUserProfile
+        // createUser,
+        // logoutUser,
       }}
     >
       {props.children}

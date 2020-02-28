@@ -3,27 +3,32 @@ import { withRouter } from 'react-router-dom';
 
 import FirebaseContext from '../../../../context/firebase/firebaseContext';
 import { Button } from '../../../proxy/Button';
+// import { updateUserName } from '../../../../firebase/firebase';
 
 const UpdateProfileModal = ({ history }) => {
-  const { userData, updateUserProfile } = useContext(FirebaseContext);
+  const { currentUser, updateUserProfile } = useContext(FirebaseContext);
 
-  const [nickname, setNickname] = useState('');
+  const [name, setName] = useState('');
 
-  console.log(history);
+  // console.log(history);
 
-  useEffect(() => {
-    if (userData.nickname) {
-      setNickname(userData.nickname);
-    }
-  }, [userData.nickname]);
+  // useEffect(() => {
+  //   const { displayName } = currentUser;
+
+  //   if (currentUser.displayName) {
+  //     setName(currentUser.displayName);
+  //   }
+  // }, [currentUser.displayName]);
 
   const onUpdateProfile = e => {
     e.preventDefault();
 
-    updateUserProfile(nickname).then(() => {
-      alert('Document successfully updated!');
-      // window.location.reload();
-      history.go(0);
+    // updateUserName(currentUser, name).the(res => console.log(res));
+    updateUserProfile(name).then(() => {
+      console.log(currentUser.displayName);
+      //   alert('Document successfully updated!');
+      //   // window.location.reload();
+      //   //   history.go(0);
     });
   };
 
@@ -51,8 +56,8 @@ const UpdateProfileModal = ({ history }) => {
               type='text'
               className='form-control'
               placeholder='Enter your new nickname'
-              value={nickname}
-              onChange={e => setNickname(e.target.value)}
+              value={name}
+              onChange={e => setName(e.target.value)}
             />
           </div>
           <div className='modal-footer'>

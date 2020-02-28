@@ -10,13 +10,13 @@ import UpdateProfileModal from '../../layout/Modals/UpdateProfileModal';
 import { Button } from '../../proxy/Button';
 
 const Profile = () => {
-  const { isLoggedIn, currentUser, userData } = useContext(FirebaseContext);
+  const { isLoggedIn, currentUser } = useContext(FirebaseContext);
 
   if (isLoggedIn) {
     return (
       <div className='jumbotron'>
         <h1 className='display-4'>Email: {currentUser.email}</h1>
-        <p>Username: {userData.nickname}</p>
+        <p>Username: {currentUser.displayName}</p>
 
         <Button
           className='btn btn-success'

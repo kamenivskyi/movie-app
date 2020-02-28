@@ -12,15 +12,16 @@ import {
 import FirebaseContext from '../../../context/firebase/firebaseContext';
 
 import { Button } from '../../proxy/Button';
+import { auth } from '../../../firebase/firebase';
 
 const NavbarUserService = () => {
-  const { isLoggedIn, logoutUser, currentUser, userData } = useContext(
-    FirebaseContext
-  );
-  console.log(currentUser);
-  console.log(userData);
+  const firestate = useContext(FirebaseContext);
 
-  if (isLoggedIn) {
+  const { isLoggedIn, logoutUser, currentUser, userData } = firestate;
+
+  // console.log(firestate);
+
+  if (currentUser) {
     return (
       <div className='dropdown'>
         <Button
@@ -30,8 +31,8 @@ const NavbarUserService = () => {
           aria-haspopup='true'
           aria-expanded='false'
         >
-          <FontAwesomeIcon icon={faUser} /> &nbsp;{' '}
-          {userData.nickname || 'Profile'}
+          <FontAwesomeIcon icon={faUser} /> &nbsp;
+          {currentUser.displayName || 'Profile'}
         </Button>
         <ul className='dropdown-menu' aria-labelledby='dropdownMenu2'>
           <li>
@@ -49,7 +50,7 @@ const NavbarUserService = () => {
             <a
               href=''
               className='dropdown-item'
-              onClick={logoutUser}
+              onClick={() => auth.signOut()}
               title='Sign out'
             >
               <FontAwesomeIcon icon={faSignOutAlt} /> Logout

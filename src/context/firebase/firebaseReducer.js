@@ -1,7 +1,7 @@
 import {
   SET_LOADING,
   SET_USER,
-  LOG_OUT,
+  // LOG_OUT,
   SET_USER_DATA,
   GET_BOOKMARKS
 } from '../types';
@@ -12,16 +12,15 @@ export default (state, action) => {
       return {
         ...state,
         currentUser: action.payload,
-        isLoggedIn: true,
         loading: false
       };
-    case SET_USER_DATA:
-      return {
-        ...state,
-        userData: action.payload,
-        isLoggedIn: true,
-        loading: false
-      };
+    // case SET_USER_DATA:
+    //   return {
+    //     ...state,
+    //     user: action.payload,
+    //     isLoggedIn: true,
+    //     loading: false
+    //   };
     case GET_BOOKMARKS:
       return {
         ...state,
@@ -33,12 +32,12 @@ export default (state, action) => {
         ...state,
         loading: true
       };
-    case LOG_OUT:
-      return {
-        ...state,
-        isLoggedIn: false,
-        loading: false
-      };
+    // case LOG_OUT:
+    //   return {
+    //     ...state,
+    //     isLoggedIn: false,
+    //     loading: false
+    //   };
     default:
       return state;
   }

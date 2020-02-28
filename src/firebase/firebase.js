@@ -14,20 +14,18 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-export const db = firebase.firestore();
-export const auth = firebase.auth();
-
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
   console.log(userAuth);
-  const userRef = userAuth.doc(`users/${userAuth.uid}`);
 
-  console.log(userRef);
+  const userRef = db.doc(`users/${userAuth.uid}`);
 
   const snapshot = await userRef.get();
 
-  if (!userRef.exists) {
+  if (!snapshot.exists) {
     const { displayName, email } = userAuth;
+
+    console.log(displayName);
 
     const createdAt = new Date();
 
@@ -41,10 +39,71 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     } catch (error) {
       console.log('Error creating user', error.message);
     }
-
-    console.log(snapshot);
   }
+
   return userRef;
 };
+
+// export const updateUserName = async (userAuth, newName) => {
+//   console.log(userAuth);
+//   if (!userAuth) return;
+//   console.log(userAuth);
+
+//   const userRef = db.doc(`users/${userAuth.uid}`);
+
+//   const snapshot = await userRef.get();
+
+//   // if (!snapshot.exists) {
+//   const { displayName, email } = userAuth;
+//   try {
+//     userRef.set({
+//       displayName
+//       // email,
+//       // createdAt,
+//       // ...additionalData
+//     });
+//   } catch (error) {
+//     console.log('Error creating user', error.message);
+//   }
+
+//   return userRef;
+// };
+// console.log(userAuth);
+// console.log(snapshot);
+// console.log(newName);
+// };
+
+export const createUserOwnBookmarksArray = async userAuth => {
+  if (!userAuth) return;
+
+  const bookmarksRef = db.doc(`userBookmarks/${userAuth.uid}`);
+
+  const snapshot = await bookmarksRef.get();
+
+  if (!snapshot.exists) {
+    bookmarksRef.set({ tv: [], movie: [] });
+  }
+
+  return bookmarksRef;
+};
+
+// const createUser = async (nickname, email, password) => {
+//   await auth
+//     .createUserWithEmailAndPassword(email, password)
+//     .then(({ user }) => {
+//       console.log(user);
+//       db.collection('userBookmarks')
+//         .doc(user.uid)
+//         .set({ tv: [], movie: [] });
+
+//       db.collection('users')
+//         .doc(user.uid)
+//         .set({ nickname });
+//     })
+//     .catch(onValidationError);
+// };
+
+export const db = firebase.firestore();
+export const auth = firebase.auth();
 
 export default firebase;

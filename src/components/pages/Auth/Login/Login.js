@@ -7,7 +7,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { signinUser, isLoggedIn } = useContext(FirebaseContext);
+  const { currentUser, signinUser, isLoggedIn } = useContext(FirebaseContext);
 
   const onSubmit = e => {
     e.preventDefault();
@@ -22,7 +22,7 @@ const Login = () => {
     }
   };
 
-  if (isLoggedIn) {
+  if (currentUser) {
     return <Redirect to='/' />;
   }
 
