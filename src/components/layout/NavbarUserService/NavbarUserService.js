@@ -17,8 +17,10 @@ const NavbarUserService = () => {
   const { isLoggedIn, logoutUser, currentUser, userData } = useContext(
     FirebaseContext
   );
+  console.log(currentUser);
+  console.log(userData);
 
-  if (currentUser.uid && isLoggedIn) {
+  if (isLoggedIn) {
     return (
       <div className='dropdown'>
         <Button

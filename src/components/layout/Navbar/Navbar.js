@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import classNames from 'classnames';
 
 import Search from '../Search';
 import NavbarNav from '../NavbarNav/NavbarNav';

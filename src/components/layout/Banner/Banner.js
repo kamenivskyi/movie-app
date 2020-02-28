@@ -33,11 +33,11 @@ const Banner = () => {
               <img src={`${original}${backdrop_path}`} alt={title} />
               <div className='banner-content'>
                 <Link to={`movie/${id}`} className='banner-link'>
-                  {cutString(title, 30)}
+                  {cutString(title, 0, 30)}
                 </Link>
 
                 <div className='banner-description'>
-                  {cutString(overview, 150)}
+                  {cutString(overview, 0, 150)}
                 </div>
               </div>
             </div>

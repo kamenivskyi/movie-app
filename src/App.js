@@ -1,5 +1,4 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
 
 import FirebaseState from './context/firebase/FirebaseState';
 import AlertState from './context/alert/AlertState';
@@ -27,12 +26,10 @@ const App = () => {
           <TrendingState>
             <FirebaseState>
               <BannerState>
-                <BrowserRouter>
-                  <Navbar />
-                  <Routes />
-                  <Alert />
-                  <ButtonToTop />
-                </BrowserRouter>
+                <Navbar />
+                <Routes />
+                <Alert />
+                <ButtonToTop />
               </BannerState>
             </FirebaseState>
           </TrendingState>

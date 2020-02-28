@@ -21,7 +21,7 @@ const CastItem = ({ item: { character, name, profile_path, id } }) => {
         </div>
         <div className='card-body'>
           <Link to={`/person/${id}`} className='character'>
-            {cutString(character, 25)}
+            {cutString(character, 0, 25)}
           </Link>
           <h4 className='card-title name'>{name}</h4>
         </div>

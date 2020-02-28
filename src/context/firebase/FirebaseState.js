@@ -2,7 +2,7 @@ import React, { useReducer, useEffect } from 'react';
 import 'firebase/firestore';
 import FirebaseContext from './firebaseContext';
 import FirebaseReducer from './firebaseReducer';
-import firebase, { db, auth } from '../../firebase';
+import firebase, { db, auth } from '../../firebase/firebase';
 import {
   SET_LOADING,
   SET_USER,
@@ -23,23 +23,24 @@ const FirebaseState = props => {
 
   // firebase variables
   const user = auth.currentUser;
+
   const docBookmarks = user && db.collection('userBookmarks').doc(user.uid);
   const docUsers = user && db.collection('users').doc(user.uid);
 
   useEffect(() => {
-    auth.onAuthStateChanged(user => {
-      const doc = db.collection('users').doc(user.uid);
+    auth.onAuthStateChanged(userAuth => {
+      if (userAuth) {
+        const doc = db.collection('users').doc(userAuth.uid);
 
-      if (user) {
         doc.get().then(doc => {
           dispatch({ type: SET_USER_DATA, payload: doc.data() });
-          dispatch({ type: SET_USER, payload: user });
+          dispatch({ type: SET_USER, payload: userAuth });
         });
       } else {
         console.log('User is signed out');
       }
     });
-  }, [user]);
+  }, []);
 
   const setLoading = () => dispatch({ type: SET_LOADING });
 

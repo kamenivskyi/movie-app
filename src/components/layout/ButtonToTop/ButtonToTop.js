@@ -9,6 +9,7 @@ const ButtonToTop = () => {
 
   const goToTop = () => {
     const top = document.querySelector('#root');
+
     top.scrollIntoView({
       behavior: 'smooth',
       block: 'start'

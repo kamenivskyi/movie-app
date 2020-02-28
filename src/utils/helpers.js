@@ -15,8 +15,8 @@ export const convertMoney = money => {
   return formatter.format(money);
 };
 
-export const cutString = (string, cutTo) => {
-  return string.length > cutTo ? string.substr(0, cutTo) + '..' : string;
+export const cutString = (string, cutFrom, cutTo) => {
+  return string.length > cutTo ? string.substr(cutFrom, cutTo) + '..' : string;
 };
 
 // get type and id then add to bookmarks
