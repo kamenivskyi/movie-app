@@ -1,9 +1,10 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Flip from 'react-reveal/Flip';
 import Slider from 'react-slick';
 
-import BannerContext from '../../../context/banner/bannerContext';
+import { getBannerMovies } from '../../../redux/banner/bannerActions';
 
 import config from '../../../utils/config';
 import { cutString } from '../../../utils/helpers';
@@ -11,21 +12,19 @@ import { singleItem } from '../../../utils/sliderSettings';
 
 import './Banner.css';
 
-const Banner = () => {
-  const { items, getTrending } = useContext(BannerContext);
-
+const Banner = ({ items, getBannerMovies }) => {
   useEffect(() => {
-    getTrending('movie', 'week');
+    getBannerMovies('movie', 'week', 1);
   }, []);
 
   const { original } = config.API_IMAGE;
 
-  if (!items.results) return null;
+  if (!items) return null;
 
   return (
     <Flip left>
       <Slider {...singleItem}>
-        {items.results.map(item => {
+        {items.map(item => {
           const { title, backdrop_path, overview, id } = item;
 
           return (
@@ -47,4 +46,9 @@ const Banner = () => {
     </Flip>
   );
 };
-export default Banner;
+
+const mapStateToProps = state => ({
+  items: state.banner.bannerItems
+});
+
+export default connect(mapStateToProps, { getBannerMovies })(Banner);
