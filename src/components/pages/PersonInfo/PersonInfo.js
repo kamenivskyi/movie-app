@@ -1,18 +1,29 @@
-import React, { useContext, useEffect } from 'react';
-import MovieContext from '../../../context/movie/movieContext';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+
+import {
+  getPerson,
+  getPersonPhotos
+} from '../../../redux/person/personActions';
+
 import PersonView from './PersonView';
 
-const PersonInfo = ({ match }) => {
-  const movieContext = useContext(MovieContext);
-  const { getPerson, person, getPhoto, photos } = movieContext;
+const PersonInfo = ({ match, person, getPerson, photos, getPersonPhotos }) => {
+  const { id } = match.params;
 
   useEffect(() => {
-    const { id } = match.params;
     getPerson(id);
-    getPhoto(id);
+    getPersonPhotos(id);
   }, []);
 
-  console.log(person);
   return <PersonView general={person} photos={photos} />;
 };
-export default PersonInfo;
+
+const mapStateToProps = state => ({
+  person: state.person.personData,
+  photos: state.person.personPhotos
+});
+
+export default connect(mapStateToProps, { getPerson, getPersonPhotos })(
+  PersonInfo
+);

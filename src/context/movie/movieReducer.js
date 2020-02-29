@@ -23,12 +23,6 @@ export default (state, action) => {
         genreMovies: action.payload,
         loading: false
       };
-    case GET_CAST:
-      return {
-        ...state,
-        cast: action.payload,
-        loading: false
-      };
     case GET_PERSON:
       return {
         ...state,
