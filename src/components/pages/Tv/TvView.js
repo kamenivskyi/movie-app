@@ -109,4 +109,4 @@ TvView.propTypes = {
   type: PropTypes.string
 };
 
-export default withSpinner(TvView);
+export default TvView;

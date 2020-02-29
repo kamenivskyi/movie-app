@@ -1,10 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Spinner from '../common/Spinner';
-import MovieContext from '../../context/movie/movieContext';
 
-const withSpinner = View => {
+const withSpinner = View => loading => {
   return props => {
-    const { loading } = useContext(MovieContext);
     if (loading) {
       return <Spinner />;
     }

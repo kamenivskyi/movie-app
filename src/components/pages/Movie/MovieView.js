@@ -20,8 +20,10 @@ import config from '../../../utils/config';
 
 import reserveBg from '../../../assets/images/reserve-bg.jpg';
 
-const MovieView = ({ movie, cast, video, id, type }) => {
+const MovieView = ({ movie, cast, video, id, type, loading }) => {
   const { currentUser, addToBookmarks } = useContext(FirebaseContext);
+
+  console.log(loading);
 
   const {
     title,
@@ -114,4 +116,4 @@ MovieView.propTypes = {
   type: PropTypes.string
 };
 
-export default withSpinner(MovieView);
+export default MovieView;

@@ -1,41 +1,53 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import MovieContext from '../../../context/movie/movieContext';
 import { getCast } from '../../../redux/cast/castActions';
-
-import MovieService from '../../../services/movie-service';
+import { getMovieData, getTrailer } from '../../../redux/media/mediaActions';
 
 import MovieView from './MovieView';
 
 import Spinner from '../../common/Spinner';
+
 import './Movie.css';
 
-const Movie = ({ match, getCast, cast, loading }) => {
-  const [video, setVideo] = useState('');
-  const { getVideo } = new MovieService();
-  const { getMovie, movie } = useContext(MovieContext);
+const Movie = ({
+  match,
+  getCast,
+  getMovieData,
+  getTrailer,
+  movie,
+  trailer,
+  cast,
+  loading
+}) => {
   const { id } = match.params;
 
   useEffect(() => {
-    getVideo(id, 'movie').then(res => setVideo(res));
-    getMovie(id, 'movie');
+    getTrailer(id, 'movie');
+    getMovieData(id);
     getCast(id, 'movie');
   }, []);
 
-  if (loading) {
-    return <Spinner />;
-  } else {
-    return (
-      <MovieView movie={movie} type='movie' cast={cast} video={video} id={id} />
-    );
-  }
+  return (
+    <MovieView
+      movie={movie}
+      type='movie'
+      cast={cast}
+      video={trailer}
+      id={id}
+      loading={loading}
+    />
+  );
 };
 
-const mapStateToProps = state => ({
-  trendingItem: state.trending.trendingItem,
-  cast: state.cast.castIteovims,
-  loading: state.cast.loading
+const mapStateToProps = ({ trending, cast, media }) => ({
+  trendingItem: trending.trendingItem,
+  cast: cast.castIteovims,
+  loading: cast.loading,
+  movie: media.movieData,
+  trailer: media.trailer
 });
 
-export default connect(mapStateToProps, { getCast })(Movie);
+export default connect(mapStateToProps, { getCast, getMovieData, getTrailer })(
+  Movie
+);

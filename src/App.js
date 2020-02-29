@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 
 import FirebaseState from './context/firebase/FirebaseState';
-import MovieState from './context/movie/MovieState';
 
 import Routes from './routes';
 import Navbar from './components/layout/Navbar';
@@ -16,18 +15,14 @@ import 'bootswatch/dist/cyborg/bootstrap.min.css';
 
 import './App.css';
 
-const App = () => {
-  return (
-    <Provider store={store}>
-      <MovieState>
-        <FirebaseState>
-          <Navbar />
-          <Routes />
-          <ButtonToTop />
-        </FirebaseState>
-      </MovieState>
-    </Provider>
-  );
-};
+const App = () => (
+  <Provider store={store}>
+    <FirebaseState>
+      <Navbar />
+      <Routes />
+      <ButtonToTop />
+    </FirebaseState>
+  </Provider>
+);
 
 export default App;

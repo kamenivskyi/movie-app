@@ -12,6 +12,7 @@ const GenreMovies = ({ match, movies, getMoviesByGenre }) => {
 
   useEffect(() => {
     let isCurrent = true;
+
     if (isCurrent) {
       getMoviesByGenre(id);
     }

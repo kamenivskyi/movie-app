@@ -3,6 +3,8 @@ import Types from '../types';
 const INITIAL_STATE = {
   moviesByFilters: [],
   moviesByGenre: [],
+  movieData: {},
+  trailer: {},
   error: false,
   loading: false
 };
@@ -20,6 +22,17 @@ const mediaReducer = (state = INITIAL_STATE, action) => {
         ...state,
         moviesByGenre: action.payload,
         loading: false
+      };
+    case Types.GET_MOVIE_DATA:
+      return {
+        ...state,
+        movieData: action.payload,
+        loading: false
+      };
+    case Types.GET_TRAILER:
+      return {
+        ...state,
+        trailer: action.payload
       };
     case Types.GOT_ERROR:
       return {
