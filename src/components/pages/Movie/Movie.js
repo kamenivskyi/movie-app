@@ -34,7 +34,7 @@ const Movie = ({ match, getCast, cast, loading }) => {
 
 const mapStateToProps = state => ({
   trendingItem: state.trending.trendingItem,
-  cast: state.cast.castItems,
+  cast: state.cast.castIteovims,
   loading: state.cast.loading
 });
 

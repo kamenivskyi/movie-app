@@ -1,30 +1,36 @@
-import React, { useEffect, useContext } from 'react';
-import MovieContext from '../../../context/movie/movieContext';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+
+import { getMoviesByGenre } from '../../../redux/media/mediaActions';
+
 import MediaItems from '../../layout/MediaItems';
 
 import './GenrePage.css';
 
-const GenreMovies = ({ match }) => {
-  const { genreMovies, getGenreMovies } = useContext(MovieContext);
+const GenreMovies = ({ match, movies, getMoviesByGenre }) => {
+  const { id } = match.params;
 
   useEffect(() => {
     let isCurrent = true;
     if (isCurrent) {
-      getGenreMovies(match.params.id);
+      getMoviesByGenre(id);
     }
     return () => (isCurrent = false);
-  }, [match.params.id]);
-
-  console.log(genreMovies);
+  }, [id]);
 
   return (
     <section className='genre-page'>
       <div className='container-fluid'>
         <div className='row'>
-          <MediaItems items={genreMovies} type='movie' />
+          <MediaItems items={movies} type='movie' />
         </div>
       </div>
     </section>
   );
 };
-export default GenreMovies;
+
+const mapStateToProps = state => ({
+  movies: state.media.moviesByGenre
+});
+
+export default connect(mapStateToProps, { getMoviesByGenre })(GenreMovies);
