@@ -21,7 +21,7 @@ const trendingReducer = (state = INITIAL_STATE, action) => {
         trendingItem: action.payload,
         loading: false
       };
-    case Types.GET_TRENDING_ERROR:
+    case Types.GOT_ERROR:
       return {
         ...state,
         error: true,

@@ -1,4 +1,5 @@
 import Types from '../types';
+
 import MovieService from '../../services/movie-service';
 
 const { getTrendingMedia, getMediaById } = new MovieService();
@@ -34,7 +35,7 @@ export const getTrendingItemData = (id, type) => async dispatch => {
     });
   } catch (error) {
     dispatch({
-      type: Types.GET_TRENDING_ERROR,
+      type: Types.GOT_ERROR,
       payload: error.response.statusText
     });
   }

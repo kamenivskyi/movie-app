@@ -1,15 +1,21 @@
 import React, { useContext } from 'react';
+import { connect } from 'react-redux';
+
 import MediaItems from '../MediaItems';
-import MovieContext from '../../../context/movie/movieContext';
+
 import Spinner from '../../common/Spinner';
 
-const Movies = () => {
-  const { movies, loading } = useContext(MovieContext);
-  const { results } = movies;
+const Movies = ({ movies, loading }) => {
   if (loading) {
     return <Spinner />;
   } else {
-    return <MediaItems items={results} type='movie' />;
+    return <MediaItems items={movies.results} type='movie' />;
   }
 };
-export default Movies;
+
+const mapStateToProps = state => ({
+  movies: state.media.moviesByFilters,
+  loading: state.media.loading
+});
+
+export default connect(mapStateToProps)(Movies);

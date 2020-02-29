@@ -1,6 +1,5 @@
-import React, { useContext, useState } from 'react';
-
-import MovieContext from '../../../context/movie/movieContext';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 
 import PaginationWrapper from '../../layout/PaginationWrapper';
 import ReleaseYear from './ReleaseYear';
@@ -8,26 +7,27 @@ import SortBy from './SortBy';
 import IncludeAdult from './IncludeAdult';
 import { Button } from '../../proxy/Button';
 
+import { getMoviesByFilters } from '../../../redux/media/mediaActions';
+
 import './Filters.css';
 
-const Filters = ({ children }) => {
+const Filters = ({ children, data, getMoviesByFilters }) => {
   const [sortBy, setSortBy] = useState('');
   const [year, setYear] = useState(null);
   const [includeAdult, setIncludeAdult] = useState(false);
   const [activePage, setActivePage] = useState(1);
 
-  const { filterMovies, movies } = useContext(MovieContext);
-  const { total_results, total_pages } = movies;
+  const { total_results, total_pages } = data;
 
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault();
     setActivePage(1);
-    filterMovies(1, sortBy, includeAdult, year);
+    getMoviesByFilters(1, sortBy, includeAdult, year);
   };
 
   const handlePageChange = pageNumber => {
     setActivePage(pageNumber);
-    filterMovies(pageNumber, sortBy, includeAdult, year);
+    getMoviesByFilters(pageNumber, sortBy, includeAdult, year);
   };
 
   return (
@@ -65,4 +65,8 @@ const Filters = ({ children }) => {
   );
 };
 
-export default Filters;
+const mapStateToProps = state => ({
+  data: state.media.moviesByFilters
+});
+
+export default connect(mapStateToProps, { getMoviesByFilters })(Filters);

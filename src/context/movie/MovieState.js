@@ -31,6 +31,7 @@ const MovieState = ({ children }) => {
     setLoading();
     dispatch({ type: GET_MOVIE, payload: await getMediaById(id, 'movie') });
   };
+
   const getGenreMovies = async id => {
     setLoading();
     dispatch({ type: GET_GENRE_MOVIES, payload: await getGenreMoviesById(id) });
@@ -43,13 +44,14 @@ const MovieState = ({ children }) => {
       payload: await getDiscoverMovies(activePage, sortBy, isAdult, year)
     });
   };
-  const searchMovies = async (name, activePage) => {
-    setLoading();
-    dispatch({
-      type: SEARCH_MOVIES,
-      payload: await searchMoviesByName(name, activePage)
-    });
-  };
+
+  // const searchMovies = async (name, activePage) => {
+  //   setLoading();
+  //   dispatch({
+  //     type: SEARCH_MOVIES,
+  //     payload: await searchMoviesByName(name, activePage)
+  //   });
+  // };
 
   const setLoading = () => dispatch({ type: SET_LOADING });
 
@@ -61,7 +63,7 @@ const MovieState = ({ children }) => {
         genreMovies: state.genreMovies,
         loading: state.loading,
         filterMovies,
-        searchMovies,
+        // searchMovies,
         getMovie,
         getGenreMovies
       }}
