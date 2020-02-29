@@ -1,26 +1,28 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import trendingContext from '../../../context/trending/trendingContext';
+import { getTrendingList } from '../../../redux/trending/trendingActions';
 
 import MediaItems from '../../layout/MediaItems';
 import MediaTabs from '../../layout/MediaTabs';
 import PaginationWrapper from '../../layout/PaginationWrapper';
 import Spinner from '../../common/Spinner';
 
-const Trending = ({ history }) => {
+const Trending = ({ getTrendingList, items, loading }) => {
+  console.log(items);
+
   const [currentType, setCurrentType] = useState('movie');
   const [currentPeriod, setCurrentPeriod] = useState('week');
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { getTrendingItems, items, loading } = useContext(trendingContext);
-
   const { results, total_results, total_pages } = items;
-  console.log(items);
 
   useEffect(() => {
-    getTrendingItems(currentType, currentPeriod);
+    getTrendingList(currentType, currentPeriod);
   }, [currentType, currentPeriod]);
+
+  if (!items.results) return null;
 
   const updateMedia = async e => {
     e.preventDefault();
@@ -30,17 +32,17 @@ const Trending = ({ history }) => {
 
     if (type) {
       setCurrentType(type);
-      getTrendingItems(currentType, currentPeriod, currentPage);
+      getTrendingList(currentType, currentPeriod, currentPage);
     } else {
       setCurrentPeriod(period);
-      getTrendingItems(currentType, currentPeriod, currentPage);
+      getTrendingList(currentType, currentPeriod, currentPage);
     }
   };
 
   const handlePageChange = activePage => {
     console.log(activePage);
     setCurrentPage(activePage);
-    getTrendingItems(currentType, currentPeriod, activePage);
+    getTrendingList(currentType, currentPeriod, activePage);
   };
 
   return (
@@ -57,6 +59,7 @@ const Trending = ({ history }) => {
 
           <div className='row'>
             <MediaItems items={results} type={currentType} />
+
             <PaginationWrapper
               currentPage={currentPage}
               totalItems={total_results}
@@ -69,4 +72,10 @@ const Trending = ({ history }) => {
     </div>
   );
 };
-export default withRouter(React.memo(Trending));
+
+const mapStateToProps = state => ({
+  items: state.trending.trendingList,
+  loading: state.trending.loading
+});
+
+export default connect(mapStateToProps, { getTrendingList })(Trending);

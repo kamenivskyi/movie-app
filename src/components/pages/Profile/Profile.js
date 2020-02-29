@@ -12,7 +12,7 @@ import { Button } from '../../proxy/Button';
 const Profile = () => {
   const { isLoggedIn, currentUser } = useContext(FirebaseContext);
 
-  if (isLoggedIn) {
+  if (currentUser) {
     return (
       <div className='jumbotron'>
         <h1 className='display-4'>Email: {currentUser.email}</h1>

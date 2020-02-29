@@ -21,7 +21,7 @@ import config from '../../../utils/config';
 import reserveBg from '../../../assets/images/reserve-bg.jpg';
 
 const MovieView = ({ movie, cast, video, id, type }) => {
-  const { isLoggedIn, addToBookmarks } = useContext(FirebaseContext);
+  const { currentUser, addToBookmarks } = useContext(FirebaseContext);
 
   const {
     title,
@@ -38,9 +38,9 @@ const MovieView = ({ movie, cast, video, id, type }) => {
     networks
   } = movie;
 
-  useEffect(() => {
-    console.log('Movie view use effect', movie);
-  });
+  // useEffect(() => {
+  //   console.log('Movie view use effect', movie);
+  // });
 
   const { original, medium } = config.API_IMAGE;
 
@@ -64,7 +64,7 @@ const MovieView = ({ movie, cast, video, id, type }) => {
           <div className='movie-img-wrapp'>
             <img className='movie-img' src={medium + poster_path} alt={title} />
             {video && <BtnShowVideo url={video.key} />}
-            {isLoggedIn && (
+            {currentUser && (
               <Button
                 className='btn btn-primary mt-3'
                 onClick={handleGetTypeAndId}

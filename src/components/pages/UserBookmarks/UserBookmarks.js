@@ -5,7 +5,7 @@ import MediaItems from '../../layout/MediaItems';
 import Spinner from '../../common/Spinner';
 
 const UserBookmarks = () => {
-  const { isLoggedIn, getBookmarks, bookmarks, loading } = useContext(
+  const { getBookmarks, currentUser, bookmarks, loading } = useContext(
     FirebaseContext
   );
 
@@ -30,7 +30,7 @@ const UserBookmarks = () => {
     setTerm(value);
   };
 
-  if (isLoggedIn) {
+  if (currentUser) {
     return (
       <div className='jumbotron'>
         <h1 className='display-4'>Bookmarks:</h1>

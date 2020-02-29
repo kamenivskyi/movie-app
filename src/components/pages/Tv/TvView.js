@@ -21,7 +21,7 @@ import config from '../../../utils/config';
 import reserveBg from '../../../assets/images/reserve-bg.jpg';
 
 const TvView = ({ tv, cast, video, type }) => {
-  const { isLoggedIn, addToBookmarks } = useContext(FirebaseContext);
+  const { currentUser, addToBookmarks } = useContext(FirebaseContext);
 
   const {
     name,
@@ -61,7 +61,7 @@ const TvView = ({ tv, cast, video, type }) => {
           <div className='movie-img-wrapp'>
             <img className='movie-img' src={medium + poster_path} alt={name} />
             {video && <BtnShowVideo url={video.key} />}
-            {isLoggedIn && (
+            {currentUser && (
               <Button
                 className='btn btn-primary mt-3'
                 onClick={handleGetTypeAndId}
