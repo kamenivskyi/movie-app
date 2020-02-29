@@ -1,23 +1,23 @@
-import Types from './bannerTypes';
+import Types from './searchTypes';
 
 const INITIAL_STATE = {
-  bannerItems: null,
-  bannerError: false,
+  items: null,
+  error: false,
   loading: false
 };
 
-const bannerReducer = (state = INITIAL_STATE, action) => {
+const searchReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case Types.GET_BANNER_ITEMS:
+    case Types.SEARCH_ITEMS:
       return {
         ...state,
-        bannerItems: action.payload,
+        items: action.payload,
         loading: false
       };
-    case Types.BANNER_ERROR:
+    case Types.SEARCH_ERROR:
       return {
         ...state,
-        bannerError: true,
+        error: true,
         loading: false
       };
     case Types.SET_LOADING:
@@ -29,4 +29,4 @@ const bannerReducer = (state = INITIAL_STATE, action) => {
       return state;
   }
 };
-export default bannerReducer;
+export default searchReducer;

@@ -5,7 +5,6 @@ import store from './redux/store';
 
 import FirebaseState from './context/firebase/FirebaseState';
 import MovieState from './context/movie/MovieState';
-import ResultsState from './context/results/ResultsState';
 import TrendingState from './context/trending/TrendingState';
 
 import Routes from './routes';
@@ -22,16 +21,13 @@ const App = () => {
   return (
     <Provider store={store}>
       <MovieState>
-        <ResultsState>
-          <TrendingState>
-            <FirebaseState>
-              <Navbar />
-              <Routes />
-              {/* <Alert /> */}
-              <ButtonToTop />
-            </FirebaseState>
-          </TrendingState>
-        </ResultsState>
+        <TrendingState>
+          <FirebaseState>
+            <Navbar />
+            <Routes />
+            <ButtonToTop />
+          </FirebaseState>
+        </TrendingState>
       </MovieState>
     </Provider>
   );

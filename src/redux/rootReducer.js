@@ -2,12 +2,12 @@ import { combineReducers } from 'redux';
 
 import mediaReducer from './media/mediaReducer';
 import bannerReducer from './banner/bannerReducer';
-// import userReducer from './user/user.reducer';
-// import cartReducer from './cart/cart.reducer';
+import searchReducer from './search/searchReducer';
 
 export default combineReducers({
   media: mediaReducer,
-  banner: bannerReducer
+  banner: bannerReducer,
+  search: searchReducer
   // user: userReducer,
   // cart: cartReducer
 });
