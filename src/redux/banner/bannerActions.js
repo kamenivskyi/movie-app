@@ -22,4 +22,4 @@ export const getBannerMovies = (name, type, activePage) => async dispatch => {
   }
 };
 
-export const setLoading = () => ({ type: Types.SET_LOADING });
+const setLoading = () => ({ type: Types.SET_LOADING });

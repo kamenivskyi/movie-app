@@ -1,18 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
-import MovieContext from '../../../context/movie/movieContext';
 import { getTrendingItemData } from '../../../redux/trending/trendingActions';
+import { getCast } from '../../../redux/cast/castActions';
 
 import TvView from './TvView';
 
 import MovieService from '../../../services/movie-service';
 
-const Tv = ({ getTrendingItemData, match, trendingItem }) => {
+const Tv = ({ getTrendingItemData, match, trendingItem, cast, getCast }) => {
   const [video, setVideo] = useState('');
   const { getVideo } = new MovieService();
-
-  const { getCast, cast } = useContext(MovieContext);
 
   useEffect(() => {
     const { id } = match.params;
@@ -26,7 +24,8 @@ const Tv = ({ getTrendingItemData, match, trendingItem }) => {
 };
 
 const mapStateToProps = state => ({
-  trendingItem: state.trending.trendingItem
+  trendingItem: state.trending.trendingItem,
+  cast: state.cast.castItems
 });
 
-export default connect(mapStateToProps, { getTrendingItemData })(Tv);
+export default connect(mapStateToProps, { getTrendingItemData, getCast })(Tv);
