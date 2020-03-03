@@ -1,31 +1,50 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { getTrendingItemData } from '../../../redux/trending/trendingActions';
+import { getTrendingItemData } from '../../../redux/trendingItem/trendingItemActions';
 import { getCast } from '../../../redux/cast/castActions';
+import { getTrailer } from '../../../redux/trailer/trailerActions';
 
 import TvView from './TvView';
 
-import MovieService from '../../../services/movie-service';
-
-const Tv = ({ getTrendingItemData, match, trendingItem, cast, getCast }) => {
-  const [video, setVideo] = useState('');
-  const { getVideo } = new MovieService();
-
+const Tv = ({
+  getTrendingItemData,
+  match,
+  trendingItem,
+  cast,
+  getCast,
+  getTrailer,
+  trailer,
+  loading
+}) => {
   useEffect(() => {
     const { id } = match.params;
 
     getTrendingItemData(id, 'tv');
-    getVideo(id, 'tv').then(res => setVideo(res));
+    getTrailer(id, 'tv');
     getCast(id, 'tv');
   }, []);
 
-  return <TvView tv={trendingItem} video={video} cast={cast} type='tv' />;
+  return (
+    <TvView
+      tv={trendingItem}
+      video={trailer}
+      cast={cast}
+      type='tv'
+      loading={loading}
+    />
+  );
 };
 
 const mapStateToProps = state => ({
-  trendingItem: state.trending.trendingItem,
-  cast: state.cast.castItems
+  trendingItem: state.trendingItem.item,
+  cast: state.cast.castItems,
+  trailer: state.trailer.video,
+  loading: state.trendingItem.loading
 });
 
-export default connect(mapStateToProps, { getTrendingItemData, getCast })(Tv);
+export default connect(mapStateToProps, {
+  getTrendingItemData,
+  getCast,
+  getTrailer
+})(Tv);

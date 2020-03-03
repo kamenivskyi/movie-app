@@ -1,8 +1,7 @@
-import Types from '../types';
+import Types from './personTypes';
 
 const INITIAL_STATE = {
   personData: {},
-  personPhotos: [],
   error: false,
   loading: false
 };
@@ -15,19 +14,13 @@ const personReducer = (state = INITIAL_STATE, action) => {
         personData: action.payload,
         loading: false
       };
-    case Types.GET_PERSON_PHOTOS:
-      return {
-        ...state,
-        personPhotos: action.payload,
-        loading: false
-      };
-    case Types.GET_ERROR:
+    case Types.GET_PERSON_ERROR:
       return {
         ...state,
         error: true,
         loading: false
       };
-    case Types.SET_LOADING:
+    case Types.GET_PERSON_LOADING:
       return {
         ...state,
         loading: true

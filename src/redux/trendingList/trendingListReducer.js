@@ -1,8 +1,7 @@
-import Types from '../types';
+import Types from './trendingListTypes';
 
 const INITIAL_STATE = {
-  trendingList: [],
-  trendingItem: {},
+  items: [],
   error: false,
   loading: false
 };
@@ -12,22 +11,17 @@ const trendingReducer = (state = INITIAL_STATE, action) => {
     case Types.GET_TRENDING_LIST:
       return {
         ...state,
-        trendingList: action.payload,
+        items: action.payload,
         loading: false
       };
-    case Types.GET_TRENDING_ITEM_DATA:
-      return {
-        ...state,
-        trendingItem: action.payload,
-        loading: false
-      };
-    case Types.GOT_ERROR:
+
+    case Types.GET_TRENDING_LIST_ERROR:
       return {
         ...state,
         error: true,
         loading: false
       };
-    case Types.SET_LOADING:
+    case Types.GET_TRENDING_LIST_LOADING:
       return {
         ...state,
         loading: true

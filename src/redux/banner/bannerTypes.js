@@ -1,7 +1,7 @@
-const actions = {
+const actionTypes = {
   GET_BANNER_ITEMS: 'GET_BANNER_ITEMS',
-  SET_LOADING: 'SET_LOADING',
+  SET_BANNER_LOADING: 'SET_BANNER_LOADING',
   BANNER_ERROR: 'BANNER_ERROR'
 };
 
-export default actions;
+export default actionTypes;

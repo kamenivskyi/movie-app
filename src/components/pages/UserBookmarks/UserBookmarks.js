@@ -1,6 +1,8 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { Redirect } from 'react-router-dom';
+
 import FirebaseContext from '../../../context/firebase/firebaseContext';
+
 import MediaItems from '../../layout/MediaItems';
 import Spinner from '../../common/Spinner';
 
@@ -17,9 +19,9 @@ const UserBookmarks = () => {
     getBookmarks();
   }, []);
 
-  const search = (array, term, property) => {
+  const search = (array, term, type) => {
     return array.filter(item =>
-      item[property].toLowerCase().includes(term.toLowerCase())
+      item[type].toLowerCase().includes(term.toLowerCase())
     );
   };
 
@@ -33,7 +35,7 @@ const UserBookmarks = () => {
   if (currentUser) {
     return (
       <div className='jumbotron'>
-        <h1 className='display-4'>Bookmarks:</h1>
+        <h1 className='section-title'>Bookmarks:</h1>
         <InputSearch term={term} onChange={handleChange} />
         <hr className='my-4' />
         <div className='row'>

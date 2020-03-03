@@ -20,7 +20,7 @@ const bannerReducer = (state = INITIAL_STATE, action) => {
         bannerError: true,
         loading: false
       };
-    case Types.SET_LOADING:
+    case Types.SET_BANNER_LOADING:
       return {
         ...state,
         loading: true

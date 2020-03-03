@@ -8,6 +8,9 @@
   top: 0;
   z-index: 110;
 }
+.navbar-brand {
+  font-family: 'Trade Winds', cursive;
+}
 .navbar-item {
   width: 30%;
 }

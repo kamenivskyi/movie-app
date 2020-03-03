@@ -38,4 +38,4 @@ const PersonView = ({ general, photos }) => {
     </>
   );
 };
-export default withSpinner(PersonView);
+export default PersonView;

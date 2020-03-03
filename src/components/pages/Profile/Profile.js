@@ -15,7 +15,7 @@ const Profile = () => {
   if (currentUser) {
     return (
       <div className='jumbotron'>
-        <h1 className='display-4'>Email: {currentUser.email}</h1>
+        <h1 className='section-title'>Email: {currentUser.email}</h1>
         <p>Username: {currentUser.displayName}</p>
 
         <Button

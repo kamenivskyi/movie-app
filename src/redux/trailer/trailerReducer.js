@@ -1,26 +1,26 @@
-import Types from './castTypes';
+import Types from './trailerTypes';
 
 const INITIAL_STATE = {
-  castItems: [],
+  video: {},
   error: false,
   loading: false
 };
 
-const castReducer = (state = INITIAL_STATE, action) => {
+const mediaReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case Types.GET_CAST:
+    case Types.GET_TRAILER:
       return {
         ...state,
-        castItems: action.payload,
+        video: action.payload,
         loading: false
       };
-    case Types.GET_CAST_ERROR:
+    case Types.GET_TRAILER_ERROR:
       return {
         ...state,
         error: true,
         loading: false
       };
-    case Types.GET_CAST_LOADING:
+    case Types.GET_TRAILER_LOADING:
       return {
         ...state,
         loading: true
@@ -29,4 +29,5 @@ const castReducer = (state = INITIAL_STATE, action) => {
       return state;
   }
 };
-export default castReducer;
+
+export default mediaReducer;

@@ -1,26 +1,26 @@
-import Types from './castTypes';
+import Types from './trendingItemTypes';
 
 const INITIAL_STATE = {
-  castItems: [],
+  item: {},
   error: false,
   loading: false
 };
 
-const castReducer = (state = INITIAL_STATE, action) => {
+const trendingItemReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case Types.GET_CAST:
+    case Types.GET_TRENDING_ITEM_DATA:
       return {
         ...state,
-        castItems: action.payload,
+        item: action.payload,
         loading: false
       };
-    case Types.GET_CAST_ERROR:
+    case Types.GET_TRENDING_ITEM_ERROR:
       return {
         ...state,
         error: true,
         loading: false
       };
-    case Types.GET_CAST_LOADING:
+    case Types.GET_TRENDING_ITEM_LOADING:
       return {
         ...state,
         loading: true
@@ -29,4 +29,4 @@ const castReducer = (state = INITIAL_STATE, action) => {
       return state;
   }
 };
-export default castReducer;
+export default trendingItemReducer;

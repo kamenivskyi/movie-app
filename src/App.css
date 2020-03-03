@@ -4,15 +4,13 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 13px;
+  width: 10px;
 }
 ::-webkit-scrollbar-track {
   background-color: #222222;
 }
 ::-webkit-scrollbar-thumb {
   background-color: #2a9fd6;
-  border: 3px solid #222222;
-  border-radius: 9px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -26,9 +24,10 @@ body {
   background-color: #222222;
 }
 *::-moz-scrollbar-thumb {
-  background-color: #ff8000;
-  border: 3px solid #222222;
-  border-radius: 9px;
+  background-color: light;
+}
+::-moz-scrollbar-thumb:hover {
+  background-color: #0c7baf;
 }
 
 img {
@@ -54,7 +53,7 @@ input {
 }
 
 .section-title {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Trade Winds', cursive;
   text-align: center;
   margin-bottom: 20px;
 }

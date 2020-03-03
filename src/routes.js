@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Home from './components/pages/Home';
 import Movie from './components/pages/Movie';
-import PersonInfo from './components/pages/PersonInfo';
+import Person from './components/pages/Person';
 import GenreMovies from './components/pages/GenreMovies';
 import People from './components/pages/People';
 import Results from './components/pages/Results';
@@ -22,7 +22,7 @@ const Routes = () => {
       <Route exact path='/movie/:id' component={Movie} />
       <Route exact path='/tv/:id' component={Tv} />
       <Route exact path='/genre/:id' component={GenreMovies} />
-      <Route exact path='/person/:id' component={PersonInfo} />
+      <Route exact path='/person/:id' component={Person} />
       <Route exact path='/people' component={People} />
       <Route exact path='/trending' component={Trending} />
 

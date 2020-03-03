@@ -1,30 +1,21 @@
-import Types from '../types';
+import Types from './personTypes';
 
 import MovieService from '../../services/movie-service';
 
-const { getPersonById, getPersonPhotoById } = new MovieService();
+const { getPersonById } = new MovieService();
 
 export const getPerson = id => async dispatch => {
   try {
-    setLoading();
+    dispatch(setLoading());
     const data = await getPersonById(id);
 
     dispatch({ type: Types.GET_PERSON, payload: data });
   } catch (error) {
-    dispatch({ type: Types.GET_ERROR, payload: error.response.statusText });
+    dispatch({
+      type: Types.GET_PERSON_ERROR,
+      payload: error.response
+    });
   }
 };
 
-export const getPersonPhotos = id => async dispatch => {
-  try {
-    setLoading();
-
-    const data = await getPersonPhotoById(id);
-
-    dispatch({ type: Types.GET_PERSON_PHOTOS, payload: data });
-  } catch (error) {
-    dispatch({ type: Types.GET_ERROR, payload: error.response.statusText });
-  }
-};
-
-export const setLoading = () => ({ type: Types.SET_LOADING });
+export const setLoading = () => ({ type: Types.GET_PERSON_LOADING });

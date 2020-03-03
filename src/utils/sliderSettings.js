@@ -36,7 +36,7 @@ export const multipleItems = {
 };
 
 export const singleItem = {
-  autoplay: true,
+  // autoplay: true,
   dots: false,
   infinite: true,
   speed: 700,

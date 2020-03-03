@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import {
-  getPerson,
-  getPersonPhotos
-} from '../../../redux/person/personActions';
+import { getPerson } from '../../../redux/person/personActions';
+import { getPersonPhotos } from '../../../redux/personPhotos/personPhotosActions';
 
 import PersonView from './PersonView';
 
-const PersonInfo = ({ match, person, getPerson, photos, getPersonPhotos }) => {
+const Person = ({ match, person, getPerson, photos, getPersonPhotos }) => {
   const { id } = match.params;
 
   useEffect(() => {
@@ -21,9 +19,7 @@ const PersonInfo = ({ match, person, getPerson, photos, getPersonPhotos }) => {
 
 const mapStateToProps = state => ({
   person: state.person.personData,
-  photos: state.person.personPhotos
+  photos: state.personPhotos.photos
 });
 
-export default connect(mapStateToProps, { getPerson, getPersonPhotos })(
-  PersonInfo
-);
+export default connect(mapStateToProps, { getPerson, getPersonPhotos })(Person);

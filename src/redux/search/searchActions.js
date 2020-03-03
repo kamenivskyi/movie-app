@@ -6,7 +6,7 @@ const { search } = new MovieService();
 
 export const searchItems = (value, page) => async dispatch => {
   try {
-    setLoading();
+    dispatch(setLoading());
 
     const data = await search(value, page);
 

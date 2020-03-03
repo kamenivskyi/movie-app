@@ -2,11 +2,10 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { getCast } from '../../../redux/cast/castActions';
-import { getMovieData, getTrailer } from '../../../redux/media/mediaActions';
+import { getMovieData } from '../../../redux/movie/movieActions';
+import { getTrailer } from '../../../redux/trailer/trailerActions';
 
 import MovieView from './MovieView';
-
-import Spinner from '../../common/Spinner';
 
 import './Movie.css';
 
@@ -22,11 +21,13 @@ const Movie = ({
 }) => {
   const { id } = match.params;
 
+  console.log(loading);
+
   useEffect(() => {
     getTrailer(id, 'movie');
     getMovieData(id);
     getCast(id, 'movie');
-  }, []);
+  }, [id]);
 
   return (
     <MovieView
@@ -40,12 +41,12 @@ const Movie = ({
   );
 };
 
-const mapStateToProps = ({ trending, cast, media }) => ({
-  trendingItem: trending.trendingItem,
-  cast: cast.castIteovims,
-  loading: cast.loading,
-  movie: media.movieData,
-  trailer: media.trailer
+const mapStateToProps = ({ trendingItem, cast, movie, trailer }) => ({
+  trendingItem: trendingItem.item,
+  cast: cast.castItems,
+  loading: movie.loading,
+  movie: movie.movieData,
+  trailer: trailer.video
 });
 
 export default connect(mapStateToProps, { getCast, getMovieData, getTrailer })(

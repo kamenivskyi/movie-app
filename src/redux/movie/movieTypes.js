@@ -1,0 +1,7 @@
+const actionTypes = {
+  GET_MOVIE_DATA: 'GET_MOVIE_DATA',
+  GET_MOVIE_DATA_ERROR: 'GET_MOVIE_DATA_ERROR',
+  GET_MOVIE_DATA_LOADING: 'GET_MOVIE_DATA_LOADING'
+};
+
+export default actionTypes;

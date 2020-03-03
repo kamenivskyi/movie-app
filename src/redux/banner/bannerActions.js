@@ -6,7 +6,7 @@ const { getTrendingMedia } = new MovieService();
 
 export const getBannerMovies = (name, type, activePage) => async dispatch => {
   try {
-    setLoading();
+    dispatch(setLoading());
 
     const data = await getTrendingMedia(name, type, activePage);
 
@@ -22,4 +22,4 @@ export const getBannerMovies = (name, type, activePage) => async dispatch => {
   }
 };
 
-const setLoading = () => ({ type: Types.SET_LOADING });
+const setLoading = () => ({ type: Types.SET_BANNER_LOADING });

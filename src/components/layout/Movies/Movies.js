@@ -1,11 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import MediaItems from '../MediaItems';
 
 import Spinner from '../../common/Spinner';
 
-const Movies = ({ movies, loading }) => {
+const Movies = props => {
+  const { movies, loading } = props;
+
   if (loading) {
     return <Spinner />;
   } else {
@@ -13,9 +15,9 @@ const Movies = ({ movies, loading }) => {
   }
 };
 
-const mapStateToProps = state => ({
-  movies: state.media.moviesByFilters,
-  loading: state.media.loading
+const mapStateToProps = ({ moviesByFilters: { movies, loading } }) => ({
+  movies,
+  loading
 });
 
 export default connect(mapStateToProps)(Movies);

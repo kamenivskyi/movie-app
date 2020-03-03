@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { getMoviesByGenre } from '../../../redux/media/mediaActions';
+import { getMoviesByGenre } from '../../../redux/moviesByGenre/moviesByGenreActions';
 
 import MediaItems from '../../layout/MediaItems';
 
@@ -30,8 +30,8 @@ const GenreMovies = ({ match, movies, getMoviesByGenre }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  movies: state.media.moviesByGenre
+const mapStateToProps = ({ moviesByGenre: { movies } }) => ({
+  movies
 });
 
 export default connect(mapStateToProps, { getMoviesByGenre })(GenreMovies);

@@ -7,11 +7,12 @@ import SortBy from './SortBy';
 import IncludeAdult from './IncludeAdult';
 import { Button } from '../../proxy/Button';
 
-import { getMoviesByFilters } from '../../../redux/media/mediaActions';
+import { getMoviesByFilters } from '../../../redux/moviesByFilters/moviesByFIltersActions';
 
 import './Filters.css';
 
 const Filters = ({ children, data, getMoviesByFilters }) => {
+  console.log(data);
   const [sortBy, setSortBy] = useState('');
   const [year, setYear] = useState(null);
   const [includeAdult, setIncludeAdult] = useState(false);
@@ -47,7 +48,7 @@ const Filters = ({ children, data, getMoviesByFilters }) => {
             onChange={({ target }) => setSortBy(target.value)}
             value={sortBy}
           />
-          <Button className='btn btn-outline-dark submit-btn' type='submit'>
+          <Button className='btn btn-primary submit-btn' type='submit'>
             Search
           </Button>
         </form>
@@ -66,7 +67,7 @@ const Filters = ({ children, data, getMoviesByFilters }) => {
 };
 
 const mapStateToProps = state => ({
-  data: state.media.moviesByFilters
+  data: state.moviesByFilters.movies
 });
 
 export default connect(mapStateToProps, { getMoviesByFilters })(Filters);

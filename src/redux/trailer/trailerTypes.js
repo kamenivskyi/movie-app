@@ -1,0 +1,7 @@
+const actionTypes = {
+  GET_TRAILER: 'GET_TRAILER',
+  GET_TRAILER_LOADING: 'GET_TRAILER_LOADING',
+  GET_TRAILER_ERROR: 'GET_TRAILER_ERROR'
+};
+
+export default actionTypes;

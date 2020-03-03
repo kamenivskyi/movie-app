@@ -15,12 +15,14 @@ import BtnShowVideo from '../../layout/Video/BtnShowVideo';
 
 import { Button } from '../../proxy/Button';
 
+import Spinner from '../../common/Spinner';
+
 import { onGetTypeAndId } from '../../../utils/helpers';
 import config from '../../../utils/config';
 
 import reserveBg from '../../../assets/images/reserve-bg.jpg';
 
-const TvView = ({ tv, cast, video, type }) => {
+const TvView = ({ tv, cast, video, type, loading }) => {
   const { currentUser, addToBookmarks } = useContext(FirebaseContext);
 
   const {
@@ -52,6 +54,8 @@ const TvView = ({ tv, cast, video, type }) => {
   });
 
   const handleGetTypeAndId = onGetTypeAndId(_createObj, addToBookmarks);
+
+  if (loading) return <Spinner />;
 
   return (
     <section>

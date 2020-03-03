@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { getTrendingList } from '../../../redux/trending/trendingActions';
+import { getTrendingList } from '../../../redux/trendingList/trendingListActions';
 
 import MediaItems from '../../layout/MediaItems';
 import MediaTabs from '../../layout/MediaTabs';
@@ -10,8 +10,6 @@ import PaginationWrapper from '../../layout/PaginationWrapper';
 import Spinner from '../../common/Spinner';
 
 const Trending = ({ getTrendingList, items, loading }) => {
-  console.log(items);
-
   const [currentType, setCurrentType] = useState('movie');
   const [currentPeriod, setCurrentPeriod] = useState('week');
   const [currentPage, setCurrentPage] = useState(1);
@@ -73,9 +71,9 @@ const Trending = ({ getTrendingList, items, loading }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  items: state.trending.trendingList,
-  loading: state.trending.loading
+const mapStateToProps = ({ trendingList: { items, loading } }) => ({
+  items,
+  loading
 });
 
 export default connect(mapStateToProps, { getTrendingList })(Trending);

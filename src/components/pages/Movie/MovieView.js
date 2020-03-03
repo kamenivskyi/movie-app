@@ -1,7 +1,5 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-
-import withSpinner from '../../hoc-helpers/withSpinner';
 
 import FirebaseContext from '../../../context/firebase/firebaseContext';
 
@@ -19,6 +17,7 @@ import { onGetTypeAndId } from '../../../utils/helpers';
 import config from '../../../utils/config';
 
 import reserveBg from '../../../assets/images/reserve-bg.jpg';
+import Spinner from '../../common/Spinner';
 
 const MovieView = ({ movie, cast, video, id, type, loading }) => {
   const { currentUser, addToBookmarks } = useContext(FirebaseContext);
@@ -53,6 +52,8 @@ const MovieView = ({ movie, cast, video, id, type, loading }) => {
     poster_path,
     vote_average
   });
+
+  if (loading) return <Spinner />;
 
   const handleGetTypeAndId = onGetTypeAndId(_createObj, addToBookmarks);
 
