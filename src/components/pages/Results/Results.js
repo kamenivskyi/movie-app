@@ -6,14 +6,18 @@ import PaginationWrapper from '../../layout/PaginationWrapper';
 
 import { searchItems } from '../../../redux/search/searchActions';
 
-const Results = ({ searchItems, match, data }) => {
-  const [page, setPage] = useState(1);
+const Results = ({ searchItems, match, history, data }) => {
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const { query } = match.params;
+  const { query, page } = match.params;
 
   useEffect(() => {
-    setPage(1);
+    setCurrentPage(page);
     searchItems(query, page);
+
+    return () => {
+      console.log('unmounted');
+    };
   }, [query]);
 
   if (!data) return null;
@@ -21,14 +25,17 @@ const Results = ({ searchItems, match, data }) => {
   const { results, total_results, total_pages } = data;
 
   const handlePageChange = activePage => {
-    setPage(activePage);
+    setCurrentPage(activePage);
+
+    history.push(`/results/${query}/${activePage}`);
+
     searchItems(query, activePage);
   };
 
-  if (total_results > 0) {
-    return (
-      <div className='container-fluid'>
-        <h2 className='section-title'>Results:</h2>
+  return (
+    <div className='container-fluid'>
+      <h2 className='section-title'>Results:</h2>
+      {total_results > 0 ? (
         <div className='row'>
           <MediaItems items={results} type='movie' />
 
@@ -39,9 +46,11 @@ const Results = ({ searchItems, match, data }) => {
             onChange={handlePageChange}
           />
         </div>
-      </div>
-    );
-  } else return null;
+      ) : (
+        <p className='text-center'>No {query} found on request</p>
+      )}
+    </div>
+  );
 };
 
 const mapStateToProps = state => ({

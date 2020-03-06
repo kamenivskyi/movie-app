@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretUp } from '@fortawesome/free-solid-svg-icons';
 
@@ -6,6 +6,13 @@ import './ButtonToTop.css';
 
 const ButtonToTop = () => {
   const btnRef = useRef();
+
+  useEffect(() => {
+    window.addEventListener('scroll', toggleButton);
+    return () => {
+      window.removeEventListener('scroll', toggleButton);
+    };
+  }, []);
 
   const goToTop = () => {
     const top = document.querySelector('#root');
@@ -17,16 +24,14 @@ const ButtonToTop = () => {
   };
 
   function toggleButton() {
-    const button = btnRef.current.classList;
+    const button = btnRef.current;
 
     if (this.scrollY > 800) {
-      button.add('show');
+      button.classList.add('show');
     } else {
-      button.remove('show');
+      button.classList.remove('show');
     }
   }
-
-  window.addEventListener('scroll', toggleButton);
 
   return (
     <button

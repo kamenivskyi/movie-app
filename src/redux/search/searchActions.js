@@ -11,15 +11,15 @@ export const searchItems = (value, page) => async dispatch => {
     const data = await search(value, page);
 
     dispatch({
-      type: Types.SEARCH_ITEMS,
+      type: Types.GET_SEARCH_ITEMS,
       payload: data
     });
   } catch (error) {
     dispatch({
-      type: Types.SEARCH_ERROR,
+      type: Types.GET_SEARCH_ERROR,
       payload: error.response.statusText
     });
   }
 };
 
-export const setLoading = () => ({ type: Types.SET_LOADING });
+export const setLoading = () => ({ type: Types.GET_BY_SEARCH_LOADING });

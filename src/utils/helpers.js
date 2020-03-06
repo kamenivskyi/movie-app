@@ -7,7 +7,7 @@ export const calcTime = time => {
 
 // Convert a number to $ format
 export const convertMoney = money => {
-  var formatter = new Intl.NumberFormat('en-US', {
+  const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
     minimumFractionDigits: 0
@@ -24,5 +24,6 @@ export const onGetTypeAndId = (createObj, addToBookmarks) => async e => {
   const id = e.target.getAttribute('data-id');
   const type = e.target.getAttribute('data-type');
   const obj = createObj(id, type);
+
   await addToBookmarks(obj, type);
 };

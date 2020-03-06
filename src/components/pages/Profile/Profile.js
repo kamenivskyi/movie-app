@@ -7,10 +7,10 @@ import FirebaseContext from '../../../context/firebase/firebaseContext';
 
 import UpdateProfileModal from '../../layout/Modals/UpdateProfileModal';
 
-import { Button } from '../../proxy/Button';
+import { Button } from '../../layout/Button';
 
 const Profile = () => {
-  const { isLoggedIn, currentUser } = useContext(FirebaseContext);
+  const { currentUser } = useContext(FirebaseContext);
 
   if (currentUser) {
     return (

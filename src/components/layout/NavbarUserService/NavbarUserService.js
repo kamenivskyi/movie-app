@@ -11,7 +11,7 @@ import {
 
 import FirebaseContext from '../../../context/firebase/firebaseContext';
 
-import { Button } from '../../proxy/Button';
+import { Button } from '../Button';
 import { auth } from '../../../firebase/firebase';
 
 const NavbarUserService = () => {

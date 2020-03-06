@@ -30,7 +30,7 @@ const Routes = () => {
       <Route exact path='/trending/tv' component={Trending} /> */}
 
       <Route exact path='/about' component={About} />
-      <Route exact path='/results/:query' component={Results} />
+      <Route exact path='/results/:query/:page' component={Results} />
       <Route exact path='/profile' component={Profile} />
       <Route exact path='/profile/bookmarks' component={UserBookmarks} />
       <Route exact path='/login' component={Login} />

@@ -5,7 +5,7 @@ import PaginationWrapper from '../../layout/PaginationWrapper';
 import ReleaseYear from './ReleaseYear';
 import SortBy from './SortBy';
 import IncludeAdult from './IncludeAdult';
-import { Button } from '../../proxy/Button';
+import { Button } from '../Button';
 
 import { getMoviesByFilters } from '../../../redux/moviesByFilters/moviesByFIltersActions';
 

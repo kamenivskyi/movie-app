@@ -12,8 +12,7 @@ import Studios from '../../layout/Studios';
 import Companies from '../../layout/Companies';
 import Networks from '../../layout/Networks/Networks';
 import BtnShowVideo from '../../layout/Video/BtnShowVideo';
-
-import { Button } from '../../proxy/Button';
+import { Button } from '../../layout/Button';
 
 import Spinner from '../../common/Spinner';
 

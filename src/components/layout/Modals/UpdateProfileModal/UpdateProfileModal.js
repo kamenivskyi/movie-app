@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import FirebaseContext from '../../../../context/firebase/firebaseContext';
-import { Button } from '../../../proxy/Button';
+import { Button } from '../../Button';
 // import { updateUserName } from '../../../../firebase/firebase';
 
 const UpdateProfileModal = ({ history }) => {

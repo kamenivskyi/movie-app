@@ -1,22 +1,17 @@
-import React, { useContext, useState } from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-
-// import ResultsContext from '../../../context/results/resultsContext';
-
-// import { searchItems } from '../../../redux/search/searchActions';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import './Search.css';
 
-const Search = ({ history }) => {
-  // const { searchMovies } = useContext(ResultsContext);
+const Search = () => {
   const [value, setValue] = useState('');
+  const history = useHistory();
 
   const onSubmit = e => {
     e.preventDefault();
     if (value.trim()) {
-      // searchItems(value, 1);
-      history.push(`/results/${value}`);
+      history.push(`/results/${value}/1`);
+      setValue('');
     }
   };
 
@@ -38,4 +33,5 @@ const Search = ({ history }) => {
     </form>
   );
 };
-export default withRouter(Search);
+
+export default Search;

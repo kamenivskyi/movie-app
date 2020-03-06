@@ -6,7 +6,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import FirebaseContext from '../../../context/firebase/firebaseContext';
 
-import { Button } from '../../proxy/Button';
+import { Button } from '../Button';
 
 const DeleteBookmarkButton = ({ item, type, history }) => {
   const { deleteBookmark } = useContext(FirebaseContext);
