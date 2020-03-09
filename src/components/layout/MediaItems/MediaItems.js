@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import MediaItem from '../MediaItem';
 
-const MediaItems = ({ items, type }) => {
+const MediaItems = ({ items, type = 'movie' }) => {
   if (items && type) {
     return (
       <>

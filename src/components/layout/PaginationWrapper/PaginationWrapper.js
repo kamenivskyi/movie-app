@@ -11,6 +11,8 @@ const PaginationWrapper = ({
   totalPages,
   onChange
 }) => {
+  console.log('currentPage: ', currentPage);
+
   return totalPages > 1 ? (
     <div className='pagination-container'>
       <Pagination
@@ -23,7 +25,6 @@ const PaginationWrapper = ({
         itemClass={'page-item'}
         linkClass={'page-link'}
         activeClass={'active'}
-        activeLinkClass={'active-link'}
       />
     </div>
   ) : null;

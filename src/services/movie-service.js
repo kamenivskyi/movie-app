@@ -79,7 +79,7 @@ class MovieService {
 
   search = async (name, activePage = 1) => {
     const res = await this.getResource(
-      `/search/movie?api_key=${this._apiKey}&language=en-US&query=${name}&include_adult=true&page=${activePage}`
+      `/search/movie?api_key=${this._apiKey}&language=en-US&query=${name}&include_adult=false&page=${activePage}`
     );
     return res;
   };

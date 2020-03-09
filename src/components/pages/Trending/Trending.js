@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
 import { getTrendingList } from '../../../redux/trendingList/trendingListActions';
 
@@ -9,16 +8,37 @@ import MediaTabs from '../../layout/MediaTabs';
 import PaginationWrapper from '../../layout/PaginationWrapper';
 import Spinner from '../../common/Spinner';
 
-const Trending = ({ getTrendingList, items, loading }) => {
+const Trending = ({ getTrendingList, items, loading, match, history }) => {
   const [currentType, setCurrentType] = useState('movie');
   const [currentPeriod, setCurrentPeriod] = useState('week');
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { results, total_results, total_pages } = items;
+  const { results, total_results, total_pages, page } = items;
 
   useEffect(() => {
-    getTrendingList(currentType, currentPeriod);
-  }, [currentType, currentPeriod]);
+    getTrendingList(currentType, currentPeriod, currentPage);
+  }, [currentType, currentPeriod, currentPage]);
+
+  useEffect(() => {
+    getTypeFromSStorage('trendingType');
+    getPeriodFromSStorage('trendingPeriod');
+
+    setCurrentPage(match.params.page);
+  }, []);
+
+  const getTypeFromSStorage = key => {
+    const type = sessionStorage.getItem(key);
+
+    setCurrentType(type);
+  };
+
+  const getPeriodFromSStorage = key => {
+    const periodFromSStorage = sessionStorage.getItem(key);
+
+    setCurrentPeriod(periodFromSStorage);
+  };
+
+  const setToSStorage = (value, key) => sessionStorage.setItem(value, key);
 
   if (!items.results) return null;
 
@@ -30,17 +50,16 @@ const Trending = ({ getTrendingList, items, loading }) => {
 
     if (type) {
       setCurrentType(type);
-      getTrendingList(currentType, currentPeriod, currentPage);
-    } else {
+      setToSStorage('trendingType', type);
+    } else if (period) {
       setCurrentPeriod(period);
-      getTrendingList(currentType, currentPeriod, currentPage);
+      setToSStorage('trendingPeriod', period);
     }
   };
 
   const handlePageChange = activePage => {
-    console.log(activePage);
     setCurrentPage(activePage);
-    getTrendingList(currentType, currentPeriod, activePage);
+    history.push(`/trending/${activePage}`);
   };
 
   return (
@@ -59,7 +78,7 @@ const Trending = ({ getTrendingList, items, loading }) => {
             <MediaItems items={results} type={currentType} />
 
             <PaginationWrapper
-              currentPage={currentPage}
+              currentPage={Number(page)}
               totalItems={total_results}
               totalPages={total_pages}
               onChange={handlePageChange}

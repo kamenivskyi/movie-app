@@ -3,21 +3,20 @@ import { connect } from 'react-redux';
 
 import MediaItems from '../../layout/MediaItems';
 import PaginationWrapper from '../../layout/PaginationWrapper';
+import Spinner from '../../common/Spinner';
 
 import { searchItems } from '../../../redux/search/searchActions';
 
-const Results = ({ searchItems, match, history, data }) => {
+const Results = ({ searchItems, match, history, data, loading }) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentQuery, setCurrentQuery] = useState('');
 
   const { query, page } = match.params;
 
   useEffect(() => {
+    console.log('fired');
     setCurrentPage(page);
     searchItems(query, page);
-
-    return () => {
-      console.log('unmounted');
-    };
   }, [query]);
 
   if (!data) return null;
@@ -32,6 +31,10 @@ const Results = ({ searchItems, match, history, data }) => {
     searchItems(query, activePage);
   };
 
+  if (loading) {
+    return <Spinner />;
+  }
+
   return (
     <div className='container-fluid'>
       <h2 className='section-title'>Results:</h2>
@@ -40,7 +43,7 @@ const Results = ({ searchItems, match, history, data }) => {
           <MediaItems items={results} type='movie' />
 
           <PaginationWrapper
-            currentPage={page}
+            currentPage={currentPage}
             totalItems={total_results}
             totalPages={total_pages}
             onChange={handlePageChange}

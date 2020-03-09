@@ -24,7 +24,7 @@ const Routes = () => {
       <Route exact path='/genre/:id' component={GenreMovies} />
       <Route exact path='/person/:id' component={Person} />
       <Route exact path='/people' component={People} />
-      <Route exact path='/trending' component={Trending} />
+      <Route exact path='/trending/:page?' component={Trending} />
 
       {/* <Route exact path='/trending/movie' component={Trending} />
       <Route exact path='/trending/tv' component={Trending} /> */}

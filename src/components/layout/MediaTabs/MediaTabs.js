@@ -1,40 +1,24 @@
 import React from 'react';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 const MediaTabs = ({ onClick, type, period, items, periodItems }) => {
-  const getClassByType = value => {
-    return `nav-link ${type === value ? 'active' : ''}`;
-  };
+  // const getClassByType = value => `nav-link ${type === value && 'active'}`;
 
-  const getClassByPeriod = value => {
-    return `nav-link ${period === value ? 'active' : ''}`;
-  };
-
-  // const Tab = () => {
-  //   return (
-  //     <li className='nav-item' key={type}>
-  //       <a
-  //         className={getClassByType(type)}
-  //         href='#'
-  //         data-type={type}
-  //         onClick={onClick}
-  //       >
-  //         {label}
-  //       </a>
-  //     </li>
-  //   );
-  // };
+  // const getClassByPeriod = value => `nav-link ${period === value && 'active'}`;
 
   return (
     <div className='row my-3' style={{ margin: '0' }}>
       <ul className='col-6 nav nav-pills'>
-        {items.map(({ label, type }) => {
+        {items.map(({ label, tabSlug }) => {
           return (
-            <li className='nav-item' key={type}>
+            <li className='nav-item' key={tabSlug}>
               <a
-                className={getClassByType(type)}
+                className={classNames('nav-link', {
+                  active: tabSlug === type
+                })}
+                data-type={tabSlug}
                 href='#'
-                data-type={type}
                 onClick={onClick}
               >
                 {label}
@@ -43,14 +27,15 @@ const MediaTabs = ({ onClick, type, period, items, periodItems }) => {
           );
         })}
       </ul>
+
       <ul className='col-6 nav nav-pills'>
-        {periodItems.map(({ label, period }) => {
+        {periodItems.map(({ label, tabPeriod }) => {
           return (
-            <li className='nav-item' key={period}>
+            <li className='nav-item' key={tabPeriod}>
               <a
-                className={getClassByPeriod(period)}
+                className={`nav-link ${tabPeriod === period && 'active'}`}
+                data-period={tabPeriod}
                 href='#'
-                data-period={period}
                 onClick={onClick}
               >
                 {label}
@@ -65,12 +50,12 @@ const MediaTabs = ({ onClick, type, period, items, periodItems }) => {
 
 MediaTabs.defaultProps = {
   items: [
-    { label: 'Movies', type: 'movie' },
-    { label: 'Tv', type: 'tv' }
+    { label: 'Movies', tabSlug: 'movie' },
+    { label: 'Tv', tabSlug: 'tv' }
   ],
   periodItems: [
-    { label: 'Week', period: 'week' },
-    { label: 'Day', period: 'day' }
+    { label: 'Week', tabPeriod: 'week' },
+    { label: 'Day', tabPeriod: 'day' }
   ]
 };
 
