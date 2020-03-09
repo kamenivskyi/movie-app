@@ -10,25 +10,20 @@ import { searchItems } from '../../../redux/search/searchActions';
 const Results = ({ searchItems, match, history, data, loading }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentQuery, setCurrentQuery] = useState('');
-
   const { query, page } = match.params;
+  const { results, total_results, total_pages } = data;
 
   useEffect(() => {
-    console.log('fired');
     setCurrentPage(page);
-    searchItems(query, page);
-  }, [query]);
+    searchItems(query, currentPage);
+  }, [query, currentPage]);
 
   if (!data) return null;
-
-  const { results, total_results, total_pages } = data;
 
   const handlePageChange = activePage => {
     setCurrentPage(activePage);
 
     history.push(`/results/${query}/${activePage}`);
-
-    searchItems(query, activePage);
   };
 
   if (loading) {
@@ -43,7 +38,7 @@ const Results = ({ searchItems, match, history, data, loading }) => {
           <MediaItems items={results} type='movie' />
 
           <PaginationWrapper
-            currentPage={currentPage}
+            currentPage={Number(currentPage)}
             totalItems={total_results}
             totalPages={total_pages}
             onChange={handlePageChange}
