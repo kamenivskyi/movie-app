@@ -27,3 +27,15 @@ export const onGetTypeAndId = (createObj, addToBookmarks) => async e => {
 
   await addToBookmarks(obj, type);
 };
+
+export const createUniqueItem = (data, type) => {
+  const { id, poster_path, title, name, vote_average } = data;
+
+  const standardObj = { id, poster_path, vote_average, type };
+
+  if (type === 'tv') {
+    return { ...standardObj, name };
+  } else {
+    return { ...standardObj, title };
+  }
+};

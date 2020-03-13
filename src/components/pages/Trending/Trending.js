@@ -27,15 +27,17 @@ const Trending = ({ getTrendingList, items, loading, match, history }) => {
   }, []);
 
   const getTypeFromSStorage = key => {
-    const type = sessionStorage.getItem(key);
-
-    setCurrentType(type);
+    const typeFromSStorage = sessionStorage.getItem(key);
+    if (typeFromSStorage) {
+      setCurrentType(typeFromSStorage);
+    }
   };
 
   const getPeriodFromSStorage = key => {
     const periodFromSStorage = sessionStorage.getItem(key);
-
-    setCurrentPeriod(periodFromSStorage);
+    if (periodFromSStorage) {
+      setCurrentPeriod(periodFromSStorage);
+    }
   };
 
   const setToSStorage = (value, key) => sessionStorage.setItem(value, key);
@@ -63,7 +65,7 @@ const Trending = ({ getTrendingList, items, loading, match, history }) => {
   };
 
   return (
-    <div className='container-fluid'>
+    <div className='container'>
       {loading ? (
         <Spinner />
       ) : (
@@ -74,16 +76,14 @@ const Trending = ({ getTrendingList, items, loading, match, history }) => {
             period={currentPeriod}
           />
 
-          <div className='row'>
-            <MediaItems items={results} type={currentType} />
+          <MediaItems items={results} type={currentType} simpleRow />
 
-            <PaginationWrapper
-              currentPage={Number(page)}
-              totalItems={total_results}
-              totalPages={total_pages}
-              onChange={handlePageChange}
-            />
-          </div>
+          <PaginationWrapper
+            currentPage={Number(page)}
+            totalItems={total_results}
+            totalPages={total_pages}
+            onChange={handlePageChange}
+          />
         </>
       )}
     </div>

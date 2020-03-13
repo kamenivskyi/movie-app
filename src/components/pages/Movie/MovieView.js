@@ -1,18 +1,17 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import FirebaseContext from '../../../context/firebase/firebaseContext';
-
-import MediaDescription from '../../layout/MediaDescription';
-import Finances from '../../layout/Finances';
-import Cast from '../../layout/Cast';
-import Studios from '../../layout/Studios';
+import MediaDescription from '../../layout/MediaDescription'; // Component
+import Finances from '../../layout/Finances'; // Component
+import Cast from '../../layout/Cast'; // Component
+import Studios from '../../layout/Studios'; // Component
 import Companies from '../../layout/Companies';
 import Networks from '../../layout/Networks/Networks';
 import MediaContainer from '../../common/MediaContainer';
 import BtnShowVideo from '../../layout/Video/BtnShowVideo';
 import { Button } from '../../layout/Button';
 
+import FirebaseContext from '../../../context/firebase/firebaseContext';
 import { onGetTypeAndId } from '../../../utils/helpers';
 import config from '../../../utils/config';
 
@@ -21,8 +20,6 @@ import Spinner from '../../common/Spinner';
 
 const MovieView = ({ movie, cast, video, id, type, loading }) => {
   const { currentUser, addToBookmarks } = useContext(FirebaseContext);
-
-  console.log(loading);
 
   const {
     title,
@@ -38,10 +35,6 @@ const MovieView = ({ movie, cast, video, id, type, loading }) => {
     production_companies,
     networks
   } = movie;
-
-  // useEffect(() => {
-  //   console.log('Movie view use effect', movie);
-  // });
 
   const { original, medium } = config.API_IMAGE;
 

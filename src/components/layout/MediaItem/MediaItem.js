@@ -2,12 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
+import MediaItemGrid from '../MediaItemGrid';
 import CardWrapper from '../CardWrapper';
 import DeleteBookmarkButton from '../DeleteBookmarkButton';
 
 import config from '../../../utils/config';
 
 import NotFoundImage from '../../../assets/images/not-found.jpg';
+
+import { createUniqueItem } from '../../../utils/helpers';
 
 import './MediaItem.css';
 
@@ -16,7 +19,7 @@ const MediaItem = ({ data, type }) => {
 
   const image = getItemImage(poster_path);
 
-  const uniqueData = getUniqueData(data, type);
+  const uniqueItemData = createUniqueItem(data, type);
 
   const link = `/${type}/${id}`;
 
@@ -26,12 +29,16 @@ const MediaItem = ({ data, type }) => {
     'bg-success': vote_average >= 7
   });
 
+  if (type === 'person') {
+    return <MediaItemGrid data={data} />;
+  }
+
   return (
     <CardWrapper>
       <img src={image} alt={title || name} />
       <span className={badgeIconClass}>{vote_average}</span>
       <div className='card-item-content'>
-        <DeleteBookmarkButton item={uniqueData} type={type} />
+        <DeleteBookmarkButton item={uniqueItemData} type={type} />
         <Link to={link} className='card-item-link'>
           {title || name}
         </Link>
@@ -42,18 +49,6 @@ const MediaItem = ({ data, type }) => {
 
 const getItemImage = path => {
   return path ? config.API_IMAGE.large + path : NotFoundImage;
-};
-
-const getUniqueData = (data, type) => {
-  const { id, poster_path, title, name, vote_average } = data;
-
-  const standartObj = { id, poster_path, vote_average, type };
-
-  if (type === 'tv') {
-    return { ...standartObj, name };
-  } else {
-    return { ...standartObj, title };
-  }
 };
 
 export default MediaItem;

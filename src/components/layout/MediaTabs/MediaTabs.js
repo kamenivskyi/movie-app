@@ -3,10 +3,6 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 const MediaTabs = ({ onClick, type, period, items, periodItems }) => {
-  // const getClassByType = value => `nav-link ${type === value && 'active'}`;
-
-  // const getClassByPeriod = value => `nav-link ${period === value && 'active'}`;
-
   return (
     <div className='row my-3' style={{ margin: '0' }}>
       <ul className='col-6 nav nav-pills'>
@@ -28,7 +24,7 @@ const MediaTabs = ({ onClick, type, period, items, periodItems }) => {
         })}
       </ul>
 
-      <ul className='col-6 nav nav-pills'>
+      <ul className='col-6 nav nav-pills justify-content-center'>
         {periodItems.map(({ label, tabPeriod }) => {
           return (
             <li className='nav-item' key={tabPeriod}>
@@ -51,7 +47,8 @@ const MediaTabs = ({ onClick, type, period, items, periodItems }) => {
 MediaTabs.defaultProps = {
   items: [
     { label: 'Movies', tabSlug: 'movie' },
-    { label: 'Tv', tabSlug: 'tv' }
+    { label: 'Tvs', tabSlug: 'tv' },
+    { label: 'People', tabSlug: 'person' }
   ],
   periodItems: [
     { label: 'Week', tabPeriod: 'week' },
