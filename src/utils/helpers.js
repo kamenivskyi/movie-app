@@ -28,6 +28,7 @@ export const onGetTypeAndId = (createObj, addToBookmarks) => async e => {
   await addToBookmarks(obj, type);
 };
 
+// creating item object for deleting from bookmarks
 export const createUniqueItem = (data, type) => {
   const { id, poster_path, title, name, vote_average } = data;
 

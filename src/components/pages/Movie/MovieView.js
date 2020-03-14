@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import MediaDescription from '../../layout/MediaDescription'; // Component
-import Finances from '../../layout/Finances'; // Component
-import Cast from '../../layout/Cast'; // Component
-import Studios from '../../layout/Studios'; // Component
+import MediaDescription from '../../layout/MediaDescription';
+import Finances from '../../layout/Finances';
+import Cast from '../../layout/Cast';
+import Studios from '../../layout/Studios';
 import Companies from '../../layout/Companies';
 import Networks from '../../layout/Networks/Networks';
 import MediaContainer from '../../common/MediaContainer';

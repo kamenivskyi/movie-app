@@ -24,16 +24,18 @@ const NavbarToggleButton = () => (
 const Navbar = () => {
   return (
     <header className='main-navbar navbar navbar-expand-lg navbar-dark bg-dark'>
-      <NavLink className='navbar-brand' to='/'>
-        <i className='fas fa-film'></i> Movie Finder
-      </NavLink>
-      <NavbarToggleButton />
-      <div className='collapse navbar-collapse' id='navbarCollapse'>
-        <NavbarNav />
-        <Search />
-        <ul className='navbar-nav authentication navbar-item'>
-          <NavbarUserService />
-        </ul>
+      <div className='container'>
+        <NavLink className='navbar-brand' to='/'>
+          <i className='fas fa-film'></i> Movie Finder
+        </NavLink>
+        <NavbarToggleButton />
+        <div className='collapse navbar-collapse' id='navbarCollapse'>
+          <NavbarNav />
+          <Search />
+          <ul className='navbar-nav authentication navbar-item'>
+            <NavbarUserService />
+          </ul>
+        </div>
       </div>
     </header>
   );

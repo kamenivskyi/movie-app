@@ -19,7 +19,7 @@ const Person = ({
   useEffect(() => {
     getPerson(id);
     getPersonPhotos(id);
-  }, []);
+  }, [id]);
 
   return <PersonView general={person} photos={photos} loading={loading} />;
 };

@@ -35,18 +35,22 @@ const UserBookmarks = () => {
   if (currentUser) {
     return (
       <div className='jumbotron'>
-        <h1 className='section-title'>Bookmarks:</h1>
-        <InputSearch term={term} onChange={handleChange} />
-        <hr className='my-4' />
-        <div className='row'>
-          {loading && <Spinner />}
+        <div className='container'>
+          <h1 className='section-title mb-3'>Bookmarks</h1>
+          <InputSearch term={term} onChange={handleChange} />
+          <hr className='my-4' />
+          <div className='row'>
+            {loading && <Spinner />}
 
-          {tv && tv.length === 0 && movie && movie.length === 0
-            ? 'Your bookmarks list is empty'
-            : ''}
+            {tv && tv.length === 0 && movie && movie.length === 0 ? (
+              <p className='text-center w-100'>Your bookmarks list is empty</p>
+            ) : (
+              ''
+            )}
 
-          {visibleMovies && <MediaItems items={visibleMovies} type='movie' />}
-          {visibleTvs && <MediaItems items={visibleTvs} type='tv' />}
+            {visibleMovies && <MediaItems items={visibleMovies} type='movie' />}
+            {visibleTvs && <MediaItems items={visibleTvs} type='tv' />}
+          </div>
         </div>
       </div>
     );
@@ -55,14 +59,13 @@ const UserBookmarks = () => {
   }
 };
 
-const InputSearch = ({ onChange }) => {
-  return (
-    <input
-      type='search'
-      className='form-control'
-      placeholder='search bookmark'
-      onChange={onChange}
-    />
-  );
-};
+const InputSearch = ({ onChange }) => (
+  <input
+    type='search'
+    className='form-control'
+    placeholder='search bookmark'
+    onChange={onChange}
+  />
+);
+
 export default UserBookmarks;

@@ -21,8 +21,6 @@ const Movie = ({
 }) => {
   const { id } = match.params;
 
-  console.log(loading);
-
   useEffect(() => {
     getTrailer(id, 'movie');
     getMovieData(id);

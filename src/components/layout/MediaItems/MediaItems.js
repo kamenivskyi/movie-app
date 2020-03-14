@@ -7,32 +7,21 @@ const MediaItems = ({ items, type = 'movie', simpleRow }) => {
   console.log(items);
   console.log(type);
 
+  const renderMediaItems =
+    items &&
+    items.map(data => (
+      <MediaItem data={data} key={`${type}${data.id}`} type={type} />
+    ));
+
   if (items && type === 'person') {
-    return (
-      <section className='grid-container'>
-        {items.map(data => (
-          <MediaItem data={data} key={`${type}${data.id}`} type={type} />
-        ))}
-      </section>
-    );
+    return <section className='grid-container'>{renderMediaItems}</section>;
   }
 
-  if ((items && type === 'tv') || (items && type === 'movie')) {
-    return simpleRow ? (
-      <section className='row'>
-        {items.map(data => (
-          <MediaItem data={data} key={`${type}${data.id}`} type={type} />
-        ))}
-      </section>
-    ) : (
-      <>
-        {items.map(data => (
-          <MediaItem data={data} key={`${type}${data.id}`} type={type} />
-        ))}
-      </>
-    );
-  }
-  return null;
+  return simpleRow ? (
+    <section className='row'>{renderMediaItems}</section>
+  ) : (
+    <>{renderMediaItems}</>
+  );
 };
 
 MediaItems.propTypes = {

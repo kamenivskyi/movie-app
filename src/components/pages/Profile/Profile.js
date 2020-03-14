@@ -15,19 +15,21 @@ const Profile = () => {
   if (currentUser) {
     return (
       <div className='jumbotron'>
-        <h1 className='section-title'>Email: {currentUser.email}</h1>
-        <p>Username: {currentUser.displayName}</p>
+        <div className='container'>
+          <h1 className='section-title'>Email: {currentUser.email}</h1>
+          <p>Username: {currentUser.displayName}</p>
 
-        <Button
-          className='btn btn-success'
-          data-toggle='modal'
-          data-target='#exampleModal'
-        >
-          <FontAwesomeIcon icon={faEdit} /> Update profile info
-        </Button>
+          <Button
+            className='btn btn-success'
+            data-toggle='modal'
+            data-target='#exampleModal'
+          >
+            <FontAwesomeIcon icon={faEdit} /> Update profile info
+          </Button>
 
-        <hr className='my-4' />
-        <UpdateProfileModal />
+          <hr className='my-4' />
+          <UpdateProfileModal />
+        </div>
       </div>
     );
   } else {

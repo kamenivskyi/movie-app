@@ -31,18 +31,20 @@ const Results = ({ searchItems, match, history, data, loading }) => {
   }
 
   return (
-    <div className='container-fluid'>
-      <h2 className='section-title'>Results:</h2>
+    <div className='container-fluid pt-3'>
+      <h2 className='section-title'>Results</h2>
       {total_results > 0 ? (
-        <div className='row'>
-          <MediaItems items={results} type='movie' />
+        <div className='container'>
+          <div className='row'>
+            <MediaItems items={results} type='movie' />
 
-          <PaginationWrapper
-            currentPage={Number(currentPage)}
-            totalItems={total_results}
-            totalPages={total_pages}
-            onChange={handlePageChange}
-          />
+            <PaginationWrapper
+              currentPage={Number(currentPage)}
+              totalItems={total_results}
+              totalPages={total_pages}
+              onChange={handlePageChange}
+            />
+          </div>
         </div>
       ) : (
         <p className='text-center'>No {query} found on request</p>
