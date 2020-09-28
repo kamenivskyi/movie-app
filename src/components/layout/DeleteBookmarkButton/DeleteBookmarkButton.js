@@ -4,14 +4,24 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-import FirebaseContext from '../../../context/firebase/firebaseContext';
+import firebase, { auth, db } from '../../../firebase/firebase';
 
 import { Button } from '../Button';
 
 const DeleteBookmarkButton = ({ item, type, history }) => {
-  const { deleteBookmark } = useContext(FirebaseContext);
-
   const isProfilePage = history.location.pathname === '/profile/bookmarks';
+
+  const deleteBookmark = (bookmark, type) => {
+    const user = auth.currentUser;
+
+    if (user) {
+      db.collection('userBookmarks')
+        .doc(user.uid)
+        .update({
+          [type]: firebase.firestore.FieldValue.arrayRemove(bookmark),
+        });
+    }
+  };
 
   const onDelete = () => deleteBookmark(item, type);
 
@@ -23,7 +33,7 @@ const DeleteBookmarkButton = ({ item, type, history }) => {
         title='delete bookmark'
         style={{
           position: 'absolute',
-          right: '0'
+          right: '0',
         }}
       >
         <FontAwesomeIcon icon={faTrash} />
@@ -34,7 +44,7 @@ const DeleteBookmarkButton = ({ item, type, history }) => {
 
 DeleteBookmarkButton.propTypes = {
   item: PropTypes.object,
-  type: PropTypes.string
+  type: PropTypes.string,
 };
 
 export default withRouter(DeleteBookmarkButton);

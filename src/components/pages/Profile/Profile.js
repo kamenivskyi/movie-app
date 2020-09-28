@@ -1,23 +1,22 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
-import FirebaseContext from '../../../context/firebase/firebaseContext';
+import { auth } from '../../../firebase/firebase';
 
 import UpdateProfileModal from '../../layout/Modals/UpdateProfileModal';
 
 import { Button } from '../../layout/Button';
 
-const Profile = () => {
-  const { currentUser } = useContext(FirebaseContext);
-
-  if (currentUser) {
+const Profile = ({ userData }) => {
+  if (auth.currentUser) {
     return (
       <div className='jumbotron'>
         <div className='container'>
-          <h1 className='section-title'>Email: {currentUser.email}</h1>
-          <p>Username: {currentUser.displayName}</p>
+          <h1 className='section-title'>Email: {userData.email}</h1>
+          <p>Username: {userData.nickname}</p>
 
           <Button
             className='btn btn-success'
@@ -36,4 +35,8 @@ const Profile = () => {
     return <Redirect to='/' />;
   }
 };
-export default Profile;
+
+const mapStateToProps = (state) => ({
+  userData: state.firebase.userData,
+});
+export default connect(mapStateToProps)(Profile);

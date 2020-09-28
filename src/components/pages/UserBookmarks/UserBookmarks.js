@@ -1,16 +1,14 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import FirebaseContext from '../../../context/firebase/firebaseContext';
+import { getBookmarks } from '../../../redux/firebase/firebaseActions';
+import { auth } from '../../../firebase/firebase';
 
 import MediaItems from '../../layout/MediaItems';
 import Spinner from '../../common/Spinner';
 
-const UserBookmarks = () => {
-  const { getBookmarks, currentUser, bookmarks, loading } = useContext(
-    FirebaseContext
-  );
-
+const UserBookmarks = ({ bookmarks, getBookmarks, loading }) => {
   const [term, setTerm] = useState('');
 
   const { tv, movie } = bookmarks;
@@ -20,7 +18,7 @@ const UserBookmarks = () => {
   }, []);
 
   const search = (array, term, type) => {
-    return array.filter(item =>
+    return array.filter((item) =>
       item[type].toLowerCase().includes(term.toLowerCase())
     );
   };
@@ -32,7 +30,13 @@ const UserBookmarks = () => {
     setTerm(value);
   };
 
-  if (currentUser) {
+  const ifArraysEmptyRenderDummy = () => {
+    if (tv && tv.length === 0 && movie && movie.length === 0) {
+      return <p className='text-center w-100'>Your bookmarks list is empty</p>;
+    }
+  };
+
+  if (auth.currentUser) {
     return (
       <div className='jumbotron'>
         <div className='container'>
@@ -42,11 +46,7 @@ const UserBookmarks = () => {
           <div className='row'>
             {loading && <Spinner />}
 
-            {tv && tv.length === 0 && movie && movie.length === 0 ? (
-              <p className='text-center w-100'>Your bookmarks list is empty</p>
-            ) : (
-              ''
-            )}
+            {ifArraysEmptyRenderDummy()}
 
             {visibleMovies && <MediaItems items={visibleMovies} type='movie' />}
             {visibleTvs && <MediaItems items={visibleTvs} type='tv' />}
@@ -63,9 +63,13 @@ const InputSearch = ({ onChange }) => (
   <input
     type='search'
     className='form-control'
-    placeholder='search bookmark'
+    placeholder='Type to search..'
     onChange={onChange}
   />
 );
 
-export default UserBookmarks;
+const mapStateToProps = (state) => ({
+  bookmarks: state.firebase.bookmarks,
+  loading: state.firebase.bookmarksLoading,
+});
+export default connect(mapStateToProps, { getBookmarks })(UserBookmarks);

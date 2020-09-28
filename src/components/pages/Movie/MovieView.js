@@ -1,5 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
+import firebase, { auth, db } from '../../../firebase/firebase';
+import { addToBookmarks } from '../../../redux/firebase/firebaseActions';
 
 import MediaDescription from '../../layout/MediaDescription';
 import Finances from '../../layout/Finances';
@@ -7,20 +11,25 @@ import Cast from '../../layout/Cast';
 import Studios from '../../layout/Studios';
 import Companies from '../../layout/Companies';
 import Networks from '../../layout/Networks/Networks';
-import MediaContainer from '../../common/MediaContainer';
 import BtnShowVideo from '../../layout/Video/BtnShowVideo';
 import { Button } from '../../layout/Button';
 
-import FirebaseContext from '../../../context/firebase/firebaseContext';
 import { onGetTypeAndId } from '../../../utils/helpers';
 import config from '../../../utils/config';
+import { mediaPropTypes } from '../../../utils/mediaViewPropTypes';
 
 import reserveBg from '../../../assets/images/reserve-bg.jpg';
 import Spinner from '../../common/Spinner';
 
-const MovieView = ({ movie, cast, video, id, type, loading }) => {
-  const { currentUser, addToBookmarks } = useContext(FirebaseContext);
-
+const MovieView = ({
+  movie,
+  cast,
+  video,
+  id,
+  type,
+  loading,
+  addToBookmarks,
+}) => {
   const {
     title,
     poster_path,
@@ -33,7 +42,7 @@ const MovieView = ({ movie, cast, video, id, type, loading }) => {
     runtime,
     vote_average,
     production_companies,
-    networks
+    networks,
   } = movie;
 
   const { original, medium } = config.API_IMAGE;
@@ -43,7 +52,7 @@ const MovieView = ({ movie, cast, video, id, type, loading }) => {
     title,
     type,
     poster_path,
-    vote_average
+    vote_average,
   });
 
   if (loading) return <Spinner />;
@@ -56,11 +65,11 @@ const MovieView = ({ movie, cast, video, id, type, loading }) => {
     <section className='movie-section'>
       <div className='movie' style={{ backgroundImage: `url(${image})` }}>
         {title && <h3 className='movie-title'>{title}</h3>}
-        <MediaContainer>
+        <div className='item-row'>
           <div className='movie-img-wrapp'>
             <img className='movie-img' src={medium + poster_path} alt={title} />
             {video && <BtnShowVideo url={video.key} />}
-            {currentUser && (
+            {auth.currentUser && (
               <Button
                 className='btn btn-primary mt-3'
                 onClick={handleGetTypeAndId}
@@ -78,7 +87,7 @@ const MovieView = ({ movie, cast, video, id, type, loading }) => {
             genres={genres}
             runtime={runtime}
           />
-        </MediaContainer>
+        </div>
       </div>
       <Studios
         postitionTop={<Companies data={production_companies} />}
@@ -93,21 +102,11 @@ const MovieView = ({ movie, cast, video, id, type, loading }) => {
 MovieView.propTypes = {
   movie: PropTypes.shape({
     title: PropTypes.string,
-    poster_path: PropTypes.string,
-    backdrop_path: PropTypes.string,
-    overview: PropTypes.string,
-    genres: PropTypes.array,
-    budget: PropTypes.number,
-    revenue: PropTypes.number,
-    release_date: PropTypes.string,
-    runtime: PropTypes.number,
-    vote_average: PropTypes.number,
-    production_companies: PropTypes.arrayOf(PropTypes.object),
-    networks: PropTypes.arrayOf(PropTypes.object)
+    ...mediaPropTypes,
   }),
   cast: PropTypes.arrayOf(PropTypes.object),
   id: PropTypes.string,
-  type: PropTypes.string
+  type: PropTypes.string,
 };
 
-export default MovieView;
+export default connect(null, { addToBookmarks })(MovieView);

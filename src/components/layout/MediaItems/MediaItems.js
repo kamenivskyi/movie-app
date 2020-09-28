@@ -5,11 +5,10 @@ import MediaItem from '../MediaItem';
 
 const MediaItems = ({ items, type = 'movie', simpleRow }) => {
   console.log(items);
-  console.log(type);
 
   const renderMediaItems =
     items &&
-    items.map(data => (
+    items.map((data) => (
       <MediaItem data={data} key={`${type}${data.id}`} type={type} />
     ));
 
@@ -26,6 +25,6 @@ const MediaItems = ({ items, type = 'movie', simpleRow }) => {
 
 MediaItems.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object),
-  type: PropTypes.string
+  type: PropTypes.string,
 };
 export default MediaItems;

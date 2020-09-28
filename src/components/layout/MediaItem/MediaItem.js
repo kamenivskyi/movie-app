@@ -8,9 +8,9 @@ import DeleteBookmarkButton from '../DeleteBookmarkButton';
 
 import config from '../../../utils/config';
 
-import NotFoundImage from '../../../assets/images/not-found.jpg';
-
 import { createUniqueItem } from '../../../utils/helpers';
+
+import NotFoundImage from '../../../assets/images/not-found.jpg';
 
 import './MediaItem.css';
 
@@ -26,7 +26,7 @@ const MediaItem = ({ data, type }) => {
   const badgeIconClass = classNames('card-item-badge', {
     'bg-warning': vote_average >= 5 && vote_average < 7,
     'bg-danger': vote_average < 5,
-    'bg-success': vote_average >= 7
+    'bg-success': vote_average >= 7,
   });
 
   if (type === 'person') {
@@ -47,7 +47,7 @@ const MediaItem = ({ data, type }) => {
   );
 };
 
-const getItemImage = path => {
+const getItemImage = (path) => {
   return path ? config.API_IMAGE.large + path : NotFoundImage;
 };
 

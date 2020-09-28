@@ -1,12 +1,14 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 
+import { auth, db } from '../../../../firebase/firebase';
+
 import FirebaseContext from '../../../../context/firebase/firebaseContext';
 import { Button } from '../../Button';
 // import { updateUserName } from '../../../../firebase/firebase';
 
 const UpdateProfileModal = ({ history }) => {
-  const { currentUser, updateUserProfile } = useContext(FirebaseContext);
+  // const { currentUser, updateUserProfile } = useContext(FirebaseContext);
 
   const [name, setName] = useState('');
 
@@ -20,16 +22,37 @@ const UpdateProfileModal = ({ history }) => {
   //   }
   // }, [currentUser.displayName]);
 
-  const onUpdateProfile = e => {
-    e.preventDefault();
+  const updateUserProfile = (nickname) => {
+    if (auth.currentUser) {
+      db.collection('users')
+        .doc(auth.currentUser.uid)
+        .update({ nickname })
+        .then(() => {
+          console.log('updated!');
+        })
+        .catch((err) => console.log(err));
+      // auth.currentUser
+      //   .updateProfile({ nickname })
+      //   .then(() => {
+      //     console.log('document successfully updated!');
+      //   })
+      //   .catch((error) => {
+      //     alert('Error updating document, maybe the document does not exist!');
+      //     console.error('Error updating document: ', error);
+      //   });
+    }
+  };
 
+  const onUpdateProfile = (e) => {
+    e.preventDefault();
+    updateUserProfile(name);
     // updateUserName(currentUser, name).the(res => console.log(res));
-    updateUserProfile(name).then(() => {
-      console.log(currentUser.displayName);
-      //   alert('Document successfully updated!');
-      //   // window.location.reload();
-      //   //   history.go(0);
-    });
+    // updateUserProfile(name).then(() => {
+    //   console.log(currentUser.displayName);
+    //   alert('Document successfully updated!');
+    //   // window.location.reload();
+    //   //   history.go(0);
+    // });
   };
 
   return (
@@ -57,7 +80,7 @@ const UpdateProfileModal = ({ history }) => {
               className='form-control'
               placeholder='Enter your new nickname'
               value={name}
-              onChange={e => setName(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div className='modal-footer'>

@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import withSpinner from '../../hoc-helpers/withSpinner';
+import { auth } from '../../../firebase/firebase';
 
-import FirebaseContext from '../../../context/firebase/firebaseContext';
+import { addToBookmarks } from '../../../redux/firebase/firebaseActions';
 
 import Cast from '../../layout/Cast';
-import MediaContainer from '../../common/MediaContainer';
 import MediaDescription from '../../layout/MediaDescription';
 import Studios from '../../layout/Studios';
 import Companies from '../../layout/Companies';
@@ -18,11 +19,12 @@ import Spinner from '../../common/Spinner';
 
 import { onGetTypeAndId } from '../../../utils/helpers';
 import config from '../../../utils/config';
+import { mediaPropTypes } from '../../../utils/mediaViewPropTypes';
 
 import reserveBg from '../../../assets/images/reserve-bg.jpg';
 
-const TvView = ({ tv, cast, video, type, loading }) => {
-  const { currentUser, addToBookmarks } = useContext(FirebaseContext);
+const TvView = ({ tv, cast, video, type, loading, addToBookmarks }) => {
+  // const { currentUser, addToBookmarks } = useContext(FirebaseContext);
 
   const {
     name,
@@ -35,7 +37,7 @@ const TvView = ({ tv, cast, video, type, loading }) => {
     vote_average,
     id,
     production_companies,
-    networks
+    networks,
   } = tv;
 
   console.log(tv);
@@ -49,22 +51,24 @@ const TvView = ({ tv, cast, video, type, loading }) => {
     name,
     type,
     poster_path,
-    vote_average
+    vote_average,
   });
 
   const handleGetTypeAndId = onGetTypeAndId(_createObj, addToBookmarks);
 
-  if (loading) return <Spinner />;
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <section>
       <div className='movie' style={{ backgroundImage: `url(${image})` }}>
         {name && <h3 className='movie-title'>{name}</h3>}
-        <MediaContainer>
+        <div className='item-row'>
           <div className='movie-img-wrapp'>
             <img className='movie-img' src={medium + poster_path} alt={name} />
             {video && <BtnShowVideo url={video.key} />}
-            {currentUser && (
+            {auth.currentUser && (
               <Button
                 className='btn btn-primary mt-3'
                 onClick={handleGetTypeAndId}
@@ -81,7 +85,7 @@ const TvView = ({ tv, cast, video, type, loading }) => {
             genres={genres}
             runtime={runtime}
           />
-        </MediaContainer>
+        </div>
       </div>
       <Studios
         postitionTop={<Companies data={production_companies} />}
@@ -95,21 +99,11 @@ const TvView = ({ tv, cast, video, type, loading }) => {
 TvView.propTypes = {
   tv: PropTypes.shape({
     name: PropTypes.string,
-    poster_path: PropTypes.string,
-    backdrop_path: PropTypes.string,
-    overview: PropTypes.string,
-    genres: PropTypes.array,
-    budget: PropTypes.number,
-    revenue: PropTypes.number,
-    first_air_date: PropTypes.string,
-    runtime: PropTypes.number,
-    vote_average: PropTypes.number,
-    production_companies: PropTypes.arrayOf(PropTypes.object),
-    networks: PropTypes.arrayOf(PropTypes.object)
+    ...mediaPropTypes,
   }),
   cast: PropTypes.arrayOf(PropTypes.object),
   id: PropTypes.string,
-  type: PropTypes.string
+  type: PropTypes.string,
 };
 
-export default TvView;
+export default connect(null, { addToBookmarks })(TvView);

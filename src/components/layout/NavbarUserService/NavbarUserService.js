@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -6,22 +6,23 @@ import {
   faBookmark,
   faSignOutAlt,
   faSignInAlt,
-  faUserPlus
+  faUserPlus,
 } from '@fortawesome/free-solid-svg-icons';
-
-import FirebaseContext from '../../../context/firebase/firebaseContext';
 
 import { Button } from '../Button';
 import { auth } from '../../../firebase/firebase';
+import { connect } from 'react-redux';
 
-const NavbarUserService = () => {
-  const firestate = useContext(FirebaseContext);
+const NavbarUserService = ({ userData }) => {
+  // const firestate = useContext(FirebaseContext);
 
-  const { isLoggedIn, logoutUser, currentUser, userData } = firestate;
+  // const { isLoggedIn, logoutUser, currentUser, userData } = firestate;
 
   // console.log(firestate);
 
-  if (currentUser) {
+  const setLogOut = () => auth.signOut();
+
+  if (auth.currentUser) {
     return (
       <div className='dropdown'>
         <Button
@@ -32,7 +33,7 @@ const NavbarUserService = () => {
           aria-expanded='false'
         >
           <FontAwesomeIcon icon={faUser} /> &nbsp;
-          {currentUser.displayName || 'Profile'}
+          {userData.nickname || 'Profile'}
         </Button>
         <ul className='dropdown-menu' aria-labelledby='dropdownMenu2'>
           <li>
@@ -50,7 +51,7 @@ const NavbarUserService = () => {
             <a
               href=''
               className='dropdown-item'
-              onClick={() => auth.signOut()}
+              onClick={setLogOut}
               title='Sign out'
             >
               <FontAwesomeIcon icon={faSignOutAlt} /> Logout
@@ -76,4 +77,8 @@ const NavbarUserService = () => {
     );
   }
 };
-export default NavbarUserService;
+
+const mapStateToProps = (state) => ({
+  userData: state.firebase.userData,
+});
+export default connect(mapStateToProps)(NavbarUserService);

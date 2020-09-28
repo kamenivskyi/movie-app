@@ -11,6 +11,7 @@ import trendingItemReducer from './trendingItem/trendingItemReducer';
 import castReducer from './cast/castReducer';
 import personReducer from './person/personReducer';
 import trailerReducer from './trailer/trailerReducer';
+import firebaseReducer from './firebase/firebaseReducer';
 
 export default combineReducers({
   movie: movieReducer,
@@ -23,5 +24,6 @@ export default combineReducers({
   trendingItem: trendingItemReducer,
   cast: castReducer,
   person: personReducer,
-  trailer: trailerReducer
+  trailer: trailerReducer,
+  firebase: firebaseReducer,
 });

@@ -1,21 +1,23 @@
 import React, { useState, useContext } from 'react';
+import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import FirebaseContext from '../../../../context/firebase/firebaseContext';
+import FirebaseContext from '../../../context/firebase/firebaseContext';
 
 import {
   auth,
+  db,
   createUserProfileDocument,
-  createUserOwnBookmarksArray
-} from '../../../../firebase/firebase';
+  createUserOwnBookmarksArray,
+} from '../../../firebase/firebase';
 
-const Signup = () => {
-  const [displayName, setDisplayName] = useState('');
+const Signup = ({ userData }) => {
+  const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { isLoggedIn, currentUser } = useContext(FirebaseContext);
+  // const { isLoggedIn, currentUser } = useContext(FirebaseContext);
 
-  console.log(currentUser);
+  console.log(userData);
 
   // const onSubmit = e => {
   //   e.preventDefault();
@@ -33,47 +35,48 @@ const Signup = () => {
         setPassword(value);
         break;
       default:
-        setDisplayName(value);
+        setNickname(value);
         break;
     }
   };
 
-  const handleSubmit = async event => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-      console.log(user);
+    createUser(nickname, email, password);
 
-      await createUserProfileDocument(user, { displayName });
-      await createUserOwnBookmarksArray(user);
+    // try {
+    //   const { user } = await auth.createUserWithEmailAndPassword(
+    //     email,
+    //     password
+    //   );
+    //   console.log(user);
 
-      // this.clearFormsFields();
-    } catch (error) {
-      console.log(error);
-    }
+    //   await createUserProfileDocument(user, { displayName });
+    //   await createUserOwnBookmarksArray(user);
+
+    //   // this.clearFormsFields();
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
-  // const createUser = async (nickname, email, password) => {
-  //   await auth
-  //     .createUserWithEmailAndPassword(email, password)
-  //     .then(({ user }) => {
-  //       console.log(user);
-  //       db.collection('userBookmarks')
-  //         .doc(user.uid)
-  //         .set({ tv: [], movie: [] });
+  const createUser = async (nickname, email, password) => {
+    await auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(({ user }) => {
+        db.collection('userBookmarks').doc(user.uid).set({ tv: [], movie: [] });
 
-  //       db.collection('users')
-  //         .doc(user.uid)
-  //         .set({ nickname });
-  //     })
-  //     .catch(onValidationError);
-  // };
+        db.collection('users').doc(user.uid).set({ nickname, email });
+      })
+      .catch(onValidationError);
+  };
 
-  if (currentUser) {
+  const onValidationError = (error) => {
+    console.log(error);
+  };
+
+  if (auth.currentUser) {
     return <Redirect to='/' />;
   }
   return (
@@ -86,8 +89,9 @@ const Signup = () => {
             type='text'
             className='form-control'
             id='signupNickname'
-            value={displayName}
+            value={nickname}
             onChange={onChange}
+            placeholder='Type your nickname..'
             required
           />
         </div>
@@ -100,6 +104,7 @@ const Signup = () => {
             value={email}
             onChange={onChange}
             aria-describedby='emailHelp'
+            placeholder='Type your email..'
             required
           />
           <small id='emailHelp' className='form-text text-muted'>
@@ -114,6 +119,7 @@ const Signup = () => {
             id='signupPassword'
             value={password}
             onChange={onChange}
+            placeholder='Type your password..'
             required
           />
         </div>
@@ -124,4 +130,9 @@ const Signup = () => {
     </div>
   );
 };
-export default Signup;
+
+const mapStateToProps = (state) => ({
+  userData: state.firebase.userData,
+});
+
+export default connect(mapStateToProps)(Signup);

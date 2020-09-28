@@ -5,23 +5,23 @@ import FirebaseReducer from './firebaseReducer';
 import firebase, {
   db,
   auth,
-  createUserProfileDocument
+  createUserProfileDocument,
 } from '../../firebase/firebase';
 import {
   SET_LOADING,
   SET_USER,
   LOG_OUT,
   GET_BOOKMARKS,
-  SET_USER_DATA
+  SET_USER_DATA,
 } from '../types';
 
-const FirebaseState = props => {
+const FirebaseState = (props) => {
   const initialState = {
     // isLoggedIn: false,
     currentUser: null,
     // userData: {},
     bookmarks: [],
-    loading: false
+    loading: false,
   };
   const [state, dispatch] = useReducer(FirebaseReducer, initialState);
 
@@ -32,56 +32,64 @@ const FirebaseState = props => {
   // const docUsers = user && db.collection('users').doc(user.uid);
 
   // useEffect(() => {
-  //   auth.onAuthStateChanged(userAuth => {
+  //   auth.onAuthStateChanged((userAuth) => {
   //     if (userAuth) {
-  //       const doc = db.collection('users').doc(userAuth.uid);
+  //       console.log(user);
+  //       // const doc = db.collection('users').doc(userAuth.uid);
 
-  //       doc.get().then(doc => {
-  //         dispatch({ type: SET_USER_DATA, payload: doc.data() });
-  //         dispatch({ type: SET_USER, payload: userAuth });
-  //       });
-  //     } else {
-  //       console.log('User is signed out');
+  //       // doc.get().then((doc) => console.log(doc.data()));
+
+  //       // console.log(doc.get());
   //     }
+  //     // if (userAuth) {
+  //     //   const doc = db.collection('users').doc(userAuth.uid);
+
+  //     //   doc.get().then(doc => {
+  //     //     dispatch({ type: SET_USER_DATA, payload: doc.data() });
+  //     //     dispatch({ type: SET_USER, payload: userAuth });
+  //     //   });
+  //     // } else {
+  //     //   console.log('User is signed out');
+  //     // }
   //   });
   // }, []);
 
-  useEffect(() => {
-    auth.onAuthStateChanged(async userAuth => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
+  // useEffect(() => {
+  //   auth.onAuthStateChanged(async userAuth => {
+  //     if (userAuth) {
+  //       const userRef = await createUserProfileDocument(userAuth);
 
-        // console.log(user.displayName);
+  //       // console.log(user.displayName);
 
-        userRef.onSnapshot(snapshot => {
-          dispatch({
-            type: SET_USER,
-            payload: {
-              id: snapshot.id,
-              displayName: userAuth.displayName,
-              ...snapshot.data()
-            }
-          });
-        });
-      }
-      // setCurrentUser(userAuth);
-      dispatch({ type: SET_USER, payload: userAuth });
-    });
-  }, [user]);
+  //       userRef.onSnapshot(snapshot => {
+  //         dispatch({
+  //           type: SET_USER,
+  //           payload: {
+  //             id: snapshot.id,
+  //             displayName: userAuth.displayName,
+  //             ...snapshot.data()
+  //           }
+  //         });
+  //       });
+  //     }
+  //     // setCurrentUser(userAuth);
+  //     dispatch({ type: SET_USER, payload: userAuth });
+  //   });
+  // }, [user]);
 
-  const setLoading = () => dispatch({ type: SET_LOADING });
+  // const setLoading = () => dispatch({ type: SET_LOADING });
 
-  const signinUser = (email, password) => {
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then(res => {
-        if (res) {
-          console.log('its ok!');
-          console.log(res);
-        }
-      })
-      .catch(onValidationError);
-  };
+  // const signinUser = (email, password) => {
+  //   auth
+  //     .signInWithEmailAndPassword(email, password)
+  //     .then((res) => {
+  //       if (res) {
+  //         console.log('its ok!');
+  //         console.log(res);
+  //       }
+  //     })
+  //     .catch(onValidationError);
+  // };
 
   // const createUser = async (nickname, email, password) => {
   //   await auth
@@ -99,40 +107,40 @@ const FirebaseState = props => {
   //     .catch(onValidationError);
   // };
 
-  const addToBookmarks = (data, type) => {
-    if (user) {
-      docBookmarks.update({
-        [type]: firebase.firestore.FieldValue.arrayUnion(data)
-      });
-    }
-  };
+  // const addToBookmarks = (data, type) => {
+  //   if (user) {
+  //     docBookmarks.update({
+  //       [type]: firebase.firestore.FieldValue.arrayUnion(data),
+  //     });
+  //   }
+  // };
 
-  const updateUserProfile = displayName => {
-    if (user) {
-      return user.updateProfile({ displayName }).catch(error => {
-        alert('Error updating document, maybe the document does not exist!');
-        console.error('Error updating document: ', error);
-      });
-    }
-  };
+  // const updateUserProfile = (displayName) => {
+  //   if (user) {
+  //     return user.updateProfile({ displayName }).catch((error) => {
+  //       alert('Error updating document, maybe the document does not exist!');
+  //       console.error('Error updating document: ', error);
+  //     });
+  //   }
+  // };
 
-  const deleteBookmark = (bookmark, type) => {
-    if (user) {
-      docBookmarks.update({
-        [type]: firebase.firestore.FieldValue.arrayRemove(bookmark)
-      });
-    }
-  };
+  // const deleteBookmark = (bookmark, type) => {
+  //   if (user) {
+  //     docBookmarks.update({
+  //       [type]: firebase.firestore.FieldValue.arrayRemove(bookmark),
+  //     });
+  //   }
+  // };
 
-  const getBookmarks = () => {
-    if (user) {
-      setLoading();
+  // const getBookmarks = () => {
+  //   if (user) {
+  //     setLoading();
 
-      docBookmarks.onSnapshot(doc => {
-        dispatch({ type: GET_BOOKMARKS, payload: doc.data() });
-      });
-    }
-  };
+  //     docBookmarks.onSnapshot((doc) => {
+  //       dispatch({ type: GET_BOOKMARKS, payload: doc.data() });
+  //     });
+  //   }
+  // };
 
   // const logoutUser = async () => {
   //   await auth
@@ -145,16 +153,16 @@ const FirebaseState = props => {
   //     });
   // };
 
-  const onValidationError = ({ code, message }) => {
-    switch (code) {
-      case 'auth/wrong-password':
-        return alert('The password is wrong, please try again.');
-      case 'auth/weak-password':
-        return alert('The password is too weak');
-      default:
-        return alert(message);
-    }
-  };
+  // const onValidationError = ({ code, message }) => {
+  //   switch (code) {
+  //     case 'auth/wrong-password':
+  //       return alert('The password is wrong, please try again.');
+  //     case 'auth/weak-password':
+  //       return alert('The password is too weak');
+  //     default:
+  //       return alert(message);
+  //   }
+  // };
 
   return (
     <FirebaseContext.Provider
@@ -164,11 +172,11 @@ const FirebaseState = props => {
         currentUser: state.currentUser,
         // userData: state.userData,
         bookmarks: state.bookmarks,
-        addToBookmarks,
-        deleteBookmark,
-        getBookmarks,
-        signinUser,
-        updateUserProfile
+        // addToBookmarks,
+        // deleteBookmark,
+        // getBookmarks,
+        // signinUser,
+        // updateUserProfile,
         // createUser,
         // logoutUser,
       }}

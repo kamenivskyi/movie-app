@@ -11,7 +11,7 @@ const MediaTabs = ({ onClick, type, period, items, periodItems }) => {
             <li className='nav-item' key={tabSlug}>
               <a
                 className={classNames('nav-link', {
-                  active: tabSlug === type
+                  active: tabSlug === type,
                 })}
                 data-type={tabSlug}
                 href='#'
@@ -29,7 +29,9 @@ const MediaTabs = ({ onClick, type, period, items, periodItems }) => {
           return (
             <li className='nav-item' key={tabPeriod}>
               <a
-                className={`nav-link ${tabPeriod === period && 'active'}`}
+                className={classNames('nav-link', {
+                  active: tabPeriod === period,
+                })}
                 data-period={tabPeriod}
                 href='#'
                 onClick={onClick}
@@ -48,19 +50,19 @@ MediaTabs.defaultProps = {
   items: [
     { label: 'Movies', tabSlug: 'movie' },
     { label: 'Tvs', tabSlug: 'tv' },
-    { label: 'People', tabSlug: 'person' }
+    { label: 'People', tabSlug: 'person' },
   ],
   periodItems: [
     { label: 'Week', tabPeriod: 'week' },
-    { label: 'Day', tabPeriod: 'day' }
-  ]
+    { label: 'Day', tabPeriod: 'day' },
+  ],
 };
 
 MediaTabs.propTypes = {
   items: PropTypes.array.isRequired,
   periodItems: PropTypes.array.isRequired,
   onClick: PropTypes.func,
-  type: PropTypes.string
+  type: PropTypes.string,
 };
 
 export default MediaTabs;

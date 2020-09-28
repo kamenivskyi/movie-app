@@ -10,8 +10,8 @@ import Trending from './components/pages/Trending';
 import Tv from './components/pages/Tv';
 import About from './components/pages/About';
 import Profile from './components/pages/Profile';
-import Login from './components/pages/Auth/Login';
-import Signup from './components/pages/Auth/Signup';
+import Login from './components/pages/Login';
+import Signup from './components/pages/Signup';
 import NotFound from './components/pages/NotFound';
 import UserBookmarks from './components/pages/UserBookmarks/UserBookmarks';
 

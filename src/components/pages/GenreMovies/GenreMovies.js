@@ -21,7 +21,7 @@ const GenreMovies = ({ match, movies, getMoviesByGenre }) => {
 
   return (
     <section className='genre-page'>
-      <div className='container-fluid'>
+      <div className='container'>
         <div className='row'>
           <MediaItems items={movies} type='movie' />
         </div>

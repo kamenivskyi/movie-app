@@ -7,16 +7,18 @@ import { getTrailer } from '../../../redux/trailer/trailerActions';
 
 import TvView from './TvView';
 
-const Tv = ({
-  getTrendingItemData,
-  match,
-  trendingItem,
-  cast,
-  getCast,
-  getTrailer,
-  trailer,
-  loading
-}) => {
+const Tv = (props) => {
+  const {
+    getTrendingItemData,
+    match,
+    trendingItem,
+    cast,
+    getCast,
+    getTrailer,
+    trailer,
+    loading,
+  } = props;
+
   useEffect(() => {
     const { id } = match.params;
 
@@ -36,15 +38,15 @@ const Tv = ({
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   trendingItem: state.trendingItem.item,
   cast: state.cast.castItems,
   trailer: state.trailer.video,
-  loading: state.trendingItem.loading
+  loading: state.trendingItem.loading,
 });
 
 export default connect(mapStateToProps, {
   getTrendingItemData,
   getCast,
-  getTrailer
+  getTrailer,
 })(Tv);

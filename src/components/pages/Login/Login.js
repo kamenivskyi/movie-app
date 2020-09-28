@@ -1,28 +1,33 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import FirebaseContext from '../../../../context/firebase/firebaseContext';
+import { auth } from '../../../firebase/firebase';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { currentUser, signinUser, isLoggedIn } = useContext(FirebaseContext);
-
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    signinUser(email, password);
+    signInUser(email, password);
   };
 
-  const onChange = e => {
-    if (e.target.type === 'email') {
-      setEmail(e.target.value);
+  const signInUser = (email, password) => {
+    auth.signInWithEmailAndPassword(email, password).then((res) => {
+      console.log(res);
+    });
+  };
+
+  const onChange = ({ target: { value, type } }) => {
+    if (type === 'email') {
+      setEmail(value);
     } else {
-      setPassword(e.target.value);
+      setPassword(value);
     }
   };
 
-  if (currentUser) {
+  if (auth.currentUser) {
     return <Redirect to='/' />;
   }
 
@@ -63,4 +68,4 @@ const Login = () => {
     </div>
   );
 };
-export default Login;
+export default connect(null)(Login);

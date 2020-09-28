@@ -16,35 +16,37 @@ const Trending = ({ getTrendingList, items, loading, match, history }) => {
   const { results, total_results, total_pages, page } = items;
 
   useEffect(() => {
-    getTrendingList(currentType, currentPeriod, currentPage);
-  }, [currentType, currentPeriod, currentPage]);
-
-  useEffect(() => {
-    getTypeFromSStorage('trendingType');
-    getPeriodFromSStorage('trendingPeriod');
+    getTypeFromSessionStorage('trendingType');
+    getPeriodFromSessionStorage('trendingPeriod');
 
     setCurrentPage(match.params.page);
   }, []);
 
-  const getTypeFromSStorage = key => {
-    const typeFromSStorage = sessionStorage.getItem(key);
-    if (typeFromSStorage) {
-      setCurrentType(typeFromSStorage);
+  useEffect(() => {
+    getTrendingList(currentType, currentPeriod, currentPage);
+  }, [currentType, currentPeriod, currentPage]);
+
+  const getTypeFromSessionStorage = (key) => {
+    const typeFromSessionStorage = sessionStorage.getItem(key);
+
+    if (typeFromSessionStorage) {
+      setCurrentType(typeFromSessionStorage);
     }
   };
 
-  const getPeriodFromSStorage = key => {
+  const getPeriodFromSessionStorage = (key) => {
     const periodFromSStorage = sessionStorage.getItem(key);
     if (periodFromSStorage) {
       setCurrentPeriod(periodFromSStorage);
     }
   };
 
-  const setToSStorage = (value, key) => sessionStorage.setItem(value, key);
+  const setToSessionStorage = (value, key) =>
+    sessionStorage.setItem(value, key);
 
   if (!items.results) return null;
 
-  const updateMedia = async e => {
+  const updateMedia = async (e) => {
     e.preventDefault();
 
     const type = e.target.getAttribute('data-type');
@@ -52,30 +54,29 @@ const Trending = ({ getTrendingList, items, loading, match, history }) => {
 
     if (type) {
       setCurrentType(type);
-      setToSStorage('trendingType', type);
+      setToSessionStorage('trendingType', type);
     } else if (period) {
       setCurrentPeriod(period);
-      setToSStorage('trendingPeriod', period);
+      setToSessionStorage('trendingPeriod', period);
     }
   };
 
-  const handlePageChange = activePage => {
+  const handlePageChange = (activePage) => {
     setCurrentPage(activePage);
     history.push(`/trending/${activePage}`);
   };
 
   return (
     <div className='container'>
+      <MediaTabs
+        onClick={updateMedia}
+        type={currentType}
+        period={currentPeriod}
+      />
       {loading ? (
         <Spinner />
       ) : (
         <>
-          <MediaTabs
-            onClick={updateMedia}
-            type={currentType}
-            period={currentPeriod}
-          />
-
           <MediaItems items={results} type={currentType} simpleRow />
 
           <PaginationWrapper
@@ -92,7 +93,7 @@ const Trending = ({ getTrendingList, items, loading, match, history }) => {
 
 const mapStateToProps = ({ trendingList: { items, loading } }) => ({
   items,
-  loading
+  loading,
 });
 
 export default connect(mapStateToProps, { getTrendingList })(Trending);

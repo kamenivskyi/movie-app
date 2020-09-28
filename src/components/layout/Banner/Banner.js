@@ -24,7 +24,7 @@ const Banner = ({ items, getBannerMovies }) => {
   return (
     <Flip left>
       <Slider {...singleItem}>
-        {items.map(item => {
+        {items.map((item) => {
           const { title, backdrop_path, overview, id } = item;
 
           return (
@@ -47,8 +47,8 @@ const Banner = ({ items, getBannerMovies }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  items: state.banner.bannerItems
+const mapStateToProps = (state) => ({
+  items: state.banner.bannerItems,
 });
 
 export default connect(mapStateToProps, { getBannerMovies })(Banner);
