@@ -16,7 +16,7 @@ export const convertMoney = (money) => {
 };
 
 export const cutString = (string, cutFrom, cutTo) => {
-  return string.length > cutTo ? string.substr(cutFrom, cutTo) + '..' : string;
+  return string.length > cutTo ? string.substring(cutFrom, cutTo) + '..' : string;
 };
 
 // creating item object for deleting from bookmarks
