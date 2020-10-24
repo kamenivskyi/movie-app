@@ -9,19 +9,11 @@ import {
   faUserPlus,
 } from '@fortawesome/free-solid-svg-icons';
 
-import { Button } from '../Button';
+import { Button } from '../../common/Button';
 import { auth } from '../../../firebase/firebase';
 import { connect } from 'react-redux';
 
 const NavbarUserService = ({ userData }) => {
-  // const firestate = useContext(FirebaseContext);
-
-  // const { isLoggedIn, logoutUser, currentUser, userData } = firestate;
-
-  // console.log(firestate);
-
-  const setLogOut = () => auth.signOut();
-
   if (auth.currentUser) {
     return (
       <div className='dropdown'>
@@ -51,7 +43,7 @@ const NavbarUserService = ({ userData }) => {
             <a
               href=''
               className='dropdown-item'
-              onClick={setLogOut}
+              onClick={() => auth.signOut()}
               title='Sign out'
             >
               <FontAwesomeIcon icon={faSignOutAlt} /> Logout
@@ -60,22 +52,21 @@ const NavbarUserService = ({ userData }) => {
         </ul>
       </div>
     );
-  } else {
-    return (
-      <>
-        <li>
-          <NavLink to='/signup' className='nav-item nav-link'>
-            <FontAwesomeIcon icon={faUserPlus} /> Signup
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/login' className='nav-item nav-link'>
-            <FontAwesomeIcon icon={faSignInAlt} /> Login
-          </NavLink>
-        </li>
-      </>
-    );
   }
+  return (
+    <>
+      <li>
+        <NavLink to='/signup' className='nav-item nav-link'>
+          <FontAwesomeIcon icon={faUserPlus} /> Signup
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to='/login' className='nav-item nav-link'>
+          <FontAwesomeIcon icon={faSignInAlt} /> Login
+        </NavLink>
+      </li>
+    </>
+  );
 };
 
 const mapStateToProps = (state) => ({

@@ -1,28 +1,37 @@
 import React from 'react';
 
-const ReleaseYear = ({ onChange, year }) => {
+const ReleaseYear = ({ onChange, year, ...restProps }) => {
   const getYears = () => {
-    const options = [];
+    const yearsArr = [];
+
     const currentYear = new Date().getFullYear();
     for (let i = currentYear; i >= 1990; i--) {
-      options.push(i);
+      yearsArr.push(i);
     }
-    return options;
+    return yearsArr;
   };
+
   const years = getYears();
 
   return (
     <div className='form-group year'>
       <label>
         <span>Release year: &nbsp;</span>
-        <select className='form-control' value={year} onChange={onChange}>
+
+        <select 
+          className='form-control' 
+          value={year} 
+          onChange={onChange} 
+          {...restProps}
+        >
           <option value=''>--Choose a year--</option>
-          {years.map(item => (
+          {years.map((item) => (
             <option value={item} key={item}>
               {item}
             </option>
           ))}
         </select>
+
       </label>
     </div>
   );

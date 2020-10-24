@@ -6,7 +6,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import firebase, { auth, db } from '../../../firebase/firebase';
 
-import { Button } from '../Button';
+import { Button } from '../../common/Button';
 
 const DeleteBookmarkButton = ({ item, type, history }) => {
   const isProfilePage = history.location.pathname === '/profile/bookmarks';

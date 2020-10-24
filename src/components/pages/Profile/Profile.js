@@ -8,7 +8,7 @@ import { auth } from '../../../firebase/firebase';
 
 import UpdateProfileModal from '../../layout/Modals/UpdateProfileModal';
 
-import { Button } from '../../layout/Button';
+import { Button } from '../../common/Button';
 
 const Profile = ({ userData }) => {
   if (auth.currentUser) {

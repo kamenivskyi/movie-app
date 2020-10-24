@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import firebase, { auth, db } from '../../../firebase/firebase';
-import { addToBookmarks } from '../../../redux/firebase/firebaseActions';
+import { addToDatabaseBookmarks } from '../../../redux/firebase/firebaseActions';
 
 import MediaDescription from '../../layout/MediaDescription';
 import Finances from '../../layout/Finances';
@@ -12,9 +12,9 @@ import Studios from '../../layout/Studios';
 import Companies from '../../layout/Companies';
 import Networks from '../../layout/Networks/Networks';
 import BtnShowVideo from '../../layout/Video/BtnShowVideo';
-import { Button } from '../../layout/Button';
+import { Button } from '../../common/Button';
 
-import { onGetTypeAndId } from '../../../utils/helpers';
+// import { onGetTypeAndId } from '../../../utils/helpers';
 import config from '../../../utils/config';
 import { mediaPropTypes } from '../../../utils/mediaViewPropTypes';
 
@@ -28,7 +28,7 @@ const MovieView = ({
   id,
   type,
   loading,
-  addToBookmarks,
+  addToDatabaseBookmarks,
 }) => {
   const {
     title,
@@ -47,7 +47,7 @@ const MovieView = ({
 
   const { original, medium } = config.API_IMAGE;
 
-  const _createObj = (id, type) => ({
+  const createMovieObj = () => ({
     id,
     title,
     type,
@@ -55,9 +55,16 @@ const MovieView = ({
     vote_average,
   });
 
-  if (loading) return <Spinner />;
+  console.log(movie);
 
-  const handleGetTypeAndId = onGetTypeAndId(_createObj, addToBookmarks);
+  if (loading) {
+    return <Spinner />;
+  }
+
+  const handleAddToBookmarks = () => {
+    const movieObject = createMovieObj();
+    addToDatabaseBookmarks(movieObject, type);
+  };
 
   const image = backdrop_path ? original + backdrop_path : reserveBg;
 
@@ -72,7 +79,7 @@ const MovieView = ({
             {auth.currentUser && (
               <Button
                 className='btn btn-primary mt-3'
-                onClick={handleGetTypeAndId}
+                onClick={handleAddToBookmarks}
                 data-id={id}
                 data-type={type}
               >
@@ -109,4 +116,4 @@ MovieView.propTypes = {
   type: PropTypes.string,
 };
 
-export default connect(null, { addToBookmarks })(MovieView);
+export default connect(null, { addToDatabaseBookmarks })(MovieView);

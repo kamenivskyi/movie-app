@@ -15,7 +15,7 @@ const Search = () => {
     }
   };
 
-  const onChange = ({ target }) => setValue(target.value);
+  const onChange = (e) => setValue(e.target.value);
 
   return (
     <form

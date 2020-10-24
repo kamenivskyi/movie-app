@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import FirebaseContext from '../../../context/firebase/firebaseContext';
+// import FirebaseContext from '../../../context/firebase/firebaseContext';
 
 import {
   auth,

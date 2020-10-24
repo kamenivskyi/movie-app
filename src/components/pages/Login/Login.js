@@ -5,12 +5,11 @@ import { Redirect } from 'react-router-dom';
 import { auth } from '../../../firebase/firebase';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [form, setForm] = useState({ email: '', password: '' });
 
   const onSubmit = (e) => {
     e.preventDefault();
-    signInUser(email, password);
+    signInUser(form.email, form.password);
   };
 
   const signInUser = (email, password) => {
@@ -19,12 +18,8 @@ const Login = () => {
     });
   };
 
-  const onChange = ({ target: { value, type } }) => {
-    if (type === 'email') {
-      setEmail(value);
-    } else {
-      setPassword(value);
-    }
+  const onChange = ({ target: { value, name } }) => {
+    setForm({ ...form, [name]: value });
   };
 
   if (auth.currentUser) {
@@ -42,7 +37,9 @@ const Login = () => {
             className='form-control'
             id='loginEmail'
             aria-describedby='emailHelp'
-            value={email}
+            placeholder='Enter your email'
+            value={form.email}
+            name='email'
             onChange={onChange}
             required
           />
@@ -56,7 +53,9 @@ const Login = () => {
             type='password'
             className='form-control'
             id='loginPassword'
-            value={password}
+            value={form.password}
+            placeholder='Enter your password'
+            name='password'
             onChange={onChange}
             required
           />

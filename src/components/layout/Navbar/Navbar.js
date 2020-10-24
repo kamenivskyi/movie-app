@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import Search from '../Search';
 import NavbarNav from '../NavbarNav/NavbarNav';
 import NavbarUserService from '../NavbarUserService';
-import { Button } from '../Button';
+import { Button } from '../../common/Button';
 
 import './Navbar.css';
 

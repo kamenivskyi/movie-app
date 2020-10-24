@@ -27,17 +27,20 @@ const Banner = ({ items, getBannerMovies }) => {
         {items.map((item) => {
           const { title, backdrop_path, overview, id } = item;
 
+          const clippedTitle = cutString(title, 0, 30);
+          const clippedOverview = cutString(overview, 0, 140);
+
           return (
             <div className='banner-item' key={`banner${Math.random()}`}>
               <img src={`${original}${backdrop_path}`} alt={title} />
               <div className='banner-content'>
-                <Link to={`movie/${id}`} className='banner-link'>
-                  {cutString(title, 0, 30)}
-                </Link>
+                <h2 className='section-title'>
+                  <Link to={`movie/${id}`} className='banner-link'>
+                    {clippedTitle}
+                  </Link>
+                </h2>
 
-                <div className='banner-description'>
-                  {cutString(overview, 0, 140)}
-                </div>
+                <div className='banner-description'>{clippedOverview}</div>
               </div>
             </div>
           );

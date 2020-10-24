@@ -1,58 +1,29 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import { auth, db } from '../../../../firebase/firebase';
 
-import FirebaseContext from '../../../../context/firebase/firebaseContext';
-import { Button } from '../../Button';
-// import { updateUserName } from '../../../../firebase/firebase';
+import { Button } from '../../../common/Button';
 
-const UpdateProfileModal = ({ history }) => {
-  // const { currentUser, updateUserProfile } = useContext(FirebaseContext);
-
+const UpdateProfileModal = () => {
   const [name, setName] = useState('');
-
-  // console.log(history);
-
-  // useEffect(() => {
-  //   const { displayName } = currentUser;
-
-  //   if (currentUser.displayName) {
-  //     setName(currentUser.displayName);
-  //   }
-  // }, [currentUser.displayName]);
+  const location = useLocation();
+  const history = useHistory();
 
   const updateUserProfile = (nickname) => {
     if (auth.currentUser) {
-      db.collection('users')
-        .doc(auth.currentUser.uid)
-        .update({ nickname })
+      db.doc(`users/${auth.currentUser.uid}`).update({ nickname })
         .then(() => {
-          console.log('updated!');
+          alert('Your username is updated! We need to reload app')
+          history.go(0);
         })
         .catch((err) => console.log(err));
-      // auth.currentUser
-      //   .updateProfile({ nickname })
-      //   .then(() => {
-      //     console.log('document successfully updated!');
-      //   })
-      //   .catch((error) => {
-      //     alert('Error updating document, maybe the document does not exist!');
-      //     console.error('Error updating document: ', error);
-      //   });
     }
   };
 
-  const onUpdateProfile = (e) => {
+  const handleUpdateName = (e) => {
     e.preventDefault();
     updateUserProfile(name);
-    // updateUserName(currentUser, name).the(res => console.log(res));
-    // updateUserProfile(name).then(() => {
-    //   console.log(currentUser.displayName);
-    //   alert('Document successfully updated!');
-    //   // window.location.reload();
-    //   //   history.go(0);
-    // });
   };
 
   return (
@@ -65,10 +36,10 @@ const UpdateProfileModal = ({ history }) => {
       aria-hidden='true'
     >
       <div className='modal-dialog' role='document'>
-        <form className='modal-content' onSubmit={onUpdateProfile}>
+        <form className='modal-content' onSubmit={handleUpdateName}>
           <div className='modal-header'>
             <h5 className='modal-title' id='updateProfileInfo'>
-              Update profile
+              Update username
             </h5>
             <Button className='close' data-dismiss='modal' aria-label='Close'>
               <span aria-hidden='true'>&times;</span>
@@ -96,4 +67,4 @@ const UpdateProfileModal = ({ history }) => {
     </div>
   );
 };
-export default withRouter(UpdateProfileModal);
+export default UpdateProfileModal;

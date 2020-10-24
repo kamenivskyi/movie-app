@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 
 import { getTrendingList } from '../../../redux/trendingList/trendingListActions';
 
@@ -8,10 +8,13 @@ import MediaTabs from '../../layout/MediaTabs';
 import PaginationWrapper from '../../layout/PaginationWrapper';
 import Spinner from '../../common/Spinner';
 
-const Trending = ({ getTrendingList, items, loading, match, history }) => {
+const Trending = ({ getTrendingList, match, history }) => {
   const [currentType, setCurrentType] = useState('movie');
   const [currentPeriod, setCurrentPeriod] = useState('week');
   const [currentPage, setCurrentPage] = useState(1);
+  
+  const items = useSelector(state => state.trendingList.items);
+  const loading = useSelector(state => state.trendingList.loading);
 
   const { results, total_results, total_pages, page } = items;
 
@@ -66,6 +69,8 @@ const Trending = ({ getTrendingList, items, loading, match, history }) => {
     history.push(`/trending/${activePage}`);
   };
 
+  console.log('render')
+
   return (
     <div className='container'>
       <MediaTabs
@@ -91,9 +96,9 @@ const Trending = ({ getTrendingList, items, loading, match, history }) => {
   );
 };
 
-const mapStateToProps = ({ trendingList: { items, loading } }) => ({
-  items,
-  loading,
-});
+// const mapStateToProps = ({ trendingList: { items, loading } }) => ({
+//   // items,
+//   loading,
+// });
 
-export default connect(mapStateToProps, { getTrendingList })(Trending);
+export default connect(null, { getTrendingList })(Trending);

@@ -67,7 +67,7 @@ export const getBookmarks = () => async (dispatch) => {
   }
 };
 
-export const addToBookmarks = (data, mediaType) => async (dispatch) => {
+export const addToDatabaseBookmarks = (data, mediaType) => async (dispatch) => {
   try {
     if (auth.currentUser) {
       db.collection('userBookmarks')

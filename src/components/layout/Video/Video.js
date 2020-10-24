@@ -1,30 +1,32 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
-import { Button } from '../Button';
+import { Button } from '../../common/Button';
 
 import config from '../../../utils/config';
 
 import './Video.css';
 
-const Video = ({ url, onClick }) => (
-  <div className='video-overlay' onClick={onClick}>
-    <iframe
-      className='video'
-      src={config.video + url}
-      frameBorder='0'
-      allowFullScreen='1'
-    />
-    <Button className='close-video' title='close video' onClick={onClick}>
-      <FontAwesomeIcon icon={faTimes} />
-    </Button>
-  </div>
-);
+const Video = ({ url, onClick }) => {
+  return ReactDOM.createPortal(
+    <div className='video-overlay' onClick={onClick}>
+      <iframe
+        className='video'
+        src={config.video + url}
+        frameBorder='0'
+        allowFullScreen='1'
+      />
+    </div>,
+    document.getElementById('video-portal')
+  );
+}
+ 
 
 Video.propTypes = {
   url: PropTypes.string,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
 };
 export default Video;

@@ -2,10 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import withSpinner from '../../hoc-helpers/withSpinner';
 import { auth } from '../../../firebase/firebase';
 
-import { addToBookmarks } from '../../../redux/firebase/firebaseActions';
+import { addToDatabaseBookmarks } from '../../../redux/firebase/firebaseActions';
 
 import Cast from '../../layout/Cast';
 import MediaDescription from '../../layout/MediaDescription';
@@ -13,19 +12,16 @@ import Studios from '../../layout/Studios';
 import Companies from '../../layout/Companies';
 import Networks from '../../layout/Networks/Networks';
 import BtnShowVideo from '../../layout/Video/BtnShowVideo';
-import { Button } from '../../layout/Button';
+import { Button } from '../../common/Button';
 
 import Spinner from '../../common/Spinner';
 
-import { onGetTypeAndId } from '../../../utils/helpers';
 import config from '../../../utils/config';
 import { mediaPropTypes } from '../../../utils/mediaViewPropTypes';
 
 import reserveBg from '../../../assets/images/reserve-bg.jpg';
 
-const TvView = ({ tv, cast, video, type, loading, addToBookmarks }) => {
-  // const { currentUser, addToBookmarks } = useContext(FirebaseContext);
-
+const TvView = ({ tv, cast, video, type, loading, addToDatabaseBookmarks }) => {
   const {
     name,
     poster_path,
@@ -46,7 +42,7 @@ const TvView = ({ tv, cast, video, type, loading, addToBookmarks }) => {
 
   const image = backdrop_path ? original + backdrop_path : reserveBg;
 
-  const _createObj = (id, type) => ({
+  const createObj = () => ({
     id,
     name,
     type,
@@ -54,7 +50,10 @@ const TvView = ({ tv, cast, video, type, loading, addToBookmarks }) => {
     vote_average,
   });
 
-  const handleGetTypeAndId = onGetTypeAndId(_createObj, addToBookmarks);
+  const handleAddToBookmarks = () => {
+    const tvObject = createObj();
+    addToDatabaseBookmarks(tvObject, type);
+  };
 
   if (loading) {
     return <Spinner />;
@@ -71,7 +70,7 @@ const TvView = ({ tv, cast, video, type, loading, addToBookmarks }) => {
             {auth.currentUser && (
               <Button
                 className='btn btn-primary mt-3'
-                onClick={handleGetTypeAndId}
+                onClick={handleAddToBookmarks}
                 data-id={id}
                 data-type={type}
               >
@@ -106,4 +105,4 @@ TvView.propTypes = {
   type: PropTypes.string,
 };
 
-export default connect(null, { addToBookmarks })(TvView);
+export default connect(null, { addToDatabaseBookmarks })(TvView);

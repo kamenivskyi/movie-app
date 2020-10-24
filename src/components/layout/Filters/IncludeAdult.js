@@ -1,6 +1,6 @@
 import React from 'react';
 
-const IncludeAdult = ({ value, onChange }) => {
+const IncludeAdult = ({ value, onChange, ...restProps }) => {
   return (
     <div className='form-check'>
       <label className='form-check-label'>
@@ -10,7 +10,8 @@ const IncludeAdult = ({ value, onChange }) => {
           value={value}
           checked={value}
           onChange={onChange}
-        />{' '}
+          {...restProps}
+        />
         Include adult?
       </label>
     </div>

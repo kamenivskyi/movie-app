@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
+import Flip from 'react-reveal/Flip';
 
 import MediaItemGrid from '../MediaItemGrid';
 import CardWrapper from '../CardWrapper';
@@ -34,16 +35,16 @@ const MediaItem = ({ data, type }) => {
   }
 
   return (
-    <CardWrapper>
-      <img src={image} alt={title || name} />
-      <span className={badgeIconClass}>{vote_average}</span>
-      <div className='card-item-content'>
-        <DeleteBookmarkButton item={uniqueItemData} type={type} />
-        <Link to={link} className='card-item-link'>
-          {title || name}
-        </Link>
-      </div>
-    </CardWrapper>
+      <CardWrapper>
+          <img src={image} alt={title || name} />
+          <span className={badgeIconClass}>{vote_average}</span>
+          <div className='card-item-content'>
+            <DeleteBookmarkButton item={uniqueItemData} type={type} />
+            <Link to={link} className='card-item-link'>
+              {title || name}
+            </Link>
+          </div>
+      </CardWrapper>
   );
 };
 
