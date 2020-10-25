@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import Search from '../Search';
+import Search from '../../layout/Search';
 import NavbarNav from '../NavbarNav/NavbarNav';
 import NavbarUserService from '../NavbarUserService';
 import { Button } from '../../common/Button';
@@ -9,7 +9,7 @@ import { Button } from '../../common/Button';
 import './Navbar.css';
 
 const Navbar = () => (
-  <header className='main-navbar navbar navbar-expand-lg navbar-dark bg-dark'>
+  <header className='main-navbar navbar navbar-expand-lg navbar-dark bg-primary'>
     <div className='container'>
       <NavLink className='navbar-brand' to='/'>
         <i className='fas fa-film'></i> Movie Finder

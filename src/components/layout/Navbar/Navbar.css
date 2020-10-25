@@ -1,3 +1,7 @@
+body .bg-primary {
+  background: #325d88 !important;
+}
+
 .main-navbar {
   display: flex;
   justify-content: space-between;

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 // import Pagination from 'react-pagination-js';
 import Pagination from 'react-js-pagination';
 
+import './PaginationWrapper.css';
+
 // import 'react-pagination-js/dist/styles.css';
 
 const PaginationWrapper = ({

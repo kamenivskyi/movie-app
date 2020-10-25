@@ -24,7 +24,7 @@ const BtnShowVideo = ({ url }) => {
     return (
       <>
         {show && <Video url={url} onClick={handleClick} />}
-        <Button className='btn btn-info mt-3' onClick={handleClick}>
+        <Button className='btn btn-light mt-3' onClick={handleClick}>
           <i className='fas fa-play'></i> &nbsp; Trailer
         </Button>
       </>

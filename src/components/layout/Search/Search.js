@@ -25,7 +25,7 @@ const Search = () => {
       <input
         className='form-control search'
         type='search'
-        placeholder='Enter something'
+        placeholder='Search movies'
         aria-label='Search'
         value={value}
         onChange={onChange}

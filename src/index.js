@@ -8,7 +8,7 @@ import App from './App';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import 'bootswatch/dist/cyborg/bootstrap.min.css';
+import 'bootswatch/dist/sandstone/bootstrap.min.css';
 
 import * as serviceWorker from './serviceWorker';
 

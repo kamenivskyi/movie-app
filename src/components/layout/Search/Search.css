@@ -1,5 +1,6 @@
 .navbar-item .search {
   width: 100%;
+  border: none;
 }
 @media (min-width: 992px) {
   .search {
