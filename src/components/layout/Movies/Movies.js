@@ -5,9 +5,7 @@ import MediaItems from '../MediaItems';
 
 import Spinner from '../Spinner';
 
-const Movies = props => {
-  const { movies, loading } = props;
-
+const Movies = ({ movies, loading }) => {
   if (loading) {
     return <Spinner />;
   } 
