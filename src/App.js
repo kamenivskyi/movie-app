@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { auth, db } from './firebase/firebase';
+import { auth, db } from './firebase/firebaseUtils';
 
 import Routes from './routes';
 import Navbar from './components/layout/Navbar';

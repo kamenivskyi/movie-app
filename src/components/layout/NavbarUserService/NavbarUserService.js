@@ -10,7 +10,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import { Button } from '../../common/Button';
-import { auth } from '../../../firebase/firebase';
+import { auth } from '../../../firebase/firebaseUtils';
 import { connect } from 'react-redux';
 
 const NavbarUserService = ({ userData }) => {

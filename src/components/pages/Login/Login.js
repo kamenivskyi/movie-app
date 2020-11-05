@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import { auth } from '../../../firebase/firebase';
+import { auth } from '../../../firebase/firebaseUtils';
+import FormControl from '../../layout/FormControl/FormControl';
 
 const Login = () => {
   const [form, setForm] = useState({ email: '', password: '' });
+  const { email, password } = form;
 
   const onSubmit = (e) => {
     e.preventDefault();
-    signInUser(form.email, form.password);
+    signInUser(email, password);
   };
 
   const signInUser = (email, password) => {
@@ -29,42 +30,33 @@ const Login = () => {
   return (
     <div className='container'>
       <h2 className='section-title'>Login</h2>
-      <form onSubmit={onSubmit}>
-        <div className='form-group'>
-          <label htmlFor='loginEmail'>Email address</label>
-          <input
-            type='email'
-            className='form-control'
-            id='loginEmail'
-            aria-describedby='emailHelp'
-            placeholder='Enter your email'
-            value={form.email}
-            name='email'
-            onChange={onChange}
-            required
-          />
-          <small id='emailHelp' className='form-text text-muted'>
-            We'll never share your email with anyone else.
-          </small>
-        </div>
-        <div className='form-group'>
-          <label htmlFor='loginPassword'>Password</label>
-          <input
-            type='password'
-            className='form-control'
-            id='loginPassword'
-            value={form.password}
-            placeholder='Enter your password'
-            name='password'
-            onChange={onChange}
-            required
-          />
-        </div>
-        <button type='submit' className='btn btn-primary'>
+      <form className='form-container' onSubmit={onSubmit}>
+        <FormControl
+          type='email'
+          id='loginEmail'
+          aria-describedby='emailHelp'
+          placeholder='Enter your email'
+          name='email'
+          label='Email address'
+          value={email}
+          onChange={onChange}
+          required
+        />
+        <FormControl
+          type='password'
+          id='loginPassword'
+          placeholder='Enter your password'
+          name='password'
+          label='Password'
+          value={password}
+          onChange={onChange}
+          required
+        />
+        <button type='submit' className='btn btn-primary w-100'>
           Submit
         </button>
       </form>
     </div>
   );
 };
-export default connect(null)(Login);
+export default Login;

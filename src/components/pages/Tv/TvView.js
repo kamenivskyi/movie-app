@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { auth } from '../../../firebase/firebase';
+import { auth } from '../../../firebase/firebaseUtils';
 
-import { addToDatabaseBookmarks } from '../../../redux/firebase/firebaseActions';
+import { addToDatabaseBookmarks } from '../../../firebase/firebaseUtils';
 
 import Cast from '../../layout/Cast';
 import MediaDescription from '../../layout/MediaDescription';

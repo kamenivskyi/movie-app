@@ -38,12 +38,6 @@ const firebaseReducer = (state = INITIAL_STATE, action) => {
         ...state,
         bookmarksLoading: true,
       };
-    // case LOG_OUT:
-    //   return {
-    //     ...state,
-    //     isLoggedIn: false,
-    //     loading: false
-    //   };
     default:
       return state;
   }

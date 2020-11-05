@@ -128,6 +128,11 @@ input.form-control {
   border: none;
 }
 
+.form-container {
+  max-width: 450px;
+  margin: 0 auto;
+}
+
 @media (max-width: 750px) {
   .item-row {
     flex-direction: column;

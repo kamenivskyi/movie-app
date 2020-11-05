@@ -45,34 +45,6 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
-// export const updateUserName = async (userAuth, newName) => {
-//   console.log(userAuth);
-//   if (!userAuth) return;
-//   console.log(userAuth);
-
-//   const userRef = db.doc(`users/${userAuth.uid}`);
-
-//   const snapshot = await userRef.get();
-
-//   // if (!snapshot.exists) {
-//   const { displayName, email } = userAuth;
-//   try {
-//     userRef.set({
-//       displayName
-//       // email,
-//       // createdAt,
-//       // ...additionalData
-//     });
-//   } catch (error) {
-//     console.log('Error creating user', error.message);
-//   }
-
-//   return userRef;
-// };
-// console.log(userAuth);
-// console.log(snapshot);
-// console.log(newName);
-// };
 
 export const createUserOwnBookmarksArray = async userAuth => {
   if (!userAuth) return;
@@ -88,21 +60,26 @@ export const createUserOwnBookmarksArray = async userAuth => {
   return bookmarksRef;
 };
 
-// const createUser = async (nickname, email, password) => {
-//   await auth
-//     .createUserWithEmailAndPassword(email, password)
-//     .then(({ user }) => {
-//       console.log(user);
-//       db.collection('userBookmarks')
-//         .doc(user.uid)
-//         .set({ tv: [], movie: [] });
 
-//       db.collection('users')
-//         .doc(user.uid)
-//         .set({ nickname });
-//     })
-//     .catch(onValidationError);
-// };
+export const addToDatabaseBookmarks = (data, mediaType) => {
+  if (auth.currentUser) {
+    db.collection('userBookmarks')
+      .doc(auth.currentUser.uid)
+      .update({
+        [mediaType]: firebase.firestore.FieldValue.arrayUnion(data),
+      });
+  }
+};
+
+export const createUser = async (nickname, email, password) => {
+  await auth
+    .createUserWithEmailAndPassword(email, password)
+    .then(({ user }) => {
+      db.collection('userBookmarks').doc(user.uid).set({ tv: [], movie: [] });
+      db.collection('users').doc(user.uid).set({ nickname, email });
+    })
+    .catch((err) => console.log(err));
+};
 
 export const db = firebase.firestore();
 export const auth = firebase.auth();

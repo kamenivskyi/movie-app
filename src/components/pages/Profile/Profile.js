@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
-import { auth } from '../../../firebase/firebase';
+import { auth } from '../../../firebase/firebaseUtils';
 
 import UpdateProfileModal from '../../layout/Modals/UpdateProfileModal';
 

@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import firebase, { auth, db } from '../../../firebase/firebase';
-import { addToDatabaseBookmarks } from '../../../redux/firebase/firebaseActions';
+import firebase, { auth, db } from '../../../firebase/firebaseUtils';
+import { addToDatabaseBookmarks } from '../../../firebase/firebaseUtils';
 
 import MediaDescription from '../../layout/MediaDescription';
 import Finances from '../../layout/Finances';

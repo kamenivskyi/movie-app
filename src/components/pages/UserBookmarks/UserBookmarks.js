@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { getBookmarks } from '../../../redux/firebase/firebaseActions';
-import { auth } from '../../../firebase/firebase';
+import { auth } from '../../../firebase/firebaseUtils';
 
 import MediaItems from '../../layout/MediaItems';
 import Spinner from '../../common/Spinner';
@@ -26,10 +26,8 @@ const UserBookmarks = ({ bookmarks, getBookmarks, loading }) => {
   const visibleMovies = movie && search(movie, term, 'title');
   const visibleTvs = tv && search(tv, term, 'name');
 
-  const handleChange = ({ target: { value } }) => {
-    setTerm(value);
-  };
-
+  const handleChange = (e) => setTerm(e.target.value);
+  
   const ifArraysEmptyRenderDummy = () => {
     if (tv && tv.length === 0 && movie && movie.length === 0) {
       return <p className='text-center w-100'>Your bookmarks list is empty</p>;

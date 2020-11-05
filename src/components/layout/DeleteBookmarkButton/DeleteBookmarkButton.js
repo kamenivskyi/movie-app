@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-import firebase, { auth, db } from '../../../firebase/firebase';
+import firebase, { auth, db } from '../../../firebase/firebaseUtils';
 
 import { Button } from '../../common/Button';
 

@@ -6,9 +6,7 @@ import MediaItem from '../MediaItem';
 const MediaItems = ({ items, type = 'movie', simpleRow }) => {
   console.log(items);
 
-  const renderMediaItems =
-    items &&
-    items.map((data) => (
+  const renderMediaItems = items && items.map((data) => (
       <MediaItem data={data} key={`${type}${data.id}`} type={type} />
     ));
 

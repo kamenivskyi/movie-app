@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import { auth, db } from '../../../firebase/firebase';
 import FormControl from '../../layout/FormControl/FormControl';
+import { createUser } from '../../../firebase/firebaseUtils';
+import { auth } from '../../../firebase/firebaseUtils';
+import { 
+  validEmailRegex, 
+  validateNickname, 
+  validatePassword, 
+  validateForm
+} from './SignupUtils';
 
 const Signup = () => {
   const [state, setState] = useState({
@@ -20,60 +27,13 @@ const Signup = () => {
 
   const { inputs, errors } = state;
 
-  const validEmailRegex = RegExp(
-    /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
-  );
-
-  const validatePassword = (name, password) => { 
-    const isEqual = compareNameWithPassword(name, password);
-
-    if (password.length < 7 && !isEqual) {
-      return 'Password must be at least 7 characters long!';
-    }
-    if (password.trim().length < 7 && !isEqual) {
-      return 'Password must not be only with spaces!'
-    }
-    if (isEqual) {
-      return 'The password and nickname must not be equal!';
-    }
-
-    return '';
-  }
-
-  const validateNickname = (name, password) => {
-    const isEqual = compareNameWithPassword(name, password);
-
-    if (name.length < 5 && !isEqual) {
-      return 'The nickname length must be greater that 4';
-    }
-    if (isEqual) {
-      return 'The password and nickname must not be equal!';
-    }
-
-    return '';
-  }
-
-
-  const compareNameWithPassword = (name, password) => {
-    if (name.toLowerCase() === password.toLowerCase()) {
-      return true;
-    }
-    return false;
-  }
-
   const handleChange = ({ target: { value, name } }) => {
     let errors = state.errors;
 
     const matchField = {
-      'nickname': () => {
-        errors.nickname = validateNickname(value, inputs.password); 
-      },
-      'email': () => {
-        errors.email = validEmailRegex.test(value) ? '' : 'Email is invalid!';
-      },
-      'password': () => {
-        errors.password = validatePassword(inputs.nickname, value); 
-      }
+      'nickname': () => { errors.nickname = validateNickname(value, inputs.password) },
+      'email': () => { errors.email = validEmailRegex.test(value) ? '' : 'Email is invalid!' },
+      'password': () => { errors.password = validatePassword(inputs.nickname, value) },
     };
 
     matchField[name]();
@@ -82,17 +42,8 @@ const Signup = () => {
   };
 
 
-  const validateForm = (errors) => {
-    let isValid = true;
-
-    Object.values(errors).forEach(val => val.length > 0 && (isValid = false));
-    
-    return isValid;
-  }
-
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const isValid = validateForm(state.errors);
 
     if (isValid) {
@@ -105,19 +56,6 @@ const Signup = () => {
     }
   };
 
-  const createUser = async (nickname, email, password) => {
-    await auth
-      .createUserWithEmailAndPassword(email, password)
-      .then(({ user }) => {
-        db.collection('userBookmarks').doc(user.uid).set({ tv: [], movie: [] });
-        db.collection('users').doc(user.uid).set({ nickname, email });
-      })
-      .catch(onValidationError);
-  };
-
-  const onValidationError = (error) => {
-    console.log(error);
-  };
 
   if (auth.currentUser) {
     return <Redirect to='/' />;
@@ -125,7 +63,7 @@ const Signup = () => {
   return (
     <div className='container'>
       <h2 className='section-title'>Signup</h2>
-      <form onSubmit={handleSubmit} style={{ maxWidth: '500px', margin: '0 auto'}}>
+      <form onSubmit={handleSubmit} className='form-container'>
         <FormControl
           id='signupNickname'
           name='nickname'
