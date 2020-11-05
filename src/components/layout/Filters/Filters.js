@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import ReleaseYear from './ReleaseYear';
 import SortBy from './SortBy';
 import IncludeAdult from './IncludeAdult';
-import { Button } from '../../common/Button';
+import Button from '../Button';
 
 import { getMoviesByFilters } from '../../../redux/moviesByFilters/moviesByFIltersActions';
 

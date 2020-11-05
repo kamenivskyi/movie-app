@@ -6,7 +6,7 @@ import { getTrendingList } from '../../../redux/trendingList/trendingListActions
 import MediaItems from '../../layout/MediaItems';
 import MediaTabs from '../../layout/MediaTabs';
 import PaginationWrapper from '../../layout/PaginationWrapper';
-import Spinner from '../../common/Spinner';
+import Spinner from '../../layout/Spinner';
 
 const Trending = ({ getTrendingList, match, history }) => {
   const [currentType, setCurrentType] = useState('movie');

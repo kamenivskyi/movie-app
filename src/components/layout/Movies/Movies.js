@@ -3,16 +3,17 @@ import { connect } from 'react-redux';
 
 import MediaItems from '../MediaItems';
 
-import Spinner from '../../common/Spinner';
+import Spinner from '../Spinner';
 
 const Movies = props => {
   const { movies, loading } = props;
 
   if (loading) {
     return <Spinner />;
-  } else {
-    return <MediaItems items={movies.results} type='movie' />;
-  }
+  } 
+
+  return <MediaItems items={movies.results} type='movie' />;
+  
 };
 
 const mapStateToProps = ({ moviesByFilters: { movies, loading } }) => ({

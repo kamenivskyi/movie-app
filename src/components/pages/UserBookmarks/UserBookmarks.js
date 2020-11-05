@@ -6,7 +6,7 @@ import { getBookmarks } from '../../../redux/firebase/firebaseActions';
 import { auth } from '../../../firebase/firebaseUtils';
 
 import MediaItems from '../../layout/MediaItems';
-import Spinner from '../../common/Spinner';
+import Spinner from '../../layout/Spinner';
 
 const UserBookmarks = ({ bookmarks, getBookmarks, loading }) => {
   const [term, setTerm] = useState('');

@@ -9,7 +9,7 @@ import {
   faUserPlus,
 } from '@fortawesome/free-solid-svg-icons';
 
-import { Button } from '../../common/Button';
+import Button  from '../Button';
 import { auth } from '../../../firebase/firebaseUtils';
 import { connect } from 'react-redux';
 

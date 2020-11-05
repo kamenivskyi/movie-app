@@ -1,10 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
-import { auth } from '../../../firebase/firebaseUtils';
-
-import { addToDatabaseBookmarks } from '../../../firebase/firebaseUtils';
 
 import Cast from '../../layout/Cast';
 import MediaDescription from '../../layout/MediaDescription';
@@ -12,16 +7,16 @@ import Studios from '../../layout/Studios';
 import Companies from '../../layout/Companies';
 import Networks from '../../layout/Networks/Networks';
 import BtnShowVideo from '../../layout/Video/BtnShowVideo';
-import { Button } from '../../common/Button';
+import Button from '../../layout/Button';
 
-import Spinner from '../../common/Spinner';
-
+import withSpinner from '../../../hoc-helpers/withSpinner';
 import config from '../../../utils/config';
+import { auth, addToDatabaseBookmarks } from '../../../firebase/firebaseUtils';
 import { mediaPropTypes } from '../../../utils/mediaViewPropTypes';
 
 import reserveBg from '../../../assets/images/reserve-bg.jpg';
 
-const TvView = ({ tv, cast, video, type, loading, addToDatabaseBookmarks }) => {
+const TvView = ({ tv, cast, video, type }) => {
   const {
     name,
     poster_path,
@@ -36,7 +31,7 @@ const TvView = ({ tv, cast, video, type, loading, addToDatabaseBookmarks }) => {
     networks,
   } = tv;
 
-  console.log(tv);
+  console.log('tv: ', tv);
 
   const { original, medium } = config.API_IMAGE;
 
@@ -54,10 +49,6 @@ const TvView = ({ tv, cast, video, type, loading, addToDatabaseBookmarks }) => {
     const tvObject = createObj();
     addToDatabaseBookmarks(tvObject, type);
   };
-
-  if (loading) {
-    return <Spinner />;
-  }
 
   return (
     <section>
@@ -105,4 +96,6 @@ TvView.propTypes = {
   type: PropTypes.string,
 };
 
-export default connect(null, { addToDatabaseBookmarks })(TvView);
+const TvViewWithSpinner = withSpinner(TvView);
+
+export default TvViewWithSpinner;

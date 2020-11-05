@@ -1,10 +1,10 @@
 import React from 'react';
 
 export const Button = props => {
-  const { type, children } = props;
+  const { type, classes, children } = props;
 
   return (
-    <button type={type} {...props}>
+    <button className={classes} type={type} {...props}>
       {children}
     </button>
   );
@@ -12,5 +12,6 @@ export const Button = props => {
 
 Button.defaultProps = {
   type: 'button',
-  children: 'button'
+  children: 'button',
+  classes: 'btn'
 };

@@ -3,7 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 
 import { auth, db } from '../../../../firebase/firebaseUtils';
 
-import { Button } from '../../../common/Button';
+import Button from '../../Button';
 
 const UpdateProfileModal = () => {
   const [name, setName] = useState('');

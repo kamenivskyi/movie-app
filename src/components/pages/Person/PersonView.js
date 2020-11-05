@@ -1,12 +1,12 @@
 import React from 'react';
 
-import Spinner from '../../common/Spinner';
 import PersonPhotos from './PersonPhotos';
+import Href from '../../layout/Href';
 
 import config from '../../../utils/config';
-import Href from '../../common/Href';
+import withSpinner from '../../../hoc-helpers/withSpinner';
 
-const PersonView = ({ general, photos, loading }) => {
+const PersonView = ({ general, photos }) => {
   const { 
     name, 
     biography, 
@@ -20,10 +20,6 @@ const PersonView = ({ general, photos, loading }) => {
   console.log(general);
 
   const photoUrl = config.API_IMAGE.medium + profile_path;
-
-  if (loading) {
-    return <Spinner />
-  } 
 
   return (
     <section className='person-page'>
@@ -63,4 +59,7 @@ const PersonView = ({ general, photos, loading }) => {
     </section>
   );
 };
-export default PersonView;
+
+const PersonViewWithSpinner = withSpinner(PersonView);
+
+export default PersonViewWithSpinner;

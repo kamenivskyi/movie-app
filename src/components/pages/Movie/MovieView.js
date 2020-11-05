@@ -1,9 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import firebase, { auth, db } from '../../../firebase/firebaseUtils';
-import { addToDatabaseBookmarks } from '../../../firebase/firebaseUtils';
+import { auth, addToDatabaseBookmarks } from '../../../firebase/firebaseUtils';
 
 import MediaDescription from '../../layout/MediaDescription';
 import Finances from '../../layout/Finances';
@@ -12,24 +10,15 @@ import Studios from '../../layout/Studios';
 import Companies from '../../layout/Companies';
 import Networks from '../../layout/Networks/Networks';
 import BtnShowVideo from '../../layout/Video/BtnShowVideo';
-import { Button } from '../../common/Button';
+import  Button from '../../layout/Button';
 
-// import { onGetTypeAndId } from '../../../utils/helpers';
 import config from '../../../utils/config';
 import { mediaPropTypes } from '../../../utils/mediaViewPropTypes';
 
 import reserveBg from '../../../assets/images/reserve-bg.jpg';
-import Spinner from '../../common/Spinner';
+import withSpinner from '../../../hoc-helpers/withSpinner';
 
-const MovieView = ({
-  movie,
-  cast,
-  video,
-  id,
-  type,
-  loading,
-  addToDatabaseBookmarks,
-}) => {
+const MovieView = ({ movie, cast, video, id, type }) => {
   const {
     title,
     poster_path,
@@ -56,10 +45,6 @@ const MovieView = ({
   });
 
   console.log(movie);
-
-  if (loading) {
-    return <Spinner />;
-  }
 
   const handleAddToBookmarks = () => {
     const movieObject = createMovieObj();
@@ -116,4 +101,6 @@ MovieView.propTypes = {
   type: PropTypes.string,
 };
 
-export default connect(null, { addToDatabaseBookmarks })(MovieView);
+const MovieViewWithSpinner = withSpinner(MovieView);
+
+export default MovieViewWithSpinner;

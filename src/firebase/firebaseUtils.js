@@ -62,12 +62,16 @@ export const createUserOwnBookmarksArray = async userAuth => {
 
 
 export const addToDatabaseBookmarks = (data, mediaType) => {
-  if (auth.currentUser) {
-    db.collection('userBookmarks')
-      .doc(auth.currentUser.uid)
-      .update({
-        [mediaType]: firebase.firestore.FieldValue.arrayUnion(data),
-      });
+  try {
+    if (auth.currentUser) {
+      db.collection('userBookmarks')
+        .doc(auth.currentUser.uid)
+        .update({
+          [mediaType]: firebase.firestore.FieldValue.arrayUnion(data),
+        });
+    }
+  } catch (error) {
+    console.log(error);
   }
 };
 

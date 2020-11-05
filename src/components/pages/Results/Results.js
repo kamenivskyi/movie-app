@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import MediaItems from '../../layout/MediaItems';
 import PaginationWrapper from '../../layout/PaginationWrapper';
-import Spinner from '../../common/Spinner';
+import Spinner from '../../layout/Spinner';
 
 import { searchItems } from '../../../redux/search/searchActions';
 

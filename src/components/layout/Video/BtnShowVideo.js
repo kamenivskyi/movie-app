@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Video from './Video';
-import { Button } from '../../common/Button';
+import Button  from '../Button';
 
 const BtnShowVideo = ({ url }) => {
   const [show, setShow] = useState(false);
