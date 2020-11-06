@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import Movies from '../../layout/Movies';
+import Movies from './Movies';
 import Banner from '../../layout/Banner';
 import Filters from '../../layout/Filters';
 import PaginationWrapper from '../../layout/PaginationWrapper';
