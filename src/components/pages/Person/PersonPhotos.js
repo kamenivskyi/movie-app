@@ -1,18 +1,15 @@
-import React from 'react';
-import Slider from 'react-slick';
+import React from "react";
+import Slider from "react-slick";
 
-import { multipleItems } from '../../../utils/sliderSettings';
-import config from '../../../utils/config';
+import MovieService from "../../../services/movie-service";
+import { multipleItems } from "../../../utils/sliderSettings";
 
 const PersonPhotos = ({ data }) => {
-  console.log(data);
-
-  const getImageUrl = item => `${config.API_IMAGE.medium}${item.file_path}`;
-
+  const { getPersonPhotoUrl } = new MovieService();
   return (
     <Slider {...multipleItems}>
-      {data.map(item => (
-        <img src={getImageUrl(item)} alt='' key={item.file_path} />
+      {data.map(({ file_path }) => (
+        <img src={getPersonPhotoUrl(file_path)} alt="" key={file_path} />
       ))}
     </Slider>
   );

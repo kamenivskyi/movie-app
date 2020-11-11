@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from "react";
+import { useHistory, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-import MediaItems from '../../layout/MediaItems';
-import PaginationWrapper from '../../layout/PaginationWrapper';
-import Spinner from '../../layout/Spinner';
+import MediaItems from "../../layout/MediaItems";
+import PaginationWrapper from "../../layout/PaginationWrapper";
+import Spinner from "../../layout/Spinner";
 
-import { searchItems } from '../../../redux/search/searchActions';
+import { searchItems } from "../../../redux/search/searchActions";
 
 const Results = () => {
-  const data = useSelector((state) => state.search.items);
-  const loading = useSelector((state) => state.search.loading);
+  const { data, loading } = useSelector(({ search }) => ({
+    data: search.items,
+    loading: search.loading,
+  }));
   const dispatch = useDispatch();
   const { query, page } = useParams();
   const history = useHistory();
@@ -24,7 +26,7 @@ const Results = () => {
 
   if (!data) return null;
 
-  const handlePageChange = activePage => {
+  const handlePageChange = (activePage) => {
     setCurrentPage(activePage);
 
     history.push(`/results/${query}/${activePage}`);
@@ -35,12 +37,12 @@ const Results = () => {
   }
 
   return (
-    <div className='container-fluid pt-3'>
-      <h2 className='section-title'>Results</h2>
+    <div className="container-fluid pt-3">
+      <h2 className="section-title">Results</h2>
       {total_results > 0 ? (
-        <div className='container'>
-          <div className='row'>
-            <MediaItems items={results} type='movie' />
+        <div className="container">
+          <div className="row">
+            <MediaItems items={results} type="movie" />
 
             <PaginationWrapper
               currentPage={Number(currentPage)}
@@ -51,7 +53,7 @@ const Results = () => {
           </div>
         </div>
       ) : (
-        <p className='text-center'>No {query} found on request</p>
+        <p className="text-center">No {query} found on request</p>
       )}
     </div>
   );

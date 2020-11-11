@@ -1,13 +1,15 @@
-import axios from 'axios';
-
+import axios from "axios";
+import config from "../utils/config";
 class MovieService {
-  _apiKey = 'f58b7aed07949c396b8a76edb193b481';
-  _apiImageBase = 'https://image.tmdb.org/t/p/w500';
+  _apiKey = "f58b7aed07949c396b8a76edb193b481";
+  _apiImageBase = "https://image.tmdb.org/t/p/w500";
   _year = `&primary_release_year=`;
-  _sort = '&sort_by=';
+  _sort = "&sort_by=";
 
-  getResource = async url => {
-    const res = await axios.create({ baseURL: 'https://api.themoviedb.org/3' }).get(url);
+  getResource = async (url) => {
+    const res = await axios
+      .create({ baseURL: "https://api.themoviedb.org/3" })
+      .get(url);
     return res.data;
   };
 
@@ -25,20 +27,20 @@ class MovieService {
     return res.cast;
   };
 
-  getPersonById = async id => {
+  getPersonById = async (id) => {
     const res = await this.getResource(
       `/person/${id}?api_key=${this._apiKey}&language=en-US`
     );
     return res;
   };
-  getPersonPhotoById = async id => {
+  getPersonPhotoById = async (id) => {
     const res = await this.getResource(
       `/person/${id}/images?api_key=${this._apiKey}`
     );
     return res.profiles;
   };
 
-  getGenreMoviesById = async id => {
+  getGenreMoviesById = async (id) => {
     const res = await this.getResource(
       `/discover/movie?api_key=${this._apiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${id}`
     );
@@ -46,8 +48,8 @@ class MovieService {
   };
 
   getDiscoverMovies = async (activePage, sortBy, isAdult, year) => {
-    const hasSort = sortBy ? this._sort + sortBy : '';
-    const hasYear = year ? this._year + year : '';
+    const hasSort = sortBy ? this._sort + sortBy : "";
+    const hasYear = year ? this._year + year : "";
 
     const res = await this.getResource(
       `/discover/movie?api_key=${this._apiKey}&language=en-US${hasSort}&include_adult=${isAdult}&vote_count.gte=1000&include_video=true&page=${activePage}${hasYear}`
@@ -56,7 +58,7 @@ class MovieService {
     return res;
   };
 
-  getTrendingMedia = async (type = 'movie', period = 'week', page = 1) => {
+  getTrendingMedia = async (type = "movie", period = "week", page = 1) => {
     const res = await this.getResource(
       `/trending/${type}/${period}?api_key=${this._apiKey}&page=${page}`
     );
@@ -89,7 +91,9 @@ class MovieService {
     return res.results;
   };
 
-  _transformMovieBase = obj => {
+  getPersonPhotoUrl = (filePath) => `${config.API_IMAGE.medium}${filePath}`;
+
+  _transformMovieBase = (obj) => {
     return {
       title: obj.title,
       id: obj.id,
@@ -98,7 +102,7 @@ class MovieService {
       overview: obj.overview,
       genres: obj.genres,
       budget: obj.budget,
-      revenue: obj.revenue
+      revenue: obj.revenue,
     };
   };
 }
