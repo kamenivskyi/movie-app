@@ -1,24 +1,24 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import { auth, addToDatabaseBookmarks } from '../../../firebase/firebaseUtils';
+import { auth, addToDatabaseBookmarks } from "../../../firebase/firebaseUtils";
 
-import MediaDescription from '../../layout/MediaDescription';
-import Finances from '../../layout/Finances';
-import Cast from '../../layout/Cast';
-import Studios from '../../layout/Studios';
-import Companies from '../../layout/Companies';
-import Networks from '../../layout/Networks/Networks';
-import BtnShowVideo from '../../layout/Video/BtnShowVideo';
-import  Button from '../../layout/Button';
+import MediaDescription from "../../layout/MediaDescription";
+import Finances from "../../layout/Finances";
+import Cast from "../../layout/Cast";
+import Studios from "../../layout/Studios";
+import Companies from "../../layout/Companies";
+import Networks from "../../layout/Networks/Networks";
+import BtnShowVideo from "../../layout/Video/BtnShowVideo";
+import Button from "../../layout/Button";
 
-import config from '../../../utils/config';
-import { mediaPropTypes } from '../../../utils/mediaViewPropTypes';
+import config from "../../../utils/config";
+import { mediaPropTypes } from "../../../utils/mediaViewPropTypes";
 
-import reserveBg from '../../../assets/images/reserve-bg.jpg';
-import withSpinner from '../../../hoc-helpers/withSpinner';
+import reserveBg from "../../../assets/images/reserve-bg.jpg";
+import withSpinner from "../../../hoc-helpers/withSpinner";
 
-const MovieView = ({ movie, cast, video, id, type }) => {
+const MovieView = ({ movie, cast, video, id }) => {
   const {
     title,
     poster_path,
@@ -39,7 +39,7 @@ const MovieView = ({ movie, cast, video, id, type }) => {
   const createMovieObj = () => ({
     id,
     title,
-    type,
+    type: "movie",
     poster_path,
     vote_average,
   });
@@ -48,27 +48,27 @@ const MovieView = ({ movie, cast, video, id, type }) => {
 
   const handleAddToBookmarks = () => {
     const movieObject = createMovieObj();
-    addToDatabaseBookmarks(movieObject, type);
+    addToDatabaseBookmarks(movieObject, "movie");
   };
 
   const image = backdrop_path ? original + backdrop_path : reserveBg;
 
   return (
-    <section className='movie-section'>
-      <div className='movie' style={{ backgroundImage: `url(${image})` }}>
-        {title && <h3 className='movie-title'>{title}</h3>}
-        <div className='item-row'>
-          <div className='movie-img-wrapp'>
-            <img className='movie-img' src={medium + poster_path} alt={title} />
+    <section className="movie-section">
+      <div className="movie" style={{ backgroundImage: `url(${image})` }}>
+        {title && <h3 className="movie-title">{title}</h3>}
+        <div className="item-row">
+          <div className="movie-img-wrapp">
+            <img className="movie-img" src={medium + poster_path} alt={title} />
             {video && <BtnShowVideo url={video.key} />}
             {auth.currentUser && (
               <Button
-                className='btn btn-primary mt-3'
+                className="btn btn-primary mt-3"
                 onClick={handleAddToBookmarks}
                 data-id={id}
-                data-type={type}
+                data-type={"movie"}
               >
-                <i className='fas fa-bookmark'></i> &nbsp; To bookmarks
+                <i className="fas fa-bookmark"></i> &nbsp; To bookmarks
               </Button>
             )}
           </div>
