@@ -1,33 +1,29 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-import { getPerson } from '../../../redux/person/personActions';
-import { getPersonPhotos } from '../../../redux/personPhotos/personPhotosActions';
+import { getPerson } from "../../../redux/person/personActions";
+import { getPersonPhotos } from "../../../redux/personPhotos/personPhotosActions";
 
-import PersonView from './PersonView';
+import PersonView from "./PersonView";
 
-const Person = ({
-  match,
-  person,
-  getPerson,
-  photos,
-  getPersonPhotos,
-  loading
-}) => {
-  const { id } = match.params;
+const Person = () => {
+  const { person, photos, loading } = useSelector(
+    ({ person, personPhotos }) => ({
+      person: person.personData,
+      photos: personPhotos.photos,
+      loading: person.loading,
+    })
+  );
+  const { id } = useParams();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getPerson(id);
-    getPersonPhotos(id);
+    dispatch(getPerson(id));
+    dispatch(getPersonPhotos(id));
   }, [id]);
 
   return <PersonView general={person} photos={photos} loading={loading} />;
 };
 
-const mapStateToProps = state => ({
-  person: state.person.personData,
-  photos: state.personPhotos.photos,
-  loading: state.person.loading
-});
-
-export default connect(mapStateToProps, { getPerson, getPersonPhotos })(Person);
+export default Person;
