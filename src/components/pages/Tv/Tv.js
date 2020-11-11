@@ -29,13 +29,7 @@ const Tv = () => {
   }, [id]);
 
   return (
-    <TvView
-      tv={trendingItem}
-      video={trailer}
-      cast={cast}
-      type="tv"
-      loading={loading}
-    />
+    <TvView tv={trendingItem} video={trailer} cast={cast} loading={loading} />
   );
 };
 

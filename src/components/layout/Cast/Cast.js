@@ -1,21 +1,20 @@
-import React from 'react';
-import Slider from 'react-slick';
-import PropTypes from 'prop-types';
+import React from "react";
+import Slider from "react-slick";
+import PropTypes from "prop-types";
 
-import CastItem from '../CastItem/CastItem';
-import { multipleItems } from '../../../utils/sliderSettings';
+import CastItem from "../CastItem/CastItem";
+import { multipleItems } from "../../../utils/sliderSettings";
 
-import './Cast.css';
+import "./Cast.css";
 
 const Cast = ({ data }) => {
-  if (!data) return null;
-
   return (
+    data &&
     data.length > 0 && (
-      <section className='cast'>
-        <h3 className='section-title'>Cast</h3>
+      <section className="cast">
+        <h3 className="section-title">Cast</h3>
         <Slider {...multipleItems}>
-          {data.map(item => (
+          {data.map((item) => (
             <CastItem item={item} key={item.id} />
           ))}
         </Slider>
@@ -25,7 +24,7 @@ const Cast = ({ data }) => {
 };
 
 Cast.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object)
+  data: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default React.memo(Cast);
+export default Cast;

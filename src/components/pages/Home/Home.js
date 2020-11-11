@@ -1,21 +1,17 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import Movies from './Movies';
-import Banner from '../../layout/Banner';
-import Filters from '../../layout/Filters';
-import PaginationWrapper from '../../layout/PaginationWrapper';
-// import ReleaseYear from '../../ReleaseYear';
-// import SortBy from './SortBy';
-// import IncludeAdult from './IncludeAdult';
-// import { Button } from '../Button';
+import Movies from "./Movies";
+import Banner from "../../layout/Banner";
+import Filters from "../../layout/Filters";
+import PaginationWrapper from "../../layout/PaginationWrapper";
 
-import { getMoviesByFilters } from '../../../redux/moviesByFilters/moviesByFIltersActions';
+import { getMoviesByFilters } from "../../../redux/moviesByFilters/moviesByFIltersActions";
 
 const Home = () => {
   const [state, setState] = useState({
-    year: '',
-    sortBy: '',
+    year: "",
+    sortBy: "",
   });
   const [includeAdult, setIncludeAdult] = useState(false);
   const [activePage, setActivePage] = useState(1);
@@ -26,13 +22,11 @@ const Home = () => {
   const { total_results, total_pages } = data;
   const { year, sortBy } = state;
 
-  // console.log(getMoviesByFilters);
-
-  const handleChange = ({ target: { value, name}}) => {
-    setState({ ...state, [name]: value});
+  const handleChange = ({ target: { value, name } }) => {
+    setState({ ...state, [name]: value });
   };
 
-  const handlePageChange = pageNumber => {
+  const handlePageChange = (pageNumber) => {
     setActivePage(pageNumber);
     dispatch(getMoviesByFilters(pageNumber, sortBy, includeAdult, year));
   };
@@ -40,10 +34,10 @@ const Home = () => {
   return (
     <>
       <Banner />
-      <div className='container' style={{ marginTop: '20px' }}>
-        <div className='row'>
-          <Filters 
-            handleChange={handleChange} 
+      <div className="container" style={{ marginTop: "20px" }}>
+        <div className="row">
+          <Filters
+            handleChange={handleChange}
             handlePageChange={handlePageChange}
             setActivePage={setActivePage}
             setIncludeAdult={setIncludeAdult}
@@ -63,7 +57,6 @@ const Home = () => {
       </div>
     </>
   );
-}
-
+};
 
 export default Home;

@@ -1,22 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import Cast from '../../layout/Cast';
-import MediaDescription from '../../layout/MediaDescription';
-import Studios from '../../layout/Studios';
-import Companies from '../../layout/Companies';
-import Networks from '../../layout/Networks/Networks';
-import BtnShowVideo from '../../layout/Video/BtnShowVideo';
-import Button from '../../layout/Button';
+import Cast from "../../layout/Cast";
+import MediaDescription from "../../layout/MediaDescription";
+import Studios from "../../layout/Studios";
+import Companies from "../../layout/Companies";
+import Networks from "../../layout/Networks/Networks";
+import BtnShowVideo from "../../layout/Video/BtnShowVideo";
+import Button from "../../layout/Button";
 
-import withSpinner from '../../../hoc-helpers/withSpinner';
-import config from '../../../utils/config';
-import { auth, addToDatabaseBookmarks } from '../../../firebase/firebaseUtils';
-import { mediaPropTypes } from '../../../utils/mediaViewPropTypes';
+import withSpinner from "../../../hoc-helpers/withSpinner";
+import config from "../../../utils/config";
+import { auth, addToDatabaseBookmarks } from "../../../firebase/firebaseUtils";
+import { mediaPropTypes } from "../../../utils/mediaViewPropTypes";
 
-import reserveBg from '../../../assets/images/reserve-bg.jpg';
+import reserveBg from "../../../assets/images/reserve-bg.jpg";
 
-const TvView = ({ tv, cast, video, type }) => {
+const TvView = ({ tv, cast, video, type = "tv" }) => {
   const {
     name,
     poster_path,
@@ -31,7 +31,7 @@ const TvView = ({ tv, cast, video, type }) => {
     networks,
   } = tv;
 
-  console.log('tv: ', tv);
+  console.log("tv: ", tv);
 
   const { original, medium } = config.API_IMAGE;
 
@@ -52,20 +52,20 @@ const TvView = ({ tv, cast, video, type }) => {
 
   return (
     <section>
-      <div className='movie' style={{ backgroundImage: `url(${image})` }}>
-        {name && <h3 className='movie-title'>{name}</h3>}
-        <div className='item-row'>
-          <div className='movie-img-wrapp'>
-            <img className='movie-img' src={medium + poster_path} alt={name} />
+      <div className="movie" style={{ backgroundImage: `url(${image})` }}>
+        {name && <h3 className="movie-title">{name}</h3>}
+        <div className="item-row">
+          <div className="movie-img-wrapp">
+            <img className="movie-img" src={medium + poster_path} alt={name} />
             {video && <BtnShowVideo url={video.key} />}
             {auth.currentUser && (
               <Button
-                className='btn btn-primary mt-3'
+                className="btn btn-primary mt-3"
                 onClick={handleAddToBookmarks}
                 data-id={id}
                 data-type={type}
               >
-                <i className='fas fa-bookmark'></i> &nbsp; To bookmarks
+                <i className="fas fa-bookmark"></i> &nbsp; To bookmarks
               </Button>
             )}
           </div>
