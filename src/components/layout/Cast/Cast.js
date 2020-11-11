@@ -3,7 +3,6 @@ import Slider from 'react-slick';
 import PropTypes from 'prop-types';
 
 import CastItem from '../CastItem/CastItem';
-
 import { multipleItems } from '../../../utils/sliderSettings';
 
 import './Cast.css';

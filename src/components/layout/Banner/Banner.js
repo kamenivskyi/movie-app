@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Flip from 'react-reveal/Flip';
 import Slider from 'react-slick';
@@ -12,9 +12,12 @@ import { singleItem } from '../../../utils/sliderSettings';
 
 import './Banner.css';
 
-const Banner = ({ items, getBannerMovies }) => {
+const Banner = () => {
+  const items = useSelector(({ banner }) => banner.bannerItems);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    getBannerMovies('movie', 'week', 1);
+    dispatch(getBannerMovies('movie', 'week', 1));
   }, []);
 
   const { original } = config.API_IMAGE;
@@ -50,8 +53,4 @@ const Banner = ({ items, getBannerMovies }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  items: state.banner.bannerItems,
-});
-
-export default connect(mapStateToProps, { getBannerMovies })(Banner);
+export default Banner;

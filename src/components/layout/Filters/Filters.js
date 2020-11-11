@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 // import PaginationWrapper from '../../layout/PaginationWrapper';
 import ReleaseYear from './ReleaseYear';
@@ -13,7 +13,6 @@ import './Filters.css';
 
 const Filters = ({ 
   data, 
-  getMoviesByFilters, 
   handleChange, 
   handlePageChange,
   setActivePage,
@@ -23,6 +22,8 @@ const Filters = ({
   includeAdult 
 }) => {
   console.log('sortBy', sortBy)
+  const dispatch = useDispatch();
+
   // const [state, setState] = useState({
   //   year: null,
   //   sortBy: ''
@@ -37,7 +38,7 @@ const Filters = ({
     e.preventDefault();
     console.log(sortBy)
     setActivePage(1);
-    getMoviesByFilters(1, sortBy, includeAdult, year);
+    dispatch(getMoviesByFilters(1, sortBy, includeAdult, year));
   };
 
   // const handleChange = ({ target: { value, name}}) => {
@@ -90,5 +91,5 @@ const Filters = ({
 //   data: state.moviesByFilters.movies
 // });
 
-export default connect(null, { getMoviesByFilters })(Filters);
+export default Filters;
 // export default Filters;

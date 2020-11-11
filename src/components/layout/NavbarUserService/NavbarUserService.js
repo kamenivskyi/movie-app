@@ -11,9 +11,11 @@ import {
 
 import Button  from '../Button';
 import { auth } from '../../../firebase/firebaseUtils';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-const NavbarUserService = ({ userData }) => {
+const NavbarUserService = () => {
+  const user = useSelector((state) => state.firebase.userData);
+
   if (auth.currentUser) {
     return (
       <div className='dropdown'>
@@ -25,7 +27,7 @@ const NavbarUserService = ({ userData }) => {
           aria-expanded='false'
         >
           <FontAwesomeIcon icon={faUser} /> &nbsp;
-          {userData.nickname || 'Profile'}
+          {user.nickname || 'Profile'}
         </Button>
         <ul className='dropdown-menu' aria-labelledby='dropdownMenu2'>
           <li>
@@ -69,7 +71,5 @@ const NavbarUserService = ({ userData }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  userData: state.firebase.userData,
-});
-export default connect(mapStateToProps)(NavbarUserService);
+
+export default NavbarUserService;

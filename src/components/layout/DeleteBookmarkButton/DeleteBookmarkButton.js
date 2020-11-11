@@ -1,30 +1,17 @@
-import React, { useContext } from 'react';
-import { withRouter } from 'react-router-dom';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-import firebase, { auth, db } from '../../../firebase/firebaseUtils';
-
 import Button from '../Button';
+import { deleteBookmark } from '../../../firebase/firebaseUtils';
 
-const DeleteBookmarkButton = ({ item, type, history }) => {
+const DeleteBookmarkButton = ({ item, type }) => {
+  const history = useHistory();
   const isProfilePage = history.location.pathname === '/profile/bookmarks';
 
-  const deleteBookmark = (bookmark, type) => {
-    const user = auth.currentUser;
-
-    if (user) {
-      db.collection('userBookmarks')
-        .doc(user.uid)
-        .update({
-          [type]: firebase.firestore.FieldValue.arrayRemove(bookmark),
-        });
-    }
-  };
-
   const onDelete = () => deleteBookmark(item, type);
-
   return (
     isProfilePage && (
       <Button
@@ -43,8 +30,13 @@ const DeleteBookmarkButton = ({ item, type, history }) => {
 };
 
 DeleteBookmarkButton.propTypes = {
-  item: PropTypes.object,
+  item: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    poster_path: PropTypes.string,
+    title: PropTypes.string,
+    type: PropTypes.string,
+  }),
   type: PropTypes.string,
 };
 
-export default withRouter(DeleteBookmarkButton);
+export default DeleteBookmarkButton;

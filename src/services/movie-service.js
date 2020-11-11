@@ -2,13 +2,12 @@ import axios from 'axios';
 
 class MovieService {
   _apiKey = 'f58b7aed07949c396b8a76edb193b481';
-  _apiBase = 'https://api.themoviedb.org/3';
   _apiImageBase = 'https://image.tmdb.org/t/p/w500';
   _year = `&primary_release_year=`;
   _sort = '&sort_by=';
 
   getResource = async url => {
-    const res = await axios.get(`${this._apiBase}${url}`);
+    const res = await axios.create({ baseURL: 'https://api.themoviedb.org/3' }).get(url);
     return res.data;
   };
 

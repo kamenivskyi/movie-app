@@ -1,27 +1,30 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { auth, db } from './firebase/firebaseUtils';
+import { auth } from './firebase/firebaseUtils';
 
 import Routes from './routes';
 import Navbar from './components/layout/Navbar';
 import ButtonToTop from './components/layout/ButtonToTop';
 
-import './App.css';
 import { setUserData } from './redux/firebase/firebaseActions';
+import './App.css';
 
-const App = ({ setUserData, userData }) => {
+const App = () => {
+  const { userData } = useSelector(({ firebase }) => firebase);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     auth.onAuthStateChanged((userAuth) => {
       if (userAuth) {
         console.log('fired auth from app');
-        setUserData(userAuth);
+        dispatch(setUserData(userAuth));
       }
     });
   }, []);
 
-  console.log("userData", userData);
+  console.log('app user', userData);
+
 
   return (
     <>
@@ -32,8 +35,4 @@ const App = ({ setUserData, userData }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  userData: state.firebase.userData,
-});
-
-export default connect(mapStateToProps, { setUserData })(App);
+export default App;

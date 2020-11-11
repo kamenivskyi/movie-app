@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import { getMoviesByGenre } from '../../../redux/moviesByGenre/moviesByGenreActions';
 
@@ -7,14 +8,16 @@ import MediaItems from '../../layout/MediaItems';
 
 import './GenrePage.css';
 
-const GenreMovies = ({ match, movies, getMoviesByGenre }) => {
-  const { id } = match.params;
+const GenreMovies = () => {
+  const movies = useSelector((state) => state.moviesByGenre.movies);
+  const dispatch = useDispatch();
+  const { id } = useParams();
 
   useEffect(() => {
     let isCurrent = true;
 
     if (isCurrent) {
-      getMoviesByGenre(id);
+      dispatch(getMoviesByGenre(id));
     }
     return () => (isCurrent = false);
   }, [id]);
@@ -30,8 +33,4 @@ const GenreMovies = ({ match, movies, getMoviesByGenre }) => {
   );
 };
 
-const mapStateToProps = ({ moviesByGenre: { movies } }) => ({
-  movies
-});
-
-export default connect(mapStateToProps, { getMoviesByGenre })(GenreMovies);
+export default GenreMovies;

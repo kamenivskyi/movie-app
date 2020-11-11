@@ -75,6 +75,18 @@ export const addToDatabaseBookmarks = (data, mediaType) => {
   }
 };
 
+export const deleteBookmark = (bookmark, type) => {
+  const user = auth.currentUser;
+
+  if (user) {
+    db.collection('userBookmarks')
+      .doc(user.uid)
+      .update({
+        [type]: firebase.firestore.FieldValue.arrayRemove(bookmark),
+      });
+  }
+};
+
 export const createUser = async (nickname, email, password) => {
   await auth
     .createUserWithEmailAndPassword(email, password)

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Movies from './Movies';
 import Banner from '../../layout/Banner';
@@ -12,13 +12,16 @@ import PaginationWrapper from '../../layout/PaginationWrapper';
 
 import { getMoviesByFilters } from '../../../redux/moviesByFilters/moviesByFIltersActions';
 
-const Home = ({ data, getMoviesByFilters }) => {
+const Home = () => {
   const [state, setState] = useState({
     year: '',
     sortBy: '',
   });
   const [includeAdult, setIncludeAdult] = useState(false);
   const [activePage, setActivePage] = useState(1);
+
+  const data = useSelector((state) => state.moviesByFilters.movies);
+  const dispatch = useDispatch();
 
   const { total_results, total_pages } = data;
   const { year, sortBy } = state;
@@ -27,11 +30,11 @@ const Home = ({ data, getMoviesByFilters }) => {
 
   const handleChange = ({ target: { value, name}}) => {
     setState({ ...state, [name]: value});
-  }
+  };
 
   const handlePageChange = pageNumber => {
     setActivePage(pageNumber);
-    getMoviesByFilters(pageNumber, sortBy, includeAdult, year);
+    dispatch(getMoviesByFilters(pageNumber, sortBy, includeAdult, year));
   };
 
   return (
@@ -62,8 +65,5 @@ const Home = ({ data, getMoviesByFilters }) => {
   );
 }
 
-const mapStateToProps = state => ({
-  data: state.moviesByFilters.movies
-});
 
-export default connect(mapStateToProps, { getMoviesByFilters })(Home);
+export default Home;

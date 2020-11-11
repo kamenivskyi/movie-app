@@ -19,12 +19,14 @@ const Tv = (props) => {
     loading,
   } = props;
 
+  const TYPE = 'tv';
+
   useEffect(() => {
     const { id } = match.params;
 
-    getTrendingItemData(id, 'tv');
-    getTrailer(id, 'tv');
-    getCast(id, 'tv');
+    getTrendingItemData(id, TYPE);
+    getTrailer(id, TYPE);
+    getCast(id, TYPE);
   }, []);
 
   return (

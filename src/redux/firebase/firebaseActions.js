@@ -1,15 +1,9 @@
 import Types from './firebaseTypes';
 
 import MovieService from '../../services/movie-service';
-import firebase, {
-  db,
-  auth,
-  createUserProfileDocument,
-} from '../../firebase/firebaseUtils';
-
+import { db, auth } from '../../firebase/firebaseUtils';
 
 const { getPersonById } = new MovieService();
-
 
 export const getPerson = (id) => async (dispatch) => {
   try {
@@ -24,15 +18,12 @@ export const getPerson = (id) => async (dispatch) => {
   }
 };
 
-export const getBookmarks = () => async (dispatch) => {
+export const getBookmarks = () => (dispatch) => {
   try {
-    const docBookmarks = db
-      .collection('userBookmarks')
-      .doc(auth.currentUser.uid);
+    const docBookmarks = db.collection('userBookmarks').doc(auth.currentUser.uid);
 
     if (auth.currentUser) {
       dispatch(setBookmarksLoading());
-      // setLoading();
 
       docBookmarks.onSnapshot((doc) => {
         dispatch({ type: Types.GET_BOOKMARKS, payload: doc.data() });
@@ -44,9 +35,8 @@ export const getBookmarks = () => async (dispatch) => {
 };
 
 
-export const setUserData = (userAuth) => async (dispatch) => {
+export const setUserData = (userAuth) => (dispatch) => {
   try {
-    // db.collection('users').doc(auth.uid)
     db.collection('users')
       .doc(userAuth.uid)
       .get()

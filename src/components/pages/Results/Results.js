@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import MediaItems from '../../layout/MediaItems';
 import PaginationWrapper from '../../layout/PaginationWrapper';
@@ -7,15 +8,18 @@ import Spinner from '../../layout/Spinner';
 
 import { searchItems } from '../../../redux/search/searchActions';
 
-const Results = ({ searchItems, match, history, data, loading }) => {
+const Results = () => {
+  const data = useSelector((state) => state.search.items);
+  const loading = useSelector((state) => state.search.loading);
+  const dispatch = useDispatch();
+  const { query, page } = useParams();
+  const history = useHistory();
   const [currentPage, setCurrentPage] = useState(1);
-  const [currentQuery, setCurrentQuery] = useState('');
-  const { query, page } = match.params;
   const { results, total_results, total_pages } = data;
 
   useEffect(() => {
     setCurrentPage(page);
-    searchItems(query, currentPage);
+    dispatch(searchItems(query, currentPage));
   }, [query, currentPage]);
 
   if (!data) return null;
@@ -53,9 +57,4 @@ const Results = ({ searchItems, match, history, data, loading }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  data: state.search.items,
-  loading: state.search.loading
-});
-
-export default connect(mapStateToProps, { searchItems })(Results);
+export default Results;
