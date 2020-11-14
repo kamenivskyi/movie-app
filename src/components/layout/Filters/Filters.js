@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import ReleaseYear from "./ReleaseYear";
 import SortBy from "./SortBy";
 import IncludeAdult from "./IncludeAdult";
-import Button from "../../../components/Button";
+import Button from "../Button";
 
 import { getMoviesByFilters } from "../../../redux/moviesByFilters/moviesByFIltersActions";
 
@@ -37,6 +37,7 @@ const Filters = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(sortBy);
+
     setActivePage(1);
     dispatch(getMoviesByFilters(1, sortBy, includeAdult, year));
   };

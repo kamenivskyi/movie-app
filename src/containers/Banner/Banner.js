@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import Flip from "react-reveal/Flip";
 import Slider from "react-slick";
 
-import { getBannerMovies } from "../../../redux/banner/bannerActions";
+import { getBannerMovies } from "../../redux/banner/bannerActions";
 
-import config from "../../../utils/config";
-import { cutString } from "../../../utils/helpers";
-import { singleItem } from "../../../utils/sliderSettings";
+import config from "../../utils/config";
+import { cutString } from "../../utils/helpers";
+import { singleItem } from "../../utils/sliderSettings";
 
 import "./Banner.css";
 

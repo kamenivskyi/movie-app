@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import Movies from "./Movies";
-import Banner from "./Banner";
-import Filters from "./Filters";
+import MoviesByFilters from "../../containers/MoviesByFilters";
+import Banner from "../../containers/Banner";
+import Filters from "../../containers/Filters";
 import PaginationWrapper from "../../components/PaginationWrapper";
 
 import { getMoviesByFilters } from "../../redux/moviesByFilters/moviesByFIltersActions";
@@ -45,7 +45,7 @@ const Home = () => {
             sortBy={state.sortBy}
             year={year}
           />
-          <Movies />
+          <MoviesByFilters />
           <PaginationWrapper
             currentPage={activePage}
             totalItems={total_results}

@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import MoviesView from "./MoviesView";
+import MoviesView from "./MoviesByFiltersView";
 
 const Movies = () => {
   const movies = useSelector((state) => state.moviesByFilters.movies);
