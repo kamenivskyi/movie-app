@@ -10,13 +10,13 @@ import BtnShowVideo from "../../components/Video/BtnShowVideo";
 import Button from "../../components/Button";
 
 import withSpinner from "../../hocs/withSpinner";
-import config from "../../utils/config";
+import { API_IMAGE, TV_TYPE } from "../../utils/config";
 import { auth, addToDatabaseBookmarks } from "../../firebase/firebaseUtils";
 import { mediaPropTypes } from "../../utils/mediaViewPropTypes";
 
 import reserveBg from "../../assets/images/reserve-bg.jpg";
 
-const TvView = ({ tv, cast, video, type = "tv" }) => {
+const TvView = ({ tv, cast, video }) => {
   const {
     name,
     poster_path,
@@ -33,21 +33,21 @@ const TvView = ({ tv, cast, video, type = "tv" }) => {
 
   console.log("tv: ", tv);
 
-  const { original, medium } = config.API_IMAGE;
+  const { original, medium } = API_IMAGE;
 
   const image = backdrop_path ? original + backdrop_path : reserveBg;
 
   const createObj = () => ({
     id,
     name,
-    type,
+    type: TV_TYPE,
     poster_path,
     vote_average,
   });
 
   const handleAddToBookmarks = () => {
     const tvObject = createObj();
-    addToDatabaseBookmarks(tvObject, type);
+    addToDatabaseBookmarks(tvObject, TV_TYPE);
   };
 
   return (
@@ -63,7 +63,7 @@ const TvView = ({ tv, cast, video, type = "tv" }) => {
                 className="btn btn-primary mt-3"
                 onClick={handleAddToBookmarks}
                 data-id={id}
-                data-type={type}
+                data-type={TV_TYPE}
               >
                 <i className="fas fa-bookmark"></i> &nbsp; To bookmarks
               </Button>

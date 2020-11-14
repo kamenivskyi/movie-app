@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import config from "../../utils/config";
+import { API_IMAGE } from "../../utils/config";
 
 import "./StudioItem.css";
 
@@ -9,11 +9,7 @@ const StudioItem = ({ item: { logo_path, name } }) => (
   <li className="studio-item">
     {logo_path ? (
       <div className="studio-img-wrapper">
-        <img
-          src={config.API_IMAGE.little + logo_path}
-          alt={name}
-          title={name}
-        />
+        <img src={API_IMAGE.little + logo_path} alt={name} title={name} />
       </div>
     ) : (
       <span className="studio-name">{name}</span>

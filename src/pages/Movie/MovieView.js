@@ -12,7 +12,7 @@ import Networks from "../../components/Networks/Networks";
 import BtnShowVideo from "../../components/Video/BtnShowVideo";
 import Button from "../../components/Button";
 
-import config from "../../utils/config";
+import { API_IMAGE, MOVIE_TYPE } from "../../utils/config";
 import { mediaPropTypes } from "../../utils/mediaViewPropTypes";
 
 import reserveBg from "../../assets/images/reserve-bg.jpg";
@@ -34,12 +34,12 @@ const MovieView = ({ movie, cast, video, id }) => {
     networks,
   } = movie;
 
-  const { original, medium } = config.API_IMAGE;
+  const { original, medium } = API_IMAGE;
 
   const createMovieObj = () => ({
     id,
     title,
-    type: "movie",
+    type: MOVIE_TYPE,
     poster_path,
     vote_average,
   });
@@ -48,7 +48,7 @@ const MovieView = ({ movie, cast, video, id }) => {
 
   const handleAddToBookmarks = () => {
     const movieObject = createMovieObj();
-    addToDatabaseBookmarks(movieObject, "movie");
+    addToDatabaseBookmarks(movieObject, MOVIE_TYPE);
   };
 
   const image = backdrop_path ? original + backdrop_path : reserveBg;
@@ -66,7 +66,7 @@ const MovieView = ({ movie, cast, video, id }) => {
                 className="btn btn-primary mt-3"
                 onClick={handleAddToBookmarks}
                 data-id={id}
-                data-type={"movie"}
+                data-type={MOVIE_TYPE}
               >
                 <i className="fas fa-bookmark"></i> &nbsp; To bookmarks
               </Button>

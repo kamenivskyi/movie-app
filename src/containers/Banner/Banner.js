@@ -6,7 +6,7 @@ import Slider from "react-slick";
 
 import { getBannerMovies } from "../../redux/banner/bannerActions";
 
-import config from "../../utils/config";
+import { API_IMAGE, MOVIE_TYPE } from "../../utils/config";
 import { cutString } from "../../utils/helpers";
 import { singleItem } from "../../utils/sliderSettings";
 
@@ -17,10 +17,10 @@ const Banner = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getBannerMovies("movie", "week", 1));
+    dispatch(getBannerMovies(MOVIE_TYPE, "week", 1));
   }, []);
 
-  const { original } = config.API_IMAGE;
+  const { original } = API_IMAGE;
 
   if (!items) return null;
 

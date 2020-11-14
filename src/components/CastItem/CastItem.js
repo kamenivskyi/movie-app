@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import config from "../../utils/config";
+import { API_IMAGE } from "../../utils/config";
 import { cutString } from "../../utils/helpers";
 
 import reserveAvatar from "../../assets/images/avatar.jpg";
@@ -10,7 +10,7 @@ import "./CastItem.css";
 
 const CastItem = ({ item: { character, name, profile_path, id } }) => {
   const imageUrl = profile_path
-    ? config.API_IMAGE.medium + profile_path
+    ? API_IMAGE.medium + profile_path
     : reserveAvatar;
 
   return (

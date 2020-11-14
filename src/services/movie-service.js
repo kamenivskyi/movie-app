@@ -1,5 +1,5 @@
 import axios from "axios";
-import config from "../utils/config";
+import { API_IMAGE } from "../utils/config";
 class MovieService {
   _apiKey = "f58b7aed07949c396b8a76edb193b481";
   _apiImageBase = "https://image.tmdb.org/t/p/w500";
@@ -91,7 +91,7 @@ class MovieService {
     return res.results;
   };
 
-  getPersonPhotoUrl = (filePath) => `${config.API_IMAGE.medium}${filePath}`;
+  getPersonPhotoUrl = (filePath) => `${API_IMAGE.medium}${filePath}`;
 
   _transformMovieBase = (obj) => {
     return {

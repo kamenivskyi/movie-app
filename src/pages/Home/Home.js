@@ -15,11 +15,11 @@ const Home = () => {
   });
   const [includeAdult, setIncludeAdult] = useState(false);
   const [activePage, setActivePage] = useState(1);
-
-  const data = useSelector((state) => state.moviesByFilters.movies);
+  const { total_results, total_pages } = useSelector(
+    (state) => state.moviesByFilters.movies
+  );
   const dispatch = useDispatch();
 
-  const { total_results, total_pages } = data;
   const { year, sortBy } = state;
 
   const handleChange = ({ target: { value, name } }) => {

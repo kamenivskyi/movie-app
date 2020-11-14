@@ -3,7 +3,7 @@ import React from "react";
 import PersonPhotos from "./PersonPhotos";
 import Href from "../../components/Href";
 
-import config from "../../utils/config";
+import { API_IMAGE } from "../../utils/config";
 import withSpinner from "../../hocs/withSpinner";
 
 const PersonView = ({ general, photos }) => {
@@ -19,7 +19,7 @@ const PersonView = ({ general, photos }) => {
 
   console.log(general);
 
-  const photoUrl = config.API_IMAGE.medium + profile_path;
+  const photoUrl = API_IMAGE.medium + profile_path;
 
   return (
     <section className="person-page">

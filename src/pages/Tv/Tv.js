@@ -5,12 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTrendingItemData } from "../../redux/trendingItem/trendingItemActions";
 import { getCast } from "../../redux/cast/castActions";
 import { getTrailer } from "../../redux/trailer/trailerActions";
+import { TV_TYPE } from "../../utils/config";
 
 import TvView from "./TvView";
 
 const Tv = () => {
-  const TYPE = "tv";
-
   const { trendingItem, cast, trailer, loading } = useSelector(
     ({ trendingItem, cast, trailer }) => ({
       trendingItem: trendingItem.item,
@@ -23,9 +22,9 @@ const Tv = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    dispatch(getTrendingItemData(id, TYPE));
-    dispatch(getTrailer(id, TYPE));
-    dispatch(getCast(id, TYPE));
+    dispatch(getTrendingItemData(id, TV_TYPE));
+    dispatch(getTrailer(id, TV_TYPE));
+    dispatch(getCast(id, TV_TYPE));
   }, [id]);
 
   return (

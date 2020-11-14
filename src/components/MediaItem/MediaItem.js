@@ -7,7 +7,7 @@ import MediaItemGrid from "../MediaItemGrid";
 import CardWrapper from "../CardWrapper";
 import DeleteBookmarkButton from "../DeleteBookmarkButton";
 
-import config from "../../utils/config";
+import { API_IMAGE } from "../../utils/config";
 import { createUniqueItem } from "../../utils/helpers";
 
 import NotFoundImage from "../../assets/images/not-found.jpg";
@@ -46,7 +46,7 @@ const MediaItem = ({ data, type }) => {
 };
 
 const getItemImage = (path) => {
-  return path ? config.API_IMAGE.large + path : NotFoundImage;
+  return path ? API_IMAGE.large + path : NotFoundImage;
 };
 
 export default MediaItem;

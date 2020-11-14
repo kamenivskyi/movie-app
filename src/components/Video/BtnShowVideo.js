@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import Video from "./Video";
 import Button from "../Button";
+import { VIDEO_EMBED_BASE } from "../../utils/config";
 
 const BtnShowVideo = ({ url }) => {
   const [show, setShow] = useState(false);
@@ -18,8 +19,6 @@ const BtnShowVideo = ({ url }) => {
       setShow(false);
     }
   };
-
-  // if (show) {
   return (
     <>
       {show && <Video url={url} onClick={handleClick} />}
@@ -28,11 +27,6 @@ const BtnShowVideo = ({ url }) => {
       </Button>
     </>
   );
-  // }
-  // } else {
-  //   return <>{button}</>;
-  // }
-  return null;
 };
 
 BtnShowVideo.propTypes = {
