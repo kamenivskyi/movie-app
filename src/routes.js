@@ -1,18 +1,18 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import Home from "./components/pages/Home";
-import Movie from "./components/pages/Movie";
-import Person from "./components/pages/Person";
-import GenreMovies from "./components/pages/GenreMovies";
-import Results from "./components/pages/Results";
-import Trending from "./components/pages/Trending";
-import Tv from "./components/pages/Tv";
-import About from "./components/pages/About";
-import Profile from "./components/pages/Profile";
-import Login from "./components/pages/Login";
-import Signup from "./components/pages/Signup";
-import NotFound from "./components/pages/NotFound";
-import UserBookmarks from "./components/pages/UserBookmarks/UserBookmarks";
+import Home from "./pages/Home";
+import Movie from "./pages/Movie";
+import Person from "./pages/Person";
+import GenreMovies from "./pages/GenreMovies";
+import Results from "./pages/Results";
+import Trending from "./pages/Trending";
+import Tv from "./pages/Tv";
+import About from "./pages/About";
+import Profile from "./pages/Profile";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import NotFound from "./pages/NotFound";
+import UserBookmarks from "./pages/UserBookmarks/UserBookmarks";
 
 const Routes = () => (
   <Switch>

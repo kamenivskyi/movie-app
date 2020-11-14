@@ -1,0 +1,149 @@
+.movie {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+  z-index: 1;
+  padding: 3rem 0;
+}
+.movie-img-wrapp {
+  display: flex;
+  flex-direction: column;
+}
+.movie-img {
+  border-top-left-radius: 20px;
+}
+
+.movie-title {
+  font-family: "Trade Winds", cursive;
+  padding: 0 20px;
+  font-size: 3rem;
+  text-align: center;
+  text-shadow: 0px 0px 6px #000000;
+  margin-bottom: 60px;
+}
+.description {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  color: #222222;
+  padding: 25px;
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 80%;
+  margin-left: 20px;
+  border-top-right-radius: 20px;
+}
+.description-title {
+  color: #000;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+.release {
+  font-weight: 600;
+}
+.release-value {
+  font-weight: 400;
+  color: tomato;
+}
+.movie-text {
+  margin-bottom: 20px;
+}
+.finances {
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #ffffff;
+}
+.budget,
+.revenue {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.budget {
+  width: 55%;
+  position: relative;
+  background-color: #cccccc;
+  color: #222222;
+  overflow: hidden;
+}
+.budget::after {
+  width: 0;
+  height: 0;
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border: 50px solid transparent;
+  border-right: 50px solid #222222;
+  border-bottom: 50px solid #222222;
+}
+.budget i,
+.revenue i {
+  font-size: 45px;
+  margin-right: 20px;
+}
+.budget i {
+  color: #222222;
+}
+.revenue {
+  width: 45%;
+  background-color: #222222;
+  color: #ffffff;
+}
+/* .revenue i {
+  color: tomato;
+} */
+
+.slick-next:before,
+.slick-prev:before {
+  color: red;
+}
+.slick-prev,
+.slick-next {
+  z-index: 2;
+}
+.slick-prev {
+  left: 0px;
+}
+.slick-next {
+  right: 0px;
+}
+.slick-track {
+  display: flex;
+  flex-wrap: wrap;
+}
+@media (max-width: 750px) {
+  .movie {
+    padding: 40px 0;
+  }
+  .movie-img-wrapp {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .description {
+    border-top-right-radius: 0;
+    width: 100%;
+    margin-left: 0;
+  }
+}
+@media (max-width: 700px) {
+  .finances {
+    flex-direction: column;
+    height: auto;
+  }
+  .budget,
+  .revenue {
+    width: 100%;
+    padding: 25px 0;
+  }
+  .budget::after {
+    border: none;
+  }
+}
