@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
 
 import FormControl from "../../components/FormControl";
 import { createUser } from "../../firebase/firebaseUtils";
-import { auth } from "../../firebase/firebaseUtils";
 import {
   validEmailRegex,
   validateNickname,
@@ -60,9 +58,6 @@ const Signup = () => {
     }
   };
 
-  if (auth.currentUser) {
-    return <Redirect to="/" />;
-  }
   return (
     <div className="container">
       <h2 className="section-title">Signup</h2>

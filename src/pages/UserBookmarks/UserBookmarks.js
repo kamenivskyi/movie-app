@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
 
 import { getBookmarks } from "../../redux/firebase/firebaseActions";
-import { auth } from "../../firebase/firebaseUtils";
-
 import MediaItems from "../../components/MediaItems";
 import Spinner from "../../components/Spinner";
 
@@ -39,33 +36,29 @@ const UserBookmarks = () => {
     }
   };
 
-  if (auth.currentUser) {
-    return (
-      <div className="jumbotron">
-        <div className="container">
-          <h1 className="section-title mb-3">Bookmarks</h1>
-          <input
-            type="search"
-            className="form-control"
-            placeholder="Type to search.."
-            value={term}
-            onChange={handleChange}
-          />
-          <hr className="my-4" />
-          <div className="row">
-            {loading && <Spinner />}
+  return (
+    <div className="jumbotron">
+      <div className="container">
+        <h1 className="section-title mb-3">Bookmarks</h1>
+        <input
+          type="search"
+          className="form-control"
+          placeholder="Type to search.."
+          value={term}
+          onChange={handleChange}
+        />
+        <hr className="my-4" />
+        <div className="row">
+          {loading && <Spinner />}
 
-            {ifBookmarksListEmptyRenderDummy()}
+          {ifBookmarksListEmptyRenderDummy()}
 
-            {visibleMovies && <MediaItems items={visibleMovies} type="movie" />}
-            {visibleTvs && <MediaItems items={visibleTvs} type="tv" />}
-          </div>
+          {visibleMovies && <MediaItems items={visibleMovies} type="movie" />}
+          {visibleTvs && <MediaItems items={visibleTvs} type="tv" />}
         </div>
       </div>
-    );
-  } else {
-    return <Redirect to="/" />;
-  }
+    </div>
+  );
 };
 
 export default UserBookmarks;

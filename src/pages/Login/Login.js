@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
 
 import { auth } from "../../firebase/firebaseUtils";
 import FormControl from "../../components/FormControl";
@@ -22,10 +21,6 @@ const Login = () => {
   const onChange = ({ target: { value, name } }) => {
     setForm({ ...form, [name]: value });
   };
-
-  if (auth.currentUser) {
-    return <Redirect to="/" />;
-  }
 
   return (
     <div className="container">
