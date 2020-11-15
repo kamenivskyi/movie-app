@@ -11,51 +11,37 @@ import {
   MOVIE_TYPE,
   WEEK_PERIOD,
 } from "../../utils/config";
-import { useLocalStorage } from "../../hooks";
+import { useStorage } from "../../hooks";
 
 const Trending = () => {
-  const [currentType, setCurrentType] = useLocalStorage(
-    "currentType",
-    MOVIE_TYPE
-  );
-  const [currentPeriod, setCurrentPeriod] = useLocalStorage(
-    "currentPeriod",
-    WEEK_PERIOD
-  );
-  const [currentPage, setCurrentPage] = useLocalStorage(
-    "currentPage",
-    DEFAULT_TRENDING_PAGE
-  );
+  const [currentType, setCurrentType] = useStorage({
+    key: "currentType",
+    initialValue: MOVIE_TYPE,
+  });
+  const [currentPeriod, setCurrentPeriod] = useStorage({
+    key: "currentPeriod",
+    initialValue: WEEK_PERIOD,
+  });
+  const [currentPage, setCurrentPage] = useStorage({
+    key: "currentPage",
+    initialValue: DEFAULT_TRENDING_PAGE,
+  });
   const { items, loading } = useSelector(({ trendingList }) => trendingList);
   const dispatch = useDispatch();
-
-  const { results, total_results, total_pages, page } = items;
 
   useEffect(() => {
     dispatch(getTrendingList(currentType, currentPeriod, currentPage));
   }, [currentType, currentPeriod, currentPage]);
 
+  const { results, total_results, total_pages, page } = items;
+
   if (!items.results) return null;
-
-  const updateMedia = async (e) => {
-    e.preventDefault();
-
-    const type = e.target.getAttribute("data-type");
-    const period = e.target.getAttribute("data-period");
-
-    if (type) {
-      setCurrentType(type);
-    } else if (period) {
-      setCurrentPeriod(period);
-    }
-  };
-
-  const handlePageChange = (activePage) => setCurrentPage(activePage);
 
   return (
     <div className="container">
       <MediaTabs
-        onClick={updateMedia}
+        onChangePeriod={setCurrentPeriod}
+        onChangeType={setCurrentType}
         type={currentType}
         period={currentPeriod}
       />
@@ -69,7 +55,7 @@ const Trending = () => {
             currentPage={Number(page)}
             totalItems={total_results}
             totalPages={total_pages}
-            onChange={handlePageChange}
+            onChange={setCurrentPage}
           />
         </>
       )}

@@ -6,7 +6,16 @@ import {
   TRENDING_PAGE_TABS,
 } from "../../../utils/config";
 
-const MediaTabs = ({ onClick, type, period }) => {
+const MediaTabs = ({ onChangePeriod, onChangeType, type, period }) => {
+  const handleChangeType = (e, newValue) => {
+    e.preventDefault();
+    onChangeType(newValue);
+  };
+  const handleChangePeriod = (e, newValue) => {
+    e.preventDefault();
+    onChangePeriod(newValue);
+  };
+
   return (
     <div className="row my-3" style={{ margin: "0" }}>
       <ul className="col-6 nav nav-pills">
@@ -19,7 +28,7 @@ const MediaTabs = ({ onClick, type, period }) => {
                 })}
                 data-type={tabSlug}
                 href="#"
-                onClick={onClick}
+                onClick={(e) => handleChangeType(e, tabSlug)}
               >
                 {label}
               </a>
@@ -38,7 +47,7 @@ const MediaTabs = ({ onClick, type, period }) => {
                 })}
                 data-period={tabPeriod}
                 href="#"
-                onClick={onClick}
+                onClick={(e) => handleChangePeriod(e, tabPeriod)}
               >
                 {label}
               </a>
@@ -51,9 +60,9 @@ const MediaTabs = ({ onClick, type, period }) => {
 };
 
 MediaTabs.propTypes = {
-  items: PropTypes.array,
-  periodItems: PropTypes.array,
-  onClick: PropTypes.func,
+  onChangePeriod: PropTypes.func,
+  onChangeType: PropTypes.func,
+  period: PropTypes.string,
   type: PropTypes.string,
 };
 
