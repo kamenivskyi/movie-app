@@ -21,7 +21,7 @@ const Routes = () => (
     <Route exact path="/tv/:id" component={Tv} />
     <Route exact path="/genre/:id" component={GenreMovies} />
     <Route exact path="/person/:id" component={Person} />
-    <Route exact path="/trending/:page?" component={Trending} />
+    <Route exact path="/trending" component={Trending} />
     <Route exact path="/about" component={About} />
     <Route exact path="/results/:query/:page" component={Results} />
     <Route exact path="/profile" component={Profile} />

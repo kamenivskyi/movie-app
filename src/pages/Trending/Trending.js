@@ -1,52 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
 
 import { getTrendingList } from "../../redux/trendingList/trendingListActions";
 import MediaItems from "../../components/MediaItems";
 import MediaTabs from "./MediaTabs";
 import PaginationWrapper from "../../components/PaginationWrapper";
 import Spinner from "../../components/Spinner";
+import {
+  DEFAULT_TRENDING_PAGE,
+  MOVIE_TYPE,
+  WEEK_PERIOD,
+} from "../../utils/config";
+import { useLocalStorage } from "../../hooks";
 
 const Trending = () => {
-  const [currentType, setCurrentType] = useState("movie");
-  const [currentPeriod, setCurrentPeriod] = useState("week");
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentType, setCurrentType] = useLocalStorage(
+    "currentType",
+    MOVIE_TYPE
+  );
+  const [currentPeriod, setCurrentPeriod] = useLocalStorage(
+    "currentPeriod",
+    WEEK_PERIOD
+  );
+  const [currentPage, setCurrentPage] = useLocalStorage(
+    "currentPage",
+    DEFAULT_TRENDING_PAGE
+  );
   const { items, loading } = useSelector(({ trendingList }) => trendingList);
   const dispatch = useDispatch();
-  const history = useHistory();
-  const params = useParams();
 
   const { results, total_results, total_pages, page } = items;
 
   useEffect(() => {
-    getTypeFromSessionStorage("trendingType");
-    getPeriodFromSessionStorage("trendingPeriod");
-
-    setCurrentPage(params.page);
-  }, []);
-
-  useEffect(() => {
     dispatch(getTrendingList(currentType, currentPeriod, currentPage));
   }, [currentType, currentPeriod, currentPage]);
-
-  const getTypeFromSessionStorage = (key) => {
-    const typeFromSessionStorage = sessionStorage.getItem(key);
-
-    if (typeFromSessionStorage) {
-      setCurrentType(typeFromSessionStorage);
-    }
-  };
-
-  const getPeriodFromSessionStorage = (key) => {
-    const periodFromSStorage = sessionStorage.getItem(key);
-    if (periodFromSStorage) {
-      setCurrentPeriod(periodFromSStorage);
-    }
-  };
-
-  const setToSessionStorage = (value, key) =>
-    sessionStorage.setItem(value, key);
 
   if (!items.results) return null;
 
@@ -58,19 +45,12 @@ const Trending = () => {
 
     if (type) {
       setCurrentType(type);
-      setToSessionStorage("trendingType", type);
     } else if (period) {
       setCurrentPeriod(period);
-      setToSessionStorage("trendingPeriod", period);
     }
   };
 
-  const handlePageChange = (activePage) => {
-    setCurrentPage(activePage);
-    history.push(`/trending/${activePage}`);
-  };
-
-  console.log("render");
+  const handlePageChange = (activePage) => setCurrentPage(activePage);
 
   return (
     <div className="container">

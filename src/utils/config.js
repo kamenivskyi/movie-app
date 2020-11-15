@@ -11,6 +11,9 @@ export const VIDEO_EMBED_BASE = "https://www.youtube.com/embed/";
 
 export const MOVIE_TYPE = "movie";
 export const TV_TYPE = "tv";
+export const DEFAULT_TRENDING_PAGE = 1;
+export const WEEK_PERIOD = "week";
+export const DAY_PERIOD = "day";
 
 export const TRENDING_PAGE_PERIODS = [
   { label: "Week", tabPeriod: "week" },

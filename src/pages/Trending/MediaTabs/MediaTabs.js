@@ -51,8 +51,8 @@ const MediaTabs = ({ onClick, type, period }) => {
 };
 
 MediaTabs.propTypes = {
-  items: PropTypes.array.isRequired,
-  periodItems: PropTypes.array.isRequired,
+  items: PropTypes.array,
+  periodItems: PropTypes.array,
   onClick: PropTypes.func,
   type: PropTypes.string,
 };

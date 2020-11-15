@@ -4,9 +4,9 @@ import { NavLink, useLocation } from "react-router-dom";
 const NavbarNav = () => {
   const location = useLocation();
 
-  const trendingPath = location.pathname.includes("/trending/")
-    ? location.pathname
-    : "/trending";
+  // const trendingPath = location.pathname.includes("/trending")
+  //   ? location.pathname
+  //   : "/trending";
 
   return (
     <>
@@ -14,7 +14,7 @@ const NavbarNav = () => {
         <NavLink className="nav-item nav-link" exact to="/">
           Home
         </NavLink>
-        <NavLink className="nav-item nav-link" to={trendingPath}>
+        <NavLink className="nav-item nav-link" to="/trending">
           Trending
         </NavLink>
         <NavLink className="nav-item nav-link" to="/about">
