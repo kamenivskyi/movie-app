@@ -59,14 +59,16 @@ export const createUserOwnBookmarksArray = async (userAuth) => {
   return bookmarksRef;
 };
 
+export const signInUser = async (email, password) => {
+  await auth.signInWithEmailAndPassword(email, password);
+};
+
 export const addToDatabaseBookmarks = (data, mediaType) => {
   try {
     if (auth.currentUser) {
-      db.collection("userBookmarks")
-        .doc(auth.currentUser.uid)
-        .update({
-          [mediaType]: firebase.firestore.FieldValue.arrayUnion(data),
-        });
+      db.doc(`userBookmarks/${auth.currentUser.uid}`).update({
+        [mediaType]: firebase.firestore.FieldValue.arrayUnion(data),
+      });
     }
   } catch (error) {
     console.log(error);
@@ -77,11 +79,9 @@ export const deleteBookmark = (bookmark, type) => {
   const user = auth.currentUser;
 
   if (user) {
-    db.collection("userBookmarks")
-      .doc(user.uid)
-      .update({
-        [type]: firebase.firestore.FieldValue.arrayRemove(bookmark),
-      });
+    db.doc(`userBookmarks/${user.uid}`).update({
+      [type]: firebase.firestore.FieldValue.arrayRemove(bookmark),
+    });
   }
 };
 
@@ -101,8 +101,8 @@ export const createUser = async (nickname, email, password) => {
   await auth
     .createUserWithEmailAndPassword(email, password)
     .then(({ user }) => {
-      db.collection("userBookmarks").doc(user.uid).set({ tv: [], movie: [] });
-      db.collection("users").doc(user.uid).set({ nickname, email });
+      db.doc(`userBookmarks/${user.uid}`).set({ tv: [], movie: [] });
+      db.doc(`users/${user.uid}`).set({ nickname, email });
     })
     .catch((err) => console.log(err));
 };

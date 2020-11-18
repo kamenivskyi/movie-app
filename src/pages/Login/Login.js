@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { auth } from "../../firebase/firebaseUtils";
+import { signInUser } from "../../firebase/firebaseUtils";
 import FormControl from "../../components/FormControl";
 
 const Login = () => {
@@ -12,11 +12,11 @@ const Login = () => {
     signInUser(email, password);
   };
 
-  const signInUser = (email, password) => {
-    auth.signInWithEmailAndPassword(email, password).then((res) => {
-      console.log(res);
-    });
-  };
+  // const signInUser = (email, password) => {
+  //   auth.signInWithEmailAndPassword(email, password).then((res) => {
+  //     console.log(res);
+  //   });
+  // };
 
   const onChange = ({ target: { value, name } }) => {
     setForm({ ...form, [name]: value });
