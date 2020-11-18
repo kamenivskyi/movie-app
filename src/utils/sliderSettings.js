@@ -6,7 +6,6 @@ export const multipleItems = {
   slidesToShow: 5,
   slidesToScroll: 5,
   initialSlide: 0,
-  lazyLoad: true,
   responsive: [
     {
       breakpoint: 1024,
@@ -14,25 +13,25 @@ export const multipleItems = {
         dots: false,
         slidesToShow: 3,
         slidesToScroll: 3,
-        infinite: true
-      }
+        infinite: true,
+      },
     },
     {
       breakpoint: 830,
       settings: {
         slidesToShow: 2,
         slidesToScroll: 2,
-        initialSlide: 2
-      }
+        initialSlide: 2,
+      },
     },
     {
       breakpoint: 550,
       settings: {
         slidesToShow: 1,
-        slidesToScroll: 1
-      }
-    }
-  ]
+        slidesToScroll: 1,
+      },
+    },
+  ],
 };
 
 export const singleItem = {
@@ -43,5 +42,5 @@ export const singleItem = {
   lazyLoad: false,
   arrows: false,
   slidesToShow: 1,
-  slidesToScroll: 1
+  slidesToScroll: 1,
 };

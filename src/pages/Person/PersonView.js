@@ -47,7 +47,15 @@ const PersonView = ({ general, photos }) => {
 
                 {birthday && <p className="card-text">Birthday: {birthday}</p>}
 
-                {deathday && <p>Death 😢: {deathday}</p>}
+                {deathday && (
+                  <p>
+                    Death{" "}
+                    <span role="img" aria-label="sad emodji">
+                      😢
+                    </span>
+                    : {deathday}
+                  </p>
+                )}
 
                 {biography && (
                   <p className="card-text">

@@ -8,23 +8,23 @@ import { calcTime } from "../../utils/helpers";
 
 const MediaDescription = ({ overview, releaseDate, genres, runtime }) => {
   return (
-    <div className="description">
+    <div className="card-body">
       {overview && (
-        <>
-          <h4 className="description-title">Description: </h4>
-          <p className="movie-text">{overview}</p>
-        </>
+        <div className="card-block">
+          <h3 className="card-title">Overview </h3>
+          <p className="card-text">{overview}</p>
+        </div>
       )}
       {releaseDate && (
-        <div className="release description-title">
-          Release: <span className="release-value">{releaseDate}</span>
+        <div className="card-block">
+          <h4 className="card-title">Release</h4>
+          <p className="card-text">{releaseDate}</p>
         </div>
       )}
       {runtime && (
-        <div className="description-title">
-          <FontAwesomeIcon icon={faClock} /> &nbsp;
-          <span className="font-weight-bold">Runtime: </span>
-          {calcTime(runtime)}
+        <div className="card-block">
+          <h5 className="card-title">Runtime</h5>
+          <p className="card-text">{calcTime(runtime)}</p>
         </div>
       )}
       <Genres genres={genres} />

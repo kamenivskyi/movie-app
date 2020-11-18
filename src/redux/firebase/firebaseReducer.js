@@ -1,4 +1,4 @@
-import Types from './firebaseTypes';
+import Types from "./firebaseTypes";
 
 const INITIAL_STATE = {
   userData: {},
@@ -9,12 +9,6 @@ const INITIAL_STATE = {
 
 const firebaseReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case Types.SET_USER:
-      return {
-        ...state,
-        userData: action.payload,
-        bookmarksLoading: false,
-      };
     case Types.SET_USER_SIGNIN:
       return {
         ...state,

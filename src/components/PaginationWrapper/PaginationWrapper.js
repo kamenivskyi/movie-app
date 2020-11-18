@@ -1,24 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
-// import Pagination from 'react-pagination-js';
 import Pagination from "react-js-pagination";
 
 import "./PaginationWrapper.css";
 
-// import 'react-pagination-js/dist/styles.css';
-
 const PaginationWrapper = ({
-  currentPage,
+  activePage,
   totalItems,
   totalPages,
   onChange,
 }) => {
-  console.log("currentPage: ", currentPage);
-
   return totalPages > 1 ? (
     <div className="pagination-container">
       <Pagination
-        activePage={currentPage}
+        activePage={activePage}
         itemsCountPerPage={20}
         totalItemsCount={totalItems}
         pageRangeDisplayed={5}
@@ -35,18 +30,8 @@ const PaginationWrapper = ({
 PaginationWrapper.propTypes = {
   currentPage: PropTypes.number,
   totalItems: PropTypes.number,
-  totalPages: PropTypes.number,
+  activePage: PropTypes.number,
   onChange: PropTypes.func,
 };
-
-{
-  /* <Pagination
-currentPage={currentPage}
-totalSize={totalItems}
-sizePerPage={20}
-changeCurrentPage={onChange}
-theme='border-bottom'
-/> */
-}
 
 export default PaginationWrapper;

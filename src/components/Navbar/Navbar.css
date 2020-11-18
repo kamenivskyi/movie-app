@@ -1,5 +1,5 @@
 body .bg-primary {
-  background: #325d88 !important;
+  background: var(--primary) !important;
 }
 
 .main-navbar {

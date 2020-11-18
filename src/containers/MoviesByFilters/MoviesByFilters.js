@@ -1,13 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import MoviesView from "./MoviesByFiltersView";
+import MoviesByFiltersView from "./MoviesByFiltersView";
 
-const Movies = () => {
-  const movies = useSelector((state) => state.moviesByFilters.movies);
-  const loading = useSelector((state) => state.moviesByFilters.loading);
+const MoviesByFilters = () => {
+  const { movies, loading } = useSelector((state) => state.moviesByFilters);
 
-  return <MoviesView items={movies.results} loading={loading} />;
+  return <MoviesByFiltersView items={movies.results} loading={loading} />;
 };
 
-export default Movies;
+export default MoviesByFilters;

@@ -8,7 +8,7 @@ const Genres = ({ genres }) => (
   <>
     {genres && (
       <>
-        <h5 className="genres-title">Genres: </h5>
+        <h5 className="card-title py-2">Genres </h5>
         <ul className="genres">
           {genres.map((genre) => (
             <GenreItem genre={genre} key={genre.id} />

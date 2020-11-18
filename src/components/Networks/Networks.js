@@ -12,7 +12,7 @@ const Networks = ({ data }) => {
 
   return (
     <>
-      <h4 className="section-title text-black">Networks</h4>
+      <h4 className="section-title text-white">Networks</h4>
       <ul className="companies">{renderNetworks}</ul>
     </>
   );

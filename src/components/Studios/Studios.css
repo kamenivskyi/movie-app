@@ -1,6 +1,6 @@
 .studios-wrapper {
-  background-color: #ccc;
-  border-bottom: 2px solid black;
+  background-color: var(--primary);
+  border-bottom: 2px solid var(--white);
   padding: 20px 0;
 }
 .studios {

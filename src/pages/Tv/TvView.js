@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBookmark } from "@fortawesome/free-solid-svg-icons";
 
 import Cast from "../../components/Cast";
 import MediaDescription from "../../components/MediaDescription";
@@ -15,6 +17,7 @@ import { auth, addToDatabaseBookmarks } from "../../firebase/firebaseUtils";
 import { mediaPropTypes } from "../../utils/mediaViewPropTypes";
 
 import reserveBg from "../../assets/images/reserve-bg.jpg";
+import "./TvView.css";
 
 const TvView = ({ tv, cast, video }) => {
   const {
@@ -33,7 +36,7 @@ const TvView = ({ tv, cast, video }) => {
 
   console.log("tv: ", tv);
 
-  const { original, medium } = API_IMAGE;
+  const { original, large } = API_IMAGE;
 
   const image = backdrop_path ? original + backdrop_path : reserveBg;
 
@@ -50,31 +53,46 @@ const TvView = ({ tv, cast, video }) => {
     addToDatabaseBookmarks(tvObject, TV_TYPE);
   };
 
+  console.log(tv);
+
   return (
     <section>
-      <div className="movie" style={{ backgroundImage: `url(${image})` }}>
-        {name && <h3 className="movie-title">{name}</h3>}
-        <div className="item-row">
-          <div className="movie-img-wrapp">
-            <img className="movie-img" src={medium + poster_path} alt={name} />
-            {video && <BtnShowVideo url={video.key} />}
-            {auth.currentUser && (
-              <Button
-                className="btn btn-primary mt-3"
-                onClick={handleAddToBookmarks}
-                data-id={id}
-                data-type={TV_TYPE}
-              >
-                <i className="fas fa-bookmark"></i> &nbsp; To bookmarks
-              </Button>
-            )}
+      <div className="media-view" style={{ backgroundImage: `url(${image})` }}>
+        <div className="container">
+          {name && <h3 className="media-view-title">{name}</h3>}
+          <div className="media-view-card">
+            <div className="row">
+              <div className="col-md-3">
+                <div className="media-view-card-img">
+                  <img src={large + poster_path} alt={name} />
+                </div>
+              </div>
+              <div className="col-md-7">
+                <MediaDescription
+                  overview={overview}
+                  releaseDate={first_air_date}
+                  genres={genres}
+                  runtime={runtime}
+                />
+              </div>
+              <div className="col-md-1 offset-md-1">
+                <div className="media-view-user-buttons">
+                  {video && <BtnShowVideo url={video.key} />}
+                  {auth.currentUser && (
+                    <Button
+                      className="btn btn-primary btn-rounded mt-3"
+                      onClick={handleAddToBookmarks}
+                      data-id={id}
+                      data-type={TV_TYPE}
+                      label="Add to bookmarks"
+                    >
+                      <FontAwesomeIcon icon={faBookmark} />
+                    </Button>
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
-          <MediaDescription
-            overview={overview}
-            releaseDate={first_air_date}
-            genres={genres}
-            runtime={runtime}
-          />
         </div>
       </div>
       <Studios

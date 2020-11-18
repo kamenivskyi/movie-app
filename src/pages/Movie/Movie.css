@@ -16,7 +16,7 @@
   border-top-left-radius: 20px;
 }
 
-.movie-title {
+.media-title {
   font-family: "Trade Winds", cursive;
   padding: 0 20px;
   font-size: 3rem;
@@ -50,74 +50,7 @@
 .movie-text {
   margin-bottom: 20px;
 }
-.finances {
-  height: 100px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: #ffffff;
-}
-.budget,
-.revenue {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.budget {
-  width: 55%;
-  position: relative;
-  background-color: #cccccc;
-  color: #222222;
-  overflow: hidden;
-}
-.budget::after {
-  width: 0;
-  height: 0;
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  border: 50px solid transparent;
-  border-right: 50px solid #222222;
-  border-bottom: 50px solid #222222;
-}
-.budget i,
-.revenue i {
-  font-size: 45px;
-  margin-right: 20px;
-}
-.budget i {
-  color: #222222;
-}
-.revenue {
-  width: 45%;
-  background-color: #222222;
-  color: #ffffff;
-}
-/* .revenue i {
-  color: tomato;
-} */
 
-.slick-next:before,
-.slick-prev:before {
-  color: red;
-}
-.slick-prev,
-.slick-next {
-  z-index: 2;
-}
-.slick-prev {
-  left: 0px;
-}
-.slick-next {
-  right: 0px;
-}
-.slick-track {
-  display: flex;
-  flex-wrap: wrap;
-}
 @media (max-width: 750px) {
   .movie {
     padding: 40px 0;
@@ -131,19 +64,5 @@
     border-top-right-radius: 0;
     width: 100%;
     margin-left: 0;
-  }
-}
-@media (max-width: 700px) {
-  .finances {
-    flex-direction: column;
-    height: auto;
-  }
-  .budget,
-  .revenue {
-    width: 100%;
-    padding: 25px 0;
-  }
-  .budget::after {
-    border: none;
   }
 }

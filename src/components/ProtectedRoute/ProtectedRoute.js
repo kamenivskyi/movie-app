@@ -5,7 +5,7 @@ import { Redirect, Route } from "react-router-dom";
 const ProtectedRoute = ({
   component: Component,
   isAuthenticated,
-  redirectTo,
+  redirectTo = "/",
   ...rest
 }) => (
   <Route
@@ -18,10 +18,6 @@ const ProtectedRoute = ({
 
 ProtectedRoute.propTypes = {
   redirectTo: PropTypes.string,
-};
-
-PropTypes.defaultProps = {
-  redirectTo: "/",
 };
 
 export default ProtectedRoute;

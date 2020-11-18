@@ -15,7 +15,8 @@
 
 .cast-item img {
   padding: 0 !important;
-  /* width: 100%; */
+  width: 100%;
+  object-fit: contain;
   height: 100%;
   min-height: 390px;
   max-height: 390px;
@@ -23,6 +24,9 @@
 
 .cast-item img:last-child {
   margin-right: 0;
+}
+.cast-item .cart-body {
+  text-align: center;
 }
 
 .character {
@@ -36,4 +40,23 @@
 .cast li img {
   width: 100%;
   height: auto;
+}
+
+.slick-next:before,
+.slick-prev:before {
+  color: red;
+}
+.slick-prev,
+.slick-next {
+  z-index: 2;
+}
+.slick-prev {
+  left: 0px;
+}
+.slick-next {
+  right: 0px;
+}
+.slick-track {
+  display: flex;
+  flex-wrap: wrap;
 }

@@ -1,5 +1,7 @@
 import React from "react";
 
+import "./Finances.css";
+
 import { convertMoney } from "../../utils/helpers";
 
 const Finances = ({ revenue, budget }) => (

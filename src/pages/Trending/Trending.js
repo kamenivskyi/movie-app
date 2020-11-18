@@ -14,15 +14,15 @@ import {
 import { useStorage } from "../../hooks";
 
 const Trending = () => {
-  const [currentType, setCurrentType] = useStorage({
+  const [type, setType] = useStorage({
     key: "currentType",
     initialValue: MOVIE_TYPE,
   });
-  const [currentPeriod, setCurrentPeriod] = useStorage({
+  const [period, setPeriod] = useStorage({
     key: "currentPeriod",
     initialValue: WEEK_PERIOD,
   });
-  const [currentPage, setCurrentPage] = useStorage({
+  const [page, setPage] = useStorage({
     key: "currentPage",
     initialValue: DEFAULT_TRENDING_PAGE,
   });
@@ -30,32 +30,32 @@ const Trending = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getTrendingList(currentType, currentPeriod, currentPage));
-  }, [currentType, currentPeriod, currentPage]);
+    dispatch(getTrendingList(type, period, page));
+  }, [type, period, page]);
 
-  const { results, total_results, total_pages, page } = items;
+  const { results, total_results, total_pages } = items;
 
   if (!items.results) return null;
 
   return (
     <div className="container">
       <MediaTabs
-        onChangePeriod={setCurrentPeriod}
-        onChangeType={setCurrentType}
-        type={currentType}
-        period={currentPeriod}
+        onChangePeriod={setPeriod}
+        onChangeType={setType}
+        type={type}
+        period={period}
       />
       {loading ? (
         <Spinner />
       ) : (
         <>
-          <MediaItems items={results} type={currentType} simpleRow />
+          <MediaItems items={results} type={type} simpleRow />
 
           <PaginationWrapper
-            currentPage={Number(page)}
-            totalItems={total_results}
-            totalPages={total_pages}
-            onChange={setCurrentPage}
+            activePage={Number(items.page)}
+            totalItems={Number(total_results)}
+            totalPages={Number(total_pages)}
+            onChange={setPage}
           />
         </>
       )}

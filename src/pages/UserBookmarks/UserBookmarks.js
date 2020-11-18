@@ -39,7 +39,7 @@ const UserBookmarks = () => {
   return (
     <div className="jumbotron">
       <div className="container">
-        <h1 className="section-title mb-3">Bookmarks</h1>
+        <h2 className="section-title mb-3">Bookmarks</h2>
         <input
           type="search"
           className="form-control"

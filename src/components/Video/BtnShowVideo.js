@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faVideo } from "@fortawesome/free-solid-svg-icons";
 
 import Video from "./Video";
 import Button from "../Button";
-import { VIDEO_EMBED_BASE } from "../../utils/config";
 
 const BtnShowVideo = ({ url }) => {
   const [show, setShow] = useState(false);
@@ -22,8 +23,11 @@ const BtnShowVideo = ({ url }) => {
   return (
     <>
       {show && <Video url={url} onClick={handleClick} />}
-      <Button className="btn btn-light mt-3" onClick={handleClick}>
-        <i className="fas fa-play"></i> &nbsp; Trailer
+      <Button
+        className="btn btn-warning btn-rounded mt-3"
+        onClick={handleClick}
+      >
+        <FontAwesomeIcon icon={faVideo} />
       </Button>
     </>
   );

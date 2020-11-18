@@ -12,7 +12,7 @@ const Cast = ({ data }) => {
     data &&
     data.length > 0 && (
       <section className="cast">
-        <h3 className="section-title">Cast</h3>
+        <h3 className="section-title text-black">Cast</h3>
         <Slider {...multipleItems}>
           {data.map((item) => (
             <CastItem item={item} key={item.id} />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useDispatch } from "react-redux";
 
 import ReleaseYear from "./ReleaseYear";
@@ -7,19 +7,21 @@ import IncludeAdult from "./IncludeAdult";
 import Button from "../../components/Button";
 
 import { getMoviesByFilters } from "../../redux/moviesByFilters/moviesByFIltersActions";
+import homeContext from "../../context/homePage/homeContext";
 
 import "./Filters.css";
 
-const Filters = ({
-  onChangeYear,
-  onChangeSort,
-  onPageChange,
-  setActivePage,
-  onChangeAdult,
-  sortBy,
-  year,
-  includeAdult,
-}) => {
+const Filters = () => {
+  const {
+    handleChangeYear,
+    handleChangeSort,
+    setActivePage,
+    handleChangeAdult,
+    sortBy,
+    year,
+    includeAdult,
+  } = useContext(homeContext);
+
   console.log("sortBy", sortBy);
   const dispatch = useDispatch();
 
@@ -33,9 +35,9 @@ const Filters = ({
     <div className="col-12">
       <h2 className="section-title">Filters</h2>
       <form className="form-inline filters" onSubmit={handleSubmit}>
-        <IncludeAdult onChange={onChangeAdult} value={includeAdult} />
-        <ReleaseYear onChange={onChangeYear} name="year" value={year} />
-        <SortBy onChange={onChangeSort} name="sortBy" value={sortBy} />
+        <IncludeAdult onChange={handleChangeAdult} value={includeAdult} />
+        <ReleaseYear onChange={handleChangeYear} name="year" value={year} />
+        <SortBy onChange={handleChangeSort} name="sortBy" value={sortBy} />
         <Button className="btn btn-primary submit-btn" type="submit">
           Search
         </Button>

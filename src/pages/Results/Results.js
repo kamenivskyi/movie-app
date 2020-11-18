@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import MediaItems from "../../components/MediaItems";
 import PaginationWrapper from "../../components/PaginationWrapper";
 import Spinner from "../../components/Spinner";
-
 import { searchItems } from "../../redux/search/searchActions";
 
 const Results = () => {

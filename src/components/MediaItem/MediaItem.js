@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
-import Flip from "react-reveal/Flip";
 
 import MediaItemGrid from "../MediaItemGrid";
 import CardWrapper from "../CardWrapper";

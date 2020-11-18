@@ -1,0 +1,69 @@
+.finances {
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #ffffff;
+}
+.budget,
+.revenue {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.budget {
+  width: 55%;
+  position: relative;
+  background-color: var(--white);
+  color: var(--dark);
+  overflow: hidden;
+}
+.budget::after {
+  width: 0;
+  height: 0;
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border: 50px solid transparent;
+  border-right: 50px solid var(--primary);
+  border-bottom: 50px solid var(--primary);
+}
+.budget i,
+.revenue i {
+  font-size: 45px;
+  margin-right: 20px;
+}
+.budget i {
+  color: var(--dark);
+}
+.revenue {
+  width: 45%;
+  background-color: var(--primary);
+  color: #ffffff;
+}
+
+@media (max-width: 700px) {
+  .finances {
+    flex-direction: column;
+    height: auto;
+  }
+  .revenue {
+    background-color: var(--white);
+    color: var(--dark);
+  }
+  .budget {
+    background-color: var(--primary);
+    color: var(--white);
+  }
+  .budget,
+  .revenue {
+    width: 100%;
+    padding: 25px 0;
+  }
+  .budget::after {
+    border: none;
+  }
+}
