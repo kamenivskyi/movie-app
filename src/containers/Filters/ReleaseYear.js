@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const ReleaseYear = ({ onChange, year, ...restProps }) => {
   const getYears = () => {
@@ -35,4 +36,10 @@ const ReleaseYear = ({ onChange, year, ...restProps }) => {
     </div>
   );
 };
+
+ReleaseYear.propTypes = {
+  onChange: PropTypes.func,
+  year: PropTypes.number,
+};
+
 export default ReleaseYear;
