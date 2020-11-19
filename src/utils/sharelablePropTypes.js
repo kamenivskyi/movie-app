@@ -14,9 +14,9 @@ export const mediaPropTypes = {
   networks: PropTypes.arrayOf(PropTypes.object),
 };
 
-export const castItemPropTypes = {
+export const castItemShapePropTypes = PropTypes.shape({
   charachter: PropTypes.string,
   profile_path: PropTypes.string,
   id: PropTypes.number,
   name: PropTypes.string,
-};
+});
