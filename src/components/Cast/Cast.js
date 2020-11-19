@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 import CastItem from "../CastItem/CastItem";
 import { multipleItems } from "../../utils/sliderSettings";
+import { castItemPropTypes } from "../../utils/sharelablePropTypes";
 
 import "./Cast.css";
 
@@ -24,7 +25,7 @@ const Cast = ({ data }) => {
 };
 
 Cast.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object),
+  data: PropTypes.arrayOf(PropTypes.shape(castItemPropTypes)),
 };
 
 export default Cast;

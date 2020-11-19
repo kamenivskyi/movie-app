@@ -14,7 +14,7 @@ import Button from "../../components/Button";
 import withSpinner from "../../hocs/withSpinner";
 import { API_IMAGE, TV_TYPE } from "../../utils/config";
 import { auth, addToDatabaseBookmarks } from "../../firebase/firebaseUtils";
-import { mediaPropTypes } from "../../utils/mediaViewPropTypes";
+import { mediaPropTypes } from "../../utils/sharelablePropTypes";
 
 import reserveBg from "../../assets/images/reserve-bg.jpg";
 import "./TvView.css";

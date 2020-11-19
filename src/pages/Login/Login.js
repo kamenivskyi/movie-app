@@ -12,12 +12,6 @@ const Login = () => {
     signInUser(email, password);
   };
 
-  // const signInUser = (email, password) => {
-  //   auth.signInWithEmailAndPassword(email, password).then((res) => {
-  //     console.log(res);
-  //   });
-  // };
-
   const onChange = ({ target: { value, name } }) => {
     setForm({ ...form, [name]: value });
   };

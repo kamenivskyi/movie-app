@@ -12,10 +12,7 @@ const About = () => (
           the latest information about your favorite movie or series
         </p>
         <hr className="my-4" />
-        <p>
-          This application was written as a coursework on react.js by Roman
-          Kamenivskyi
-        </p>
+        <p>This application was written on react.js by Roman Kamenivskyi</p>
         <p className="lead">
           <Link className="btn btn-primary btn-lg" to="/" role="button">
             Back to home

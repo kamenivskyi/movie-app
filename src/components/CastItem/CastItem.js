@@ -1,8 +1,10 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import { API_IMAGE } from "../../utils/config";
 import { cutString } from "../../utils/helpers";
+import { castItemPropTypes } from "../../utils/sharelablePropTypes";
 
 import reserveAvatar from "../../assets/images/avatar.jpg";
 
@@ -24,6 +26,10 @@ const CastItem = ({ item: { character, name, profile_path, id } }) => {
       </div>
     </div>
   );
+};
+
+CastItem.propTypes = {
+  item: PropTypes.shape(castItemPropTypes),
 };
 
 export default CastItem;

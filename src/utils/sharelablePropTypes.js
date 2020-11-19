@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 export const mediaPropTypes = {
   poster_path: PropTypes.string,
@@ -11,5 +11,12 @@ export const mediaPropTypes = {
   runtime: PropTypes.number,
   vote_average: PropTypes.number,
   production_companies: PropTypes.arrayOf(PropTypes.object),
-  networks: PropTypes.arrayOf(PropTypes.object)
+  networks: PropTypes.arrayOf(PropTypes.object),
+};
+
+export const castItemPropTypes = {
+  charachter: PropTypes.string,
+  profile_path: PropTypes.string,
+  id: PropTypes.number,
+  name: PropTypes.string,
 };
