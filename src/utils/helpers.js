@@ -7,16 +7,18 @@ export const calcTime = (time) => {
 
 // Convert a number to $ format
 export const convertMoney = (money) => {
-  const formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
     minimumFractionDigits: 0,
   });
   return formatter.format(money);
 };
 
 export const cutString = (string, cutFrom, cutTo) => {
-  return string.length > cutTo ? string.substring(cutFrom, cutTo) + '..' : string;
+  return string.length > cutTo
+    ? string.substring(cutFrom, cutTo) + ".."
+    : string;
 };
 
 // creating item object for deleting from bookmarks
@@ -24,5 +26,15 @@ export const createUniqueItem = (data, type) => {
   const { id, poster_path, title, name, vote_average } = data;
   const standardObj = { id, poster_path, vote_average, type };
 
-  return type === 'tv' ? { ...standardObj, name } : { ...standardObj, title };
+  return type === "tv" ? { ...standardObj, name } : { ...standardObj, title };
+};
+
+export const getYears = () => {
+  const yearsArr = [];
+  const currentYear = new Date().getFullYear();
+
+  for (let i = currentYear; i >= 1990; i--) {
+    yearsArr.push(i);
+  }
+  return yearsArr;
 };
