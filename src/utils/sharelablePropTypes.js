@@ -20,3 +20,10 @@ export const castItemShapePropTypes = PropTypes.shape({
   id: PropTypes.number,
   name: PropTypes.string,
 });
+
+export const companiesAndNetworksPropTypes = PropTypes.arrayOf(
+  PropTypes.shape({
+    name: PropTypes.string,
+    logo_path: PropTypes.string,
+  })
+);

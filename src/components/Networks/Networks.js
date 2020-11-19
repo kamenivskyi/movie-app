@@ -1,7 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import StudioItem from "../StudioItem";
+import { companiesAndNetworksPropTypes } from "../../utils/sharelablePropTypes";
 
 const Networks = ({ data }) => {
   if (!data) return null;
@@ -19,12 +19,7 @@ const Networks = ({ data }) => {
 };
 
 Networks.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string,
-      logo_path: PropTypes.string,
-    })
-  ),
+  data: companiesAndNetworksPropTypes,
 };
 
 export default Networks;
