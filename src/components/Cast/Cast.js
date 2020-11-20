@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import PropTypes from "prop-types";
 
 import CastItem from "../CastItem/CastItem";
-import { multipleItems } from "../../utils/sliderSettings";
+import { sliderSettings } from "../../utils/config";
 import { castItemShapePropTypes } from "../../utils/sharelablePropTypes";
 
 import "./Cast.css";
@@ -14,7 +14,7 @@ const Cast = ({ data }) => {
     data.length > 0 && (
       <section className="cast">
         <h3 className="section-title text-black">Cast</h3>
-        <Slider {...multipleItems}>
+        <Slider {...sliderSettings.multipleItems}>
           {data.map((item) => (
             <CastItem item={item} key={item.id} />
           ))}

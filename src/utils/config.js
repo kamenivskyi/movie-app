@@ -25,3 +25,50 @@ export const TRENDING_PAGE_TABS = [
   { label: "Tvs", tabSlug: "tv" },
   { label: "People", tabSlug: "person" },
 ];
+
+export const sliderSettings = {
+  multipleItems: {
+    dots: false,
+    arrows: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 5,
+    slidesToScroll: 5,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          dots: false,
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 830,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 550,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  },
+  singleItem: {
+    dots: false,
+    infinite: true,
+    speed: 700,
+    lazyLoad: false,
+    arrows: false,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  },
+};

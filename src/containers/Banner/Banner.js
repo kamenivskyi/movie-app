@@ -6,9 +6,8 @@ import Slider from "react-slick";
 
 import { getBannerMovies } from "../../redux/banner/bannerActions";
 
-import { API_IMAGE, MOVIE_TYPE } from "../../utils/config";
+import { API_IMAGE, MOVIE_TYPE, sliderSettings } from "../../utils/config";
 import { cutString } from "../../utils/helpers";
-import { singleItem } from "../../utils/sliderSettings";
 
 import "./Banner.css";
 
@@ -26,7 +25,7 @@ const Banner = () => {
 
   return (
     <Flip left>
-      <Slider {...singleItem}>
+      <Slider {...sliderSettings.singleItem}>
         {items.map((item) => {
           const { title, backdrop_path, overview, id } = item;
 
