@@ -1,6 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import GenreItem from "../GenreItem";
+import { genreItemShape } from "../../utils/sharelablePropTypes";
 
 import "./Genres.css";
 
@@ -18,5 +20,9 @@ const GenresList = ({ genres }) => (
     )}
   </>
 );
+
+GenresList.propTypes = {
+  genres: PropTypes.arrayOf(genreItemShape),
+};
 
 export default GenresList;

@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { genreItemShape } from "../../utils/sharelablePropTypes";
+
 const GenreItem = ({ genre: { name, id } }) => (
   <li>
     <Link to={`/genre/${id}`} type="button" className="btn btn-primary">
@@ -8,4 +10,9 @@ const GenreItem = ({ genre: { name, id } }) => (
     </Link>
   </li>
 );
+
+GenreItem.propTypes = {
+  genre: genreItemShape,
+};
+
 export default GenreItem;

@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-export const mediaPropTypes = {
+export const mediaView = {
   poster_path: PropTypes.string,
   backdrop_path: PropTypes.string,
   overview: PropTypes.string,
@@ -14,16 +14,19 @@ export const mediaPropTypes = {
   networks: PropTypes.arrayOf(PropTypes.object),
 };
 
-export const castItemShapePropTypes = PropTypes.shape({
+export const castItemShape = PropTypes.shape({
   charachter: PropTypes.string,
   profile_path: PropTypes.string,
   id: PropTypes.number,
   name: PropTypes.string,
 });
 
-export const companiesAndNetworksPropTypes = PropTypes.arrayOf(
-  PropTypes.shape({
-    name: PropTypes.string,
-    logo_path: PropTypes.string,
-  })
-);
+export const companiesAndNetworksShape = PropTypes.shape({
+  name: PropTypes.string,
+  logo_path: PropTypes.string,
+});
+
+export const genreItemShape = PropTypes.shape({
+  name: PropTypes.string,
+  id: PropTypes.number,
+});

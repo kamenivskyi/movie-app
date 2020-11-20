@@ -12,7 +12,7 @@ import Networks from "../../components/Networks/Networks";
 import BtnShowVideo from "../../components/Video/BtnShowVideo";
 import Button from "../../components/Button";
 import { API_IMAGE, MOVIE_TYPE } from "../../utils/config";
-import { mediaPropTypes } from "../../utils/sharelablePropTypes";
+import { mediaView } from "../../utils/sharelablePropTypes";
 import { auth, addToDatabaseBookmarks } from "../../firebase/firebaseUtils";
 
 import reserveBg from "../../assets/images/reserve-bg.jpg";
@@ -107,7 +107,7 @@ const MovieView = ({ movie, cast, video, id }) => {
 MovieView.propTypes = {
   movie: PropTypes.shape({
     title: PropTypes.string,
-    ...mediaPropTypes,
+    ...mediaView,
   }),
   cast: PropTypes.arrayOf(PropTypes.object),
   id: PropTypes.string,
