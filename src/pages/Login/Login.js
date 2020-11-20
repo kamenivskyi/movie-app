@@ -1,20 +1,37 @@
 import React, { useState } from "react";
 
-import { signInUser } from "../../firebase/firebaseUtils";
 import FormControl from "../../components/FormControl";
+import { signInUser } from "../../firebase/firebaseUtils";
+import { getErrorMessage } from "./loginUtils";
 
 const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
+  const [errorMessage, setErrorMessage] = useState("");
   const { email, password } = form;
 
   const onSubmit = (e) => {
     e.preventDefault();
-    signInUser(email, password);
+    signInUser(email, password).catch(handleError);
+  };
+
+  const handleError = (errorObj) => {
+    const errMessage = getErrorMessage(errorObj);
+
+    if (errMessage) {
+      setErrorMessage(errMessage);
+    } else {
+      setErrorMessage("Error!");
+    }
   };
 
   const onChange = ({ target: { value, name } }) => {
     setForm({ ...form, [name]: value });
   };
+
+  if (errorMessage) {
+    alert(errorMessage);
+    setErrorMessage("");
+  }
 
   return (
     <div className="container">
