@@ -4,7 +4,7 @@ import GenreItem from "../GenreItem";
 
 import "./Genres.css";
 
-const Genres = ({ genres }) => (
+const GenresList = ({ genres }) => (
   <>
     {genres && (
       <>
@@ -19,4 +19,4 @@ const Genres = ({ genres }) => (
   </>
 );
 
-export default Genres;
+export default GenresList;

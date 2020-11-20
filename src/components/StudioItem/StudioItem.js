@@ -1,7 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 import { API_IMAGE } from "../../utils/config";
+import { companiesAndNetworksPropTypes } from "../../utils/sharelablePropTypes";
 
 import "./StudioItem.css";
 
@@ -18,10 +18,7 @@ const StudioItem = ({ item: { logo_path, name } }) => (
 );
 
 StudioItem.propTypes = {
-  item: PropTypes.shape({
-    logo_path: PropTypes.string,
-    name: PropTypes.string,
-  }),
+  item: companiesAndNetworksPropTypes,
 };
 
 export default StudioItem;
