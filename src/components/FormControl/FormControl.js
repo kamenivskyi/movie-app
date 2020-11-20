@@ -37,6 +37,11 @@ FormControl.defaultProps = {
 
 FormControl.propTypes = {
   label: PropTypes.string,
+  classes: PropTypes.string,
+  type: PropTypes.string,
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  append: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  error: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 };
 
 export default FormControl;
