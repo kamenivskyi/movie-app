@@ -31,8 +31,6 @@ const Results = () => {
     return <Spinner />;
   }
 
-  console.log();
-
   return (
     <div className="container-fluid pt-3">
       <h2 className="section-title">Results</h2>
