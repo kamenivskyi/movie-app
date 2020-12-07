@@ -15,7 +15,7 @@ const GenreMovies = () => {
 
   useEffect(() => {
     dispatch(getMoviesByGenre(id));
-  }, [id]);
+  }, [id, dispatch]);
 
   return (
     <section className="genre-page">

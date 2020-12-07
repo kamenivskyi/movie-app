@@ -1,11 +1,9 @@
-// Convert time to hours and minutes
 export const calcTime = (time) => {
   const hours = Math.floor(time / 60);
   const mins = time % 60;
   return `${hours}h ${mins}m`;
 };
 
-// Convert a number to $ format
 export const convertMoney = (money) => {
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -37,4 +35,17 @@ export const getYears = () => {
     yearsArr.push(i);
   }
   return yearsArr;
+};
+
+export const checkIsAllArraysEmpty = (arrs) => {
+  let empty = true;
+
+  for (let i = 0; i < arrs.length; i++) {
+    if (arrs[i] && arrs[i].length > 0) {
+      empty = false;
+      break;
+    }
+  }
+
+  return empty;
 };

@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getBookmarks } from "../../redux/firebase/firebaseActions";
 import MediaItems from "../../components/MediaItems";
 import Spinner from "../../components/Spinner";
+import FormControl from "../../components/FormControl";
+
+import { getBookmarks } from "../../redux/firebase/firebaseActions";
+import { checkIsAllArraysEmpty } from "../../utils/helpers";
 
 const UserBookmarks = () => {
   const [term, setTerm] = useState("");
@@ -17,32 +20,29 @@ const UserBookmarks = () => {
 
   useEffect(() => {
     dispatch(getBookmarks());
-  }, []);
+  }, [dispatch]);
 
-  const search = (array, term, type) => {
+  const getSearchedArr = (array, term, type) => {
     return array.filter((item) =>
       item[type].toLowerCase().includes(term.toLowerCase())
     );
   };
 
-  const visibleMovies = movie && search(movie, term, "title");
-  const visibleTvs = tv && search(tv, term, "name");
+  const visibleMovies = movie && getSearchedArr(movie, term, "title");
+  const visibleTvs = tv && getSearchedArr(tv, term, "name");
 
   const handleChange = ({ target }) => setTerm(target.value);
 
-  const ifBookmarksListEmptyRenderDummy = () => {
-    if (tv && tv.length === 0 && movie && movie.length === 0) {
-      return <p className="text-center w-100">Your bookmarks list is empty</p>;
-    }
-  };
+  const isEmpty = checkIsAllArraysEmpty([tv, movie]);
+
+  console.log(isEmpty);
 
   return (
     <div className="jumbotron">
       <div className="container">
         <h2 className="section-title mb-3">Bookmarks</h2>
-        <input
+        <FormControl
           type="search"
-          className="form-control"
           placeholder="Type to search.."
           value={term}
           onChange={handleChange}
@@ -51,7 +51,9 @@ const UserBookmarks = () => {
         <div className="row">
           {loading && <Spinner />}
 
-          {ifBookmarksListEmptyRenderDummy()}
+          {isEmpty && (
+            <p className="text-center w-100">Your bookmarks list is empty</p>
+          )}
 
           {visibleMovies && <MediaItems items={visibleMovies} type="movie" />}
           {visibleTvs && <MediaItems items={visibleTvs} type="tv" />}
@@ -61,4 +63,4 @@ const UserBookmarks = () => {
   );
 };
 
-export default UserBookmarks;
+export default React.memo(UserBookmarks);

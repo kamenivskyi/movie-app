@@ -11,6 +11,7 @@ const Video = ({ url, onClick }) =>
     <div className="video-overlay" onClick={onClick}>
       <iframe
         className="video"
+        title="Watch video trailer"
         src={VIDEO_EMBED_BASE + url}
         frameBorder="0"
         allowFullScreen="1"
