@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { genreItemShape } from "../../utils/sharelablePropTypes";
+import { genreItemShape } from "../../utils/commonPropTypes";
 
 const GenreItem = ({ genre: { name, id } }) => (
   <li>

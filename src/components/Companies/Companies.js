@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import StudioItem from "../StudioItem";
-import { companiesAndNetworksShape } from "../../utils/sharelablePropTypes";
+import { companiesAndNetworksShape } from "../../utils/commonPropTypes";
 
 const Companies = ({ data }) => {
   const renderCompanies = data?.map((item) => (

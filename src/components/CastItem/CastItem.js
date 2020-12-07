@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import { API_IMAGE } from "../../utils/config";
 import { cutString } from "../../utils/helpers";
-import { castItemShape } from "../../utils/sharelablePropTypes";
+import { castItemShape } from "../../utils/commonPropTypes";
 
 import reserveAvatar from "../../assets/images/avatar.jpg";
 

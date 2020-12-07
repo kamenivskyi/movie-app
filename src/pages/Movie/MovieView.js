@@ -12,7 +12,7 @@ import Networks from "../../components/Networks/Networks";
 import BtnShowVideo from "../../components/Video/BtnShowVideo";
 import Button from "../../components/Button";
 import { API_IMAGE, MOVIE_TYPE } from "../../utils/config";
-import { mediaView } from "../../utils/sharelablePropTypes";
+import { mediaView } from "../../utils/commonPropTypes";
 import { auth, addToDatabaseBookmarks } from "../../firebase/firebaseUtils";
 
 import reserveBg from "../../assets/images/reserve-bg.jpg";

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import GenreItem from "../GenreItem";
-import { genreItemShape } from "../../utils/sharelablePropTypes";
+import { genreItemShape } from "../../utils/commonPropTypes";
 
 import "./Genres.css";
 

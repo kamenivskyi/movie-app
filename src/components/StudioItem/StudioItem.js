@@ -1,7 +1,7 @@
 import React from "react";
 
 import { API_IMAGE } from "../../utils/config";
-import { companiesAndNetworksShape } from "../../utils/sharelablePropTypes";
+import { companiesAndNetworksShape } from "../../utils/commonPropTypes";
 
 import "./StudioItem.css";
 

@@ -14,7 +14,7 @@ import Button from "../../components/Button";
 import withSpinner from "../../hocs/withSpinner";
 import { API_IMAGE, TV_TYPE } from "../../utils/config";
 import { auth, addToDatabaseBookmarks } from "../../firebase/firebaseUtils";
-import { mediaView } from "../../utils/sharelablePropTypes";
+import { castItemShape, mediaView } from "../../utils/commonPropTypes";
 
 import reserveBg from "../../assets/images/reserve-bg.jpg";
 import "./TvView.css";
@@ -109,7 +109,7 @@ TvView.propTypes = {
     name: PropTypes.string,
     ...mediaView,
   }),
-  cast: PropTypes.arrayOf(PropTypes.object),
+  cast: PropTypes.arrayOf(castItemShape),
   id: PropTypes.string,
   type: PropTypes.string,
 };

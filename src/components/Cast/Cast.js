@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import CastItem from "../CastItem/CastItem";
 import { sliderSettings } from "../../utils/config";
-import { castItemShape } from "../../utils/sharelablePropTypes";
+import { castItemShape } from "../../utils/commonPropTypes";
 
 import "./Cast.css";
 
