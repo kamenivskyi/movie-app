@@ -6,6 +6,7 @@ import MovieView from "./MovieView";
 import { getCast } from "../../redux/cast/castActions";
 import { getMovieData } from "../../redux/movie/movieActions";
 import { getTrailer } from "../../redux/trailer/trailerActions";
+import { MOVIE_TYPE } from "../../utils/config";
 
 import "./Movie.css";
 
@@ -21,12 +22,10 @@ const Movie = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  const TYPE = "movie";
-
   useEffect(() => {
-    dispatch(getTrailer(id, TYPE));
+    dispatch(getTrailer(id, MOVIE_TYPE));
     dispatch(getMovieData(id));
-    dispatch(getCast(id, TYPE));
+    dispatch(getCast(id, MOVIE_TYPE));
   }, [id]);
 
   return (

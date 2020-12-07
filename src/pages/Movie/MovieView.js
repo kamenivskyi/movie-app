@@ -12,11 +12,11 @@ import Networks from "../../components/Networks/Networks";
 import BtnShowVideo from "../../components/Video/BtnShowVideo";
 import Button from "../../components/Button";
 import { API_IMAGE, MOVIE_TYPE } from "../../utils/config";
-import { mediaView } from "../../utils/commonPropTypes";
+import { castItemShape, mediaView } from "../../utils/commonPropTypes";
 import { auth, addToDatabaseBookmarks } from "../../firebase/firebaseUtils";
 
-import reserveBg from "../../assets/images/reserve-bg.jpg";
 import withSpinner from "../../hocs/withSpinner";
+import MediaBackground from "../../components/MediaBackground/MediaBackground";
 
 const MovieView = ({ movie, cast, video, id }) => {
   const {
@@ -34,7 +34,7 @@ const MovieView = ({ movie, cast, video, id }) => {
     networks,
   } = movie;
 
-  const { original, large } = API_IMAGE;
+  const { large } = API_IMAGE;
 
   const createMovieObj = () => ({
     id,
@@ -51,12 +51,9 @@ const MovieView = ({ movie, cast, video, id }) => {
     addToDatabaseBookmarks(movieObject, MOVIE_TYPE);
   };
 
-  const image = backdrop_path ? original + backdrop_path : reserveBg;
-
   return (
     <section>
-      <div className="media-view" style={{ backgroundImage: `url(${image})` }}>
-        \
+      <MediaBackground bgUrl={backdrop_path}>
         <div className="container">
           {title && <h3 className="media-view-title">{title}</h3>}
           <div className="media-view-card">
@@ -98,7 +95,7 @@ const MovieView = ({ movie, cast, video, id }) => {
           postitionTop={<Companies data={production_companies} />}
           positionBottom={<Networks data={networks} />}
         />
-      </div>
+      </MediaBackground>
       <Cast data={cast} />
     </section>
   );
@@ -109,7 +106,7 @@ MovieView.propTypes = {
     title: PropTypes.string,
     ...mediaView,
   }),
-  cast: PropTypes.arrayOf(PropTypes.object),
+  cast: PropTypes.arrayOf(castItemShape),
   id: PropTypes.string,
   type: PropTypes.string,
 };

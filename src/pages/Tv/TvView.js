@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark } from "@fortawesome/free-solid-svg-icons";
 
+import MediaBackground from "../../components/MediaBackground/MediaBackground";
 import Cast from "../../components/Cast";
 import MediaDescription from "../../components/MediaDescription";
 import Studios from "../../components/Studios";
@@ -16,7 +17,6 @@ import { API_IMAGE, TV_TYPE } from "../../utils/config";
 import { auth, addToDatabaseBookmarks } from "../../firebase/firebaseUtils";
 import { castItemShape, mediaView } from "../../utils/commonPropTypes";
 
-import reserveBg from "../../assets/images/reserve-bg.jpg";
 import "./TvView.css";
 
 const TvView = ({ tv, cast, video }) => {
@@ -36,9 +36,7 @@ const TvView = ({ tv, cast, video }) => {
 
   console.log("tv: ", tv);
 
-  const { original, large } = API_IMAGE;
-
-  const image = backdrop_path ? original + backdrop_path : reserveBg;
+  const { large } = API_IMAGE;
 
   const createObj = () => ({
     id,
@@ -53,11 +51,9 @@ const TvView = ({ tv, cast, video }) => {
     addToDatabaseBookmarks(tvObject, TV_TYPE);
   };
 
-  console.log(tv);
-
   return (
     <section>
-      <div className="media-view" style={{ backgroundImage: `url(${image})` }}>
+      <MediaBackground bgUrl={backdrop_path}>
         <div className="container">
           {name && <h3 className="media-view-title">{name}</h3>}
           <div className="media-view-card">
@@ -94,7 +90,7 @@ const TvView = ({ tv, cast, video }) => {
             </div>
           </div>
         </div>
-      </div>
+      </MediaBackground>
       <Studios
         postitionTop={<Companies data={production_companies} />}
         positionBottom={<Networks data={networks} />}
