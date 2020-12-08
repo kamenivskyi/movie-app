@@ -54,4 +54,4 @@ MediaTabs.propTypes = {
   type: PropTypes.string,
 };
 
-export default MediaTabs;
+export default React.memo(MediaTabs);

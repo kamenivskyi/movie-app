@@ -22,7 +22,6 @@ const Filters = () => {
     includeAdult,
   } = useContext(homeContext);
 
-  console.log("sortBy", sortBy);
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {

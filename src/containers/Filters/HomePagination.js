@@ -20,4 +20,4 @@ const HomePagination = () => {
   );
 };
 
-export default HomePagination;
+export default React.memo(HomePagination);

@@ -4,8 +4,6 @@ import PropTypes from "prop-types";
 import MediaItem from "../MediaItem";
 
 const MediaItems = ({ items, type = "movie", simpleRow }) => {
-  console.log(items);
-
   const renderMediaItems =
     items &&
     items.map((data) => (

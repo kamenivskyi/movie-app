@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import MediaItems from "../../components/MediaItems";
@@ -9,7 +9,7 @@ import { getBookmarks } from "../../redux/firebase/firebaseActions";
 import { checkIsAllArraysEmpty } from "../../utils/helpers";
 
 const UserBookmarks = () => {
-  const [term, setTerm] = useState("");
+  const [query, setQuery] = useState("");
   const { bookmarks, loading } = useSelector(({ firebase }) => ({
     bookmarks: firebase.bookmarks,
     loading: firebase.bookmarksLoading,
@@ -22,20 +22,18 @@ const UserBookmarks = () => {
     dispatch(getBookmarks());
   }, [dispatch]);
 
-  const getSearchedArr = (array, term, type) => {
+  const getSearchedArr = (array, query, type) => {
     return array.filter((item) =>
-      item[type].toLowerCase().includes(term.toLowerCase())
+      item[type].toLowerCase().includes(query.toLowerCase())
     );
   };
 
-  const visibleMovies = movie && getSearchedArr(movie, term, "title");
-  const visibleTvs = tv && getSearchedArr(tv, term, "name");
+  const visibleMovies = movie && getSearchedArr(movie, query, "title");
+  const visibleTvs = tv && getSearchedArr(tv, query, "name");
 
-  const handleChange = ({ target }) => setTerm(target.value);
+  const handleChange = ({ target }) => setQuery(target.value);
 
   const isEmpty = checkIsAllArraysEmpty([tv, movie]);
-
-  console.log(isEmpty);
 
   return (
     <div className="jumbotron">
@@ -44,7 +42,7 @@ const UserBookmarks = () => {
         <FormControl
           type="search"
           placeholder="Type to search.."
-          value={term}
+          value={query}
           onChange={handleChange}
         />
         <hr className="my-4" />
