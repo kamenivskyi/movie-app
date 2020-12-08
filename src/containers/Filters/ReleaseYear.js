@@ -1,9 +1,9 @@
-import React, { useMemo } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { getYears } from "../../utils/helpers";
 
 const ReleaseYear = ({ onChange, year, ...restProps }) => {
-  const years = useMemo(() => getYears(), [new Date().getFullYear()]);
+  const years = getYears();
 
   return (
     <div className="form-group year">

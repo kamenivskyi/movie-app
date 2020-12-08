@@ -39,9 +39,5 @@ export const validateForm = (errors) => {
   return isValid;
 };
 
-const isNameEqualPassword = (name, password) => {
-  if (name.toLowerCase() === password.toLowerCase()) {
-    return true;
-  }
-  return false;
-};
+const isNameEqualPassword = (name, password) =>
+  name.toLowerCase() === password.toLowerCase();

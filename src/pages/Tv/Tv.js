@@ -25,7 +25,7 @@ const Tv = () => {
     dispatch(getTrendingItemData(id, TV_TYPE));
     dispatch(getTrailer(id, TV_TYPE));
     dispatch(getCast(id, TV_TYPE));
-  }, [id]);
+  }, [id, dispatch]);
 
   return (
     <TvView tv={trendingItem} video={trailer} cast={cast} loading={loading} />

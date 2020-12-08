@@ -26,7 +26,7 @@ const Movie = () => {
     dispatch(getTrailer(id, MOVIE_TYPE));
     dispatch(getMovieData(id));
     dispatch(getCast(id, MOVIE_TYPE));
-  }, [id]);
+  }, [id, dispatch]);
 
   return (
     <MovieView

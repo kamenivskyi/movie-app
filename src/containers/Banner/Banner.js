@@ -17,7 +17,7 @@ const Banner = () => {
 
   useEffect(() => {
     dispatch(getBannerMovies(MOVIE_TYPE, "week", 1));
-  }, []);
+  }, [dispatch]);
 
   const { original } = API_IMAGE;
 

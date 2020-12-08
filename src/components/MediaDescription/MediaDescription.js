@@ -1,9 +1,6 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClock } from "@fortawesome/free-solid-svg-icons";
 
 import Genres from "../GenresList";
-
 import { calcTime } from "../../utils/helpers";
 
 const MediaDescription = ({ overview, releaseDate, genres, runtime }) => {

@@ -19,7 +19,7 @@ const Results = () => {
 
   useEffect(() => {
     dispatch(searchItems(query, page));
-  }, [query, page]);
+  }, [query, page, dispatch]);
 
   if (!data) return null;
 

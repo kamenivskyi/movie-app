@@ -21,7 +21,7 @@ const Person = () => {
   useEffect(() => {
     dispatch(getPerson(id));
     dispatch(getPersonPhotos(id));
-  }, [id]);
+  }, [id, dispatch]);
 
   return <PersonView general={person} photos={photos} loading={loading} />;
 };

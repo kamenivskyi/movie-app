@@ -2,17 +2,18 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
+import "./TabItem.css";
+
 const TabItem = ({ children, className, activeIf, ...restProps }) => (
   <li className="nav-item">
-    <a
-      href="#"
-      className={classNames(className, {
+    <button
+      className={classNames("tab-button", className, {
         active: activeIf,
       })}
       {...restProps}
     >
       {children}
-    </a>
+    </button>
   </li>
 );
 

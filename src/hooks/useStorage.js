@@ -22,11 +22,11 @@ export const useStorage = ({
     if (item) {
       setData(JSON.parse(item));
     }
-  }, []);
+  }, [storageType, key]);
 
   useEffect(() => {
     window[storageType].setItem(key, JSON.stringify(data));
-  }, [data]);
+  }, [data, storageType, key]);
 
   return [data, setData];
 };

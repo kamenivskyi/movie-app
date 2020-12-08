@@ -31,7 +31,7 @@ const Trending = () => {
 
   useEffect(() => {
     dispatch(getTrendingList(type, period, page));
-  }, [type, period, page]);
+  }, [type, period, page, dispatch]);
 
   const { results, total_results, total_pages } = items;
 
