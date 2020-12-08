@@ -43,7 +43,7 @@ const Results = () => {
               activePage={Number(page)}
               totalItems={Number(total_results)}
               totalPages={Number(total_pages)}
-              onChange={Number(handlePageChange)}
+              onChange={handlePageChange}
             />
           </div>
         </div>
