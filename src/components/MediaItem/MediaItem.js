@@ -35,7 +35,7 @@ const MediaItem = ({ data, type }) => {
       <img src={image} alt={title || name} />
       <span className={badgeIconClass}>{vote_average}</span>
       <div className="card-item-content">
-        <DeleteBookmarkButton item={uniqueItemData} type={type} />
+        <DeleteBookmarkButton deleteItem={uniqueItemData} type={type} />
         <Link to={link} className="card-item-link">
           {title || name}
         </Link>
@@ -44,8 +44,6 @@ const MediaItem = ({ data, type }) => {
   );
 };
 
-const getItemImage = (path) => {
-  return path ? API_IMAGE.large + path : NotFoundImage;
-};
+const getItemImage = (path) => (path ? API_IMAGE.large + path : NotFoundImage);
 
 export default MediaItem;

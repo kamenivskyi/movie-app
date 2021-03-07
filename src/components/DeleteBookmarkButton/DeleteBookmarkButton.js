@@ -7,11 +7,11 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import Button from "../Button";
 import { deleteBookmark } from "../../firebase/firebaseUtils";
 
-const DeleteBookmarkButton = ({ item, type }) => {
+const DeleteBookmarkButton = ({ deleteItem, type }) => {
   const history = useHistory();
   const isProfilePage = history.location.pathname === "/profile/bookmarks";
 
-  const onDelete = () => deleteBookmark(item, type);
+  const onDelete = () => deleteBookmark(deleteItem, type);
   return (
     isProfilePage && (
       <Button
