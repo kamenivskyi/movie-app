@@ -9,12 +9,6 @@ const INITIAL_STATE = {
 
 const firebaseReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case Types.SET_USER_SIGNIN:
-      return {
-        ...state,
-        userData: action.payload,
-        bookmarksLoading: false,
-      };
     case Types.GET_BOOKMARKS:
       return {
         ...state,

@@ -1,5 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 import Home from "./pages/Home";
 import Movie from "./pages/Movie";
 import Person from "./pages/Person";
@@ -14,10 +16,12 @@ import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
 import UserBookmarks from "./pages/UserBookmarks/UserBookmarks";
 import ProtectedRoute from "./components/ProtectedRoute";
-import { auth } from "./firebase/firebaseUtils";
 
 const Routes = () => {
-  const isAuthed = auth.currentUser;
+  const { userData } = useSelector(({ firebase }) => firebase);
+
+  const isAuthed = userData.nickname;
+
   return (
     <Switch>
       <Route path="/" component={Home} exact />
