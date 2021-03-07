@@ -7,7 +7,7 @@ import {
   validateNickname,
   validatePassword,
   validateForm,
-} from "./signupUtils";
+} from "./SignupUtils";
 
 const Signup = () => {
   const [state, setState] = useState({
