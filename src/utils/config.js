@@ -37,7 +37,16 @@ export const sliderSettings = {
     initialSlide: 0,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1350,
+        settings: {
+          dots: false,
+          slidesToShow: 4,
+          slidesToScroll: 4,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 1100,
         settings: {
           dots: false,
           slidesToShow: 3,

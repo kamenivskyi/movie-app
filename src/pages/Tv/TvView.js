@@ -71,7 +71,7 @@ const TvView = ({ tv, cast, video }) => {
                   runtime={runtime}
                 />
               </div>
-              <div className="col-md-1 offset-md-1">
+              <div className="col-md-2 col-xl-1 offset-xl-1">
                 <div className="media-view-user-buttons">
                   {video && <BtnShowVideo url={video.key} />}
                   {auth.currentUser && (
@@ -81,6 +81,7 @@ const TvView = ({ tv, cast, video }) => {
                       data-id={id}
                       data-type={TV_TYPE}
                       label="Add to bookmarks"
+                      title="Add to bookmarks"
                     >
                       <FontAwesomeIcon icon={faBookmark} />
                     </Button>

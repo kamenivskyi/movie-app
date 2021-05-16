@@ -143,6 +143,7 @@ input.form-control {
   padding-top: 200px;
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
 }
 
 .card-block {

@@ -20,7 +20,7 @@ const NavbarUserService = () => {
     return (
       <div className="dropdown">
         <Button
-          className="btn btn-info dropdown-toggle"
+          className="btn btn-light dropdown-toggle"
           id="dropdownMenu2"
           data-toggle="dropdown"
           aria-haspopup="true"

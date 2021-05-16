@@ -26,6 +26,7 @@ const BtnShowVideo = ({ url }) => {
       <Button
         className="btn btn-warning btn-rounded mt-3"
         onClick={handleClick}
+        title="Watch trailer"
       >
         <FontAwesomeIcon icon={faVideo} />
       </Button>

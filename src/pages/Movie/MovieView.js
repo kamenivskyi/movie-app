@@ -36,7 +36,7 @@ const MovieView = ({ movie, cast, video, id }) => {
 
   const { large } = API_IMAGE;
 
-  const createMovieObj = () => ({
+  const getMovieObj = () => ({
     id,
     title,
     type: MOVIE_TYPE,
@@ -47,7 +47,7 @@ const MovieView = ({ movie, cast, video, id }) => {
   console.log(movie);
 
   const handleAddToBookmarks = () => {
-    const movieObject = createMovieObj();
+    const movieObject = getMovieObj();
     addToDatabaseBookmarks(movieObject, MOVIE_TYPE);
   };
 
@@ -71,7 +71,7 @@ const MovieView = ({ movie, cast, video, id }) => {
                   runtime={runtime}
                 />
               </div>
-              <div className="col-md-1 offset-md-1">
+              <div className="col-md-2 col-xl-1 offset-xl-1">
                 <div className="media-view-user-buttons">
                   {video && <BtnShowVideo url={video.key} />}
                   {auth.currentUser && (
@@ -81,6 +81,7 @@ const MovieView = ({ movie, cast, video, id }) => {
                       data-id={id}
                       data-type={MOVIE_TYPE}
                       leabel="Add to bookmarks"
+                      title="Add to bookmarks"
                     >
                       <FontAwesomeIcon icon={faBookmark} /> &nbsp;
                     </Button>
